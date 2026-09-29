@@ -57,7 +57,7 @@ The Positron menus may look slightly different across versions, but the workflow
 
 1. In Positron, choose **New > New Folder from Template**.
 2. Select **Python Project**.
-3. Choose a location such as your Documents folder and name the project `luma-data`.
+3. Choose a location such as your Documents folder and name the project `indigo-data`.
 4. When asked, create a `pyproject.toml` file.
 5. Choose **Create a new virtual environment**.
 6. Choose **`uv`** as the environment provider (default).
@@ -70,7 +70,7 @@ Positron may download Python through `uv` if Python is not already installed. Th
 
 We will install `polars`, a common package for working with tables.
 
-1. Make sure the Positron terminal is open in the `luma-data` project.
+1. Make sure the Positron terminal is open in the `indigo-data` project.
 2. Go to **Terminal**:
 
 ```sh

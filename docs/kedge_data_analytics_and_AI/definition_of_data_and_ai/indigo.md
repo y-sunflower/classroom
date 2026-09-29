@@ -25,6 +25,12 @@ We have access to the following datasets:
 - **Product reviews:** customer ratings and written reviews about products
 - **Website analytics:** customer visits, where they came from, products viewed, and whether they added items to their cart or purchased them
 
+!!! example "Explore the sales data"
+
+    Search across every column, click a heading to sort, or use the buttons to move through the transactions.
+
+    <csv-table src="../data/sales.csv" caption="Sales transactions" page-size="8"></csv-table>
+
 <br>
 <br>
 <br>

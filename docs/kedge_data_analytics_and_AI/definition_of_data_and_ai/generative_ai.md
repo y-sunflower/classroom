@@ -26,7 +26,7 @@ Here is an AI running completely "offline". Once it says _"Ready: ...."_, you ca
 
 <iframe src="./local_llm.html" width="100%" height="600"></iframe>
 
-> Everything you ask the AI here is 100% private. Nobody, not even me, could ever know what you ask it.
+> Everything you ask the AI here is 100% private. Nobody, not even the instructor, could ever know what you ask it.
 
 As you run some tests, you'll see that:
 

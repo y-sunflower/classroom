@@ -72,6 +72,16 @@ Code can also be highlighted inline: `#!python print("Hello, Python!")`.
     println!("Hello from Rust!");
     ```
 
+## CSV tables
+
+Use the `<csv-table>` element to load a CSV file as an interactive table. [Tabulator](https://tabulator.info/) parses the CSV and provides sorting and pagination; the table also includes a search across all columns.
+
+``` html
+<csv-table src="../data/sales.csv" caption="Sales transactions" page-size="10"></csv-table>
+```
+
+Set `src` to a path relative to the Markdown file. `caption` and `page-size` are optional; the default page size is 10.
+
 ## Diagrams
 
 > Go to [documentation](https://zensical.org/docs/authoring/diagrams/)

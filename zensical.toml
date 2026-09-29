@@ -31,7 +31,14 @@ nav = [
   ] },
 ]
 
-extra_css = ["stylesheets/style.css"]
+extra_css = [
+  "https://unpkg.com/tabulator-tables@6.5.3/dist/css/tabulator.min.css",
+  "stylesheets/style.css",
+]
+extra_javascript = [
+  "https://unpkg.com/tabulator-tables@6.5.3/dist/js/tabulator.min.js",
+  "javascripts/csv-table.js",
+]
 
 [project.theme]
 language = "en"
