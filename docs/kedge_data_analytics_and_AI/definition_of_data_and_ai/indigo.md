@@ -20,16 +20,29 @@ We want to answer questions such as:
 
 We have access to the following datasets:
 
-- **Sales:** each transaction, products bought, quantity, customer ID, price, and date
-- **Marketing campaigns:** campaigns sent to customers, channel (email, ads), message, and whether customers clicked or purchased
-- **Product reviews:** customer ratings and written reviews about products
-- **Website analytics:** customer visits, where they came from, products viewed, and whether they added items to their cart or purchased them
+=== "Sales"
 
-!!! example "Explore the sales data"
+    Each transaction, products bought, quantity, customer ID, price, and date.
 
-    Search across every column, click a heading to sort, or use the buttons to move through the transactions.
+    <csv-table src="../data/sales.csv" caption="Sales transactions" page-size="10"></csv-table>
 
-    <csv-table src="../data/sales.csv" caption="Sales transactions" page-size="8"></csv-table>
+=== "Website analytics"
+
+    Customer visits, where they came from, products viewed, and whether they added items to their cart or purchased them
+
+    <csv-table src="../data/website_analytics.csv" caption="Website analytics" page-size="10"></csv-table>
+
+=== "Product reviews"
+
+    Customer ratings and written reviews about products.
+
+    <csv-table src="../data/product_reviews.csv" caption="Product reviews" page-size="10"></csv-table>
+
+=== "Marketing campaigns"
+
+    Campaigns sent to customers, channel (email, ads), message, and whether customers clicked or purchased.
+
+    <csv-table src="../data/marketing_campaigns.csv" caption="Marketing campaigns" page-size="10"></csv-table>
 
 <br>
 <br>
@@ -60,10 +73,6 @@ Use this template:
 |          |             |                 |                |
 |          |             |                 |                |
 
-!!! tip "A useful question"
-
-    Before asking "What data do we have?", ask "What decision are we trying to improve?" This prevents a team from collecting data simply because it is available.
-
 ## 4. Data types and data sources
 
 ### Structured and unstructured data
@@ -83,11 +92,11 @@ Some data is **semi-structured**: it has labels or a loose organisation but not 
 
 ### Internal, external, and open data
 
-| Source            | What it means                                             | Marketing example                                                        | Questions to ask                                                              |
-| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| Source            | What it means                                             | Marketing example                                                        | Questions to ask                                                                     |
+| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | **Internal data** | Collected by or for the organisation                      | Orders, CRM records, campaign spend, customer-service contacts           | Was it collected for this purpose? Is it accurate and was it collected with consent? |
-| **External data** | Comes from outside the organisation                       | A media platform report, a research panel, a partner, or a market report | What is the provider's method and incentive? Can the definitions be compared? |
-| **Open data**     | External data available for reuse under stated conditions | Public population, weather, transport, or economic statistics            | What licence, geography, date, and limitations apply?                         |
+| **External data** | Comes from outside the organisation                       | A media platform report, a research panel, a partner, or a market report | What is the provider's method and incentive? Can the definitions be compared?        |
+| **Open data**     | External data available for reuse under stated conditions | Public population, weather, transport, or economic statistics            | What licence, geography, date, and limitations apply?                                |
 
 External does not necessarily mean open. A company may buy external data that cannot be freely shared or reused.
 
