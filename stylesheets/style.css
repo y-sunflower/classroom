@@ -23,7 +23,7 @@ csv-table {
   appearance: none;
   background: var(--csv-surface);
   border: 1px solid var(--csv-border);
-  border-radius: 20%;
+  border-radius: 5px;
   color: var(--csv-text);
   font: inherit;
   font-size: 0.875rem;
