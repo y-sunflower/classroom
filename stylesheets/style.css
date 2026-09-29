@@ -9,62 +9,139 @@ h4 {
 }
 
 csv-table {
+  --csv-border: var(--md-default-fg-color--lightest);
+  --csv-muted: var(--md-default-fg-color--light);
+  --csv-surface: var(--md-default-bg-color);
+  --csv-subtle: var(--md-code-bg-color);
+  --csv-text: var(--md-default-fg-color);
   display: block;
   margin: 1.5em 0;
+  color: var(--csv-text);
 }
 
 .csv-table input[type="search"] {
-  background: var(--md-default-bg-color);
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 0.25em;
-  color: var(--md-default-fg-color);
+  appearance: none;
+  background: var(--csv-surface);
+  border: 1px solid var(--csv-border);
+  border-radius: 20%;
+  color: var(--csv-text);
   font: inherit;
+  font-size: 0.875rem;
+  height: 2.25rem;
   margin-bottom: 0.75em;
-  max-width: 32em;
-  padding: 0.4em 0.6em;
+  max-width: 22rem;
+  padding: 0 0.75rem;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
   width: 100%;
 }
 
+.csv-table input[type="search"]::placeholder {
+  color: var(--csv-muted);
+  opacity: 1;
+}
+
+.csv-table input[type="search"]:focus-visible {
+  border-color: var(--csv-text);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csv-text) 10%, transparent);
+  outline: none;
+}
+
 .csv-table .tabulator {
-  background: var(--md-default-bg-color);
-  border-color: var(--md-default-fg-color--lightest);
-  color: var(--md-default-fg-color);
+  background: var(--csv-surface);
+  border: 1px solid var(--csv-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  color: var(--csv-text);
   font: inherit;
+  font-size: 0.875rem;
+  overflow: hidden;
 }
 
 .csv-table .tabulator-header,
 .csv-table .tabulator-header .tabulator-col,
 .csv-table .tabulator-footer {
-  background: var(--md-code-bg-color);
-  border-color: var(--md-default-fg-color--lightest);
-  color: var(--md-default-fg-color);
+  background: var(--csv-surface);
+  border-color: var(--csv-border);
+  color: var(--csv-text);
 }
 
-.csv-table .tabulator-footer button,
-.csv-table .tabulator-footer select {
-  background: var(--md-default-bg-color);
-  color: var(--md-default-fg-color);
+.csv-table .tabulator-header {
+  background: var(--csv-subtle);
+  border-bottom: 1px solid var(--csv-border);
+}
+
+.csv-table .tabulator-header .tabulator-col {
+  background: transparent;
+  min-height: 2.5rem;
+}
+
+.csv-table .tabulator-col-title {
+  font-weight: 600;
 }
 
 .csv-table .tabulator-row,
 .csv-table .tabulator-row.tabulator-row-even {
-  background: var(--md-default-bg-color);
-  border-color: var(--md-default-fg-color--lightest);
-  color: var(--md-default-fg-color);
+  background: var(--csv-surface);
+  border-bottom: 1px solid var(--csv-border);
+  color: var(--csv-text);
+  min-height: 2.75rem;
+  transition: background-color 100ms ease;
+}
+
+.csv-table .tabulator-row:hover,
+.csv-table .tabulator-row.tabulator-row-even:hover {
+  background: var(--csv-subtle);
 }
 
 .csv-table .tabulator-cell,
 .csv-table .tabulator-col {
-  border-color: var(--md-default-fg-color--lightest);
+  border-color: var(--csv-border);
 }
 
-.csv-table input[type="search"]:focus-visible {
-  outline: 2px solid var(--md-primary-fg-color);
+.csv-table .tabulator-row .tabulator-cell {
+  padding: 0.65rem 0.75rem;
+}
+
+.csv-table .tabulator-footer {
+  border-top: 1px solid var(--csv-border);
+  color: var(--csv-muted);
+  padding: 0.5rem 0.75rem;
+}
+
+.csv-table .tabulator-footer button.tabulator-page,
+.csv-table .tabulator-footer .tabulator-page-size {
+  background: var(--csv-surface);
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  color: var(--csv-text);
+  transition:
+    background-color 100ms ease,
+    border-color 100ms ease;
+}
+
+.csv-table .tabulator-footer button.tabulator-page:hover:not(:disabled) {
+  background: var(--csv-subtle);
+}
+
+.csv-table .tabulator-footer button.tabulator-page.active {
+  border-color: var(--csv-border);
+  font-weight: 600;
+}
+
+.csv-table .tabulator-footer .tabulator-page-size {
+  border-color: var(--csv-border);
+}
+
+.csv-table .tabulator-footer button:focus-visible,
+.csv-table .tabulator-footer select:focus-visible {
+  outline: 2px solid var(--csv-text);
   outline-offset: 2px;
 }
 
 .csv-table__status {
-  color: var(--md-default-fg-color--light);
+  color: var(--csv-muted);
   font-size: 0.85em;
   margin: 0;
 }

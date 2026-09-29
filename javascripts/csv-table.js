@@ -8,10 +8,13 @@ class CsvTable extends HTMLElement {
   async loadTable() {
     const source = this.getAttribute("src");
     const caption = this.getAttribute("caption") || "CSV data";
-    const pageSize = Number.parseInt(this.getAttribute("page-size") || "10", 10);
+    const pageSize = Number.parseInt(
+      this.getAttribute("page-size") || "15",
+      15,
+    );
     const search = document.createElement("input");
     search.type = "search";
-    search.placeholder = "Search all columns";
+    search.placeholder = "Search";
     search.setAttribute("aria-label", `Search ${caption}`);
 
     const tableElement = document.createElement("div");
@@ -23,9 +26,11 @@ class CsvTable extends HTMLElement {
     this.replaceChildren(search, status, tableElement);
 
     try {
-      if (!source) throw new Error("Add a src attribute with the path to a CSV file.");
+      if (!source)
+        throw new Error("Add a src attribute with the path to a CSV file.");
       const response = await fetch(source);
-      if (!response.ok) throw new Error(`Could not load the CSV (${response.status}).`);
+      if (!response.ok)
+        throw new Error(`Could not load the CSV (${response.status}).`);
 
       const table = new Tabulator(tableElement, {
         data: await response.text(),
@@ -40,16 +45,22 @@ class CsvTable extends HTMLElement {
       search.addEventListener("input", () => {
         const query = search.value.trim().toLocaleLowerCase();
         table.setFilter((row) =>
-          Object.values(row).some((value) => String(value).toLocaleLowerCase().includes(query)),
+          Object.values(row).some((value) =>
+            String(value).toLocaleLowerCase().includes(query),
+          ),
         );
       });
       status.remove();
     } catch (error) {
       status.className = "csv-table__status csv-table__error";
       status.setAttribute("role", "alert");
-      status.textContent = error instanceof Error ? error.message : "Could not load this CSV file.";
+      status.textContent =
+        error instanceof Error
+          ? error.message
+          : "Could not load this CSV file.";
     }
   }
 }
 
-if (!customElements.get("csv-table")) customElements.define("csv-table", CsvTable);
+if (!customElements.get("csv-table"))
+  customElements.define("csv-table", CsvTable);
