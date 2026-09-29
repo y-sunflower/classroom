@@ -40,7 +40,8 @@ class Campaign(TypedDict):
     campaign_id: str
     campaign_name: str
     channel: str
-    message: str
+    message_a: str
+    message_b: str
     start_month: int
     end_month: int
     promotion_code: str
@@ -99,7 +100,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP01",
         "campaign_name": "New Year Reset",
         "channel": "email",
-        "message": "Start fresh with practical favorites.",
+        "message_a": "Start fresh with practical favorites for your everyday routine.",
+        "message_b": "Make your new-year routine easier with practical everyday picks.",
         "start_month": 1,
         "end_month": 2,
         "promotion_code": "RESET10",
@@ -108,7 +110,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP02",
         "campaign_name": "Spring Refresh",
         "channel": "ads",
-        "message": "Refresh your routine for spring.",
+        "message_a": "Refresh your routine with useful picks for spring.",
+        "message_b": "Find simple upgrades to make your spring routine feel new.",
         "start_month": 3,
         "end_month": 4,
         "promotion_code": "SPRING10",
@@ -117,7 +120,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP03",
         "campaign_name": "Member Picks",
         "channel": "email",
-        "message": "Popular picks selected for you.",
+        "message_a": "Explore the favorites selected for our members.",
+        "message_b": "See which practical picks other members use every day.",
         "start_month": 5,
         "end_month": 6,
         "promotion_code": "MEMBER15",
@@ -126,7 +130,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP04",
         "campaign_name": "Summer Essentials",
         "channel": "ads",
-        "message": "Simple essentials for warmer days.",
+        "message_a": "Get ready for warmer days with simple essentials.",
+        "message_b": "Make summer routines easier with useful everyday essentials.",
         "start_month": 6,
         "end_month": 8,
         "promotion_code": "SUMMER5",
@@ -135,7 +140,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP05",
         "campaign_name": "Back to Routine",
         "channel": "email",
-        "message": "Get back into your everyday rhythm.",
+        "message_a": "Get back into your everyday rhythm with practical picks.",
+        "message_b": "Find simple favorites to make your routine easier again.",
         "start_month": 8,
         "end_month": 9,
         "promotion_code": "ROUTINE10",
@@ -144,7 +150,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP06",
         "campaign_name": "Autumn Edit",
         "channel": "ads",
-        "message": "Discover this season's useful upgrades.",
+        "message_a": "Discover useful upgrades for the autumn season.",
+        "message_b": "Refresh your everyday setup with our autumn favorites.",
         "start_month": 9,
         "end_month": 10,
         "promotion_code": "AUTUMN5",
@@ -153,7 +160,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP07",
         "campaign_name": "Early Holiday",
         "channel": "email",
-        "message": "A head start on thoughtful gifting.",
+        "message_a": "Get a head start on thoughtful holiday gifts.",
+        "message_b": "Find useful gifts before the holiday rush begins.",
         "start_month": 11,
         "end_month": 11,
         "promotion_code": "GIFT10",
@@ -162,7 +170,8 @@ CAMPAIGNS: list[Campaign] = [
         "campaign_id": "CMP08",
         "campaign_name": "Holiday Highlights",
         "channel": "ads",
-        "message": "Explore customer favorites this holiday.",
+        "message_a": "Explore customer favorites for the holiday season.",
+        "message_b": "Make holiday routines easier with these practical picks.",
         "start_month": 11,
         "end_month": 12,
         "promotion_code": "HOLIDAY15",
@@ -347,6 +356,7 @@ for _ in range(1, N_OTHER_SALE_ATTEMPTS + 1):
 
 campaign_rows = []
 campaign_website_rows = []
+message_assignments: dict[tuple[str, str], str] = {}
 for i in range(1, N_CAMPAIGN_SENDS + 1):
     customer_id = rng.choice(customer_ids)
     customer = customers_by_id[customer_id]
@@ -354,11 +364,17 @@ for i in range(1, N_CAMPAIGN_SENDS + 1):
     sent_date = random_date_between_months(
         campaign["start_month"], campaign["end_month"]
     )
+    assignment_key = (campaign["campaign_id"], customer_id)
+    if assignment_key not in message_assignments:
+        message_assignments[assignment_key] = rng.choice(["A", "B"])
+    message_variant = message_assignments[assignment_key]
+    message = campaign[f"message_{message_variant.lower()}"]
     click_score = (
         -2.1
         + 0.55 * customer["engagement"]
         + (0.20 if campaign["channel"] == "email" else 0)
         + (0.15 if sent_date.month in (11, 12) else 0)
+        + (0.22 if message_variant == "B" else 0)
         + rng.uniform(-0.15, 0.15)
     )
     clicked = rng.random() < logistic(click_score)
@@ -372,6 +388,7 @@ for i in range(1, N_CAMPAIGN_SENDS + 1):
             + 0.50 * customer["engagement"]
             + 1.25
             + (0.15 if sent_date.month in (11, 12) else 0)
+            + (0.18 if message_variant == "B" else 0)
             + rng.uniform(-0.15, 0.15)
         )
         purchase_intent = rng.random() < logistic(purchase_score)
@@ -381,9 +398,11 @@ for i in range(1, N_CAMPAIGN_SENDS + 1):
         "send_id": send_id,
         "campaign_id": campaign["campaign_id"],
         "campaign_name": campaign["campaign_name"],
+        "experiment_id": f"AB-{campaign['campaign_id']}",
+        "message_variant": message_variant,
         "customer_id": customer_id,
         "channel": campaign["channel"],
-        "message": campaign["message"],
+        "message": message,
         "sent_date": sent_date,
         "promotion_code": campaign["promotion_code"],
         "discount_rate": PROMOTION_RATES[campaign["promotion_code"]],

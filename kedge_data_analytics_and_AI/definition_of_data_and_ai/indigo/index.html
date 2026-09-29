@@ -673,66 +673,16 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#pair-activity-what-data-would-indigo-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Pair activity: what data would Indigo need?
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-the-people-behind-data-and-ai" class="md-nav__link">
+  <a href="#pair-activity" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        5. The people behind data and AI
-      </span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. The people behind data and AI">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#activity-who-should-be-involved" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Activity: who should be involved?
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#activity-the-ai-question-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Activity: the AI question checklist
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exit-ticket" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Exit ticket
+        Pair activity
       </span>
     </span>
   </a>
@@ -1325,66 +1275,16 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#pair-activity-what-data-would-indigo-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Pair activity: what data would Indigo need?
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-the-people-behind-data-and-ai" class="md-nav__link">
+  <a href="#pair-activity" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        5. The people behind data and AI
-      </span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. The people behind data and AI">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#activity-who-should-be-involved" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Activity: who should be involved?
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#activity-the-ai-question-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Activity: the AI question checklist
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exit-ticket" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Exit ticket
+        Pair activity
       </span>
     </span>
   </a>
@@ -1517,10 +1417,8 @@
 <ul>
 <li>Who might be interested in the product in the current customer base?</li>
 <li>Which message and channel should we use?</li>
-<li>How should we brand that product?</li>
 <li>How should we price that product?</li>
 <li>What are customers saying about the product?</li>
-<li>Did the launch increase sales?</li>
 <li>What does that teach us about launching a new product?</li>
 </ul>
 <h2 id="data-for-this-course">Data for this course<a class="headerlink" href="#data-for-this-course" title="Permanent link">&para;</a></h2>
@@ -1553,7 +1451,7 @@
 <p><csv-table src="../../data/product_reviews.csv" caption="Product reviews" page-size="6"></csv-table></p>
 </div>
 <div class="tabbed-block">
-<p><strong>One row represents a campaign message sent to a customer</strong>. <code>campaign_id</code> identifies the campaign; <code>promotion_code</code> joins to Promotions. A click has a <code>visit_id</code> linking to Website analytics, and its <code>time_spent</code> value in seconds matches that session. When <code>purchased</code> is true, <code>transaction_id</code> joins to Sales and <code>amount_purchased</code> equals that transaction's discounted total before refunds.</p>
+<p><strong>One row represents a campaign message sent to a customer</strong>. Each <code>experiment_id</code> is an A/B message test within one campaign. Recipients are randomly assigned to <code>message_variant</code> A or B, with the assignment kept consistent for that customer in that campaign; both variants share the campaign's channel, offer, and period. Variant B has a small simulated lift in clicks and purchases. Compare click and purchase rates by experiment and variant. <code>promotion_code</code> joins to Promotions. A click has a <code>visit_id</code> linking to Website analytics, and its <code>time_spent</code> value in seconds matches that session. When <code>purchased</code> is true, <code>transaction_id</code> joins to Sales and <code>amount_purchased</code> equals that transaction's discounted total before refunds.</p>
 <p><csv-table src="../../data/marketing_campaigns.csv" caption="Marketing campaigns" page-size="6"></csv-table></p>
 </div>
 <div class="tabbed-block">
@@ -1566,18 +1464,7 @@
 </div>
 </div>
 </div>
-<p><br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br></p>
-<h3 id="pair-activity-what-data-would-indigo-need">Pair activity: what data would Indigo need?<a class="headerlink" href="#pair-activity-what-data-would-indigo-need" title="Permanent link">&para;</a></h3>
+<h2 id="pair-activity">Pair activity<a class="headerlink" href="#pair-activity" title="Permanent link">&para;</a></h2>
 <p>Choose one of the case questions and work with a partner.</p>
 <ol>
 <li>Write the decision the team wants to make.</li>
@@ -1587,90 +1474,8 @@
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Do not confuse a proxy with the thing itself</p>
-<p>A click is a record of clicking, not proof that someone read, liked, remembered, or believed a message. A purchase is evidence of a transaction, not a complete explanation of motivation.</p>
+<p>A click is a record of clicking, not proof that someone read, liked, remembered, or believed a message. A purchase is evidence of a transaction, not a complete explanation of motivation nor a happy customer.</p>
 </div>
-<h2 id="5-the-people-behind-data-and-ai">5. The people behind data and AI<a class="headerlink" href="#5-the-people-behind-data-and-ai" title="Permanent link">&para;</a></h2>
-<p>Data work is collaborative. Job titles vary between organisations, and one person may perform several roles in a small company.</p>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>Main responsibility</th>
-<th>Example question from Indigo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Chief Data Officer (CDO)</strong></td>
-<td>Connects data strategy, governance, and business priorities</td>
-<td>Are we building responsible data capabilities?</td>
-</tr>
-<tr>
-<td><strong>Data engineer</strong></td>
-<td>Builds and maintains systems that collect, move, and store data</td>
-<td>Can campaign, order, and website data arrive reliably in one place?</td>
-</tr>
-<tr>
-<td><strong>Data analyst</strong></td>
-<td>Explores and summarises data to answer business questions</td>
-<td>Which channel had the strongest conversion rate last month?</td>
-</tr>
-<tr>
-<td><strong>Statistician</strong></td>
-<td>Designs measurement, samples, experiments, and uncertainty analysis</td>
-<td>Is the apparent campaign effect larger than normal variation?</td>
-</tr>
-<tr>
-<td><strong>Data scientist</strong></td>
-<td>Uses statistics, machine learning, and programming to model patterns or make predictions</td>
-<td>Which customers are likely to respond to an offer?</td>
-</tr>
-<tr>
-<td><strong>Data translator</strong></td>
-<td>Connects business needs, data work, and communication across teams</td>
-<td>What does "successful launch" mean, and how will we measure it?</td>
-</tr>
-<tr>
-<td><strong>Data Protection Officer (DPO)</strong></td>
-<td>Advises on privacy, data protection obligations, rights, and governance</td>
-<td>Are we allowed to use this personal data for this purpose?</td>
-</tr>
-</tbody>
-</table>
-<p>The DPO is not the person who "makes data safe" alone. Everyone who collects, analyses, shares, or acts on data has a responsibility to handle it appropriately.</p>
-<h3 id="activity-who-should-be-involved">Activity: who should be involved?<a class="headerlink" href="#activity-who-should-be-involved" title="Permanent link">&para;</a></h3>
-<p>For each request, identify the first role you would involve and at least one other role they might need.</p>
-<ol>
-<li>"Our dashboard shows a 40% improvement. Can we publish it?"</li>
-<li>"The customer data from two systems uses different country codes."</li>
-<li>"Can we use browsing behaviour to target people with a new offer?"</li>
-<li>"We want to predict which customers will stop buying."</li>
-</ol>
-<p>The marketing manager remains responsible for the business decision. Data specialists help make the evidence more reliable; they do not replace accountability.</p>
-<h3 id="activity-the-ai-question-checklist">Activity: the AI question checklist<a class="headerlink" href="#activity-the-ai-question-checklist" title="Permanent link">&para;</a></h3>
-<p>Choose one of the techniques above and answer these questions:</p>
-<ol>
-<li>What is the decision that the system will support?</li>
-<li>What is the input data?</li>
-<li>What would the output be: a number, category, ranking, text, or image?</li>
-<li>What would count as a useful and fair result?</li>
-<li>Who could be missing, misclassified, or harmed?</li>
-<li>What should a person check before acting on the output?</li>
-</ol>
-<p>If you cannot answer the first two questions, the problem is probably not ready for AI. Start by clarifying the decision and the data.</p>
-<div class="admonition warning">
-<p class="admonition-title">Human judgement remains part of the system</p>
-<p>A model can be technically accurate and still be a poor business choice if the target is wrong, the data is unfair, the output is not actionable, or the use violates people's expectations or rights.</p>
-</div>
-<h2 id="exit-ticket">Exit ticket<a class="headerlink" href="#exit-ticket" title="Permanent link">&para;</a></h2>
-<p>Answer these questions in your own words:</p>
-<ol>
-<li>What is the difference between big data and smart data?</li>
-<li>Why is open data not automatically suitable for a marketing decision?</li>
-<li>Give one example of structured data and one example of unstructured data.</li>
-<li>Which role would you involve for a privacy question? Which role would you involve for a data pipeline problem?</li>
-<li>For customer-review analysis, which AI technique could help, and what is one limitation?</li>
-</ol>
 
 
 
