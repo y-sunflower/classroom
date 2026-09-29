@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data" class="md-skip">
+        <a href="#data-for-this-course" class="md-skip">
           Skip to content
         </a>
       
@@ -640,22 +640,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#data" class="md-nav__link">
+  <a href="#data-for-this-course" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Data
+        Data for this course
       </span>
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data">
+    <nav class="md-nav" aria-label="Data for this course">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pair-activity-what-data-would-indigo-need" class="md-nav__link">
+  <a href="#schema" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Pair activity: what data would Indigo need?
+        Schema
       </span>
     </span>
   </a>
@@ -663,10 +663,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#data-quality-fit-for-purpose" class="md-nav__link">
+  <a href="#datasets" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Data quality: fit for purpose
+        Datasets
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pair-activity-what-data-would-indigo-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pair activity: what data would Indigo need?
       </span>
     </span>
   </a>
@@ -1281,22 +1292,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#data" class="md-nav__link">
+  <a href="#data-for-this-course" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Data
+        Data for this course
       </span>
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data">
+    <nav class="md-nav" aria-label="Data for this course">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pair-activity-what-data-would-indigo-need" class="md-nav__link">
+  <a href="#schema" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Pair activity: what data would Indigo need?
+        Schema
       </span>
     </span>
   </a>
@@ -1304,10 +1315,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#data-quality-fit-for-purpose" class="md-nav__link">
+  <a href="#datasets" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Data quality: fit for purpose
+        Datasets
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pair-activity-what-data-would-indigo-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pair activity: what data would Indigo need?
       </span>
     </span>
   </a>
@@ -1501,21 +1523,46 @@
 <li>Did the launch increase sales?</li>
 <li>What does that teach us about launching a new product?</li>
 </ul>
-<h2 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h2>
-<p>We have access to the following datasets:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sales</label><label for="__tabbed_1_2">Website analytics</label><label for="__tabbed_1_3">Product reviews</label><label for="__tabbed_1_4">Marketing campaigns</label></div>
+<h2 id="data-for-this-course">Data for this course<a class="headerlink" href="#data-for-this-course" title="Permanent link">&para;</a></h2>
+<h3 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+  products[Products] --&gt;|product_id| sales[Sales]
+  products --&gt;|product_id| visits[Website analytics]
+  products --&gt;|product_id| reviews[Product reviews]
+  promotions[Promotions] --&gt;|promotion_code| campaigns[Marketing campaigns]
+  promotions --&gt;|promotion_code| visits
+  promotions --&gt;|promotion_code| sales
+  campaigns --&gt;|send_id = campaign_send_id| visits
+  campaigns --&gt;|send_id = campaign_send_id| sales
+  visits --&gt;|transaction_id| sales
+  campaigns --&gt;|transaction_id| sales
+  sales --&gt;|transaction_id| reviews</code></pre>
+<h3 id="datasets">Datasets<a class="headerlink" href="#datasets" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sales</label><label for="__tabbed_1_2">Website analytics</label><label for="__tabbed_1_3">Product reviews</label><label for="__tabbed_1_4">Marketing campaigns</label><label for="__tabbed_1_5">Products</label><label for="__tabbed_1_6">Promotions</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
+<p><strong>One row represents a completed transaction</strong>. <code>transaction_id</code> is its unique ID. <code>gross_total</code> is the list-price total before discounts; <code>transaction_total</code> is after discounts and before refunds; <code>net_total</code> is after refunds. <code>discount_amount</code>, <code>refund_amount</code>, <code>returned_quantity</code>, <code>return_status</code>, and <code>return_date</code> describe discounts and returns. <code>sales_channel</code> identifies other sales, website sales, or campaign-attributed sales. <code>campaign_send_id</code> and <code>visit_id</code> connect attributed sales to their originating events.</p>
 <p><csv-table src="../../data/sales.csv" caption="Sales transactions" page-size="6"></csv-table></p>
 </div>
 <div class="tabbed-block">
+<p><strong>One row represents a product-page visit</strong>. It includes 10,000 ordinary visits and sessions created from campaign clicks. <code>time_spent</code> is the session duration in seconds. <code>product_available</code> records whether the item was in stock at the start of the visit. A completed purchase has a <code>transaction_id</code> that joins to Sales. Campaign sessions also carry <code>campaign_send_id</code>, which joins to Marketing campaigns.</p>
 <p><csv-table src="../../data/website_analytics.csv" caption="Website analytics" page-size="6"></csv-table></p>
 </div>
 <div class="tabbed-block">
+<p><strong>One row represents a review of a purchased product</strong>. <code>transaction_id</code> joins the review to the sale, and the customer and product IDs match that transaction. The review date is on or after the purchase date. Text varies in length, tone, spelling, casing, and punctuation, including very positive and very negative opinions.</p>
 <p><csv-table src="../../data/product_reviews.csv" caption="Product reviews" page-size="6"></csv-table></p>
 </div>
 <div class="tabbed-block">
+<p><strong>One row represents a campaign message sent to a customer</strong>. <code>campaign_id</code> identifies the campaign; <code>promotion_code</code> joins to Promotions. A click has a <code>visit_id</code> linking to Website analytics, and its <code>time_spent</code> value in seconds matches that session. When <code>purchased</code> is true, <code>transaction_id</code> joins to Sales and <code>amount_purchased</code> equals that transaction's discounted total before refunds.</p>
 <p><csv-table src="../../data/marketing_campaigns.csv" caption="Marketing campaigns" page-size="6"></csv-table></p>
+</div>
+<div class="tabbed-block">
+<p><strong>One row represents a product</strong>. <code>product_id</code> joins to sales, website visits, and reviews. <code>list_price</code> is in euros and is the price before promotions. <code>opening_stock</code> is available at the start of 2025; <code>monthly_restock_quantity</code> is added at the start of each following month. Sales cannot exceed available stock, and website visits record whether the product was available.</p>
+<p><csv-table src="../../data/products.csv" caption="Product catalog and stock schedule" page-size="6"></csv-table></p>
+</div>
+<div class="tabbed-block">
+<p><strong>One row represents a promotion code</strong>. <code>discount_rate</code> is the fraction taken off the product's list price, and the active dates show when the code can be used. Campaign-specific offers also include a <code>campaign_id</code>. Promotion codes join to Marketing campaigns, Website analytics, and Sales.</p>
+<p><csv-table src="../../data/promotions.csv" caption="Promotion codes and discounts" page-size="6"></csv-table></p>
 </div>
 </div>
 </div>
@@ -1542,19 +1589,6 @@
 <p class="admonition-title">Do not confuse a proxy with the thing itself</p>
 <p>A click is a record of clicking, not proof that someone read, liked, remembered, or believed a message. A purchase is evidence of a transaction, not a complete explanation of motivation.</p>
 </div>
-<h3 id="data-quality-fit-for-purpose">Data quality: fit for purpose<a class="headerlink" href="#data-quality-fit-for-purpose" title="Permanent link">&para;</a></h3>
-<p>Before using data, check at least the following dimensions:</p>
-<ul>
-<li><strong>Accuracy:</strong> Does it represent what it claims to represent?</li>
-<li><strong>Completeness:</strong> Are important values missing?</li>
-<li><strong>Consistency:</strong> Do the same concepts use the same definitions and formats?</li>
-<li><strong>Timeliness:</strong> Is it recent enough for this decision?</li>
-<li><strong>Uniqueness:</strong> Are records duplicated?</li>
-<li><strong>Validity:</strong> Do values follow the expected rules, such as a percentage between 0 and 100?</li>
-<li><strong>Representativeness:</strong> Who is absent or overrepresented?</li>
-<li><strong>Provenance:</strong> Who collected it, how, when, and under what conditions?</li>
-</ul>
-<p>Quality is not the same as perfection. A dataset is fit for purpose when its limitations are understood and acceptable for the decision being made.</p>
 <h2 id="5-the-people-behind-data-and-ai">5. The people behind data and AI<a class="headerlink" href="#5-the-people-behind-data-and-ai" title="Permanent link">&para;</a></h2>
 <p>Data work is collaborative. Job titles vary between organisations, and one person may perform several roles in a small company.</p>
 <table>
