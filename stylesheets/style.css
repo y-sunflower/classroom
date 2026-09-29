@@ -7,3 +7,68 @@ h4 {
 .md-footer-meta {
   display: none;
 }
+
+csv-table {
+  display: block;
+  margin: 1.5em 0;
+}
+
+.csv-table input[type="search"] {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.25em;
+  color: var(--md-default-fg-color);
+  font: inherit;
+  margin-bottom: 0.75em;
+  max-width: 32em;
+  padding: 0.4em 0.6em;
+  width: 100%;
+}
+
+.csv-table .tabulator {
+  background: var(--md-default-bg-color);
+  border-color: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color);
+  font: inherit;
+}
+
+.csv-table .tabulator-header,
+.csv-table .tabulator-header .tabulator-col,
+.csv-table .tabulator-footer {
+  background: var(--md-code-bg-color);
+  border-color: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color);
+}
+
+.csv-table .tabulator-footer button,
+.csv-table .tabulator-footer select {
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.csv-table .tabulator-row,
+.csv-table .tabulator-row.tabulator-row-even {
+  background: var(--md-default-bg-color);
+  border-color: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color);
+}
+
+.csv-table .tabulator-cell,
+.csv-table .tabulator-col {
+  border-color: var(--md-default-fg-color--lightest);
+}
+
+.csv-table input[type="search"]:focus-visible {
+  outline: 2px solid var(--md-primary-fg-color);
+  outline-offset: 2px;
+}
+
+.csv-table__status {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.85em;
+  margin: 0;
+}
+
+.csv-table__error {
+  color: var(--md-typeset-mark-color);
+}

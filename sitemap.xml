@@ -4,10 +4,7 @@
         <loc>https://www.example.com/</loc>
       </url>
       <url>
-        <loc>https://www.example.com/kedge_data_analytics_and_AI/syllabus/</loc>
-      </url>
-      <url>
-        <loc>https://www.example.com/kedge_data_analytics_and_AI/definition_of_data_and_ai/setup/</loc>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/analyzing_data/other/</loc>
       </url>
       <url>
         <loc>https://www.example.com/kedge_data_analytics_and_AI/definition_of_data_and_ai/definitions/</loc>
@@ -19,18 +16,24 @@
         <loc>https://www.example.com/kedge_data_analytics_and_AI/definition_of_data_and_ai/indigo/</loc>
       </url>
       <url>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/definition_of_data_and_ai/setup/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/group_projects/other/</loc>
+      </url>
+      <url>
         <loc>https://www.example.com/kedge_data_analytics_and_AI/preparing_data/other/</loc>
-      </url>
-      <url>
-        <loc>https://www.example.com/kedge_data_analytics_and_AI/analyzing_data/other/</loc>
-      </url>
-      <url>
-        <loc>https://www.example.com/kedge_data_analytics_and_AI/text_mining/other/</loc>
       </url>
       <url>
         <loc>https://www.example.com/kedge_data_analytics_and_AI/presenting_data_and_ethical_issues/other/</loc>
       </url>
       <url>
-        <loc>https://www.example.com/kedge_data_analytics_and_AI/group_projects/other/</loc>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/syllabus/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/text_mining/other/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/syntax/</loc>
       </url>
 </urlset>
