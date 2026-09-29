@@ -74,7 +74,7 @@ Code can also be highlighted inline: `#!python print("Hello, Python!")`.
 
 ## CSV tables
 
-Use the `<csv-table>` element to load a CSV file as an interactive table. [Tabulator](https://tabulator.info/) parses the CSV and provides sorting and pagination; the table also includes a search across all columns.
+Use the `<csv-table>` element to load a CSV file as an interactive table. [Tabulator](https://tabulator.info/) parses the CSV and provides sorting, pagination, and CSV downloads. A search field and total row/column count are included automatically.
 
 ``` html
 <csv-table src="../data/sales.csv" caption="Sales transactions" page-size="10"></csv-table>

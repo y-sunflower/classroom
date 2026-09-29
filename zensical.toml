@@ -4,8 +4,8 @@ site_name = "Documentation"
 site_description = "Teaching materials of Joseph Barbier"
 site_author = "Joseph Barbier"
 nav = [
-  { "All courses" = "index.md" },
-  { "Data Analytics & AI" = [
+  "index.md",
+  { "Kedge Data Analytics & AI" = [
     { "Syllabus" = "kedge_data_analytics_and_AI/syllabus.md" },
     { "Definitions of data and AI" = [
       { "Set up Positron and uv" = "kedge_data_analytics_and_AI/definition_of_data_and_ai/setup.md" },

@@ -22,27 +22,19 @@ We have access to the following datasets:
 
 === "Sales"
 
-    Each transaction, products bought, quantity, customer ID, price, and date.
-
-    <csv-table src="../data/sales.csv" caption="Sales transactions" page-size="10"></csv-table>
+    <csv-table src="../data/sales.csv" caption="Sales transactions" page-size="6"></csv-table>
 
 === "Website analytics"
 
-    Customer visits, where they came from, products viewed, and whether they added items to their cart or purchased them
-
-    <csv-table src="../data/website_analytics.csv" caption="Website analytics" page-size="10"></csv-table>
+    <csv-table src="../data/website_analytics.csv" caption="Website analytics" page-size="6"></csv-table>
 
 === "Product reviews"
 
-    Customer ratings and written reviews about products.
-
-    <csv-table src="../data/product_reviews.csv" caption="Product reviews" page-size="10"></csv-table>
+    <csv-table src="../data/product_reviews.csv" caption="Product reviews" page-size="6"></csv-table>
 
 === "Marketing campaigns"
 
-    Campaigns sent to customers, channel (email, ads), message, and whether customers clicked or purchased.
-
-    <csv-table src="../data/marketing_campaigns.csv" caption="Marketing campaigns" page-size="10"></csv-table>
+    <csv-table src="../data/marketing_campaigns.csv" caption="Marketing campaigns" page-size="6"></csv-table>
 
 <br>
 <br>
@@ -64,58 +56,6 @@ Choose one of the case questions and work with a partner.
 2. List three pieces of data that could help.
 3. For each piece, write where it could come from.
 4. Add one reason the data might be incomplete, misleading, or inappropriate.
-
-Use this template:
-
-| Decision | Data needed | Possible source | One limitation |
-| -------- | ----------- | --------------- | -------------- |
-|          |             |                 |                |
-|          |             |                 |                |
-|          |             |                 |                |
-
-## 4. Data types and data sources
-
-### Structured and unstructured data
-
-**Structured data** is organised according to a known format, often rows and columns. Each row might represent a customer, order, or campaign event, while each column has a defined meaning.
-
-| customer_id | order_date | product        | amount_eur |
-| ----------- | ---------- | -------------- | ---------: |
-| 1042        | 2026-09-03 | refill shampoo |      24.90 |
-| 1088        | 2026-09-04 | refill pouch   |      12.50 |
-
-Structured data is convenient to filter and summarise, but a neat table can still contain errors or unfair measurements.
-
-**Unstructured data** does not arrive in a simple table with a fixed schema. Examples include review text, interview recordings, images, videos, presentations, and social-media content. It may contain valuable context, but it usually needs additional interpretation or processing before it can be compared systematically.
-
-Some data is **semi-structured**: it has labels or a loose organisation but not a simple table. Examples include website event records in JSON format, email headers, and some API responses.
-
-### Internal, external, and open data
-
-| Source            | What it means                                             | Marketing example                                                        | Questions to ask                                                                     |
-| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| **Internal data** | Collected by or for the organisation                      | Orders, CRM records, campaign spend, customer-service contacts           | Was it collected for this purpose? Is it accurate and was it collected with consent? |
-| **External data** | Comes from outside the organisation                       | A media platform report, a research panel, a partner, or a market report | What is the provider's method and incentive? Can the definitions be compared?        |
-| **Open data**     | External data available for reuse under stated conditions | Public population, weather, transport, or economic statistics            | What licence, geography, date, and limitations apply?                                |
-
-External does not necessarily mean open. A company may buy external data that cannot be freely shared or reused.
-
-### Panel and tracking data
-
-**Panel data** follows the same people, households, stores, or organisations repeatedly over time. It can help reveal changes in behaviour, but participants may drop out or change their behaviour because they know they are being observed.
-
-**Tracking data** records behaviour over time, such as visits, clicks, movement through a website, or repeated exposure to an advertisement. Tracking can support measurement and personalisation, but it raises important questions about consent, identity, retention, and the difference between observing behaviour and understanding motivation.
-
-### Activity: match the source to the question
-
-For each question, choose one or more suitable data sources. Then write one limitation.
-
-| Marketing question                                 | Possible data source | One limitation |
-| -------------------------------------------------- | -------------------- | -------------- |
-| Did the campaign increase orders?                  |                      |                |
-| What do customers like or dislike about the scent? |                      |                |
-| Which regions might need more delivery capacity?   |                      |                |
-| How does behaviour change after three months?      |                      |                |
 
 !!! tip "Do not confuse a proxy with the thing itself"
 
