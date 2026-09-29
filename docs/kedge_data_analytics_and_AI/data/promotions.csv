@@ -1,0 +1,12 @@
+promotion_code,description,discount_rate,active_from,active_to,campaign_id
+WELCOME5,Welcome offer,0.05,2025-01-01,2025-12-31,
+LOYALTY10,Loyalty offer,0.1,2025-01-01,2025-12-31,
+WEEKEND15,Weekend offer,0.15,2025-01-01,2025-12-31,
+RESET10,New Year Reset offer,0.1,2025-01-01,2025-03-14,CMP01
+SPRING10,Spring Refresh offer,0.1,2025-03-01,2025-05-14,CMP02
+MEMBER15,Member Picks offer,0.15,2025-05-01,2025-07-14,CMP03
+SUMMER5,Summer Essentials offer,0.05,2025-06-01,2025-09-14,CMP04
+ROUTINE10,Back to Routine offer,0.1,2025-08-01,2025-10-14,CMP05
+AUTUMN5,Autumn Edit offer,0.05,2025-09-01,2025-11-14,CMP06
+GIFT10,Early Holiday offer,0.1,2025-11-01,2025-12-14,CMP07
+HOLIDAY15,Holiday Highlights offer,0.15,2025-11-01,2025-12-31,CMP08

@@ -1,6 +1,7 @@
 import math
 import random
 import string
+from calendar import monthrange
 from datetime import date, timedelta
 from pathlib import Path
 from typing import TypedDict
@@ -11,9 +12,10 @@ SEED = 42
 OUTPUT_DIR = Path("docs/kedge_data_analytics_and_AI/data")
 START_DATE = date(2025, 1, 1)
 END_DATE = date(2025, 12, 31)
+CURRENCY_CODE = "EUR"
 N_CUSTOMERS = 1_000
 N_PRODUCTS = 30
-N_SALES = 6_000
+N_OTHER_SALE_ATTEMPTS = 6_000
 N_CAMPAIGN_SENDS = 7_000
 N_REVIEWS = 2_500
 N_WEBSITE_VISITS = 10_000
@@ -41,6 +43,7 @@ class Campaign(TypedDict):
     message: str
     start_month: int
     end_month: int
+    promotion_code: str
 
 
 class Customer(TypedDict):
@@ -57,6 +60,38 @@ class Product(TypedDict):
     base_price: float
     quality: float
     popularity: float
+    opening_stock: int
+    monthly_restock_quantity: int
+
+
+PROMOTION_RATES = {
+    "RESET10": 0.10,
+    "SPRING10": 0.10,
+    "MEMBER15": 0.15,
+    "SUMMER5": 0.05,
+    "ROUTINE10": 0.10,
+    "AUTUMN5": 0.05,
+    "GIFT10": 0.10,
+    "HOLIDAY15": 0.15,
+    "WELCOME5": 0.05,
+    "LOYALTY10": 0.10,
+    "WEEKEND15": 0.15,
+}
+
+GENERIC_PROMOTIONS = [
+    {
+        "promotion_code": "WELCOME5",
+        "description": "Welcome offer",
+    },
+    {
+        "promotion_code": "LOYALTY10",
+        "description": "Loyalty offer",
+    },
+    {
+        "promotion_code": "WEEKEND15",
+        "description": "Weekend offer",
+    },
+]
 
 
 CAMPAIGNS: list[Campaign] = [
@@ -67,6 +102,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "Start fresh with practical favorites.",
         "start_month": 1,
         "end_month": 2,
+        "promotion_code": "RESET10",
     },
     {
         "campaign_id": "CMP02",
@@ -75,6 +111,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "Refresh your routine for spring.",
         "start_month": 3,
         "end_month": 4,
+        "promotion_code": "SPRING10",
     },
     {
         "campaign_id": "CMP03",
@@ -83,6 +120,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "Popular picks selected for you.",
         "start_month": 5,
         "end_month": 6,
+        "promotion_code": "MEMBER15",
     },
     {
         "campaign_id": "CMP04",
@@ -91,6 +129,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "Simple essentials for warmer days.",
         "start_month": 6,
         "end_month": 8,
+        "promotion_code": "SUMMER5",
     },
     {
         "campaign_id": "CMP05",
@@ -99,6 +138,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "Get back into your everyday rhythm.",
         "start_month": 8,
         "end_month": 9,
+        "promotion_code": "ROUTINE10",
     },
     {
         "campaign_id": "CMP06",
@@ -107,6 +147,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "Discover this season's useful upgrades.",
         "start_month": 9,
         "end_month": 10,
+        "promotion_code": "AUTUMN5",
     },
     {
         "campaign_id": "CMP07",
@@ -115,6 +156,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "A head start on thoughtful gifting.",
         "start_month": 11,
         "end_month": 11,
+        "promotion_code": "GIFT10",
     },
     {
         "campaign_id": "CMP08",
@@ -123,6 +165,7 @@ CAMPAIGNS: list[Campaign] = [
         "message": "Explore customer favorites this holiday.",
         "start_month": 11,
         "end_month": 12,
+        "promotion_code": "HOLIDAY15",
     },
 ]
 
@@ -200,10 +243,19 @@ for i in range(1, N_PRODUCTS + 1):
             "base_price": round(rng.uniform(12, 110), 2),
             "quality": rng.uniform(-0.5, 0.5),
             "popularity": rng.uniform(0.75, 1.25),
+            "opening_stock": rng.randint(80, 130),
+            "monthly_restock_quantity": rng.randint(17, 24),
         }
     )
 
 product_weights: list[float] = [product["popularity"] for product in products]
+products_by_id = {product["product_id"]: product for product in products}
+
+
+def choose_generic_promotion() -> str | None:
+    if rng.random() < 0.22:
+        return rng.choice(GENERIC_PROMOTIONS)["promotion_code"]
+    return None
 
 
 def create_sale(
@@ -211,33 +263,66 @@ def create_sale(
     product: Product,
     sale_date: date,
     sales_channel: str,
+    stock_available: int,
+    promotion_code: str | None,
     campaign_send_id: str | None = None,
     visit_id: str | None = None,
 ) -> dict[str, object]:
     customer = customers_by_id[customer_id]
+    quantity_options = [1, 2, 3, 4]
     quantity_weights = [0.70, 0.21, 0.07, 0.02]
     if customer["segment"] == "Premium":
         quantity_weights = [0.64, 0.24, 0.09, 0.03]
-    quantity = rng.choices([1, 2, 3, 4], weights=quantity_weights, k=1)[0]
-    discount = rng.choices(
-        [0, 0.05, 0.10, 0.15], weights=[0.67, 0.16, 0.12, 0.05], k=1
-    )[0]
-    seasonal_price_effect = 1 + (seasonal_multiplier(sale_date) - 1) * 0.15
-    unit_price = (
-        product["base_price"]
-        * (1 - discount)
-        * seasonal_price_effect
-        * rng.uniform(0.98, 1.02)
-    )
-    unit_price = round(unit_price, 2)
+    available_options = [
+        quantity for quantity in quantity_options if quantity <= stock_available
+    ]
+    available_weights = [
+        weight
+        for quantity, weight in zip(quantity_options, quantity_weights, strict=True)
+        if quantity <= stock_available
+    ]
+    quantity = rng.choices(available_options, weights=available_weights, k=1)[0]
+    discount_rate = PROMOTION_RATES.get(promotion_code, 0.0)
+    list_unit_price = product["base_price"]
+    unit_price = round(list_unit_price * (1 - discount_rate), 2)
+    gross_total = round(quantity * list_unit_price, 2)
+    transaction_total = round(quantity * unit_price, 2)
+    discount_amount = round(gross_total - transaction_total, 2)
+
+    returned_quantity = 0
+    return_date = None
+    return_status = "none"
+    days_until_year_end = (END_DATE - sale_date).days
+    if days_until_year_end > 0 and rng.random() < 0.06:
+        return_date = sale_date + timedelta(
+            days=rng.randint(1, min(30, days_until_year_end))
+        )
+        if quantity == 1 or rng.random() < 0.65:
+            returned_quantity = quantity
+            return_status = "full"
+        else:
+            returned_quantity = rng.randint(1, quantity - 1)
+            return_status = "partial"
+    refund_amount = round(returned_quantity * unit_price, 2)
     return {
         "transaction_id": f"T{len(sales_rows) + 1:06d}",
+        "currency_code": CURRENCY_CODE,
         "customer_id": customer_id,
         "product_id": product["product_id"],
         "product_name": product["product_name"],
         "quantity": quantity,
+        "list_unit_price": list_unit_price,
         "unit_price": unit_price,
-        "transaction_total": round(quantity * unit_price, 2),
+        "discount_rate": discount_rate,
+        "promotion_code": promotion_code,
+        "gross_total": gross_total,
+        "discount_amount": discount_amount,
+        "transaction_total": transaction_total,
+        "return_status": return_status,
+        "returned_quantity": returned_quantity,
+        "return_date": return_date,
+        "refund_amount": refund_amount,
+        "net_total": round(transaction_total - refund_amount, 2),
         "date": sale_date,
         "sales_channel": sales_channel,
         "campaign_send_id": campaign_send_id,
@@ -245,12 +330,20 @@ def create_sale(
     }
 
 
-sales_rows = []
-for i in range(1, N_SALES + 1):
-    d = random_date()
-    customer_id = rng.choice(customer_ids)
+inventory_events = []
+for _ in range(1, N_OTHER_SALE_ATTEMPTS + 1):
     product = rng.choices(products, weights=product_weights, k=1)[0]
-    sales_rows.append(create_sale(customer_id, product, d, "other"))
+    inventory_events.append(
+        {
+            "event_type": "offline_sale",
+            "sales_channel": "other",
+            "event_date": random_date(),
+            "customer_id": rng.choice(customer_ids),
+            "product": product,
+            "promotion_code": choose_generic_promotion(),
+            "tie_breaker": rng.random(),
+        }
+    )
 
 campaign_rows = []
 campaign_website_rows = []
@@ -272,68 +365,79 @@ for i in range(1, N_CAMPAIGN_SENDS + 1):
     time_spent = (
         int(max(8, min(3600, rng.lognormvariate(4.5, 0.8)))) if clicked else None
     )
-    purchase_score = (
-        -3.0
-        + 0.50 * customer["engagement"]
-        + 1.25
-        + (0.15 if sent_date.month in (11, 12) else 0)
-        + rng.uniform(-0.15, 0.15)
-    )
-    purchased = clicked and rng.random() < logistic(purchase_score)
+    purchase_intent = False
+    if clicked:
+        purchase_score = (
+            -3.0
+            + 0.50 * customer["engagement"]
+            + 1.25
+            + (0.15 if sent_date.month in (11, 12) else 0)
+            + rng.uniform(-0.15, 0.15)
+        )
+        purchase_intent = rng.random() < logistic(purchase_score)
     send_id = f"SEND{i:06d}"
     visit_id = None
-    sale = None
+    campaign_row = {
+        "send_id": send_id,
+        "campaign_id": campaign["campaign_id"],
+        "campaign_name": campaign["campaign_name"],
+        "customer_id": customer_id,
+        "channel": campaign["channel"],
+        "message": campaign["message"],
+        "sent_date": sent_date,
+        "promotion_code": campaign["promotion_code"],
+        "discount_rate": PROMOTION_RATES[campaign["promotion_code"]],
+        "currency_code": CURRENCY_CODE,
+        "clicked": clicked,
+        "time_spent": time_spent,
+        "purchased": False,
+        "visit_id": None,
+        "transaction_id": None,
+        "amount_purchased": None,
+    }
     if clicked:
         product = rng.choices(products, weights=product_weights, k=1)[0]
         visit_id = f"V{N_WEBSITE_VISITS + len(campaign_website_rows) + 1:06d}"
         visit_date = min(sent_date + timedelta(days=rng.randint(0, 14)), END_DATE)
-        added_to_cart = purchased or rng.random() < logistic(
+        added_to_cart = purchase_intent or rng.random() < logistic(
             -1.55 + 0.45 * customer["engagement"]
         )
-        if purchased:
-            sale = create_sale(
-                customer_id,
-                product,
-                visit_date,
-                "marketing_campaign",
-                campaign_send_id=send_id,
-                visit_id=visit_id,
-            )
-            sales_rows.append(sale)
-        campaign_website_rows.append(
+        website_row = {
+            "visit_id": visit_id,
+            "customer_id": customer_id,
+            "visit_date": visit_date,
+            "traffic_source": (
+                "email" if campaign["channel"] == "email" else "paid_search"
+            ),
+            "product_id": product["product_id"],
+            "product_viewed": product["product_name"],
+            "product_available": None,
+            "added_to_cart": added_to_cart,
+            "purchased": False,
+            "time_spent": time_spent,
+            "promotion_code": campaign["promotion_code"],
+            "transaction_id": None,
+            "campaign_send_id": send_id,
+        }
+        campaign_row["visit_id"] = visit_id
+        campaign_website_rows.append(website_row)
+        inventory_events.append(
             {
-                "visit_id": visit_id,
+                "event_type": "website_visit",
+                "sales_channel": "marketing_campaign",
+                "event_date": visit_date,
                 "customer_id": customer_id,
-                "visit_date": visit_date,
-                "traffic_source": (
-                    "email" if campaign["channel"] == "email" else "paid_search"
-                ),
-                "product_id": product["product_id"],
-                "product_viewed": product["product_name"],
-                "added_to_cart": added_to_cart,
-                "purchased": purchased,
-                "time_spent": time_spent,
-                "transaction_id": sale["transaction_id"] if sale else None,
+                "product": product,
+                "promotion_code": campaign["promotion_code"],
+                "purchase_intent": purchase_intent,
                 "campaign_send_id": send_id,
+                "visit_id": visit_id,
+                "campaign_row": campaign_row,
+                "website_row": website_row,
+                "tie_breaker": rng.random(),
             }
         )
-    campaign_rows.append(
-        {
-            "send_id": send_id,
-            "campaign_id": campaign["campaign_id"],
-            "campaign_name": campaign["campaign_name"],
-            "customer_id": customer_id,
-            "channel": campaign["channel"],
-            "message": campaign["message"],
-            "sent_date": sent_date,
-            "clicked": clicked,
-            "time_spent": time_spent,
-            "purchased": purchased,
-            "visit_id": visit_id,
-            "transaction_id": sale["transaction_id"] if sale else None,
-            "amount_purchased": sale["transaction_total"] if sale else None,
-        }
-    )
+    campaign_rows.append(campaign_row)
 
 website_rows = campaign_website_rows
 for i in range(1, N_WEBSITE_VISITS + 1):
@@ -380,7 +484,7 @@ for i in range(1, N_WEBSITE_VISITS + 1):
         + source_purchase_effect
         + rng.uniform(-0.20, 0.20)
     )
-    purchased = rng.random() < logistic(purchase_score)
+    purchase_intent = rng.random() < logistic(purchase_score)
     visit_id = f"V{i:06d}"
     time_spent = int(
         max(
@@ -388,40 +492,140 @@ for i in range(1, N_WEBSITE_VISITS + 1):
             min(
                 3600,
                 rng.lognormvariate(
-                    3.9 + 0.45 * int(added_to_cart) + 0.45 * int(purchased), 0.8
+                    3.9 + 0.45 * int(added_to_cart) + 0.45 * int(purchase_intent), 0.8
                 ),
             ),
         )
     )
-    sale = None
-    if purchased:
-        sale = create_sale(
-            customer_id,
-            product,
-            visit_date,
-            "website",
-            visit_id=visit_id,
-        )
-        sales_rows.append(sale)
-    website_rows.append(
+    promotion_code = choose_generic_promotion()
+    website_row = {
+        "visit_id": visit_id,
+        "customer_id": customer_id,
+        "visit_date": visit_date,
+        "traffic_source": source,
+        "product_id": product["product_id"],
+        "product_viewed": product["product_name"],
+        "product_available": None,
+        "added_to_cart": added_to_cart,
+        "purchased": False,
+        "time_spent": time_spent,
+        "promotion_code": promotion_code,
+        "transaction_id": None,
+        "campaign_send_id": None,
+    }
+    website_rows.append(website_row)
+    inventory_events.append(
         {
-            "visit_id": visit_id,
+            "event_type": "website_visit",
+            "sales_channel": "website",
+            "event_date": visit_date,
             "customer_id": customer_id,
-            "visit_date": visit_date,
-            "traffic_source": source,
-            "product_id": product["product_id"],
-            "product_viewed": product["product_name"],
-            "added_to_cart": added_to_cart,
-            "purchased": purchased,
-            "time_spent": time_spent,
-            "transaction_id": sale["transaction_id"] if sale else None,
-            "campaign_send_id": None,
+            "product": product,
+            "promotion_code": promotion_code,
+            "purchase_intent": purchase_intent,
+            "visit_id": visit_id,
+            "website_row": website_row,
+            "tie_breaker": rng.random(),
         }
     )
+
+sales_rows = []
+remaining_stock = {
+    product["product_id"]: product["opening_stock"] for product in products
+}
+current_month = 1
+for event in sorted(
+    inventory_events, key=lambda item: (item["event_date"], item["tie_breaker"])
+):
+    while current_month < event["event_date"].month:
+        current_month += 1
+        for product in products:
+            remaining_stock[product["product_id"]] += product[
+                "monthly_restock_quantity"
+            ]
+
+    product = event["product"]
+    product_id = product["product_id"]
+    stock_available = remaining_stock[product_id]
+    if event["event_type"] == "website_visit":
+        website_row = event["website_row"]
+        website_row["product_available"] = stock_available > 0
+        if stock_available == 0:
+            website_row["added_to_cart"] = False
+
+    sale = None
+    purchase_intent = event.get("purchase_intent", True)
+    if stock_available > 0 and purchase_intent:
+        sale = create_sale(
+            event["customer_id"],
+            product,
+            event["event_date"],
+            event["sales_channel"],
+            stock_available,
+            event["promotion_code"],
+            campaign_send_id=event.get("campaign_send_id"),
+            visit_id=event.get("visit_id"),
+        )
+        sales_rows.append(sale)
+        remaining_stock[product_id] -= sale["quantity"]
+
+    if event["event_type"] == "website_visit":
+        website_row["purchased"] = sale is not None
+        if sale:
+            website_row["transaction_id"] = sale["transaction_id"]
+        campaign_row = event.get("campaign_row")
+        if campaign_row is not None:
+            campaign_row["purchased"] = sale is not None
+            if sale:
+                campaign_row["transaction_id"] = sale["transaction_id"]
+                campaign_row["amount_purchased"] = sale["transaction_total"]
 
 sales_df = pl.DataFrame(sales_rows, infer_schema_length=None)
 campaigns_df = pl.DataFrame(campaign_rows, infer_schema_length=None)
 website_df = pl.DataFrame(website_rows, infer_schema_length=None)
+products_df = pl.DataFrame(
+    [
+        {
+            "product_id": product["product_id"],
+            "product_name": product["product_name"],
+            "category": product["category"],
+            "list_price": product["base_price"],
+            "currency_code": CURRENCY_CODE,
+            "opening_stock": product["opening_stock"],
+            "monthly_restock_quantity": product["monthly_restock_quantity"],
+        }
+        for product in products
+    ]
+)
+
+promotion_rows = [
+    {
+        "promotion_code": promotion["promotion_code"],
+        "description": promotion["description"],
+        "discount_rate": PROMOTION_RATES[promotion["promotion_code"]],
+        "active_from": START_DATE,
+        "active_to": END_DATE,
+        "campaign_id": None,
+    }
+    for promotion in GENERIC_PROMOTIONS
+]
+for campaign in CAMPAIGNS:
+    promotion_end = min(
+        date(2025, campaign["end_month"], monthrange(2025, campaign["end_month"])[1])
+        + timedelta(days=14),
+        END_DATE,
+    )
+    promotion_rows.append(
+        {
+            "promotion_code": campaign["promotion_code"],
+            "description": f"{campaign['campaign_name']} offer",
+            "discount_rate": PROMOTION_RATES[campaign["promotion_code"]],
+            "active_from": date(2025, campaign["start_month"], 1),
+            "active_to": promotion_end,
+            "campaign_id": campaign["campaign_id"],
+        }
+    )
+promotions_df = pl.DataFrame(promotion_rows)
 
 
 review_texts = {
@@ -562,9 +766,7 @@ review_rows = []
 review_sales = rng.sample(sales_rows, k=N_REVIEWS)
 for i, sale in enumerate(review_sales, start=1):
     customer = customers_by_id[sale["customer_id"]]
-    product = next(
-        product for product in products if product["product_id"] == sale["product_id"]
-    )
+    product = products_by_id[sale["product_id"]]
     rating_score = (
         3.65 + product["quality"] + 0.15 * customer["engagement"] + rng.gauss(0, 1.0)
     )
@@ -592,3 +794,5 @@ sales_df.write_csv(OUTPUT_DIR / "sales.csv")
 campaigns_df.write_csv(OUTPUT_DIR / "marketing_campaigns.csv")
 reviews_df.write_csv(OUTPUT_DIR / "product_reviews.csv")
 website_df.write_csv(OUTPUT_DIR / "website_analytics.csv")
+products_df.write_csv(OUTPUT_DIR / "products.csv")
+promotions_df.write_csv(OUTPUT_DIR / "promotions.csv")

@@ -51,7 +51,7 @@ csv-table {
 
 .csv-table__summary {
   color: var(--csv-muted);
-  font-size: 0.8125rem;
+  font-size: 0.7125rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -74,7 +74,7 @@ csv-table {
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
   color: var(--csv-text);
   font: inherit;
-  font-size: 0.875rem;
+  font-size: 0.67rem;
   overflow: hidden;
 }
 
@@ -120,7 +120,7 @@ csv-table {
 }
 
 .csv-table .tabulator-row .tabulator-cell {
-  padding: 0.5rem 0.4rem;
+  padding: 0.2rem 0.4rem;
 }
 
 .csv-table .tabulator-footer {

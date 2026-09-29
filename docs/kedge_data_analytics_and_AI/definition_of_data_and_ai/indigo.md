@@ -16,25 +16,62 @@ We want to answer questions such as:
 - Did the launch increase sales?
 - What does that teach us about launching a new product?
 
-## Data
+## Data for this course
 
-We have access to the following datasets:
+### Schema
+
+```mermaid
+flowchart LR
+  products[Products] -->|product_id| sales[Sales]
+  products -->|product_id| visits[Website analytics]
+  products -->|product_id| reviews[Product reviews]
+  promotions[Promotions] -->|promotion_code| campaigns[Marketing campaigns]
+  promotions -->|promotion_code| visits
+  promotions -->|promotion_code| sales
+  campaigns -->|send_id = campaign_send_id| visits
+  campaigns -->|send_id = campaign_send_id| sales
+  visits -->|transaction_id| sales
+  campaigns -->|transaction_id| sales
+  sales -->|transaction_id| reviews
+```
+
+### Datasets
 
 === "Sales"
+
+    **One row represents a completed transaction**. `transaction_id` is its unique ID. `gross_total` is the list-price total before discounts; `transaction_total` is after discounts and before refunds; `net_total` is after refunds. `discount_amount`, `refund_amount`, `returned_quantity`, `return_status`, and `return_date` describe discounts and returns. `sales_channel` identifies other sales, website sales, or campaign-attributed sales. `campaign_send_id` and `visit_id` connect attributed sales to their originating events.
 
     <csv-table src="../data/sales.csv" caption="Sales transactions" page-size="6"></csv-table>
 
 === "Website analytics"
 
+    **One row represents a product-page visit**. It includes 10,000 ordinary visits and sessions created from campaign clicks. `time_spent` is the session duration in seconds. `product_available` records whether the item was in stock at the start of the visit. A completed purchase has a `transaction_id` that joins to Sales. Campaign sessions also carry `campaign_send_id`, which joins to Marketing campaigns.
+
     <csv-table src="../data/website_analytics.csv" caption="Website analytics" page-size="6"></csv-table>
 
 === "Product reviews"
+
+    **One row represents a review of a purchased product**. `transaction_id` joins the review to the sale, and the customer and product IDs match that transaction. The review date is on or after the purchase date. Text varies in length, tone, spelling, casing, and punctuation, including very positive and very negative opinions.
 
     <csv-table src="../data/product_reviews.csv" caption="Product reviews" page-size="6"></csv-table>
 
 === "Marketing campaigns"
 
+    **One row represents a campaign message sent to a customer**. `campaign_id` identifies the campaign; `promotion_code` joins to Promotions. A click has a `visit_id` linking to Website analytics, and its `time_spent` value in seconds matches that session. When `purchased` is true, `transaction_id` joins to Sales and `amount_purchased` equals that transaction's discounted total before refunds.
+
     <csv-table src="../data/marketing_campaigns.csv" caption="Marketing campaigns" page-size="6"></csv-table>
+
+=== "Products"
+
+    **One row represents a product**. `product_id` joins to sales, website visits, and reviews. `list_price` is in euros and is the price before promotions. `opening_stock` is available at the start of 2025; `monthly_restock_quantity` is added at the start of each following month. Sales cannot exceed available stock, and website visits record whether the product was available.
+
+    <csv-table src="../data/products.csv" caption="Product catalog and stock schedule" page-size="6"></csv-table>
+
+=== "Promotions"
+
+    **One row represents a promotion code**. `discount_rate` is the fraction taken off the product's list price, and the active dates show when the code can be used. Campaign-specific offers also include a `campaign_id`. Promotion codes join to Marketing campaigns, Website analytics, and Sales.
+
+    <csv-table src="../data/promotions.csv" caption="Promotion codes and discounts" page-size="6"></csv-table>
 
 <br>
 <br>
@@ -60,21 +97,6 @@ Choose one of the case questions and work with a partner.
 !!! tip "Do not confuse a proxy with the thing itself"
 
     A click is a record of clicking, not proof that someone read, liked, remembered, or believed a message. A purchase is evidence of a transaction, not a complete explanation of motivation.
-
-### Data quality: fit for purpose
-
-Before using data, check at least the following dimensions:
-
-- **Accuracy:** Does it represent what it claims to represent?
-- **Completeness:** Are important values missing?
-- **Consistency:** Do the same concepts use the same definitions and formats?
-- **Timeliness:** Is it recent enough for this decision?
-- **Uniqueness:** Are records duplicated?
-- **Validity:** Do values follow the expected rules, such as a percentage between 0 and 100?
-- **Representativeness:** Who is absent or overrepresented?
-- **Provenance:** Who collected it, how, when, and under what conditions?
-
-Quality is not the same as perfection. A dataset is fit for purpose when its limitations are understood and acceptable for the decision being made.
 
 ## 5. The people behind data and AI
 

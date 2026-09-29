@@ -93,6 +93,20 @@ We're now using an extremely high amount of compute, and even more each year:
 
 ![A graph showing that the amount of compute used to train AI models doubles over time](https://upload.wikimedia.org/wikipedia/commons/4/4b/Ai_training_compute_doubling_v2.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled)
 
+## Jobs
+
+Data work is collaborative. Job titles vary between organisations, and one person may perform several roles in a small company.
+
+| Role                              | Main responsibility                                                                      |
+| --------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Chief Data Officer (CDO)**      | Connects data strategy, governance, and business priorities                              |
+| **Data engineer**                 | Builds and maintains systems that collect, move, and store data                          |
+| **Data analyst**                  | Explores and summarises data to answer business questions                                |
+| **Data scientist**                | Uses statistics, machine learning, and programming to model patterns or make predictions |
+| **Data Protection Officer (DPO)** | Advises on privacy, data protection obligations, rights, and governance                  |
+
+In practice, many of those job titles are mixed together and companies often don't make true differences between them. Also,
+
 
 ## Going further:
 
