@@ -3,6 +3,7 @@ site_url = "https://www.example.com/"
 site_name = "Documentation"
 site_description = "Teaching materials of Joseph Barbier"
 site_author = "Joseph Barbier"
+copyright = "Copyright &copy; 2026 Joseph Barbier--Darnal"
 nav = [
   "index.md",
   { "Kedge Data Analytics & AI" = [
@@ -14,7 +15,9 @@ nav = [
       { "Indigo" = "kedge_data_analytics_and_AI/definition_of_data_and_ai/indigo.md" },
     ] },
     { "Preparing data" = [
-      { "Other" = "kedge_data_analytics_and_AI/preparing_data/other.md" },
+      { "Storing data" = "kedge_data_analytics_and_AI/preparing_data/storing_data.md" },
+      { "Cleaning data" = "kedge_data_analytics_and_AI/preparing_data/cleaning.md" },
+      { "Practical lab" = "kedge_data_analytics_and_AI/preparing_data/lab.md" },
     ] },
     { "Analyzing data" = [
       { "Other" = "kedge_data_analytics_and_AI/analyzing_data/other.md" },
@@ -86,6 +89,8 @@ toggle.name = "Switch to system preference"
 
 [project.extra]
 generator = false
+
+[project.plugins.markdown-exec]
 
 [project.markdown_extensions]
 abbr = {}

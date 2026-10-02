@@ -28,7 +28,7 @@ icon: lucide/book-open-check
 - Cleaning data: why clean data, how to clean data, missing data, outliers, redundant data, naming variables, coding variables
 - Practical exercise: cleaning, preparing and storing data, basic operations
 
-[Go to materials of this session](preparing_data/other.md){ .md-button .md-button--primary }
+[Go to materials of this session](preparing_data/storing_data.md){ .md-button .md-button--primary }
 
 ## Session 3 - Analyzing data
 
