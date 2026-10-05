@@ -112,7 +112,7 @@ Use `filter` to keep rows that match a condition. `pl.col("column")` refers to a
 
       Compare the column expression with the string value: `pl.col("sales_channel") == "online"`. Put that condition inside `sales.filter(...)`.
 
-## Group By
+## Group by
 
 Use `group_by` to collect rows with the same value, then `agg` to calculate a summary for each group. Common aggregations include `.sum()`, `.mean()`, and `.len()`.
 
@@ -121,16 +121,14 @@ Use `group_by` to collect rows with the same value, then `agg` to calculate a su
       ```python exec="on" source="above" result="text"
       import polars as pl
 
+      # Read the sales dataset
       sales = pl.read_csv("docs/kedge_data_analytics_and_AI/data/sales.csv")
-      sales_by_channel = (
-          sales.group_by("sales_channel")
-          .agg(
-              pl.len().alias("transactions"),
-              pl.col("net_total").sum().round(2).alias("net_revenue"),
-          )
-          .sort("sales_channel")
-      )
-      print(sales_by_channel)
+
+      # Group by sales channel and compute the sum for each one
+      sales_agg = sales.group_by("sales_channel").agg(net_revenue=pl.col("net_total").sum())
+
+      # Print the result (no need for head() here since there are just 3 channels)
+      print(sales_agg)
       ```
 
 === "Exercise"
@@ -139,4 +137,54 @@ Use `group_by` to collect rows with the same value, then `agg` to calculate a su
 
 === "Hint"
 
-      Start with `sales.group_by("product_name")`, then aggregate `pl.col("quantity").sum().alias("units_sold")`. Finish with `.sort("units_sold", descending=True)`.
+      Start with `sales.group_by("product_name")`, then aggregate with `pl.col("quantity").sum().alias("units_sold")`.
+
+## Expressions
+
+A Polars expression describes a calculation using one or more columns. Use `pl.col("column")` to refer to a column, then combine expressions with arithmetic or methods such as `.sum()`. Polars evaluates the expression inside an operation such as `with_columns`, `select`, or `agg`.
+
+=== "Example"
+
+      ```python exec="on" source="above" result="text"
+      import polars as pl
+
+      sales = pl.read_csv("docs/kedge_data_analytics_and_AI/data/sales.csv")
+      sales_with_discount = sales.with_columns(
+          (pl.col("list_unit_price") - pl.col("unit_price")).alias("discount_per_unit")
+      )
+      print(sales_with_discount.select("product_name", "discount_per_unit").head())
+      ```
+
+=== "Exercise"
+
+      Create a new `line_total` column by multiplying `quantity` by `unit_price`. Store the result in `sales_with_line_total` and print the `product_name` and `line_total` columns for the first five rows.
+
+=== "Hint"
+
+      Inside `with_columns(...)`, multiply `pl.col("quantity")` by `pl.col("unit_price")`. Use `.alias("line_total")` to give the calculated column its name.
+
+## Chaining operations
+
+Each Polars operation returns a DataFrame that the next operation can use. Chaining lets you filter rows, select columns, and then group and summarize the remaining data in one readable sequence.
+
+=== "Example"
+
+      ```python exec="on" source="above" result="text"
+      import polars as pl
+
+      sales = pl.read_csv("docs/kedge_data_analytics_and_AI/data/sales.csv")
+      online_revenue = (
+          sales.group_by("sales_channel")
+          .agg(pl.col("net_total").sum())
+          .sort("net_total", descending=True)
+      )
+      print(online_revenue)
+      ```
+
+=== "Exercise"
+
+      Chain operations to keep online sales, select the `product_name` and `quantity` columns, then group by product and calculate total units sold. Name the result `units_sold` and print the final table.
+
+=== "Hint"
+
+      Begin with `sales.filter(...)`, follow it with `.select(...)`, then `.group_by("product_name").agg(...)`. The filter condition is `pl.col("sales_channel") == "online"`.
