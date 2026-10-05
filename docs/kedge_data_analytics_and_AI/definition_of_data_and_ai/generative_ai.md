@@ -12,7 +12,7 @@ Source: [Generative AI exists because of the transformer](https://ig.ft.com/gene
 
 ## An LLM isn't a database
 
-It might feel natural to compare an LLM to a search tool like Google, but they are very different. An LLM is literally one (or multiple) files stored somewhere. It contains between **dozens of millions** of parameters (see example below) and **hundreds of billions** of parameters (Claude, ChatGPT, etc.).
+It might feel natural to compare an LLM to a search tool like Google, but they are very different. An LLM is literally one (or multiple) file(s) stored somewhere. It contains between **dozens of millions** of parameters (see example below) and **hundreds of billions** of parameters (Claude, ChatGPT, etc.).
 
 Here is an AI running completely "offline". Once it says _"Ready: ...."_, you can:
 
@@ -21,12 +21,14 @@ Here is an AI running completely "offline". Once it says _"Ready: ...."_, you ca
 
 !!! warning
 
-      - Don't refresh the page, otherwise it won't work.
-      - This might slow down your computer a little bit, but there are no risks.
+      - Don't refresh the page, otherwise it won't work
+      - This might slow down your computer a little bit
 
 <iframe src="./local_llm.html" width="100%" height="600"></iframe>
 
-> Everything you ask the AI here is 100% private. Nobody, not even the instructor, could ever know what you ask it.
+!!! tip
+
+      Everything you ask the AI here is 100% private. Nobody, not even the instructor, could ever know what you ask it.
 
 As you run some tests, you'll see that:
 

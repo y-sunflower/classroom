@@ -84,11 +84,11 @@ The command adds the package to the project and updates the project's environmen
 
 ```python
 import sys
-import polars as pd
+import polars as pl
 
 print(sys.executable)
 print(sys.version)
-print(pd.__version__)
+print(pl.__version__)
 ```
 
 You have succeeded when the cell prints a Python path, a Python version, and a polars version without errors.

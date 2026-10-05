@@ -21,7 +21,8 @@ jobs:
         with:
           enable-cache: true
 
-      - run: uvx zensical build --clean
+      # Build website with inline dependencies
+      - run: uvx --with markdown-exec --with polars zensical build --clean
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

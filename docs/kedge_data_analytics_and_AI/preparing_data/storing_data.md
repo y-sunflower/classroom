@@ -67,16 +67,3 @@ Relational systems work well when data has a clear structure and accurate links 
     Groups values by column families and is designed for large, distributed workloads such as streams of website events.
 
 Examples include **MongoDB** for documents, **Redis** for key-value data, and **Neo4j** for graphs. A non-relational system is not automatically faster or more flexible for every task; its data model should fit the questions and workload.
-
-## Polars
-
-In this course we'll use [Polars](https://pola.rs/), a famous DataFrame library. It's **open source** (the entire underlying code is freely available online) and **completly free**.
-
-It lets us read files, inspect tables, transform columns, and join related datasets in our analysis workflow.
-
-```python exec="on" source="above" result="text"
-import polars as pl
-
-sales = pl.read_csv("docs/kedge_data_analytics_and_AI/data/sales.csv")
-print(sales)
-```
