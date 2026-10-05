@@ -22,7 +22,16 @@
         <loc>https://www.example.com/kedge_data_analytics_and_AI/group_projects/other/</loc>
       </url>
       <url>
-        <loc>https://www.example.com/kedge_data_analytics_and_AI/preparing_data/other/</loc>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/preparing_data/cleaning/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/preparing_data/lab/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/preparing_data/polars_crash_course/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/kedge_data_analytics_and_AI/preparing_data/storing_data/</loc>
       </url>
       <url>
         <loc>https://www.example.com/kedge_data_analytics_and_AI/presenting_data_and_ethical_issues/other/</loc>
