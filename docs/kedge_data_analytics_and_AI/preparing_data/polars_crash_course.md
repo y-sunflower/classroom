@@ -20,7 +20,7 @@ Excel is a bit more accessible than writing code when it comes to manipulating d
 
       Those limitations are approximately the same for alternative products such as Google Sheets.
 
-With programming tools (especially `polars`), working with 100 or 100M rows **doesn't make such a big difference**.
+With programming tools (especially `polars`), working with 100 or 100M rows **doesn't make such a big difference**, it will stay free forever and you don't depend on any entity.
 
 The n°1 reason that people use Excel is that it is (or rather _seems_) simpler to use. But in the AI era, coding has become dramastically more accessible, **especially if you know what you're doing**, which is required no matter which tool you use.
 
@@ -174,9 +174,9 @@ Each Polars operation returns a DataFrame that the next operation can use. Chain
 
       sales = pl.read_csv("docs/kedge_data_analytics_and_AI/data/sales.csv")
       online_revenue = (
-          sales.group_by("sales_channel")
-          .agg(pl.col("net_total").sum())
-          .sort("net_total", descending=True)
+          sales.group_by("sales_channel")      # For each sales channel
+          .agg(pl.col("net_total").sum())      # Compute total of sales
+          .sort("net_total", descending=True)  # And sort them by amount
       )
       print(online_revenue)
       ```
