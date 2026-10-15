@@ -1,5 +1,5 @@
 ---
-icon: lucide/code
+icon: lucide/brush-cleaning
 ---
 
 In the next lesson, we'll use **Python**, one of the world most famous programming language. This page introduces the basic ideas you'll need to read and write small Python programs.
@@ -25,7 +25,11 @@ We'll write Python in Positron and use `uv` to run it. `uv` can create a starter
 
 === "Exercise"
 
-      Change the message to introduce yourself, save the file, and run it again.
+      Replace the message with one that introduces you. Save `main.py` and run `uv run main.py` again to see the change.
+
+      ```python
+      print("Hello, Python!")
+      ```
 
 === "Hint"
 
@@ -33,7 +37,7 @@ We'll write Python in Positron and use `uv` to run it. `uv` can create a starter
 
 ## Read code from top to bottom
 
-Python normally runs each line in order, from the top of the file to the bottom. A comment starts with `#`; Python skips it, so you can leave notes for people reading your code.
+Python **runs each line in order**, from the top of the file to the bottom. A comment starts with `#`; Python skips it, so you can leave notes for people reading your code.
 
 === "Example"
 
@@ -45,7 +49,13 @@ Python normally runs each line in order, from the top of the file to the bottom.
 
 === "Exercise"
 
-      Write two `print` statements: one that displays `Sales data` and one that displays `Ready to explore`.
+      Run this starter code. Add a second `print` statement below the first so it also displays `Ready to explore`, then run it again.
+
+      ```python
+      # Python runs these lines from top to bottom
+      print("Sales data")
+      # TODO: display "Ready to explore"
+      ```
 
 === "Hint"
 
@@ -53,7 +63,7 @@ Python normally runs each line in order, from the top of the file to the bottom.
 
 ## Store values in variables
 
-A variable gives a name to a value so you can use it later. Use `=` to assign a value. Python works out the type from the value: for example, `str` for text, `int` for whole numbers, and `float` for decimal numbers.
+A variable gives a name to a value so you can use it later. Use `=` to assign a value.
 
 === "Example"
 
@@ -69,7 +79,17 @@ A variable gives a name to a value so you can use it later. Use `=` to assign a 
 
 === "Exercise"
 
-      Create variables for a product name, its quantity, and its unit price. Print each value.
+      Change the three values to describe a product of your choice. Run the code and check that it prints the values you assigned.
+
+      ```python
+      product_name = "Notebook"
+      quantity = 3
+      unit_price = 4.50
+
+      print(product_name)
+      print(quantity)
+      print(unit_price)
+      ```
 
 === "Hint"
 
@@ -91,7 +111,16 @@ Python can calculate with numbers. The basic operators are `+` for addition, `-`
 
 === "Exercise"
 
-      Calculate the total for five items that cost 2.25 each. Store it in `total` and print it.
+      Complete the calculation so `total` is the price of five items. Run the code and check the result.
+
+      ```python
+      quantity = 5
+      unit_price = 2.25
+
+      # TODO: multiply quantity by unit_price and store the result in total
+      total = 0
+      print(total)
+      ```
 
 === "Hint"
 
@@ -111,7 +140,14 @@ Text values are called **strings**. You can join strings with `+`, or use an f-s
 
 === "Exercise"
 
-      Use an f-string to print a sentence with a product name and its price.
+      Change the values, then replace the TODO with an f-string that prints the product name and price. Run the code to check the sentence.
+
+      ```python
+      product_name = "Notebook"
+      unit_price = 4.50
+
+      # TODO: print a sentence that includes both values
+      ```
 
 === "Hint"
 
@@ -132,11 +168,48 @@ A list stores values in order. Write its values between square brackets and sepa
 
 === "Exercise"
 
-      Make a list with three product names. Print the second name and the number of names in the list.
+      Add a third product to this list. Then print the second name and the number of names. Run the code to check both results.
+
+      ```python
+      products = ["Notebook", "Pen"]
+
+      # TODO: add another product
+      # TODO: print the second product
+      # TODO: print how many products are in the list
+      ```
 
 === "Hint"
 
       The second item has index `1`. Use `len(your_list)` to count the items.
+
+## Store related values in a dictionary
+
+A dictionary stores values under named keys. Write each key and value as a pair inside braces. Use a key in square brackets to look up its value. Dictionaries are useful when each record has named fields, such as a product and its price.
+
+=== "Example"
+
+      ```python
+      sale = {"product": "Notebook", "quantity": 3, "unit_price": 4.50}
+
+      print(sale["product"])
+      print(sale["quantity"] * sale["unit_price"])
+      ```
+
+=== "Exercise"
+
+      Run this starter code. Change the product and quantity, then add a print statement that looks up and displays the unit price. Run it again to check your changes.
+
+      ```python
+      sale = {"product": "Notebook", "quantity": 3, "unit_price": 4.50}
+
+      print(sale["product"])
+      print(sale["quantity"])
+      # TODO: print the unit price using its key
+      ```
+
+=== "Hint"
+
+      Look up a value with the key in square brackets, for example `sale["unit_price"]`.
 
 ## Make a decision
 
@@ -155,7 +228,18 @@ An `if` statement runs code only when a condition is true. Use `else` for the al
 
 === "Exercise"
 
-      Print `In stock` when `quantity` is greater than zero; otherwise print `Out of stock`.
+      Run this code several times. The quantity is randomly chosen each time between 0 and 5, as the comment explains. Add an `if` and `else` so it prints `In stock` when the quantity is greater than zero and `Out of stock` otherwise. Run it several more times and observe both outcomes.
+
+      ```python
+      import random
+
+      # Pick a new whole number from 0 to 5 each time you run the program
+      quantity = random.randint(0, 5)
+      print(f"Quantity: {quantity}")
+
+      # TODO: print "In stock" when quantity is above 0
+      # TODO: otherwise print "Out of stock"
+      ```
 
 === "Hint"
 
@@ -176,7 +260,13 @@ A `for` loop runs its indented code once for each item in a sequence, such as a 
 
 === "Exercise"
 
-      Loop through a list of three prices and print each price.
+      Run the starter code. Add a `for` loop that prints each price in the list, then run it again and check that all three prices appear.
+
+      ```python
+      prices = [2.25, 4.50, 1.75]
+
+      # TODO: loop through prices and print each one
+      ```
 
 === "Hint"
 
@@ -198,7 +288,14 @@ A function is a named set of steps. Define one with `def`, give it a name and an
 
 === "Exercise"
 
-      Write a function named `greet` that takes a `name` and prints a greeting. Call it with your name.
+      Replace `pass` with a print statement that greets the name. Change the name in the function call, then run the code to see your greeting.
+
+      ```python
+      def greet(name):
+          pass  # TODO: print a greeting that includes name
+
+      greet("Sam")
+      ```
 
 === "Hint"
 
@@ -224,7 +321,19 @@ The same building blocks work together in a program. Here, a loop visits each sa
 
 === "Exercise"
 
-      Add another sale to the list, then change the condition so the program displays sales of 20 euros or more.
+      Run the starter code and note which sales appear. Add another sale to the list, then change the condition from `> 10` to `>= 20`. Run it again and check that only sales of 20 euros or more appear.
+
+      ```python
+      sales = [
+          {"product": "Notebook", "total": 24.00},
+          {"product": "Pen", "total": 6.00},
+          {"product": "Folder", "total": 18.00},
+      ]
+
+      for sale in sales:
+          if sale["total"] > 10:
+              print(f"{sale['product']}: {sale['total']} euros")
+      ```
 
 === "Hint"
 
