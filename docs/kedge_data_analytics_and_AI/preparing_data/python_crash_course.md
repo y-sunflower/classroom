@@ -153,6 +153,40 @@ Text values are called **strings**. You can join strings with `+`, or use an f-s
 
       Start the text with `f` and put each variable name inside `{}`. For example: `f"The price is {unit_price}"`.
 
+## Python's basic types
+
+Every value has a **type**, which determines what you can do with it. The main types you'll use here are `int` for whole numbers, `float` for decimal numbers, `str` for text, and `bool` for either `True` or `False`. Use `type(...)` to inspect a value's type.
+
+Numbers can be added to other numbers, including an `int` and a `float`. Strings can be joined with other strings, but **Python won't add a number to a string**. Convert a number with `str(...)` when you want to include it in text. Comparisons such as `>` produce a boolean, and `and`, `or`, and `not` combine boolean values.
+
+=== "Example"
+
+      ```python
+      quantity = 3                 # int
+      unit_price = 4.50            # float
+      product_name = "Notebook"    # str
+      is_available = True          # bool
+
+      total = quantity * unit_price
+      message = "Total: " + str(total)
+      can_purchase = is_available and quantity > 0
+
+      print(type(quantity))
+      print(type(unit_price))
+      print(type(product_name))
+      print(type(is_available))
+      print(message)
+      print(can_purchase)
+      ```
+
+!!! warning
+
+      `"Total: " + total` raises a `TypeError` because `total` is a number and `"Total: "` is text. Convert the number with `str(total)`, or use an f-string such as `f"Total: {total}"`.
+
+!!! tip
+
+      Python has many other types, some of them will be described below.
+
 ## Keep several values in a list
 
 A list stores values in order. Write its values between square brackets and separate them with commas. Python counts positions from zero, so the first item is at index `0`.
@@ -182,6 +216,10 @@ A list stores values in order. Write its values between square brackets and sepa
 
       The second item has index `1`. Use `len(your_list)` to count the items.
 
+!!! question
+
+      In your opinion, how to get **the last element of a list** (assuming the length of the list is unknown)?
+
 ## Store related values in a dictionary
 
 A dictionary stores values under named keys. Write each key and value as a pair inside braces. Use a key in square brackets to look up its value. Dictionaries are useful when each record has named fields, such as a product and its price.
@@ -189,7 +227,11 @@ A dictionary stores values under named keys. Write each key and value as a pair 
 === "Example"
 
       ```python
-      sale = {"product": "Notebook", "quantity": 3, "unit_price": 4.50}
+      sale = {
+            "product": "Notebook",
+            "quantity": 3,
+            "unit_price": 4.50
+      }
 
       print(sale["product"])
       print(sale["quantity"] * sale["unit_price"])
@@ -213,7 +255,7 @@ A dictionary stores values under named keys. Write each key and value as a pair 
 
 ## Make a decision
 
-An `if` statement runs code only when a condition is true. Use `else` for the alternative. The indented lines belong to the condition above them; indentation is part of Python's syntax.
+An `if` statement runs code only **when a condition is true**. Use `else` for the alternative. The ==indented lines== belong to the condition above them; indentation is part of Python's syntax.
 
 === "Example"
 
