@@ -14,7 +14,7 @@ Source: [Generative AI exists because of the transformer](https://ig.ft.com/gene
 
 It might feel natural to compare an LLM to a search tool like Google, but they are very different. An LLM is literally one (or multiple) file(s) stored somewhere. It contains between **dozens of millions** of parameters (see example below) and **hundreds of billions** of parameters (Claude, ChatGPT, etc.).
 
-Here is an AI running completely "offline". Once it says _"Ready: ...."_, you can:
+Here is an AI running completely "offline". Once it says _"Ready!"_, you can:
 
 - turn off your wifi
 - try to chat with it

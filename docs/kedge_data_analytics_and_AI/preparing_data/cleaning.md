@@ -97,7 +97,3 @@ For categorical variables, choose one spelling per category. A small codebook co
 ??? question "Should every outlier be removed?"
 
     No. A large order might be a real bulk purchase. First check units, source records, and business context; then decide whether to keep, correct, flag, or exclude it for the stated analysis.
-
-## Continue
-
-[Apply the checks in a practical lab](lab.md){ .md-button .md-button--primary }

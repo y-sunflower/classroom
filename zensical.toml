@@ -16,9 +16,9 @@ nav = [
     ] },
     { "Preparing data" = [
       { "Storing data" = "kedge_data_analytics_and_AI/preparing_data/storing_data.md" },
+      { "Python crash course" = "kedge_data_analytics_and_AI/preparing_data/python_crash_course.md" },
       { "Polars crash course" = "kedge_data_analytics_and_AI/preparing_data/polars_crash_course.md" },
       { "Cleaning data" = "kedge_data_analytics_and_AI/preparing_data/cleaning.md" },
-      { "Practical lab" = "kedge_data_analytics_and_AI/preparing_data/lab.md" },
     ] },
     { "Analyzing data" = [
       { "Other" = "kedge_data_analytics_and_AI/analyzing_data/other.md" },
