@@ -826,6 +826,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pythons-basic-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Python's basic types
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#keep-several-values-in-a-list" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1459,6 +1470,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pythons-basic-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Python's basic types
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#keep-several-values-in-a-list" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1775,24 +1797,57 @@
 </div>
 </div>
 </div>
-<h2 id="keep-several-values-in-a-list">Keep several values in a list<a class="headerlink" href="#keep-several-values-in-a-list" title="Permanent link">&para;</a></h2>
-<p>A list stores values in order. Write its values between square brackets and separate them with commas. Python counts positions from zero, so the first item is at index <code>0</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:3"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Example</label><label for="__tabbed_6_2">Exercise</label><label for="__tabbed_6_3">Hint</label></div>
+<h2 id="pythons-basic-types">Python's basic types<a class="headerlink" href="#pythons-basic-types" title="Permanent link">&para;</a></h2>
+<p>Every value has a <strong>type</strong>, which determines what you can do with it. The main types you'll use here are <code>int</code> for whole numbers, <code>float</code> for decimal numbers, <code>str</code> for text, and <code>bool</code> for either <code>True</code> or <code>False</code>. Use <code>type(...)</code> to inspect a value's type.</p>
+<p>Numbers can be added to other numbers, including an <code>int</code> and a <code>float</code>. Strings can be joined with other strings, but <strong>Python won't add a number to a string</strong>. Convert a number with <code>str(...)</code> when you want to include it in text. Comparisons such as <code>&gt;</code> produce a boolean, and <code>and</code>, <code>or</code>, and <code>not</code> combine boolean values.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Example</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"Pen"</span><span class="p">,</span> <span class="s2">"Folder"</span><span class="p">]</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">products</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">))</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">quantity</span> <span class="o">=</span> <span class="mi">3</span>                 <span class="c1"># int</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">unit_price</span> <span class="o">=</span> <span class="mf">4.50</span>            <span class="c1"># float</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">product_name</span> <span class="o">=</span> <span class="s2">"Notebook"</span>    <span class="c1"># str</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">is_available</span> <span class="o">=</span> <span class="kc">True</span>          <span class="c1"># bool</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">total</span> <span class="o">=</span> <span class="n">quantity</span> <span class="o">*</span> <span class="n">unit_price</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">message</span> <span class="o">=</span> <span class="s2">"Total: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">can_purchase</span> <span class="o">=</span> <span class="n">is_available</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">quantity</span><span class="p">))</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">unit_price</span><span class="p">))</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">product_name</span><span class="p">))</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">is_available</span><span class="p">))</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">can_purchase</span><span class="p">)</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>"Total: " + total</code> raises a <code>TypeError</code> because <code>total</code> is a number and <code>"Total: "</code> is text. Convert the number with <code>str(total)</code>, or use an f-string such as <code>f"Total: {total}"</code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Python has many other types, some of them will be described below.</p>
+</div>
+<h2 id="keep-several-values-in-a-list">Keep several values in a list<a class="headerlink" href="#keep-several-values-in-a-list" title="Permanent link">&para;</a></h2>
+<p>A list stores values in order. Write its values between square brackets and separate them with commas. Python counts positions from zero, so the first item is at index <code>0</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Example</label><label for="__tabbed_7_2">Exercise</label><label for="__tabbed_7_3">Hint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"Pen"</span><span class="p">,</span> <span class="s2">"Folder"</span><span class="p">]</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">products</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">))</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <p>Add a third product to this list. Then print the second name and the number of names. Run the code to check both results.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"Pen"</span><span class="p">]</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># TODO: add another product</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># TODO: print the second product</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># TODO: print how many products are in the list</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"Pen"</span><span class="p">]</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># TODO: add another product</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># TODO: print the second product</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># TODO: print how many products are in the list</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1800,24 +1855,32 @@
 </div>
 </div>
 </div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>In your opinion, how to get <strong>the last element of a list</strong> (assuming the length of the list is unknown)?</p>
+</div>
 <h2 id="store-related-values-in-a-dictionary">Store related values in a dictionary<a class="headerlink" href="#store-related-values-in-a-dictionary" title="Permanent link">&para;</a></h2>
 <p>A dictionary stores values under named keys. Write each key and value as a pair inside braces. Use a key in square brackets to look up its value. Dictionaries are useful when each record has named fields, such as a product and its price.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Example</label><label for="__tabbed_7_2">Exercise</label><label for="__tabbed_7_3">Hint</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Example</label><label for="__tabbed_8_2">Exercise</label><label for="__tabbed_8_3">Hint</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">sale</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"unit_price"</span><span class="p">:</span> <span class="mf">4.50</span><span class="p">}</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"product"</span><span class="p">])</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"quantity"</span><span class="p">]</span> <span class="o">*</span> <span class="n">sale</span><span class="p">[</span><span class="s2">"unit_price"</span><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">sale</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>      <span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Notebook"</span><span class="p">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>      <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>      <span class="s2">"unit_price"</span><span class="p">:</span> <span class="mf">4.50</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">}</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"product"</span><span class="p">])</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"quantity"</span><span class="p">]</span> <span class="o">*</span> <span class="n">sale</span><span class="p">[</span><span class="s2">"unit_price"</span><span class="p">])</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <p>Run this starter code. Change the product and quantity, then add a print statement that looks up and displays the unit price. Run it again to check your changes.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">sale</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"unit_price"</span><span class="p">:</span> <span class="mf">4.50</span><span class="p">}</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"product"</span><span class="p">])</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"quantity"</span><span class="p">])</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># TODO: print the unit price using its key</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">sale</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"unit_price"</span><span class="p">:</span> <span class="mf">4.50</span><span class="p">}</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"product"</span><span class="p">])</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">sale</span><span class="p">[</span><span class="s2">"quantity"</span><span class="p">])</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># TODO: print the unit price using its key</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1826,28 +1889,28 @@
 </div>
 </div>
 <h2 id="make-a-decision">Make a decision<a class="headerlink" href="#make-a-decision" title="Permanent link">&para;</a></h2>
-<p>An <code>if</code> statement runs code only when a condition is true. Use <code>else</code> for the alternative. The indented lines belong to the condition above them; indentation is part of Python's syntax.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Example</label><label for="__tabbed_8_2">Exercise</label><label for="__tabbed_8_3">Hint</label></div>
+<p>An <code>if</code> statement runs code only <strong>when a condition is true</strong>. Use <code>else</code> for the alternative. The <mark>indented lines</mark> belong to the condition above them; indentation is part of Python's syntax.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Example</label><label for="__tabbed_9_2">Exercise</label><label for="__tabbed_9_3">Hint</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">24</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Large order"</span><span class="p">)</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="k">else</span><span class="p">:</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Small order"</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">24</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Large order"</span><span class="p">)</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Small order"</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <p>Run this code several times. The quantity is randomly chosen each time between 0 and 5, as the comment explains. Add an <code>if</code> and <code>else</code> so it prints <code>In stock</code> when the quantity is greater than zero and <code>Out of stock</code> otherwise. Run it several more times and observe both outcomes.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># Pick a new whole number from 0 to 5 each time you run the program</span>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">quantity</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Quantity: </span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># TODO: print "In stock" when quantity is above 0</span>
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1"># TODO: otherwise print "Out of stock"</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1"># Pick a new whole number from 0 to 5 each time you run the program</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">quantity</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Quantity: </span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1"># TODO: print "In stock" when quantity is above 0</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="c1"># TODO: otherwise print "Out of stock"</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1857,20 +1920,20 @@
 </div>
 <h2 id="repeat-work-with-a-loop">Repeat work with a loop<a class="headerlink" href="#repeat-work-with-a-loop" title="Permanent link">&para;</a></h2>
 <p>A <code>for</code> loop runs its indented code once for each item in a sequence, such as a list. The loop variable takes the value of the current item each time.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Example</label><label for="__tabbed_9_2">Exercise</label><label for="__tabbed_9_3">Hint</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Example</label><label for="__tabbed_10_2">Exercise</label><label for="__tabbed_10_3">Hint</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"Pen"</span><span class="p">,</span> <span class="s2">"Folder"</span><span class="p">]</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"Pen"</span><span class="p">,</span> <span class="s2">"Folder"</span><span class="p">]</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <p>Run the starter code. Add a <code>for</code> loop that prints each price in the list, then run it again and check that all three prices appear.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.25</span><span class="p">,</span> <span class="mf">4.50</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">]</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1"># TODO: loop through prices and print each one</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.25</span><span class="p">,</span> <span class="mf">4.50</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">]</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># TODO: loop through prices and print each one</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1880,22 +1943,22 @@
 </div>
 <h2 id="reuse-steps-with-a-function">Reuse steps with a function<a class="headerlink" href="#reuse-steps-with-a-function" title="Permanent link">&para;</a></h2>
 <p>A function is a named set of steps. Define one with <code>def</code>, give it a name and any inputs in parentheses, then indent its body. Call the function by writing its name with parentheses.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Example</label><label for="__tabbed_10_2">Exercise</label><label for="__tabbed_10_3">Hint</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:3"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Example</label><label for="__tabbed_11_2">Exercise</label><label for="__tabbed_11_3">Hint</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_total</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">unit_price</span><span class="p">):</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="k">return</span> <span class="n">quantity</span> <span class="o">*</span> <span class="n">unit_price</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">total</span> <span class="o">=</span> <span class="n">calculate_total</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">4.50</span><span class="p">)</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_total</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">unit_price</span><span class="p">):</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="k">return</span> <span class="n">quantity</span> <span class="o">*</span> <span class="n">unit_price</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">total</span> <span class="o">=</span> <span class="n">calculate_total</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">4.50</span><span class="p">)</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <p>Replace <code>pass</code> with a print statement that greets the name. Change the name in the function call, then run the code to see your greeting.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="k">pass</span>  <span class="c1"># TODO: print a greeting that includes name</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">greet</span><span class="p">(</span><span class="s2">"Sam"</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="k">pass</span>  <span class="c1"># TODO: print a greeting that includes name</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="n">greet</span><span class="p">(</span><span class="s2">"Sam"</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1905,22 +1968,9 @@
 </div>
 <h2 id="put-the-pieces-together">Put the pieces together<a class="headerlink" href="#put-the-pieces-together" title="Permanent link">&para;</a></h2>
 <p>The same building blocks work together in a program. Here, a loop visits each sale, a condition keeps larger sales, and an f-string displays the result. In the next lesson, Polars will help us do similar work with columns and many rows of data.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:3"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Example</label><label for="__tabbed_11_2">Exercise</label><label for="__tabbed_11_3">Hint</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:3"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Example</label><label for="__tabbed_12_2">Exercise</label><label for="__tabbed_12_3">Hint</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">sales</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">24.00</span><span class="p">},</span>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Pen"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">6.00</span><span class="p">},</span>
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Folder"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">18.00</span><span class="p">},</span>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="p">]</span>
-</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
-</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="k">for</span> <span class="n">sale</span> <span class="ow">in</span> <span class="n">sales</span><span class="p">:</span>
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>    <span class="k">if</span> <span class="n">sale</span><span class="p">[</span><span class="s2">"total"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
-</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sale</span><span class="p">[</span><span class="s1">'product'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sale</span><span class="p">[</span><span class="s1">'total'</span><span class="p">]</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
-</span></code></pre></div>
-</div>
-<div class="tabbed-block">
-<p>Run the starter code and note which sales appear. Add another sale to the list, then change the condition from <code>&gt; 10</code> to <code>&gt;= 20</code>. Run it again and check that only sales of 20 euros or more appear.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">sales</span> <span class="o">=</span> <span class="p">[</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">24.00</span><span class="p">},</span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Pen"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">6.00</span><span class="p">},</span>
@@ -1930,6 +1980,19 @@
 </span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="k">for</span> <span class="n">sale</span> <span class="ow">in</span> <span class="n">sales</span><span class="p">:</span>
 </span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>    <span class="k">if</span> <span class="n">sale</span><span class="p">[</span><span class="s2">"total"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
 </span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sale</span><span class="p">[</span><span class="s1">'product'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sale</span><span class="p">[</span><span class="s1">'total'</span><span class="p">]</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Run the starter code and note which sales appear. Add another sale to the list, then change the condition from <code>&gt; 10</code> to <code>&gt;= 20</code>. Run it again and check that only sales of 20 euros or more appear.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">sales</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Notebook"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">24.00</span><span class="p">},</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Pen"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">6.00</span><span class="p">},</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"Folder"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">:</span> <span class="mf">18.00</span><span class="p">},</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="p">]</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="k">for</span> <span class="n">sale</span> <span class="ow">in</span> <span class="n">sales</span><span class="p">:</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    <span class="k">if</span> <span class="n">sale</span><span class="p">[</span><span class="s2">"total"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sale</span><span class="p">[</span><span class="s1">'product'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sale</span><span class="p">[</span><span class="s1">'total'</span><span class="p">]</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
