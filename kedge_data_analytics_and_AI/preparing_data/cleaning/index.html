@@ -840,46 +840,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#check-before-changing" class="md-nav__link">
+  <a href="#missing-values" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Check before changing
+        Missing values
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-completely-at-random" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Missing <strong>completely at random</strong>
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#inspect-a-real-campaign-file" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#missing-at-random" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Inspect a real campaign file
+        Missing at <strong>random</strong>
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#practice-on-deliberately-messy-rows" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#missing-not-at-random" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Practice on deliberately messy rows
+        Missing <strong>not at random</strong>
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#name-and-code-variables-consistently" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#missing-by-design" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Name and code variables consistently
+        Missing by design
       </span>
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1349,46 +1366,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#check-before-changing" class="md-nav__link">
+  <a href="#missing-values" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Check before changing
+        Missing values
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-completely-at-random" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Missing <strong>completely at random</strong>
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#inspect-a-real-campaign-file" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#missing-at-random" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Inspect a real campaign file
+        Missing at <strong>random</strong>
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#practice-on-deliberately-messy-rows" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#missing-not-at-random" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Practice on deliberately messy rows
+        Missing <strong>not at random</strong>
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#name-and-code-variables-consistently" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#missing-by-design" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Name and code variables consistently
+        Missing by design
       </span>
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1513,135 +1547,19 @@
   <h1>Cleaning data</h1>
 
 <h2 id="what-does-clean-means">What does "clean" means<a class="headerlink" href="#what-does-clean-means" title="Permanent link">&para;</a></h2>
-<p>Data cleaning makes a dataset more consistent and useful for a specific question. Poor quality can distort a campaign comparison, hide an operational issue, or lead a team to act on the wrong customers.</p>
-<p>Cleaning is not about making every column look tidy. It is about documenting decisions so someone else can understand what changed and why.</p>
-<h2 id="check-before-changing">Check before changing<a class="headerlink" href="#check-before-changing" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Issue</th>
-<th>What to ask</th>
-<th>Possible response</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Missing value</td>
-<td>Is it unknown, not collected, or not applicable?</td>
-<td>Keep it, investigate it, exclude a row for a stated reason, or fill it using a justified rule.</td>
-</tr>
-<tr>
-<td>Outlier</td>
-<td>Is the value impossible, a data-entry error, or a rare real event?</td>
-<td>Verify it, flag it, correct it from a trusted source, or keep it and explain why.</td>
-</tr>
-<tr>
-<td>Redundant record</td>
-<td>Which field defines a duplicate for this analysis?</td>
-<td>Compare the key and context, then remove only confirmed duplicate records.</td>
-</tr>
-<tr>
-<td>Inconsistent name</td>
-<td>Are spaces, case, abbreviations, or units mixed?</td>
-<td>Use a stable naming convention and record the unit in the name or data dictionary.</td>
-</tr>
-<tr>
-<td>Inconsistent code</td>
-<td>Do labels refer to the same category?</td>
-<td>Map known variants to one documented code; preserve unknown values for review.</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition warning">
-<p class="admonition-title">Missing does not mean zero</p>
-<p>In Indigo's campaign data, <code>time_spent</code> is blank for most messages because the recipient did not click. Replacing those blanks with zero could imply that time was measured and found to be zero. Preserve the distinction unless the analysis rule explicitly defines otherwise.</p>
-</div>
-<h2 id="inspect-a-real-campaign-file">Inspect a real campaign file<a class="headerlink" href="#inspect-a-real-campaign-file" title="Permanent link">&para;</a></h2>
-<p>Use Polars to check the schema, the number of records, missing values, and whether the send ID is unique. The file includes expected missing values in later-stage fields such as <code>time_spent</code> and <code>transaction_id</code>.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">campaigns</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">"docs/kedge_data_analytics_and_AI/data/marketing_campaigns.csv"</span><span class="p">,</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">try_parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Shape: </span><span class="si">{</span><span class="n">campaigns</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"send_id unique: </span><span class="si">{</span><span class="n">campaigns</span><span class="p">[</span><span class="s1">'send_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">campaigns</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Missing values in selected columns:"</span><span class="p">)</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">print</span><span class="p">(</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">campaigns</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"time_spent"</span><span class="p">)</span><span class="o">.</span><span class="n">null_count</span><span class="p">(),</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"visit_id"</span><span class="p">)</span><span class="o">.</span><span class="n">null_count</span><span class="p">(),</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"transaction_id"</span><span class="p">)</span><span class="o">.</span><span class="n">null_count</span><span class="p">(),</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="p">)</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="p">)</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Shape: (7000, 18)
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>send_id unique: True
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Missing values in selected columns:
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>shape: (1, 3)
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>┌────────────┬──────────┬────────────────┐
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│ time_spent ┆ visit_id ┆ transaction_id │
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ ---        ┆ ---      ┆ ---            │
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ u32        ┆ u32      ┆ u32            │
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>╞════════════╪══════════╪════════════════╡
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│ 6016       ┆ 6016     ┆ 6838           │
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>└────────────┴──────────┴────────────────┘
-</span></code></pre></div>
-<p>The missing counts are not automatically errors. Compare them with the event flow: a recipient must click before time spent is recorded, and a purchase is less common than a message send.</p>
-<h2 id="practice-on-deliberately-messy-rows">Practice on deliberately messy rows<a class="headerlink" href="#practice-on-deliberately-messy-rows" title="Permanent link">&para;</a></h2>
-<p>This small example includes a repeated send, inconsistent channel labels, a meaningful blank, and a suspicious time value. We standardise the field names and channel labels, flag the suspicious value for review, and remove only the repeated <code>send_id</code>.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">raw</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="p">{</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="s2">"Send ID"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"S001"</span><span class="p">,</span> <span class="s2">"S002"</span><span class="p">,</span> <span class="s2">"S002"</span><span class="p">,</span> <span class="s2">"S003"</span><span class="p">],</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="s2">"Channel"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Email"</span><span class="p">,</span> <span class="s2">" e-mail "</span><span class="p">,</span> <span class="s2">"email"</span><span class="p">,</span> <span class="s2">"SOCIAL"</span><span class="p">],</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="s2">"Time spent (seconds)"</span><span class="p">:</span> <span class="p">[</span><span class="mi">120</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="s2">"Clicked"</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="p">}</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">prepared</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">raw</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="p">{</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="s2">"Send ID"</span><span class="p">:</span> <span class="s2">"send_id"</span><span class="p">,</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="s2">"Channel"</span><span class="p">:</span> <span class="s2">"channel"</span><span class="p">,</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="s2">"Time spent (seconds)"</span><span class="p">:</span> <span class="s2">"time_spent_seconds"</span><span class="p">,</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            <span class="s2">"Clicked"</span><span class="p">:</span> <span class="s2">"clicked"</span><span class="p">,</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="p">}</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"channel"</span><span class="p">)</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip_chars</span><span class="p">()</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">to_lowercase</span><span class="p">()</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">"e-mail"</span><span class="p">:</span> <span class="s2">"email"</span><span class="p">}),</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"time_spent_seconds"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3600</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"time_needs_review"</span><span class="p">),</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="p">)</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"send_id"</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s2">"first"</span><span class="p">,</span> <span class="n">maintain_order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="p">)</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">prepared</span><span class="p">)</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (3, 5)
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌─────────┬─────────┬────────────────────┬─────────┬───────────────────┐
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ send_id ┆ channel ┆ time_spent_seconds ┆ clicked ┆ time_needs_review │
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│ ---     ┆ ---     ┆ ---                ┆ ---     ┆ ---               │
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ str     ┆ str     ┆ i64                ┆ bool    ┆ bool              │
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>╞═════════╪═════════╪════════════════════╪═════════╪═══════════════════╡
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ S001    ┆ email   ┆ 120                ┆ true    ┆ false             │
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ S002    ┆ email   ┆ null               ┆ false   ┆ null              │
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│ S003    ┆ social  ┆ 9999               ┆ true    ┆ true              │
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>└─────────┴─────────┴────────────────────┴─────────┴───────────────────┘
-</span></code></pre></div>
-<p>The example flags a value for review rather than deleting it. The duplicate rule uses <code>send_id</code> because that field identifies one send in this example. If records describe visits, use a visit key instead.</p>
-<h2 id="name-and-code-variables-consistently">Name and code variables consistently<a class="headerlink" href="#name-and-code-variables-consistently" title="Permanent link">&para;</a></h2>
-<p>Prefer clear names such as <code>sent_date</code>, <code>discount_rate</code>, and <code>time_spent_seconds</code>. Keep one case convention, avoid spaces and unexplained abbreviations, and include units where they affect interpretation.</p>
-<p>For categorical variables, choose one spelling per category. A small codebook could define <code>email</code>, <code>ads</code>, and <code>social</code> as values for <code>channel</code>; it should also define whether a value such as <code>unknown</code> means missing, unavailable, or not applicable.</p>
-<details class="question">
-<summary>Should every outlier be removed?</summary>
-<p>No. A large order might be a real bulk purchase. First check units, source records, and business context; then decide whether to keep, correct, flag, or exclude it for the stated analysis.</p>
-</details>
+<p>Data cleaning makes a dataset more consistent and useful for a specific question. Poor quality can distort a campaign comparison, hide an operational issue, or lead a team to act on the wrong customers. In practice, we want to make the <a href="https://vita.had.co.nz/papers/tidy-data.pdf">data "tidy"</a>.</p>
+<p>In the previous lesson we saw the common operations of how to clean data (select columns, filter rows, aggregations). Here we'll talk about common issues that we have when cleaning data, why they can occur and how to "fix" (if they need a fix).</p>
+<h2 id="missing-values">Missing values<a class="headerlink" href="#missing-values" title="Permanent link">&para;</a></h2>
+<h3 id="missing-completely-at-random">Missing <strong>completely at random</strong><a class="headerlink" href="#missing-completely-at-random" title="Permanent link">&para;</a></h3>
+<p>Data is missing for purely random reason. This is the ideal case since ignoring those data has no impact on our analysis, but this is almost never the case in the real world.</p>
+<p>A bank with customer info might have missing info about the job of customers. It's likely that people who don't want to share their job have reasons: bad credit score, illegal activities, ...</p>
+<h3 id="missing-at-random">Missing at <strong>random</strong><a class="headerlink" href="#missing-at-random" title="Permanent link">&para;</a></h3>
+<p>Missingness isn't random and can be explained by other variables.</p>
+<p>Male are less likely to do depression diagnostic, but this has nothing to do with the level of depression. Statistics allow us to easily take into account maleness.</p>
+<h3 id="missing-not-at-random">Missing <strong>not at random</strong><a class="headerlink" href="#missing-not-at-random" title="Permanent link">&para;</a></h3>
+<p>Missing data where the value of the variable that's missing is related to the reason it's missing. People with high depression symptoms are more likely to not answer questions <strong>because</strong> of their depressions.</p>
+<h3 id="missing-by-design">Missing by design<a class="headerlink" href="#missing-by-design" title="Permanent link">&para;</a></h3>
+<p>When sending marketing emails, time spend on the website being empty isn't really missing data if user didn't click on the link to the website.</p>
 
 
 
