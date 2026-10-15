@@ -6,7 +6,8 @@ In the next lesson, we'll use **Python**, one of the world most famous programmi
 
 !!! warning
 
-      Make sure you installed Positron and uv, [see the guide if not](../definition_of_data_and_ai/setup.md).
+      - Make sure you installed Positron and uv, [see the guide if not](../definition_of_data_and_ai/setup.md).
+      - **The goal isn't to make you a programming expert**! Instead, I want you to grasp the core concepts of manipulating data with coding, how to do basic operations, and then how to use AI to do it for you.
 
 ## Get ready
 

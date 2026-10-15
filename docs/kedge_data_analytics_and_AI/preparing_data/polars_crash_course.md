@@ -26,10 +26,6 @@ The n°1 reason that people use Excel is that it is (or rather _seems_) simpler 
 
 Instead, the best investment you could make is understand how `polars` work in general, and work with AI to handle the rest. **You'll never have privacy, performance, automation or scalability issue**.
 
-!!! warning
-
-      The goal isn't to make you a programming expert! Instead, I want you to grasp the core concepts of manipulating data with coding, how to do basic operations, and then how to use AI to do it for you.
-
 ## Read files
 
 Reading a file = Opening an Excel spreadsheet
