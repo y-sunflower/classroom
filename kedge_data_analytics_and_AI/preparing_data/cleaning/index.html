@@ -848,56 +848,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Missing values">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#missing-completely-at-random" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing <strong>completely at random</strong>
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#missing-at-random" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing at <strong>random</strong>
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#missing-not-at-random" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing <strong>not at random</strong>
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#missing-by-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing by design
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1374,56 +1324,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Missing values">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#missing-completely-at-random" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing <strong>completely at random</strong>
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#missing-at-random" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing at <strong>random</strong>
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#missing-not-at-random" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing <strong>not at random</strong>
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#missing-by-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Missing by design
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1550,16 +1450,24 @@
 <p>Data cleaning makes a dataset more consistent and useful for a specific question. Poor quality can distort a campaign comparison, hide an operational issue, or lead a team to act on the wrong customers. In practice, we want to make the <a href="https://vita.had.co.nz/papers/tidy-data.pdf">data "tidy"</a>.</p>
 <p>In the previous lesson we saw the common operations of how to clean data (select columns, filter rows, aggregations). Here we'll talk about common issues that we have when cleaning data, why they can occur and how to "fix" (if they need a fix).</p>
 <h2 id="missing-values">Missing values<a class="headerlink" href="#missing-values" title="Permanent link">&para;</a></h2>
-<h3 id="missing-completely-at-random">Missing <strong>completely at random</strong><a class="headerlink" href="#missing-completely-at-random" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">completely at random</label><label for="__tabbed_1_2">at random</label><label for="__tabbed_1_3">not at random</label><label for="__tabbed_1_4">by design</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>Data is missing for purely random reason. This is the ideal case since ignoring those data has no impact on our analysis, but this is almost never the case in the real world.</p>
 <p>A bank with customer info might have missing info about the job of customers. It's likely that people who don't want to share their job have reasons: bad credit score, illegal activities, ...</p>
-<h3 id="missing-at-random">Missing at <strong>random</strong><a class="headerlink" href="#missing-at-random" title="Permanent link">&para;</a></h3>
+</div>
+<div class="tabbed-block">
 <p>Missingness isn't random and can be explained by other variables.</p>
 <p>Male are less likely to do depression diagnostic, but this has nothing to do with the level of depression. Statistics allow us to easily take into account maleness.</p>
-<h3 id="missing-not-at-random">Missing <strong>not at random</strong><a class="headerlink" href="#missing-not-at-random" title="Permanent link">&para;</a></h3>
+</div>
+<div class="tabbed-block">
 <p>Missing data where the value of the variable that's missing is related to the reason it's missing. People with high depression symptoms are more likely to not answer questions <strong>because</strong> of their depressions.</p>
-<h3 id="missing-by-design">Missing by design<a class="headerlink" href="#missing-by-design" title="Permanent link">&para;</a></h3>
+</div>
+<div class="tabbed-block">
 <p>When sending marketing emails, time spend on the website being empty isn't really missing data if user didn't click on the link to the website.</p>
+</div>
+</div>
+</div>
 
 
 
