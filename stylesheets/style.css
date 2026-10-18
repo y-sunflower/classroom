@@ -194,3 +194,8 @@ csv-table {
 .csv-table__error {
   color: var(--md-typeset-mark-color);
 }
+
+.answer {
+  rotate: 180deg;
+  display: inline-block;
+}
