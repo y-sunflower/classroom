@@ -70,4 +70,4 @@ For each scenario, decide whether the data is **completely at random**, **at ran
 
 A data point that differs significantly from others.
 
-<iframe src="./outlier.html" width="100%" height="400"></iframe>
+<iframe src="./outlier.html" width="100%" height="400" style="border: none"></iframe>
