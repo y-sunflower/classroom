@@ -6,31 +6,31 @@ site_author = "Joseph Barbier"
 copyright = "Copyright &copy; 2026 Joseph Barbier--Darnal"
 nav = [
   "index.md",
-  { "Kedge Data Analytics & AI" = [
-    { "Syllabus" = "kedge_data_analytics_and_AI/syllabus.md" },
+  { "Data Analytics & AI" = [
+    { "Syllabus" = "data_analytics_and_AI/syllabus.md" },
     { "Definitions of data and AI" = [
-      { "Set up Positron and uv" = "kedge_data_analytics_and_AI/definition_of_data_and_ai/setup.md" },
-      { "Definitions" = "kedge_data_analytics_and_AI/definition_of_data_and_ai/definitions.md" },
-      { "Generative AI" = "kedge_data_analytics_and_AI/definition_of_data_and_ai/generative_ai.md" },
-      { "Indigo" = "kedge_data_analytics_and_AI/definition_of_data_and_ai/indigo.md" },
+      { "Set up Positron and uv" = "data_analytics_and_AI/definition_of_data_and_ai/setup.md" },
+      { "Definitions" = "data_analytics_and_AI/definition_of_data_and_ai/definitions.md" },
+      { "Generative AI" = "data_analytics_and_AI/definition_of_data_and_ai/generative_ai.md" },
+      { "Indigo" = "data_analytics_and_AI/definition_of_data_and_ai/indigo.md" },
     ] },
     { "Preparing data" = [
-      { "Storing data" = "kedge_data_analytics_and_AI/preparing_data/storing_data.md" },
-      { "Python crash course" = "kedge_data_analytics_and_AI/preparing_data/python_crash_course.md" },
-      { "Polars crash course" = "kedge_data_analytics_and_AI/preparing_data/polars_crash_course.md" },
-      { "Cleaning data" = "kedge_data_analytics_and_AI/preparing_data/cleaning.md" },
+      { "Storing data" = "data_analytics_and_AI/preparing_data/storing_data.md" },
+      { "Python crash course" = "data_analytics_and_AI/preparing_data/python_crash_course.md" },
+      { "Polars crash course" = "data_analytics_and_AI/preparing_data/polars_crash_course.md" },
+      { "Cleaning data" = "data_analytics_and_AI/preparing_data/cleaning.md" },
     ] },
     { "Analyzing data" = [
-      { "Other" = "kedge_data_analytics_and_AI/analyzing_data/other.md" },
+      { "Other" = "data_analytics_and_AI/analyzing_data/other.md" },
     ] },
     { "Text mining" = [
-      { "Other" = "kedge_data_analytics_and_AI/text_mining/other.md" },
+      { "Other" = "data_analytics_and_AI/text_mining/other.md" },
     ] },
     { "Presenting data and ethical issues" = [
-      { "Other" = "kedge_data_analytics_and_AI/presenting_data_and_ethical_issues/other.md" },
+      { "Other" = "data_analytics_and_AI/presenting_data_and_ethical_issues/other.md" },
     ] },
     { "Group projects" = [
-      { "Other" = "kedge_data_analytics_and_AI/group_projects/other.md" },
+      { "Other" = "data_analytics_and_AI/group_projects/other.md" },
     ] },
   ] },
 ]

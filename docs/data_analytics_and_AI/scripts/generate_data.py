@@ -9,7 +9,7 @@ from typing import TypedDict
 import polars as pl
 
 SEED = 42
-OUTPUT_DIR = Path("docs/kedge_data_analytics_and_AI/data")
+OUTPUT_DIR = Path("docs/data_analytics_and_AI/data")
 START_DATE = date(2025, 1, 1)
 END_DATE = date(2025, 12, 31)
 CURRENCY_CODE = "EUR"
@@ -794,7 +794,9 @@ for i, sale in enumerate(review_sales, start=1):
     else:
         rating = max(1, min(5, round(rating_score)))
     max_review_lag = (END_DATE - sale["date"]).days
-    review_date = sale["date"] + timedelta(days=rng.randint(0, min(180, max_review_lag)))
+    review_date = sale["date"] + timedelta(
+        days=rng.randint(0, min(180, max_review_lag))
+    )
     review_rows.append(
         {
             "review_id": f"R{i:06d}",

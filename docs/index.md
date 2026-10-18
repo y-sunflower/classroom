@@ -1,1 +1,1 @@
-- [Kedge Data Analytics & AI](kedge_data_analytics_and_AI/syllabus.md)
+- [Data Analytics & AI](data_analytics_and_AI/syllabus.md)
