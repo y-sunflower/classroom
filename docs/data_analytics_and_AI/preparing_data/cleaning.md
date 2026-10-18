@@ -75,3 +75,9 @@ Let's look at graduates' annual income ten years after graduation.
 !!! question "What should the school publish?"
 
     The mean includes everyone but can be pulled up by one $500,000 income. The median may better represent a typical graduate. If you exclude a valid outcome, **say so clearly**.
+
+### Exercise
+
+In this exercise, you'll investigate 6 cases of outliers, and will need to figure out what should be done in that case.
+
+<iframe src="./outlier_case_files.html" width="100%" height="900" style="border: none"></iframe>
