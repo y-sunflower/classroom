@@ -1556,16 +1556,16 @@
 
   <h1>Polars crash course</h1>
 
-<p>In this course we'll use <a href="https://pola.rs/"><code>polars</code></a>, a famous dataframe library. It's <strong>open source</strong> (the entire underlying code is freely <a href="https://github.com/pola-rs/polars">available online</a>) and <strong>completly free</strong>.</p>
+<p>In this course we'll use <a href="https://pola.rs/"><code>polars</code></a>, a famous dataframe library. It's <strong>open source</strong> (the entire underlying code is freely <a href="https://github.com/pola-rs/polars">available online</a>) and <strong>completely free</strong>.</p>
 <h2 id="why-not-just-use-excel">Why not just use Excel?<a class="headerlink" href="#why-not-just-use-excel" title="Permanent link">&para;</a></h2>
 <p>Excel is a bit more accessible than writing code when it comes to manipulating data because everything is very <strong>visual</strong> and <strong>interactive</strong>. Thing is, this also comes with important limitations:</p>
 <ul>
-<li>1M rows limit in Excel: insanely low</li>
-<li>Not meant to be used for: automation, reproducibility, scalability, composability, and integration</li>
+<li>1M-row limit in Excel: insanely low</li>
+<li>It's not meant for automation, reproducibility, scalability, composability, or integration</li>
 <li>
 <p>Commercial software:</p>
 <ul>
-<li>you need a Microsoft License</li>
+<li>you need a Microsoft licence</li>
 <li>you don't own your work</li>
 <li><a href="https://www.youtube.com/watch?v=SlIZxdeoWDY" title="Video on Microsoft being a 'spyware'">your data isn't private</a></li>
 </ul>
@@ -1575,11 +1575,11 @@
 <p class="admonition-title">Note</p>
 <p>Those limitations are approximately the same for alternative products such as Google Sheets.</p>
 </div>
-<p>With programming tools (especially <code>polars</code>), working with 100 or 100M rows <strong>doesn't make such a big difference</strong>, it will stay free forever and you don't depend on any entity.</p>
-<p>The n°1 reason that people use Excel is that it is (or rather <em>seems</em>) simpler to use. But in the AI era, coding has become dramastically more accessible, <strong>especially if you know what you're doing</strong>, which is required no matter which tool you use.</p>
-<p>Instead, the best investment you could make is understand how <code>polars</code> work in general, and work with AI to handle the rest. <strong>You'll never have privacy, performance, automation or scalability issue</strong>.</p>
+<p>With programming tools (especially <code>polars</code>), working with 100 or 100M rows <strong>doesn't make such a big difference</strong>. <code>polars</code> will stay free forever, and you don't depend on any entity.</p>
+<p>The #1 reason people use Excel is that it is (or rather, <em>seems</em>) simpler to use. But in the AI era, coding has become dramatically more accessible, <strong>especially if you know what you're doing</strong>, which is required no matter which tool you use.</p>
+<p>Instead, the best investment you could make is to understand how <code>polars</code> works in general and work with AI to handle the rest. <strong>You'll never have privacy, performance, automation, or scalability issues</strong>.</p>
 <h2 id="read-files">Read files<a class="headerlink" href="#read-files" title="Permanent link">&para;</a></h2>
-<p>Reading a file = Opening an Excel spreadsheet</p>
+<p>Reading a file is like opening an Excel spreadsheet.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Example</label><label for="__tabbed_1_2">Exercise</label><label for="__tabbed_1_3">Hint</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1614,7 +1614,7 @@
 <div class="tabbed-block">
 <ul>
 <li>(if you haven't already) Download the <a href="../../definition_of_data_and_ai/indigo/">datasets</a> and put them inside the <code>indigo-data</code> folder.</li>
-<li>create a <code>read.py</code> file</li>
+<li>Create a <code>read.py</code> file</li>
 <li>In that file, write the code to read the <code>sales.csv</code> file and print the first 5 rows.</li>
 </ul>
 </div>
@@ -1677,10 +1677,10 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Read the dataset</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">sales</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"docs/data_analytics_and_AI/data/sales.csv"</span><span class="p">)</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Keep transaction with an amount of 100€</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Keep transactions with an amount greater than €100</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">high_value_sales</span> <span class="o">=</span> <span class="n">sales</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"net_total"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Print the first rows</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Print the first few rows</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">high_value_sales</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"transaction_id"</span><span class="p">,</span> <span class="s2">"product_name"</span><span class="p">,</span> <span class="s2">"net_total"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (5, 3)
@@ -1715,7 +1715,7 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Read the sales dataset</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">sales</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"docs/data_analytics_and_AI/data/sales.csv"</span><span class="p">)</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Group by sales channel and compute the sum for each one</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Group by sales channel and compute total sales for each one</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">sales_agg</span> <span class="o">=</span> <span class="n">sales</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"sales_channel"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">net_revenue</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"net_total"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Print the result (no need for head() here since there are just 3 channels)</span>
