@@ -68,6 +68,22 @@ For each scenario, decide whether the data is **completely at random**, **at ran
 
 ## Outliers
 
-A data point that differs significantly from others.
+A data point that differs significantly from others. Those data points can have a very high impact on the analysis we're doing, and the most common ways to deal with them are:
+
+- remove them: simplify everything but arbitrary
+- cap them: add upper/lower bound
+- use techniques that aren't sensible to outliers
+- mathematical transformations
+
+None of them are fully satisfying. The good news is that most of the time extreme values **are here for a reason** (_assuming the data isn't corrupted_).
+
+Let's say we're interested in the raw salary of Kedge BS students, 3 months after they left school. ==Click **generate**==
 
 <iframe src="./outlier.html" width="100%" height="400" style="border: none"></iframe>
+
+!!! tip
+
+      - **Sample size** = how many students we have in our dataset?
+      - **Seed** = number that defines randomness (same number implies same result, change number to see a different sample)
+
+Most students are between 35k and 55k, but one student is at 73k, which is **62% more than the average** and **10% more than the second best**.

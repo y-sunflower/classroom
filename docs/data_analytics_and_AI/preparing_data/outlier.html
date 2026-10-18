@@ -28,9 +28,18 @@
 
       .controls {
         display: flex;
+        align-items: flex-end;
         justify-content: flex-end;
         gap: 8px;
         padding: 0 4px 12px;
+      }
+
+      .control {
+        display: grid;
+        gap: 4px;
+        color: #64748b;
+        font-size: 12px;
+        line-height: 16px;
       }
 
       input,
@@ -183,24 +192,31 @@
   <body>
     <main class="visualization">
       <div class="controls">
-        <input
-          id="count"
-          type="number"
-          min="1"
-          max="5000"
-          step="1"
-          value="1000"
-          aria-label="Number of data points"
-        />
-        <input
-          id="seed"
-          type="number"
-          min="0"
-          max="2147483647"
-          step="1"
-          value="1"
-          aria-label="Random seed"
-        />
+        <div class="control" title="Number of salary values to generate.">
+          <label for="count">Sample size</label>
+          <input
+            id="count"
+            type="number"
+            min="1"
+            max="5000"
+            step="1"
+            value="1000"
+          />
+        </div>
+        <div
+          class="control"
+          title="Controls the random sequence. Reusing the same seed and sample size reproduces the same salaries."
+        >
+          <label for="seed">Seed</label>
+          <input
+            id="seed"
+            type="number"
+            min="0"
+            max="2147483647"
+            step="1"
+            value="21"
+          />
+        </div>
         <button id="generate" type="button">Generate</button>
       </div>
 
@@ -408,7 +424,9 @@
         seedInput.value = seed;
         const random = createRandom(seed);
         const counts = Array(binCount).fill(0);
-        const samples = Array.from({ length: count }, () => normalSample(random));
+        const samples = Array.from({ length: count }, () =>
+          normalSample(random),
+        );
         const assignments = samples.map((sample) => {
           const index = Math.max(
             0,
