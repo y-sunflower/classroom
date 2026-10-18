@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery data cases</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        color: #172033;
+        background: transparent;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 280px;
+        margin: 0;
+        background: transparent;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+
+      .activity {
+        width: min(100%, 820px);
+        margin: 0 auto;
+        padding: 4px;
+      }
+
+      .topbar {
+        display: flex;
+        min-height: 36px;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+      }
+
+      .reset-button,
+      .decision-button,
+      .nav-button,
+      .small-button {
+        border: 1px solid #dbe3ee;
+        border-radius: 8px;
+        color: #334155;
+        background: #fff;
+        transition:
+          border-color 150ms ease,
+          background 150ms ease,
+          color 150ms ease,
+          transform 150ms ease;
+      }
+
+      .reset-button:hover,
+      .decision-button:hover:not(:disabled),
+      .nav-button:hover:not(:disabled),
+      .small-button:hover {
+        border-color: #94a3b8;
+        background: #f8fafc;
+      }
+
+      .reset-button:active,
+      .decision-button:active,
+      .nav-button:active {
+        transform: translateY(1px);
+      }
+
+      .reset-button {
+        padding: 7px 11px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .case-card {
+        padding: 18px;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 2px 8px #0f172a08;
+      }
+
+      .progress-wrap {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      .progress-meta {
+        color: #64748b;
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .progress-track {
+        height: 5px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #e2e8f0;
+      }
+
+      .progress-fill {
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: #2563eb;
+        transition: width 300ms ease;
+      }
+
+      .case-heading {
+        margin-bottom: 13px;
+      }
+
+      .case-kicker {
+        margin-bottom: 4px;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .case-title {
+        margin: 0;
+        color: #172033;
+        font-size: 19px;
+        line-height: 1.25;
+      }
+
+      .record-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        padding: 11px 12px;
+        border: 1px solid #f1f5f9;
+        border-radius: 10px;
+        background: #f8fafc;
+      }
+
+      .record-label {
+        display: block;
+        margin-bottom: 3px;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .record-value {
+        color: #c2410c;
+        font-size: 23px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 750;
+        letter-spacing: -0.03em;
+      }
+
+      .case-description {
+        margin: 0 0 16px;
+        color: #475569;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .decision-title {
+        margin: 0 0 8px;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .decision-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .decision-button {
+        min-height: 40px;
+        padding: 8px 10px;
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .decision-button.selected {
+        border-color: #2563eb;
+        color: #1d4ed8;
+        background: #eff6ff;
+      }
+
+      .correction-form {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        margin-top: 9px;
+        padding: 10px;
+        border-radius: 9px;
+        background: #eff6ff;
+      }
+
+      .correction-form[hidden],
+      .feedback[hidden],
+      .completion[hidden] {
+        display: none;
+      }
+
+      .correction-field {
+        display: grid;
+        flex: 1;
+        gap: 4px;
+        color: #475569;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .correction-field input {
+        width: 100%;
+        height: 36px;
+        padding: 0 9px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        color: #172033;
+        background: #fff;
+      }
+
+      .small-button {
+        min-height: 36px;
+        padding: 0 11px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .apply-button {
+        border-color: #2563eb;
+        color: #fff;
+        background: #2563eb;
+      }
+
+      .apply-button:hover {
+        border-color: #1d4ed8;
+        color: #fff;
+        background: #1d4ed8;
+      }
+
+      .feedback {
+        margin-top: 10px;
+        padding: 9px 11px;
+        border-radius: 8px;
+        color: #475569;
+        background: #f1f5f9;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .feedback.supported {
+        color: #166534;
+        background: #f0fdf4;
+      }
+
+      .feedback.revisit {
+        color: #92400e;
+        background: #fffbeb;
+      }
+
+      .summary-section {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      .summary-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .summary-title {
+        margin: 0;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .summary-note {
+        color: #64748b;
+        font-size: 10px;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .summary-item {
+        min-width: 0;
+        padding: 10px;
+        border: 1px solid #e2e8f0;
+        border-radius: 9px;
+        background: #f8fafc;
+      }
+
+      .summary-label {
+        display: block;
+        margin-bottom: 4px;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .summary-value {
+        display: block;
+        overflow: hidden;
+        color: #172033;
+        font-size: 15px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 750;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .case-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .nav-button {
+        min-height: 38px;
+        padding: 0 12px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .nav-button.primary {
+        border-color: #2563eb;
+        color: #fff;
+        background: #2563eb;
+      }
+
+      .nav-button.primary:hover:not(:disabled) {
+        border-color: #1d4ed8;
+        background: #1d4ed8;
+      }
+
+      .nav-button:disabled {
+        border-color: #e2e8f0;
+        color: #94a3b8;
+        background: #f8fafc;
+        cursor: not-allowed;
+      }
+
+      .completion {
+        margin-top: 12px;
+        color: #166534;
+        font-size: 11px;
+        font-weight: 600;
+        text-align: right;
+      }
+
+      @media (max-width: 520px) {
+        .case-card {
+          padding: 14px;
+        }
+
+        .case-title {
+          font-size: 17px;
+        }
+
+        .summary {
+          gap: 6px;
+        }
+
+        .summary-item {
+          padding: 8px 7px;
+        }
+
+        .summary-value {
+          font-size: 13px;
+        }
+
+        .summary-note {
+          max-width: 120px;
+          text-align: right;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .summary-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .summary-note {
+          max-width: none;
+          text-align: left;
+        }
+
+        .decision-button {
+          padding: 7px 6px;
+          font-size: 11px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="activity">
+      <header class="topbar">
+        <button id="reset" class="reset-button" type="button">
+          Start over
+        </button>
+      </header>
+
+      <section class="case-card" aria-labelledby="case-title">
+        <div class="progress-wrap">
+          <span id="progress-label" class="progress-meta">Case 1 of 6</span>
+          <div
+            id="progress-track"
+            class="progress-track"
+            role="progressbar"
+            aria-label="Cases completed"
+            aria-valuemin="0"
+            aria-valuemax="6"
+            aria-valuenow="0"
+          >
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="case-heading">
+          <div class="case-kicker">Delivery record</div>
+          <h1 id="case-title" class="case-title">Unit mismatch</h1>
+        </div>
+
+        <div class="record-summary">
+          <div>
+            <span class="record-label">Reported delivery time</span>
+            <strong id="reported-value" class="record-value">0.7 min</strong>
+          </div>
+        </div>
+
+        <p id="case-description" class="case-description"></p>
+
+        <p class="decision-title">How should this time be handled?</p>
+        <div class="decision-buttons">
+          <button class="decision-button" type="button" data-action="keep">
+            Keep as recorded
+          </button>
+          <button class="decision-button" type="button" data-action="correct">
+            Correct the time
+          </button>
+          <button class="decision-button" type="button" data-action="exclude">
+            Exclude from summary
+          </button>
+          <button
+            class="decision-button"
+            type="button"
+            data-action="investigate"
+          >
+            Hold for more information
+          </button>
+        </div>
+
+        <form id="correction-form" class="correction-form" hidden>
+          <label class="correction-field" for="correction-value">
+            Correct delivery time (minutes)
+            <input
+              id="correction-value"
+              type="number"
+              min="0"
+              max="10000"
+              step="0.1"
+              placeholder="Enter a value from the case details"
+              required
+            />
+          </label>
+          <button class="small-button apply-button" type="submit">Apply</button>
+          <button id="cancel-correction" class="small-button" type="button">
+            Cancel
+          </button>
+        </form>
+
+        <div id="feedback" class="feedback" role="status" hidden></div>
+
+        <section class="summary-section" aria-labelledby="summary-title">
+          <div class="summary-heading">
+            <h2 id="summary-title" class="summary-title">Sample summary</h2>
+            <span class="summary-note">Updates after each choice</span>
+          </div>
+          <div class="summary" aria-live="polite">
+            <div class="summary-item">
+              <span class="summary-label">Mean</span>
+              <output id="mean" class="summary-value">—</output>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Median</span>
+              <output id="median" class="summary-value">—</output>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Records included</span>
+              <output id="included-count" class="summary-value">—</output>
+            </div>
+          </div>
+        </section>
+
+        <div class="case-footer">
+          <button id="previous-case" class="nav-button" type="button" disabled>
+            Previous case
+          </button>
+          <button
+            id="next-case"
+            class="nav-button primary"
+            type="button"
+            disabled
+          >
+            Next case
+          </button>
+        </div>
+        <div id="completion" class="completion" hidden>
+          All six cases reviewed.
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const baselineMinutes = [
+        18, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+        40, 41, 42, 43, 44, 45, 46, 48, 50, 52, 54, 56, 58, 60, 63, 67,
+      ];
+
+      const cases = [
+        {
+          title: "Unit mismatch",
+          reported: 0.7,
+          description:
+            "The source system stores this route's time in hours, but the combined data labels it as minutes. Pickup was at 14:10 and delivery at 14:52.",
+          bestAction: "correct",
+          correction: 42,
+          takeaway:
+            "The source times show a 42-minute delivery. Correct the unit instead of dropping a value that can be recovered.",
+        },
+        {
+          title: "Road closure",
+          reported: 246,
+          description:
+            "A bridge was closed during the trip, forcing a long detour. GPS and the customer's signed delivery record both confirm the delivery took 246 minutes.",
+          bestAction: "keep",
+          correction: null,
+          takeaway:
+            "The long delivery is unusual, but both records confirm it happened. Keep a valid extreme value.",
+        },
+        {
+          title: "Seconds entered as minutes",
+          reported: 4800,
+          description:
+            "The courier app records elapsed time in seconds, but the combined data treats the number as minutes.",
+          bestAction: "correct",
+          correction: 80,
+          takeaway:
+            "Convert the recoverable value: 4,800 seconds is 80 minutes.",
+        },
+        {
+          title: "Missing tracking",
+          reported: 720,
+          description:
+            "The courier's tracker stopped during the delivery and came back online 12 hours later. There is no arrival scan or customer confirmation, so the exact delivery time cannot be verified.",
+          bestAction: "exclude",
+          correction: null,
+          takeaway:
+            "Since we can't be sure about what happened, we'd prefer exclude it.",
+        },
+        {
+          title: "Short nearby delivery",
+          reported: 14,
+          description:
+            "Pickup and handoff scans are 14 minutes apart. The customer was in the next building, and there are no missing scans or clock problems.",
+          bestAction: "keep",
+          correction: null,
+          takeaway:
+            "The short time is supported by the records and makes sense for this route. Keep it.",
+        },
+        {
+          title: "Multi-stop route",
+          reported: 168,
+          description:
+            "This planned route had 18 stops. GPS and signed handoffs confirm the full route took 168 minutes. It is valid, though single-stop deliveries may be a fairer comparison for some questions.",
+          bestAction: "keep",
+          correction: null,
+          takeaway:
+            "Keep valid data in the full dataset. Compare route types separately when the question is about single-stop deliveries.",
+        },
+      ];
+
+      const totalRecords = baselineMinutes.length + cases.length;
+      const numberFormatter = new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 1,
+      });
+      const progressLabel = document.getElementById("progress-label");
+      const progressTrack = document.getElementById("progress-track");
+      const progressFill = document.getElementById("progress-fill");
+      const caseTitle = document.getElementById("case-title");
+      const reportedValue = document.getElementById("reported-value");
+      const caseDescription = document.getElementById("case-description");
+      const correctionForm = document.getElementById("correction-form");
+      const correctionInput = document.getElementById("correction-value");
+      const feedback = document.getElementById("feedback");
+      const previousCaseButton = document.getElementById("previous-case");
+      const nextCaseButton = document.getElementById("next-case");
+      const completion = document.getElementById("completion");
+      const decisionButtons = Array.from(
+        document.querySelectorAll(".decision-button"),
+      );
+      let activeIndex = 0;
+      let reviewFinished = false;
+
+      function currentCase() {
+        return cases[activeIndex];
+      }
+
+      function formatMinutes(value) {
+        return numberFormatter.format(value) + " min";
+      }
+
+      function actionLabel(action, item) {
+        if (action === "keep") return "keeping it as recorded";
+        if (action === "correct")
+          return "correcting it to " + formatMinutes(item.correction);
+        if (action === "exclude") return "excluding it from this summary";
+        return "holding it until it can be checked";
+      }
+
+      function includedRecords() {
+        const values = baselineMinutes.slice();
+
+        for (const item of cases) {
+          const heldOut =
+            item.decision === "exclude" || item.decision === "investigate";
+          if (!heldOut) {
+            values.push(
+              item.decision === "correct" ? item.currentValue : item.reported,
+            );
+          }
+        }
+
+        return values;
+      }
+
+      function updateSummary() {
+        const values = includedRecords().sort(
+          (first, second) => first - second,
+        );
+        const middle = Math.floor(values.length / 2);
+        const median =
+          values.length % 2 === 0
+            ? (values[middle - 1] + values[middle]) / 2
+            : values[middle];
+        const mean =
+          values.reduce((total, value) => total + value, 0) / values.length;
+
+        document.getElementById("mean").textContent = formatMinutes(mean);
+        document.getElementById("median").textContent = formatMinutes(median);
+        document.getElementById("included-count").textContent =
+          values.length + " / " + totalRecords;
+      }
+
+      function updateNavigation() {
+        const completedSteps = reviewFinished ? cases.length : activeIndex;
+        progressLabel.textContent =
+          "Case " + (activeIndex + 1) + " of " + cases.length;
+        progressTrack.setAttribute("aria-valuenow", String(completedSteps));
+        progressFill.style.width = (completedSteps / cases.length) * 100 + "%";
+        previousCaseButton.disabled = activeIndex === 0;
+        nextCaseButton.disabled = !currentCase().decision || reviewFinished;
+        nextCaseButton.textContent =
+          activeIndex === cases.length - 1
+            ? reviewFinished
+              ? "Review complete"
+              : "Finish review"
+            : "Next case";
+        completion.hidden = !reviewFinished;
+      }
+
+      function renderCase() {
+        const item = currentCase();
+        caseTitle.textContent = item.title;
+        reportedValue.textContent = formatMinutes(item.reported);
+        caseDescription.textContent = item.description;
+
+        for (const button of decisionButtons) {
+          button.classList.toggle(
+            "selected",
+            button.dataset.action === item.decision,
+          );
+        }
+
+        correctionForm.hidden = item.decision !== "correct";
+        correctionInput.value =
+          item.decision === "correct" ? String(item.currentValue) : "";
+        feedback.hidden = !item.feedback;
+        feedback.className =
+          "feedback" + (item.feedbackClass ? " " + item.feedbackClass : "");
+        feedback.textContent = item.feedback || "";
+        updateNavigation();
+      }
+
+      function commitDecision(action, correctedValue) {
+        const item = currentCase();
+        item.decision = action;
+        item.currentValue =
+          action === "correct" ? correctedValue : item.reported;
+
+        const correctionMatches =
+          action !== "correct" ||
+          Math.abs(correctedValue - item.correction) < 0.11;
+        const supported = action === item.bestAction && correctionMatches;
+
+        if (supported) {
+          item.feedbackClass = "supported";
+          item.feedback = item.takeaway;
+        } else if (action === "correct" && item.bestAction === "correct") {
+          item.feedbackClass = "revisit";
+          item.feedback =
+            "The case details support " +
+            formatMinutes(item.correction) +
+            ". Check the conversion and update your correction.";
+        } else {
+          item.feedbackClass = "revisit";
+          item.feedback =
+            "The information best supports " +
+            actionLabel(item.bestAction, item) +
+            ". " +
+            item.takeaway;
+        }
+
+        correctionForm.hidden = true;
+        renderCase();
+        updateSummary();
+      }
+
+      function chooseAction(action) {
+        if (action === "correct") {
+          correctionForm.hidden = false;
+          correctionInput.value = "";
+          correctionInput.focus();
+          return;
+        }
+
+        commitDecision(action, null);
+      }
+
+      decisionButtons.forEach((button) => {
+        button.addEventListener("click", () =>
+          chooseAction(button.dataset.action),
+        );
+      });
+
+      correctionForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        commitDecision("correct", Number(correctionInput.value));
+      });
+
+      document
+        .getElementById("cancel-correction")
+        .addEventListener("click", () => {
+          correctionForm.hidden = true;
+        });
+
+      previousCaseButton.addEventListener("click", () => {
+        if (activeIndex > 0) {
+          reviewFinished = false;
+          activeIndex--;
+          renderCase();
+        }
+      });
+
+      nextCaseButton.addEventListener("click", () => {
+        if (!currentCase().decision || reviewFinished) return;
+        if (activeIndex < cases.length - 1) activeIndex++;
+        else reviewFinished = true;
+        renderCase();
+      });
+
+      document.getElementById("reset").addEventListener("click", () => {
+        for (const item of cases) {
+          item.currentValue = item.reported;
+          item.decision = null;
+          item.feedback = "";
+          item.feedbackClass = "";
+        }
+        activeIndex = 0;
+        reviewFinished = false;
+        renderCase();
+        updateSummary();
+      });
+
+      for (const item of cases) {
+        item.currentValue = item.reported;
+        item.decision = null;
+        item.feedback = "";
+        item.feedbackClass = "";
+      }
+
+      renderCase();
+      updateSummary();
+
+      try {
+        const frame = window.frameElement;
+        if (frame && "ResizeObserver" in window) {
+          const resizeObserver = new ResizeObserver(() => {
+            frame.style.height = document.documentElement.scrollHeight + "px";
+          });
+          resizeObserver.observe(document.body);
+          frame.style.height = document.documentElement.scrollHeight + "px";
+        }
+      } catch (error) {
+        // Keep the iframe's declared height as a fallback.
+      }
+    </script>
+  </body>
+</html>
