@@ -10,6 +10,8 @@ In the previous lesson we saw the common operations of how to clean data (select
 
 ## Missing values
 
+### Definitions
+
 === "completely at random"
 
       Data is missing for purely random reason. This is the ideal case since ignoring those data has no impact on our analysis, but this is almost never the case in the real world.
@@ -28,4 +30,44 @@ In the previous lesson we saw the common operations of how to clean data (select
 
 === "by design"
 
-      When sending marketing emails, time spend on the website being empty isn't really missing data if user didn't click on the link to the website.
+      When sending marketing emails, time spend on the website being empty isn't really missing data if user didn't click on the link to the website. Want to know how much time users spend on average on your website from your email campaign? Start by filtering users who did click on your email and you'll "remove" missing values.
+
+### Exercise
+
+For each scenario, decide whether the data is **completely at random**, **at random**, **not at random**, or missing **by design**. Open each card to check your answer.
+
+??? question "A sensor loses readings during randomly timed transmission glitches"
+
+    The glitches affect readings across devices and times, with no connection to the recorded conditions or the readings themselves. What kind of missing data is this?
+
+    <span class="answer"><strong>Answer: completely at random.</strong> The missingness has no relationship to observed variables or to the missing readings.</span>
+
+??? question "A customer survey does not ask for household income"
+
+    Customers with higher incomes are more likely to skip the income question. What kind of missing data is this?
+
+    <span class="answer"><strong>Answer: not at random.</strong> Whether income is missing is related to the income value itself.</span>
+
+??? question "A satisfaction score is missing more often in one app version"
+
+    A bug in the survey form affects the oldest app version. The app version is recorded for every customer. What kind of missing data is this?
+
+    <span class="answer"><strong>Answer: at random.</strong> Missingness is related to an observed variable, the app version, rather than to the satisfaction score itself.</span>
+
+??? question "A delivery time is blank for orders that were never shipped"
+
+    The dataset records a delivery time only after an order has shipped. What kind of missing data is this?
+
+    <span class="answer"><strong>Answer: by design.</strong> A delivery time does not exist for an order that was never shipped, so the blank is not an unrecorded value.</span>
+
+??? question "A health question is skipped more often by older respondents"
+
+    Age is recorded for everyone, and older respondents are more likely to leave the question blank. What kind of missing data is this?
+
+    <span class="answer"><strong>Answer: at random.</strong> The missingness can be explained by the observed age variable.</span>
+
+## Outliers
+
+A data point that differs significantly from others.
+
+<iframe src="./outlier.html" width="100%" height="400"></iframe>

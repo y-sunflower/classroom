@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Normal distribution</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        background: transparent;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 280px;
+        margin: 0;
+        padding: 12px;
+        background: transparent;
+      }
+
+      .visualization {
+        width: min(100%, 940px);
+        margin: 0 auto;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 0 4px 12px;
+      }
+
+      input,
+      button {
+        height: 40px;
+        font: inherit;
+      }
+
+      input {
+        width: 92px;
+        padding: 0 12px;
+        color: #172033;
+        background: #fff;
+        text-align: center;
+      }
+
+      input:focus-visible,
+      button:focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+
+      button {
+        padding: 0 16px;
+        border-color: #2563eb;
+        color: #fff;
+        background: #2563eb;
+        font-weight: 650;
+        cursor: pointer;
+        transition:
+          background 160ms ease,
+          transform 160ms ease;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      .chart {
+        display: block;
+        width: 100%;
+        overflow: visible;
+        background: #fff;
+      }
+
+      .baseline {
+        stroke: #cbd5e1;
+        stroke-width: 1.25;
+      }
+
+      .smooth-line {
+        fill: none;
+        stroke: #2563eb;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 500ms ease;
+      }
+
+      .smooth-line.visible {
+        opacity: 0.9;
+        visibility: visible;
+      }
+
+      .point {
+        fill: #f97316;
+        stroke: #fff;
+        stroke-width: 1.25;
+        cursor: crosshair;
+        transition:
+          r 120ms ease,
+          filter 120ms ease;
+      }
+
+      .point:hover,
+      .point:focus-visible {
+        r: 5.5px;
+        stroke: #9a3412;
+        stroke-width: 2;
+        filter: drop-shadow(0 1px 4px #f9731688);
+        outline: none;
+      }
+
+      .chart-wrap {
+        position: relative;
+      }
+
+      .tooltip {
+        position: absolute;
+        z-index: 1;
+        padding: 5px 8px;
+        border: 1px solid #dbe3ee;
+        border-radius: 7px;
+        color: #172033;
+        background: #fff;
+        box-shadow: 0 3px 12px #0f172a1c;
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-50%, calc(-100% - 9px));
+        transition: opacity 100ms ease;
+        visibility: hidden;
+      }
+
+      .tooltip.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 8px 4px;
+        }
+
+        .chart {
+          border-radius: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="visualization">
+      <div class="controls">
+        <input
+          id="count"
+          type="number"
+          min="1"
+          max="5000"
+          step="1"
+          value="1000"
+          aria-label="Number of data points"
+        />
+        <button id="generate" type="button">Generate</button>
+      </div>
+
+      <div class="chart-wrap">
+        <svg
+          class="chart"
+          viewBox="0 0 900 430"
+          role="group"
+          aria-label="Normally distributed data points"
+        >
+          <line class="baseline" x1="48" y1="354" x2="852" y2="354" />
+          <path id="smooth-line" class="smooth-line" />
+          <g id="points"></g>
+        </svg>
+        <output id="tooltip" class="tooltip" aria-hidden="true"></output>
+      </div>
+    </main>
+
+    <script>
+      const svgNamespace = "http://www.w3.org/2000/svg";
+      const countInput = document.getElementById("count");
+      const pointsLayer = document.getElementById("points");
+      const smoothLine = document.getElementById("smooth-line");
+      const chartWrap = document.querySelector(".chart-wrap");
+      const tooltip = document.getElementById("tooltip");
+      const xMin = 48;
+      const xMax = 852;
+      const baseline = 354;
+      const domain = 4;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
+      const binCount = 150;
+      const pointPitch = 9;
+      let animationFrame = 0;
+
+      function binX(index) {
+        return xMin + ((index + 0.5) / binCount) * (xMax - xMin);
+      }
+
+      function normalSample() {
+        let u = 0;
+        let v = 0;
+
+        while (u === 0) u = Math.random();
+        while (v === 0) v = Math.random();
+
+        return Math.max(
+          -3.95,
+          Math.min(
+            3.95,
+            Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v),
+          ),
+        );
+      }
+
+      function easeOutCubic(progress) {
+        return 1 - Math.pow(1 - progress, 3);
+      }
+
+      function showValue(circle, value) {
+        const circleRect = circle.getBoundingClientRect();
+        const wrapRect = chartWrap.getBoundingClientRect();
+        tooltip.textContent = value.toFixed(2);
+        tooltip.style.left = `${circleRect.left + circleRect.width / 2 - wrapRect.left}px`;
+        tooltip.style.top = `${circleRect.top - wrapRect.top}px`;
+        tooltip.classList.add("visible");
+      }
+
+      function hideValue() {
+        tooltip.classList.remove("visible");
+      }
+
+      function drawSmoothedLine(counts) {
+        const sigma = 3;
+        const smoothed = counts.map((_, index) => {
+          let weightedCount = 0;
+          let totalWeight = 0;
+
+          for (
+            let offset = -Math.ceil(sigma * 3);
+            offset <= Math.ceil(sigma * 3);
+            offset++
+          ) {
+            const sourceIndex = index + offset;
+            if (sourceIndex < 0 || sourceIndex >= counts.length) continue;
+            const weight = Math.exp(-0.5 * (offset / sigma) ** 2);
+            weightedCount += counts[sourceIndex] * weight;
+            totalWeight += weight;
+          }
+
+          return weightedCount / totalWeight;
+        });
+        const peak = Math.max(...smoothed);
+        const tallestStack = Math.max(...counts);
+        const points = smoothed
+          .map((height, index) => ({
+            x: binX(index),
+            y:
+              baseline -
+              (height / peak) * tallestStack * pointPitch +
+              pointPitch / 2,
+          }))
+          .filter((point, index) => smoothed[index] >= peak * 0.015);
+
+        let path = `M ${points[0].x.toFixed(2)} ${points[0].y.toFixed(2)}`;
+        for (let index = 0; index < points.length - 1; index++) {
+          const previous = points[Math.max(0, index - 1)];
+          const current = points[index];
+          const next = points[index + 1];
+          const afterNext = points[Math.min(points.length - 1, index + 2)];
+          const control1X = current.x + (next.x - previous.x) / 6;
+          const control1Y = current.y + (next.y - previous.y) / 6;
+          const control2X = next.x - (afterNext.x - current.x) / 6;
+          const control2Y = next.y - (afterNext.y - current.y) / 6;
+          path += ` C ${control1X.toFixed(2)} ${control1Y.toFixed(2)}, ${control2X.toFixed(2)} ${control2Y.toFixed(2)}, ${next.x.toFixed(2)} ${next.y.toFixed(2)}`;
+        }
+
+        smoothLine.setAttribute("d", path);
+        smoothLine.classList.add("visible");
+      }
+
+      function generate() {
+        cancelAnimationFrame(animationFrame);
+        pointsLayer.replaceChildren();
+        smoothLine.setAttribute("d", "");
+        smoothLine.classList.remove("visible");
+        hideValue();
+
+        const count = Math.max(
+          1,
+          Math.min(1000, Math.floor(Number(countInput.value) || 1)),
+        );
+        countInput.value = count;
+        const counts = Array(binCount).fill(0);
+        const samples = Array.from({ length: count }, () => normalSample());
+        const assignments = samples.map((sample) => {
+          const index = Math.max(
+            0,
+            Math.min(
+              binCount - 1,
+              Math.floor(((sample + domain) / (2 * domain)) * binCount),
+            ),
+          );
+          const stack = counts[index]++;
+          return { sample, index, stack };
+        });
+        const tallestStack = Math.max(...counts);
+        const topRoom = Math.max(16, baseline - tallestStack * pointPitch - 24);
+        const duration = prefersReducedMotion.matches ? 0 : 760;
+        const start = performance.now();
+
+        const points = assignments.map(({ sample, index, stack }) => {
+          const circle = document.createElementNS(svgNamespace, "circle");
+          circle.setAttribute("class", "point");
+          circle.setAttribute("r", "3.7");
+          circle.setAttribute("cx", binX(index).toFixed(2));
+          circle.setAttribute("cy", topRoom.toFixed(2));
+          circle.setAttribute("tabindex", "0");
+          circle.setAttribute("aria-label", sample.toFixed(2));
+          pointsLayer.append(circle);
+          circle.addEventListener("pointerenter", () =>
+            showValue(circle, sample),
+          );
+          circle.addEventListener("pointerleave", hideValue);
+          circle.addEventListener("focus", () => showValue(circle, sample));
+          circle.addEventListener("blur", hideValue);
+
+          return {
+            circle,
+            targetY: baseline - (stack + 0.5) * pointPitch,
+            delay: prefersReducedMotion.matches
+              ? 0
+              : stack * 65 + Math.random() * 35,
+          };
+        });
+
+        function animate(now) {
+          let complete = true;
+
+          for (const point of points) {
+            const progress = Math.max(
+              0,
+              Math.min(1, (now - start - point.delay) / duration),
+            );
+            if (progress < 1) complete = false;
+            const eased = easeOutCubic(progress);
+            const y = topRoom + (point.targetY - topRoom) * eased;
+            point.circle.setAttribute("cy", y.toFixed(2));
+          }
+
+          if (complete) {
+            drawSmoothedLine(counts);
+          } else {
+            animationFrame = requestAnimationFrame(animate);
+          }
+        }
+
+        if (prefersReducedMotion.matches) {
+          for (const point of points)
+            point.circle.setAttribute("cy", point.targetY.toFixed(2));
+          drawSmoothedLine(counts);
+        } else {
+          animationFrame = requestAnimationFrame(animate);
+        }
+      }
+
+      document.getElementById("generate").addEventListener("click", generate);
+      countInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") generate();
+      });
+    </script>
+  </body>
+</html>

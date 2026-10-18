@@ -5,7 +5,7 @@ site_description = "Teaching materials of Joseph Barbier"
 site_author = "Joseph Barbier"
 copyright = "Copyright &copy; 2026 Joseph Barbier--Darnal"
 nav = [
-  "index.md",
+  { "All courses" = "index.md" },
   { "Data Analytics & AI" = [
     { "Syllabus" = "data_analytics_and_AI/syllabus.md" },
     { "Definitions of data and AI" = [
