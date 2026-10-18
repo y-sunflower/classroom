@@ -22,7 +22,7 @@ icon: lucide/brush-cleaning
 
 !!! note
 
-    In this course, we'll work with **CSV files**. It's a very common data file format, but isn't a database.
+    In this course, we'll work with **CSV files**. It's a very common data file format, but it isn't a database.
 
 ## Relational data
 

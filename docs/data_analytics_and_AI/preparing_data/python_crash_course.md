@@ -2,12 +2,12 @@
 icon: lucide/brush-cleaning
 ---
 
-In the next lesson, we'll use **Python**, one of the world most famous programming language. This page introduces the basic ideas you'll need to read and write small Python programs.
+In the next lesson, we'll use **Python**, one of the world's most famous programming languages. This page introduces the basic ideas you'll need to read and write small Python programs.
 
 !!! warning
 
-      - Make sure you installed Positron and uv, [see the guide if not](../definition_of_data_and_ai/setup.md).
-      - **The goal isn't to make you a programming expert**! Instead, I want you to grasp the core concepts of manipulating data with coding, how to do basic operations, and then how to use AI to do it for you.
+      - Make sure you've installed Positron and uv ([see the guide if not](../definition_of_data_and_ai/setup.md)).
+      - **The goal isn't to make you a programming expert**! Instead, I want you to grasp the core concepts of manipulating data with code, learn to do basic operations, and then learn how to use AI to do them for you.
 
 ## Get ready
 
@@ -186,7 +186,7 @@ Numbers can be added to other numbers, including an `int` and a `float`. Strings
 
 !!! tip
 
-      Python has many other types, some of them will be described below.
+      Python has many other types, some of which are described below.
 
 ## Keep several values in a list
 
@@ -219,7 +219,7 @@ A list stores values in order. Write its values between square brackets and sepa
 
 !!! question
 
-      In your opinion, how to get **the last element of a list** (assuming the length of the list is unknown)?
+      In your opinion, how can you get **the last element of a list** (assuming you don't know its length)?
 
 ## Store related values in a dictionary
 

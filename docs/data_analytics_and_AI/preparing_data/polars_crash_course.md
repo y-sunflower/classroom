@@ -2,17 +2,17 @@
 icon: lucide/brush-cleaning
 ---
 
-In this course we'll use [`polars`](https://pola.rs/), a famous dataframe library. It's **open source** (the entire underlying code is freely [available online](https://github.com/pola-rs/polars)) and **completly free**.
+In this course we'll use [`polars`](https://pola.rs/), a famous dataframe library. It's **open source** (the entire underlying code is freely [available online](https://github.com/pola-rs/polars)) and **completely free**.
 
 ## Why not just use Excel?
 
 Excel is a bit more accessible than writing code when it comes to manipulating data because everything is very **visual** and **interactive**. Thing is, this also comes with important limitations:
 
-- 1M rows limit in Excel: insanely low
-- Not meant to be used for: automation, reproducibility, scalability, composability, and integration
+- 1M-row limit in Excel: insanely low
+- It's not meant for automation, reproducibility, scalability, composability, or integration
 - Commercial software:
 
-      - you need a Microsoft License
+      - you need a Microsoft licence
       - you don't own your work
       - [your data isn't private](https://www.youtube.com/watch?v=SlIZxdeoWDY "Video on Microsoft being a 'spyware'")
 
@@ -20,15 +20,15 @@ Excel is a bit more accessible than writing code when it comes to manipulating d
 
       Those limitations are approximately the same for alternative products such as Google Sheets.
 
-With programming tools (especially `polars`), working with 100 or 100M rows **doesn't make such a big difference**, it will stay free forever and you don't depend on any entity.
+With programming tools (especially `polars`), working with 100 or 100M rows **doesn't make such a big difference**. `polars` will stay free forever, and you don't depend on any entity.
 
-The n°1 reason that people use Excel is that it is (or rather _seems_) simpler to use. But in the AI era, coding has become dramastically more accessible, **especially if you know what you're doing**, which is required no matter which tool you use.
+The #1 reason people use Excel is that it is (or rather, _seems_) simpler to use. But in the AI era, coding has become dramatically more accessible, **especially if you know what you're doing**, which is required no matter which tool you use.
 
-Instead, the best investment you could make is understand how `polars` work in general, and work with AI to handle the rest. **You'll never have privacy, performance, automation or scalability issue**.
+Instead, the best investment you could make is to understand how `polars` works in general and work with AI to handle the rest. **You'll never have privacy, performance, automation, or scalability issues**.
 
 ## Read files
 
-Reading a file = Opening an Excel spreadsheet
+Reading a file is like opening an Excel spreadsheet.
 
 === "Example"
 
@@ -45,7 +45,7 @@ Reading a file = Opening an Excel spreadsheet
 === "Exercise"
 
       - (if you haven't already) Download the [datasets](../definition_of_data_and_ai/indigo.md) and put them inside the `indigo-data` folder.
-      - create a `read.py` file
+      - Create a `read.py` file
       - In that file, write the code to read the `sales.csv` file and print the first 5 rows.
 
 === "Hint"
@@ -93,10 +93,10 @@ Use `filter` to keep rows that match a condition. `pl.col("column")` refers to a
       # Read the dataset
       sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
 
-      # Keep transaction with an amount of 100€
+      # Keep transactions with an amount greater than €100
       high_value_sales = sales.filter(pl.col("net_total") > 100)
 
-      # Print the first rows
+      # Print the first few rows
       print(high_value_sales.select("transaction_id", "product_name", "net_total").head())
       ```
 
@@ -120,7 +120,7 @@ Use `group_by` to collect rows with the same value, then `agg` to calculate a su
       # Read the sales dataset
       sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
 
-      # Group by sales channel and compute the sum for each one
+      # Group by sales channel and compute total sales for each one
       sales_agg = sales.group_by("sales_channel").agg(net_revenue=pl.col("net_total").sum())
 
       # Print the result (no need for head() here since there are just 3 channels)

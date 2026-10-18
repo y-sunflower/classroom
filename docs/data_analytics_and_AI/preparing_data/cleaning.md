@@ -2,11 +2,11 @@
 icon: lucide/brush-cleaning
 ---
 
-## What does "clean" means
+## What does "clean" mean?
 
 Data cleaning makes a dataset more consistent and useful for a specific question. Poor quality can distort a campaign comparison, hide an operational issue, or lead a team to act on the wrong customers. In practice, we want to make the [data "tidy"](https://vita.had.co.nz/papers/tidy-data.pdf).
 
-In the previous lesson we saw the common operations of how to clean data (select columns, filter rows, aggregations). Here we'll talk about common issues that we have when cleaning data, why they can occur and how to "fix" (if they need a fix).
+In the previous lesson, we saw common ways to clean data (selecting columns, filtering rows, and aggregating). Here we'll talk about common issues that arise when cleaning data, why they occur, and how to "fix" them (if they need fixing).
 
 ## Missing values
 
@@ -14,23 +14,23 @@ In the previous lesson we saw the common operations of how to clean data (select
 
 === "completely at random"
 
-      Data is missing for purely random reason. This is the ideal case since ignoring those data has no impact on our analysis, but this is almost never the case in the real world.
+      Data is missing for purely random reasons. This is the ideal case, since ignoring those values has no impact on our analysis, but it is almost never the case in the real world.
 
-      A bank with customer info might have missing info about the job of customers. It's likely that people who don't want to share their job have reasons: bad credit score, illegal activities, ...
+      A bank with customer info might be missing information about its customers' jobs. It's likely that people who don't want to share their job have reasons: a bad credit score, illegal activities, ...
 
 === "at random"
 
       Missingness isn't random and can be explained by other variables.
 
-      Male are less likely to do depression diagnostic, but this has nothing to do with the level of depression. Statistics allow us to easily take into account maleness.
+      Men are less likely to receive a diagnosis of depression, but this has nothing to do with their level of depression. Statistics allow us to easily account for sex.
 
 === "not at random"
 
-      Missing data where the value of the variable that's missing is related to the reason it's missing. People with high depression symptoms are more likely to not answer questions **because** of their depressions.
+      Data is not missing at random when the value of the missing variable is related to the reason it's missing. People with severe symptoms of depression are more likely not to answer questions **because** of their symptoms.
 
 === "by design"
 
-      When sending marketing emails, time spend on the website being empty isn't really missing data if user didn't click on the link to the website. Want to know how much time users spend on average on your website from your email campaign? Start by filtering users who did click on your email and you'll "remove" missing values.
+      When sending marketing emails, a blank value for time spent on the website isn't really missing data if a user didn't click the link to the website. Want to know how much time users spend on your website on average after clicking through from your email campaign? Start by filtering for users who clicked through, and you'll "remove" missing values.
 
 ### Exercise
 
@@ -78,6 +78,6 @@ Let's look at graduates' annual income ten years after graduation.
 
 ### Exercise
 
-In this exercise, you'll investigate 6 cases of outliers, and will need to figure out what should be done in that case.
+In this exercise, you'll investigate six outlier cases and figure out what should be done in each one.
 
 <iframe src="./outlier_case_files.html" width="100%" height="900" style="border: none"></iframe>
