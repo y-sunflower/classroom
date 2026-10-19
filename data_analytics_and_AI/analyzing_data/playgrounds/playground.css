@@ -227,6 +227,10 @@ canvas {
   height: 350px;
 }
 
+body[data-model="linear"] canvas {
+  height: 370px;
+}
+
 .stats {
   display: flex;
   flex-wrap: wrap;
@@ -286,6 +290,10 @@ canvas {
 
   canvas {
     height: 290px;
+  }
+
+  body[data-model="linear"] canvas {
+    height: 310px;
   }
 
   .legend {
