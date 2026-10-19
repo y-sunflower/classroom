@@ -31,6 +31,8 @@ When we create a model, we need to find a way to **evaluate** it. Let's say we h
 
 > How can we know whether that value is accurate or not?
 
+For this, we often **split our dataset into 2 sets**: a train set and the test set.
+
 <iframe title="Train and test split animation" src="./playgrounds/train-test-split.html" width="100%" height="620" style="border: none"></iframe>
 
 The blue examples are used to fit the line. Orange examples stay hidden from the fit until the final check. Mean absolute error (MAE) shows the average distance between a prediction and an example; lower is closer in this demo. If we keep tuning against the test set, it stops being a fair check.
