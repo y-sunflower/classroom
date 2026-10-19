@@ -15,13 +15,11 @@
   const plotWrap = canvas.parentElement;
   const controls = Array.from(document.querySelectorAll(".control input"));
   const fitButton = document.getElementById("fit-button");
-  const status = document.getElementById("model-status");
   const detail = document.getElementById("chart-detail");
   const sampleCount = document.getElementById("sample-count");
   const sampleOutput = document.getElementById("sample-output");
   const scoreStat = document.getElementById("score-stat");
   const scoreOutput = document.getElementById("score-output");
-  const hint = document.getElementById("hint");
   const range =
     modelName === "linear"
       ? { xMin: 15, xMax: 85, yMin: 0, yMax: 600 }
@@ -32,6 +30,10 @@
   let query = null;
   let resizeObserver = null;
   let probabilityTooltip = null;
+
+  function setDetail(text) {
+    if (detail) detail.textContent = text;
+  }
 
   if (modelName !== "linear") {
     probabilityTooltip = document.createElement("div");
@@ -185,15 +187,6 @@
     fitButton.disabled = false;
     fitButton.innerHTML =
       'Fit model <span class="arrow" aria-hidden="true">↗</span>';
-    status.textContent = "Ready to fit";
-    detail.textContent =
-      modelName === "linear"
-        ? "Each dot is one example"
-        : "The background will show the model’s decision regions";
-    hint.textContent =
-      modelName === "knn"
-        ? "Change a setting, fit the model, then click the chart to try a new example."
-        : "Change a setting, fit again, and compare the pattern. The score describes the examples used to fit.";
     draw();
   }
 
@@ -459,9 +452,7 @@
       context.textAlign = "right";
       context.textBaseline = "middle";
       context.fillText(
-        modelName === "linear"
-          ? "€" + yValue.toFixed(0)
-          : yValue.toFixed(1),
+        modelName === "linear" ? "€" + yValue.toFixed(0) : yValue.toFixed(1),
         PLOT.left - 7,
         y,
       );
@@ -620,24 +611,19 @@
     );
     const pClass1 = Math.round(result.probability * 100);
     const pClass2 = 100 - pClass1;
-    detail.textContent =
+    setDetail(
       "Class 1: " +
-      pClass1 +
-      "% · Class 2: " +
-      pClass2 +
-      "% of its nearest examples.";
+        pClass1 +
+        "% · Class 2: " +
+        pClass2 +
+        "% of its nearest examples.",
+    );
   }
 
   function fit() {
     if (fitButton.disabled) return;
     hideProbabilityTooltip();
     fitButton.disabled = true;
-    status.textContent = "Fitting the model…";
-    detail.textContent =
-      modelName === "linear"
-        ? "Finding a line that follows the examples"
-        : "Finding a pattern in the examples";
-    hint.textContent = "The model is learning from the sample.";
     window.setTimeout(function () {
       if (modelName === "linear") model = fitRegression();
       if (modelName === "logistic") model = fitLogistic();
@@ -652,13 +638,6 @@
         modelName === "linear"
           ? Math.max(-1, score).toFixed(2)
           : Math.round(score * 100) + "%";
-      status.textContent = "Model fitted";
-      detail.textContent =
-        modelName === "linear"
-          ? "The blue line is the fitted estimate"
-          : "The shaded regions show the model’s predictions";
-      hint.textContent =
-        "This fit score uses the same examples the model learned from. Test on new examples before making decisions.";
       fitButton.disabled = false;
       fitButton.innerHTML =
         'Fit again <span class="arrow" aria-hidden="true">↗</span>';
@@ -729,7 +708,6 @@
     query = { x: domainX(pixelX), y: domainY(pixelY) };
     draw();
     if (model) showQueryPrediction();
-    else detail.textContent = "Fit the model to classify your new point.";
   });
 
   setOutputs();

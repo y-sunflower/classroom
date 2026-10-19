@@ -9,7 +9,7 @@ from typing import TypedDict
 import polars as pl
 
 SEED = 42
-OUTPUT_DIR = Path("docs/data_analytics_and_AI/data")
+OUTPUT_DIR = Path("src/data_analytics_and_AI/data")
 START_DATE = date(2025, 1, 1)
 END_DATE = date(2025, 12, 31)
 CURRENCY_CODE = "EUR"

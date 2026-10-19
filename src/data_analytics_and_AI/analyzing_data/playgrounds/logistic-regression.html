@@ -3,57 +3,48 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Linear regression playground</title>
+    <title>Logistic regression playground</title>
     <link rel="stylesheet" href="./playground.css" />
   </head>
-  <body data-model="linear">
+  <body data-model="logistic">
     <main class="playground">
       <section class="controls" aria-label="Model controls">
         <label class="control" for="sample-count">
           <span class="control-label"
-            >Sample size <output id="sample-output">96</output></span
+            >Sample size <output id="sample-output">180</output></span
           >
           <input
             id="sample-count"
             type="range"
-            min="24"
-            max="180"
-            step="12"
-            value="96"
+            min="60"
+            max="360"
+            step="30"
+            value="180"
           />
         </label>
-        <label class="control" for="noise">
+        <label class="control" for="threshold">
           <span class="control-label"
-            >Monthly spend noise <output id="noise-value">60 €</output></span
+            >Positive threshold <output id="threshold-value">50%</output></span
           >
           <input
-            id="noise"
+            id="threshold"
             type="range"
             min="20"
-            max="120"
-            step="10"
-            value="60"
-            data-suffix=" €"
+            max="80"
+            step="5"
+            value="50"
+            data-suffix="%"
           />
         </label>
-
         <button class="fit-button" id="fit-button" type="button">
           Fit model <span class="arrow" aria-hidden="true">↗</span>
         </button>
       </section>
       <div class="chart-heading">
-        <div>
-          <strong id="model-status">Ready to fit</strong
-          ><span id="chart-detail"
-            >Each dot is one customer: age and monthly spend</span
-          >
-        </div>
         <div class="legend" aria-label="Chart legend">
+          <span class="legend-item"><span class="swatch"></span>class 1</span>
           <span class="legend-item"
-            ><span class="swatch warm"></span>examples</span
-          >
-          <span class="legend-item"
-            ><span class="line-swatch"></span>fitted line</span
+            ><span class="swatch warm"></span>class 2</span
           >
         </div>
       </div>
@@ -61,19 +52,15 @@
         <canvas
           id="chart"
           role="img"
-          aria-label="Scatter plot with customer age in years on the x axis and monthly spending in euros per month on the y axis"
+          aria-label="Classification examples and logistic regression decision regions; hover a square for class probabilities"
           aria-describedby="hint"
         ></canvas>
       </div>
       <div class="stats">
         <span class="stat" id="score-stat" hidden
-          >Fit R² <output id="score-output">—</output></span
+          >Training match <output id="score-output">—</output></span
         >
       </div>
-      <p class="note" id="hint" aria-live="polite">
-        Change a setting, fit again, and compare the pattern. The score
-        describes the examples used to fit.
-      </p>
     </main>
     <script src="./playground.js"></script>
   </body>

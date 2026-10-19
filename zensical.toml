@@ -4,6 +4,7 @@ site_name = "Documentation"
 site_description = "Teaching materials of Joseph Barbier"
 site_author = "Joseph Barbier"
 copyright = "Copyright &copy; 2026 Joseph Barbier--Darnal"
+docs_dir = "src"
 nav = [
   { "All courses" = "index.md" },
   { "Data Analytics & AI" = [

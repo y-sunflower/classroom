@@ -8,13 +8,6 @@
   </head>
   <body data-model="knn">
     <main class="playground">
-      <header class="heading">
-        <h1>Ask the nearest examples</h1>
-        <p class="intro">
-          K-nearest neighbors uses nearby examples to make a prediction. Click
-          the chart to try a new point.
-        </p>
-      </header>
       <section class="controls" aria-label="Model controls">
         <label class="control" for="sample-count">
           <span class="control-label"
@@ -47,12 +40,6 @@
         </button>
       </section>
       <div class="chart-heading">
-        <div>
-          <strong id="model-status">Ready to fit</strong
-          ><span id="chart-detail"
-            >The background will show the model’s decision regions</span
-          >
-        </div>
         <div class="legend" aria-label="Chart legend">
           <span class="legend-item"><span class="swatch"></span>class 1</span>
           <span class="legend-item"
@@ -73,10 +60,6 @@
           >Training match <output id="score-output">—</output></span
         >
       </div>
-      <p class="note" id="hint" aria-live="polite">
-        Change a setting, fit the model, then click the chart to try a new
-        example.
-      </p>
     </main>
     <script src="./playground.js"></script>
   </body>

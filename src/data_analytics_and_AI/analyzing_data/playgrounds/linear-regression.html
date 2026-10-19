@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linear regression playground</title>
+    <link rel="stylesheet" href="./playground.css" />
+  </head>
+  <body data-model="linear">
+    <main class="playground">
+      <section class="controls" aria-label="Model controls">
+        <label class="control" for="sample-count">
+          <span class="control-label"
+            >Sample size <output id="sample-output">96</output></span
+          >
+          <input
+            id="sample-count"
+            type="range"
+            min="24"
+            max="180"
+            step="12"
+            value="96"
+          />
+        </label>
+        <label class="control" for="noise">
+          <span class="control-label"
+            >Monthly spend noise <output id="noise-value">60 €</output></span
+          >
+          <input
+            id="noise"
+            type="range"
+            min="20"
+            max="120"
+            step="10"
+            value="60"
+            data-suffix=" €"
+          />
+        </label>
+
+        <button class="fit-button" id="fit-button" type="button">
+          Fit model <span class="arrow" aria-hidden="true">↗</span>
+        </button>
+      </section>
+      <div class="chart-heading">
+        <div class="legend" aria-label="Chart legend">
+          <span class="legend-item"
+            ><span class="swatch warm"></span>examples</span
+          >
+          <span class="legend-item"
+            ><span class="line-swatch"></span>fitted line</span
+          >
+        </div>
+      </div>
+      <div class="plot-wrap">
+        <canvas
+          id="chart"
+          role="img"
+          aria-label="Scatter plot with customer age in years on the x axis and monthly spending in euros per month on the y axis"
+          aria-describedby="hint"
+        ></canvas>
+      </div>
+      <div class="stats">
+        <span class="stat" id="score-stat" hidden
+          >Fit R² <output id="score-output">—</output></span
+        >
+      </div>
+    </main>
+    <script src="./playground.js"></script>
+  </body>
+</html>

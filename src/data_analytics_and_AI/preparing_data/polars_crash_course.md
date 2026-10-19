@@ -36,7 +36,7 @@ Reading a file is like opening an Excel spreadsheet.
       import polars as pl
 
       # We read the CSV file and create a "sales" dataframe
-      sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
+      sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
 
       # We print the "head" (first 5 rows) of the dataframe
       print(sales.head())
@@ -63,7 +63,7 @@ Use `select` to choose the columns you need. Keeping a small set of relevant col
       import polars as pl
 
       # Read the sales dataset
-      sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
+      sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
 
       # Select 3 columns
       overview = sales.select("transaction_id", "date", "net_total")
@@ -91,7 +91,7 @@ Use `filter` to keep rows that match a condition. `pl.col("column")` refers to a
       import polars as pl
 
       # Read the dataset
-      sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
+      sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
 
       # Keep transactions with an amount greater than €100
       high_value_sales = sales.filter(pl.col("net_total") > 100)
@@ -118,7 +118,7 @@ Use `group_by` to collect rows with the same value, then `agg` to calculate a su
       import polars as pl
 
       # Read the sales dataset
-      sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
+      sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
 
       # Group by sales channel and compute total sales for each one
       sales_agg = sales.group_by("sales_channel").agg(net_revenue=pl.col("net_total").sum())
@@ -144,7 +144,7 @@ A Polars expression describes a calculation using one or more columns. Use `pl.c
       ```python exec="on" source="above" result="text"
       import polars as pl
 
-      sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
+      sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
       sales_with_discount = sales.with_columns(
           (pl.col("list_unit_price") - pl.col("unit_price")).alias("discount_per_unit")
       )
@@ -168,7 +168,7 @@ Each Polars operation returns a DataFrame that the next operation can use. Chain
       ```python exec="on" source="above" result="text"
       import polars as pl
 
-      sales = pl.read_csv("docs/data_analytics_and_AI/data/sales.csv")
+      sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
       online_revenue = (
           sales.group_by("sales_channel")      # For each sales channel
           .agg(pl.col("net_total").sum())      # Compute total of sales
