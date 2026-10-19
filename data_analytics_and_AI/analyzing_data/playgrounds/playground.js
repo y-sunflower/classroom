@@ -9,6 +9,7 @@
   const modelName = document.body.dataset.model;
   const canvas = document.getElementById("chart");
   const context = canvas.getContext("2d");
+  const plotWrap = canvas.parentElement;
   const controls = Array.from(document.querySelectorAll(".control input"));
   const fitButton = document.getElementById("fit-button");
   const status = document.getElementById("model-status");
@@ -27,6 +28,73 @@
   let boundary = null;
   let query = null;
   let resizeObserver = null;
+  let probabilityTooltip = null;
+
+  if (modelName !== "linear") {
+    probabilityTooltip = document.createElement("div");
+    probabilityTooltip.className = "probability-tooltip";
+    probabilityTooltip.setAttribute("role", "tooltip");
+    probabilityTooltip.hidden = true;
+    plotWrap.classList.add("probability-enabled");
+    plotWrap.appendChild(probabilityTooltip);
+  }
+
+  function hideProbabilityTooltip() {
+    if (probabilityTooltip) probabilityTooltip.hidden = true;
+  }
+
+  function showProbabilityTooltip(event) {
+    if (!model || !boundary || !probabilityTooltip) {
+      hideProbabilityTooltip();
+      return;
+    }
+    const bounds = canvas.getBoundingClientRect();
+    const pixelX = ((event.clientX - bounds.left) / bounds.width) * WIDTH;
+    const pixelY = ((event.clientY - bounds.top) / bounds.height) * HEIGHT;
+    if (
+      pixelX < PLOT.left ||
+      pixelX > PLOT.left + plotWidth ||
+      pixelY < PLOT.top ||
+      pixelY > PLOT.top + plotHeight
+    ) {
+      hideProbabilityTooltip();
+      return;
+    }
+
+    const column = Math.min(
+      boundary.columns - 1,
+      Math.floor(((pixelX - PLOT.left) / plotWidth) * boundary.columns),
+    );
+    const row = Math.min(
+      boundary.rows - 1,
+      Math.floor(((pixelY - PLOT.top) / plotHeight) * boundary.rows),
+    );
+    const pClass1 = Math.round(
+      boundary.values[row * boundary.columns + column] * 100,
+    );
+    const pClass2 = 100 - pClass1;
+    probabilityTooltip.textContent =
+      "Class 1: " + pClass1 + "% · Class 2: " + pClass2 + "%";
+    probabilityTooltip.hidden = false;
+
+    const wrapBounds = plotWrap.getBoundingClientRect();
+    let left = event.clientX - wrapBounds.left + 10;
+    let top = event.clientY - wrapBounds.top - probabilityTooltip.offsetHeight - 10;
+    if (top < 5) top = event.clientY - wrapBounds.top + 12;
+    if (left + probabilityTooltip.offsetWidth > wrapBounds.width - 5) {
+      left = event.clientX - wrapBounds.left - probabilityTooltip.offsetWidth - 10;
+    }
+    left = Math.max(
+      5,
+      Math.min(left, wrapBounds.width - probabilityTooltip.offsetWidth - 5),
+    );
+    top = Math.max(
+      5,
+      Math.min(top, wrapBounds.height - probabilityTooltip.offsetHeight - 5),
+    );
+    probabilityTooltip.style.left = left + "px";
+    probabilityTooltip.style.top = top + "px";
+  }
 
   function seededRandom(seed) {
     let state = seed >>> 0;
@@ -106,6 +174,7 @@
   function invalidateModel() {
     model = null;
     boundary = null;
+    hideProbabilityTooltip();
     scoreOutput.textContent = "—";
     scoreStat.hidden = true;
     fitButton.disabled = false;
@@ -530,17 +599,19 @@
       value("neighbors", 7),
       true,
     );
-    const label = result.probability >= 0.5 ? "blue group" : "orange group";
+    const pClass1 = Math.round(result.probability * 100);
+    const pClass2 = 100 - pClass1;
     detail.textContent =
-      "This point is in the " +
-      label +
-      " (" +
-      Math.round(result.probability * 100) +
-      "% of its nearest examples).";
+      "Class 1: " +
+      pClass1 +
+      "% · Class 2: " +
+      pClass2 +
+      "% of its nearest examples.";
   }
 
   function fit() {
     if (fitButton.disabled) return;
+    hideProbabilityTooltip();
     fitButton.disabled = true;
     status.textContent = "Fitting the model…";
     detail.textContent =
@@ -620,6 +691,10 @@
     input.addEventListener("input", onControlChange);
   });
   fitButton.addEventListener("click", fit);
+  if (probabilityTooltip) {
+    canvas.addEventListener("pointermove", showProbabilityTooltip);
+    canvas.addEventListener("pointerleave", hideProbabilityTooltip);
+  }
   canvas.addEventListener("click", function (event) {
     if (modelName !== "knn") return;
     const bounds = canvas.getBoundingClientRect();
