@@ -21,7 +21,8 @@ nav = [
       { "Cleaning data" = "data_analytics_and_AI/preparing_data/cleaning.md" },
     ] },
     { "Analyzing data" = [
-      { "Other" = "data_analytics_and_AI/analyzing_data/other.md" },
+      { "Prediction" = "data_analytics_and_AI/analyzing_data/prediction.md" },
+      { "Machine learning exercise" = "data_analytics_and_AI/analyzing_data/exercise.md" },
     ] },
     { "Text mining" = [
       { "Other" = "data_analytics_and_AI/text_mining/other.md" },

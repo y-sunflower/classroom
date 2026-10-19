@@ -33,7 +33,7 @@ icon: lucide/book-open-check
 ## Session 3 - Analyzing data
 
 - Data mining techniques according to the company’s goal and type of data: prediction and classification algorithms, linear regression, logistic regression, decision trees, random forests, K-nearest neighbors
-- Practical exercises with predictive marketing use cases: price prediction, consumer segmentation, recommendation, personalization
+- Practical exercises with Indigo data: predicting website purchases and recommending products
 
 [Go to materials of this session](analyzing_data/other.md){ .md-button .md-button--primary }
 

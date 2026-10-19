@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Logistic regression playground</title>
+    <link rel="stylesheet" href="./playground.css" />
+  </head>
+  <body data-model="logistic">
+    <main class="playground">
+      <header class="heading">
+        <h1>Estimate the chance of a class</h1>
+        <p class="intro">
+          Logistic regression estimates a probability. The threshold turns that
+          probability into a category.
+        </p>
+      </header>
+      <section class="controls" aria-label="Model controls">
+        <label class="control" for="sample-count">
+          <span class="control-label"
+            >Sample size <output id="sample-output">180</output></span
+          >
+          <input
+            id="sample-count"
+            type="range"
+            min="60"
+            max="360"
+            step="30"
+            value="180"
+          />
+        </label>
+        <label class="control" for="threshold">
+          <span class="control-label"
+            >Positive threshold <output id="threshold-value">50%</output></span
+          >
+          <input
+            id="threshold"
+            type="range"
+            min="20"
+            max="80"
+            step="5"
+            value="50"
+            data-suffix="%"
+          />
+        </label>
+        <label class="control" for="strength">
+          <span class="control-label"
+            >Model flexibility <output id="strength-value">5</output></span
+          >
+          <input
+            id="strength"
+            type="range"
+            min="1"
+            max="10"
+            step="1"
+            value="5"
+          />
+        </label>
+        <button class="fit-button" id="fit-button" type="button">
+          Fit model <span class="arrow" aria-hidden="true">↗</span>
+        </button>
+      </section>
+      <div class="chart-heading">
+        <div>
+          <strong id="model-status">Ready to fit</strong
+          ><span id="chart-detail"
+            >The background will show the model’s decision regions</span
+          >
+        </div>
+        <div class="legend" aria-label="Chart legend">
+          <span class="legend-item"><span class="swatch"></span>class 1</span>
+          <span class="legend-item"
+            ><span class="swatch warm"></span>class 0</span
+          >
+        </div>
+      </div>
+      <div class="plot-wrap">
+        <canvas
+          id="chart"
+          role="img"
+          aria-label="Classification examples and logistic regression decision regions"
+          aria-describedby="hint"
+        ></canvas>
+      </div>
+      <div class="stats">
+        <span class="stat" id="score-stat" hidden
+          >Training match <output id="score-output">—</output></span
+        >
+      </div>
+      <p class="note" id="hint" aria-live="polite">
+        Change a setting, fit again, and compare the pattern. The score
+        describes the examples used to fit.
+      </p>
+    </main>
+    <script src="./playground.js"></script>
+  </body>
+</html>

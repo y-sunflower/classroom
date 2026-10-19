@@ -1,3 +1,0 @@
----
-icon: lucide/chart-column
----

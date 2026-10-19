@@ -1,3 +1,3 @@
 ---
-icon: lucide/message-circle
+icon: lucide/chart-column
 ---
