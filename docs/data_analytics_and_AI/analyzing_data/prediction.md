@@ -2,35 +2,38 @@
 icon: lucide/brain-circuit
 ---
 
-## From a question to a model
+## Question to a model
 
-A machine learning model looks for patterns in examples. We give it **features** (the information it can use) and, for supervised learning, a **target** (the thing we want it to predict).
+In marketing, many questions look like this:
 
-## First, split the examples
+- which customers are the most likely to churn?
+- which products should we suggest to customers?
+- who should we target for our ad campaign?
 
-A model learns from its **training data**. Keep a separate **test set** aside until fitting is done; it gives a first check on examples the model has not seen.
+In data / machine learning, those problems can be (partially?) solve using **prediction techniques**. A machine learning model looks for patterns in examples. We use:
+
+- **Target**: which is the thing we want it to predict: probability of churn, expected spend, etc
+- **Features**: anything that can help us predict our target: time since subscribed, age, buying behaviors, etc
+
+!!! important
+
+    In all of the examples below, all visualization are in 2d (or 3d), because otherwise we wouldn't be able to represent them. This means that we only have 1 or 2 features, but keep in mind that in the real world we often use much more features.
+
+## Linear regression
+
+Linear regression is the most simple machine learning model. It uses a line to estimate a **number**.
+
+<iframe title="Linear regression playground" src="./playgrounds/linear-regression.html" width="100%" height="620" style="border: none"></iframe>
+
+## Train-test split
+
+When we create a model, we need to find a way to **evaluate** it. Let's say we have a model that predicts the ==spending of a customer next month==. We use that model every month to know how much money we expect to make.
+
+> How can we know whether that value is accurate or not?
 
 <iframe title="Train and test split animation" src="./playgrounds/train-test-split.html" width="100%" height="620" style="border: none"></iframe>
 
 The blue examples are used to fit the line. Orange examples stay hidden from the fit until the final check. Mean absolute error (MAE) shows the average distance between a prediction and an example; lower is closer in this demo. If we keep tuning against the test set, it stops being a fair check.
-
-| Goal | Example question | A useful starting point |
-| --- | --- | --- |
-| Predict a number | How much might this order cost? | Linear regression |
-| Predict a category or probability | Is this visit likely to end in a purchase? | Logistic regression |
-| Learn a short set of rules | Which visitors are likely to buy? | Decision tree |
-| Combine many rule sets | Can several trees make a steadier prediction? | Random forest |
-| Use similar examples | What might this customer like next? | K-nearest neighbors |
-
-The best choice depends on the decision, the available data, and how much explanation the team needs. Try the same sample-size control in each playground and see how the fitted pattern changes.
-
-After fitting a classification model, hover over a shaded square to inspect its probability for each class.
-
-## Linear regression
-
-Use a line to estimate a **number**. Try a small sample, add noise, and increase regularization to see the line become less sensitive to individual points.
-
-<iframe title="Linear regression playground" src="./playgrounds/linear-regression.html" width="100%" height="620" style="border: none"></iframe>
 
 ## Logistic regression
 
