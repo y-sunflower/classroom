@@ -24,6 +24,8 @@ The blue examples are used to fit the line. Orange examples stay hidden from the
 
 The best choice depends on the decision, the available data, and how much explanation the team needs. Try the same sample-size control in each playground and see how the fitted pattern changes.
 
+After fitting a classification model, hover over a shaded square to inspect its probability for each class.
+
 ## Linear regression
 
 Use a line to estimate a **number**. Try a small sample, add noise, and increase regularization to see the line become less sensitive to individual points.

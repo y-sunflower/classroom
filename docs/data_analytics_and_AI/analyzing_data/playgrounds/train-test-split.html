@@ -1,47 +1,90 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Train and test split</title>
-    <link rel="stylesheet" href="./playground.css">
+    <link rel="stylesheet" href="./playground.css" />
   </head>
   <body>
     <main class="playground">
       <header class="heading">
-        <div class="eyebrow">before fitting · model evaluation</div>
         <h1>Keep some examples unseen</h1>
-        <p class="intro">Fit on one part of the data. Check the model on examples held back until the end.</p>
+        <p class="intro">
+          Fit on one part of the data. Check the model on examples held back
+          until the end.
+        </p>
       </header>
       <section class="controls" aria-label="Split controls">
         <label class="control" for="sample-size">
-          <span class="control-label">Sample size <output id="sample-size-value">80</output></span>
-          <input id="sample-size" type="range" min="40" max="140" step="20" value="80">
+          <span class="control-label"
+            >Sample size <output id="sample-size-value">80</output></span
+          >
+          <input
+            id="sample-size"
+            type="range"
+            min="40"
+            max="140"
+            step="20"
+            value="80"
+          />
         </label>
         <label class="control" for="test-share">
-          <span class="control-label">Set aside for testing <output id="test-share-value">25%</output></span>
-          <input id="test-share" type="range" min="15" max="40" step="5" value="25" data-suffix="%">
+          <span class="control-label"
+            >Set aside for testing
+            <output id="test-share-value">25%</output></span
+          >
+          <input
+            id="test-share"
+            type="range"
+            min="15"
+            max="40"
+            step="5"
+            value="25"
+            data-suffix="%"
+          />
         </label>
-        <button class="fit-button" id="run-split" type="button">Split and evaluate <span class="arrow" aria-hidden="true">↗</span></button>
+        <button class="fit-button" id="run-split" type="button">
+          Split and evaluate <span class="arrow" aria-hidden="true">↗</span>
+        </button>
       </section>
       <div class="chart-heading">
-        <div><strong id="split-status" aria-live="polite">Ready to split</strong><span id="split-detail">Each dot is one example</span></div>
+        <div>
+          <strong id="split-status" aria-live="polite">Ready to split</strong
+          ><span id="split-detail">Each dot is one example</span>
+        </div>
         <div class="legend" aria-label="Chart legend">
           <span class="legend-item"><span class="swatch"></span>training</span>
           <span class="legend-item"><span class="swatch warm"></span>test</span>
-          <span class="legend-item"><span class="line-swatch"></span>fitted line</span>
+          <span class="legend-item"
+            ><span class="line-swatch"></span>fitted line</span
+          >
         </div>
       </div>
       <div class="plot-wrap">
-        <canvas id="split-chart" role="img" aria-label="Examples divided into training and test sets, with a fitted line and test errors" aria-describedby="split-hint"></canvas>
+        <canvas
+          id="split-chart"
+          role="img"
+          aria-label="Examples divided into training and test sets, with a fitted line and test errors"
+          aria-describedby="split-hint"
+        ></canvas>
       </div>
       <div class="stats" aria-live="polite">
-        <span class="stat">Training examples <output id="training-count">—</output></span>
-        <span class="stat">Test examples <output id="test-count">—</output></span>
-        <span class="stat">Training MAE <output id="training-error">—</output></span>
+        <span class="stat"
+          >Training examples <output id="training-count">—</output></span
+        >
+        <span class="stat"
+          >Test examples <output id="test-count">—</output></span
+        >
+        <span class="stat"
+          >Training MAE <output id="training-error">—</output></span
+        >
         <span class="stat">Test MAE <output id="test-error">—</output></span>
       </div>
-      <p class="note" id="split-hint" aria-live="polite">Orange examples stay out of the fit. Their prediction errors appear at the end.</p>
+      <p class="note" id="split-hint" aria-live="polite">
+        Orange examples stay out of the fit. Their prediction errors appear at
+        the end.
+      </p>
     </main>
     <script>
       (function () {
@@ -66,7 +109,9 @@
         const runButton = document.getElementById("run-split");
         const status = document.getElementById("split-status");
         const detail = document.getElementById("split-detail");
-        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
         let data = [];
         let training = [];
         let testing = [];
@@ -89,12 +134,16 @@
         function normalRandom(random) {
           const first = Math.max(random(), 0.000001);
           const second = Math.max(random(), 0.000001);
-          return Math.sqrt(-2 * Math.log(first)) * Math.cos(2 * Math.PI * second);
+          return (
+            Math.sqrt(-2 * Math.log(first)) * Math.cos(2 * Math.PI * second)
+          );
         }
 
         function createData() {
           const count = Number(sampleInput.value);
-          const random = seededRandom(503 + count * 37 + Number(shareInput.value) * 11 + runNumber);
+          const random = seededRandom(
+            503 + count * 37 + Number(shareInput.value) * 11 + runNumber,
+          );
           data = [];
           for (let index = 0; index < count; index += 1) {
             const x = -3.2 + random() * 6.4;
@@ -104,8 +153,10 @@
         }
 
         function updateLabels() {
-          document.getElementById("sample-size-value").textContent = sampleInput.value;
-          document.getElementById("test-share-value").textContent = shareInput.value + "%";
+          document.getElementById("sample-size-value").textContent =
+            sampleInput.value;
+          document.getElementById("test-share-value").textContent =
+            shareInput.value + "%";
         }
 
         function resetActivity() {
@@ -124,7 +175,8 @@
           detail.textContent = "Each dot is one example";
           document.getElementById("split-hint").textContent =
             "Orange examples stay out of the fit. Their prediction errors appear at the end.";
-          runButton.innerHTML = 'Split and evaluate <span class="arrow" aria-hidden="true">↗</span>';
+          runButton.innerHTML =
+            'Split and evaluate <span class="arrow" aria-hidden="true">↗</span>';
           draw();
         }
 
@@ -143,8 +195,8 @@
           context.fillStyle = "#7b8798";
           context.font = "10px Inter, ui-sans-serif, system-ui, sans-serif";
           for (let tick = 0; tick <= 4; tick += 1) {
-            const x = LEFT + PLOT_WIDTH * tick / 4;
-            const y = TOP + PLOT_HEIGHT * tick / 4;
+            const x = LEFT + (PLOT_WIDTH * tick) / 4;
+            const y = TOP + (PLOT_HEIGHT * tick) / 4;
             context.beginPath();
             context.moveTo(x, TOP);
             context.lineTo(x, TOP + PLOT_HEIGHT);
@@ -153,10 +205,18 @@
             context.stroke();
             context.textAlign = "center";
             context.textBaseline = "top";
-            context.fillText((X_MIN + (X_MAX - X_MIN) * tick / 4).toFixed(0), x, HEIGHT - 19);
+            context.fillText(
+              (X_MIN + ((X_MAX - X_MIN) * tick) / 4).toFixed(0),
+              x,
+              HEIGHT - 19,
+            );
             context.textAlign = "right";
             context.textBaseline = "middle";
-            context.fillText((Y_MAX - (Y_MAX - Y_MIN) * tick / 4).toFixed(0), LEFT - 7, y);
+            context.fillText(
+              (Y_MAX - ((Y_MAX - Y_MIN) * tick) / 4).toFixed(0),
+              LEFT - 7,
+              y,
+            );
           }
         }
 
@@ -168,10 +228,23 @@
           if (!line || progress <= 0) return;
           const averageY = line.meanY;
           const shownSlope = line.slope * progress;
-          const shownIntercept = averageY + (line.intercept - averageY) * progress;
+          const shownIntercept =
+            averageY + (line.intercept - averageY) * progress;
           context.beginPath();
-          context.moveTo(LEFT, TOP + ((Y_MAX - (shownIntercept + shownSlope * X_MIN)) / (Y_MAX - Y_MIN)) * PLOT_HEIGHT);
-          context.lineTo(LEFT + PLOT_WIDTH, TOP + ((Y_MAX - (shownIntercept + shownSlope * X_MAX)) / (Y_MAX - Y_MIN)) * PLOT_HEIGHT);
+          context.moveTo(
+            LEFT,
+            TOP +
+              ((Y_MAX - (shownIntercept + shownSlope * X_MIN)) /
+                (Y_MAX - Y_MIN)) *
+                PLOT_HEIGHT,
+          );
+          context.lineTo(
+            LEFT + PLOT_WIDTH,
+            TOP +
+              ((Y_MAX - (shownIntercept + shownSlope * X_MAX)) /
+                (Y_MAX - Y_MIN)) *
+                PLOT_HEIGHT,
+          );
           context.strokeStyle = "#315cce";
           context.lineWidth = 3;
           context.lineCap = "round";
@@ -198,7 +271,10 @@
             context.setLineDash([3, 3]);
             testing.forEach(function (point) {
               const actual = coordinates(point);
-              const expected = coordinates({ x: point.x, y: prediction(point.x) });
+              const expected = coordinates({
+                x: point.x,
+                y: prediction(point.x),
+              });
               context.beginPath();
               context.moveTo(actual.x, actual.y);
               context.lineTo(expected.x, expected.y);
@@ -242,7 +318,14 @@
           const bounds = canvas.getBoundingClientRect();
           canvas.width = Math.round(bounds.width * ratio);
           canvas.height = Math.round(bounds.height * ratio);
-          context.setTransform(canvas.width / WIDTH, 0, 0, canvas.height / HEIGHT, 0, 0);
+          context.setTransform(
+            canvas.width / WIDTH,
+            0,
+            0,
+            canvas.height / HEIGHT,
+            0,
+            0,
+          );
           draw();
         }
 
@@ -255,11 +338,18 @@
             shuffled[index] = shuffled[target];
             shuffled[target] = current;
           }
-          const testCount = Math.max(1, Math.round(shuffled.length * Number(shareInput.value) / 100));
+          const testCount = Math.max(
+            1,
+            Math.round((shuffled.length * Number(shareInput.value)) / 100),
+          );
           testing = shuffled.slice(0, testCount);
           training = shuffled.slice(testCount);
-          document.getElementById("training-count").textContent = String(training.length);
-          document.getElementById("test-count").textContent = String(testing.length);
+          document.getElementById("training-count").textContent = String(
+            training.length,
+          );
+          document.getElementById("test-count").textContent = String(
+            testing.length,
+          );
         }
 
         function fitTrainingLine() {
@@ -278,7 +368,11 @@
             variance += (point.x - meanX) * (point.x - meanX);
           });
           const slope = variance === 0 ? 0 : covariance / variance;
-          return { slope: slope, intercept: meanY - slope * meanX, meanY: meanY };
+          return {
+            slope: slope,
+            intercept: meanY - slope * meanX,
+            meanY: meanY,
+          };
         }
 
         function meanAbsoluteError(rows) {
@@ -317,41 +411,64 @@
           document.getElementById("split-hint").textContent =
             "The model will only fit the blue training examples.";
           runNumber += 1;
-          window.setTimeout(function () {
-            makeSplit();
-            phase = "split";
-            status.textContent = "Split complete";
-            detail.textContent = training.length + " for training · " + testing.length + " held back";
-            animate(380, function (progress) {
-              splitOpacity = progress;
-            }, function () {
-              line = fitTrainingLine();
-              status.textContent = "Fitting on training examples";
-              detail.textContent = "The blue examples shape the line";
-              animate(520, function (progress) {
-                lineProgress = progress;
-              }, function () {
-                status.textContent = "Checking unseen examples";
-                detail.textContent = "Orange lines show each test prediction error";
-                animate(420, function (progress) {
-                  errorOpacity = progress;
-                }, function () {
-                  document.getElementById("training-error").textContent =
-                    meanAbsoluteError(training);
-                  document.getElementById("test-error").textContent =
-                    meanAbsoluteError(testing);
-                  status.textContent = "Evaluation complete";
-                  detail.textContent = "A new set of examples gives a fairer performance check";
-                  document.getElementById("split-hint").textContent =
-                    "Training MAE is fit on examples the model saw; test MAE is measured on examples it did not see.";
-                  runButton.disabled = false;
-                  sampleInput.disabled = false;
-                  shareInput.disabled = false;
-                  runButton.innerHTML = 'Run again <span class="arrow" aria-hidden="true">↗</span>';
-                });
-              });
-            });
-          }, reducedMotion ? 0 : 180);
+          window.setTimeout(
+            function () {
+              makeSplit();
+              phase = "split";
+              status.textContent = "Split complete";
+              detail.textContent =
+                training.length +
+                " for training · " +
+                testing.length +
+                " held back";
+              animate(
+                380,
+                function (progress) {
+                  splitOpacity = progress;
+                },
+                function () {
+                  line = fitTrainingLine();
+                  status.textContent = "Fitting on training examples";
+                  detail.textContent = "The blue examples shape the line";
+                  animate(
+                    520,
+                    function (progress) {
+                      lineProgress = progress;
+                    },
+                    function () {
+                      status.textContent = "Checking unseen examples";
+                      detail.textContent =
+                        "Orange lines show each test prediction error";
+                      animate(
+                        420,
+                        function (progress) {
+                          errorOpacity = progress;
+                        },
+                        function () {
+                          document.getElementById(
+                            "training-error",
+                          ).textContent = meanAbsoluteError(training);
+                          document.getElementById("test-error").textContent =
+                            meanAbsoluteError(testing);
+                          status.textContent = "Evaluation complete";
+                          detail.textContent =
+                            "A new set of examples gives a fairer performance check";
+                          document.getElementById("split-hint").textContent =
+                            "Training MAE is fit on examples the model saw; test MAE is measured on examples it did not see.";
+                          runButton.disabled = false;
+                          sampleInput.disabled = false;
+                          shareInput.disabled = false;
+                          runButton.innerHTML =
+                            'Run again <span class="arrow" aria-hidden="true">↗</span>';
+                        },
+                      );
+                    },
+                  );
+                },
+              );
+            },
+            reducedMotion ? 0 : 180,
+          );
         }
 
         [sampleInput, shareInput].forEach(function (input) {

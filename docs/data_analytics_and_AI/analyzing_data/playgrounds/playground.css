@@ -200,6 +200,27 @@ button:focus-visible {
   background: #fff;
 }
 
+.plot-wrap.probability-enabled canvas {
+  cursor: crosshair;
+}
+
+.probability-tooltip {
+  position: absolute;
+  z-index: 4;
+  max-width: calc(100% - 12px);
+  padding: 7px 9px;
+  border: 1px solid #dbe3ee;
+  border-radius: 7px;
+  color: #172033;
+  background: #fff;
+  box-shadow: 0 3px 12px #0f172a1c;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 canvas {
   display: block;
   width: 100%;
