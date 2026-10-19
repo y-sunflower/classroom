@@ -1,0 +1,283 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #172033;
+  background: transparent;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 280px;
+  margin: 0;
+  background: transparent;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.playground {
+  width: min(100%, 920px);
+  margin: 0 auto;
+  padding: 14px 12px 10px;
+}
+
+.heading {
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0;
+  color: #172033;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.intro {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.controls {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 9px 14px;
+  margin-bottom: 9px;
+  padding: 11px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.control {
+  display: grid;
+  flex: 1 1 120px;
+  gap: 5px;
+  min-width: 100px;
+  color: #475569;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.control output {
+  color: #172033;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 16px;
+  margin: 0;
+  accent-color: #315cce;
+  cursor: pointer;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 2px solid #315cce;
+  outline-offset: 3px;
+}
+
+.fit-button {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 14px;
+  border: 1px solid #244eb7;
+  border-radius: 7px;
+  color: #fff;
+  background: #315cce;
+  box-shadow: 0 1px 2px #1e3a8a20;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.fit-button:hover:not(:disabled) {
+  background: #244eb7;
+  transform: translateY(-1px);
+}
+
+.fit-button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
+.fit-button .arrow {
+  font-size: 15px;
+  line-height: 0;
+}
+
+.chart-heading {
+  display: flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 2px 5px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.chart-heading strong {
+  color: #172033;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.chart-heading span {
+  margin-left: 7px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #315cce;
+}
+
+.swatch.warm {
+  background: #e8875a;
+}
+
+.line-swatch {
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: #315cce;
+}
+
+.plot-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #fff;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 350px;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 9px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  color: #64748b;
+  background: #fff;
+  font-size: 10px;
+}
+
+.stat output {
+  color: #172033;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.note {
+  min-height: 16px;
+  margin: 7px 2px 0;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.note[aria-live] {
+  color: #475569;
+}
+
+@media (max-width: 560px) {
+  .playground {
+    padding-inline: 4px;
+  }
+
+  .controls {
+    align-items: stretch;
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .control {
+    flex-basis: calc(50% - 8px);
+  }
+
+  .fit-button {
+    flex: 1 1 100%;
+  }
+
+  canvas {
+    height: 290px;
+  }
+
+  .legend {
+    gap: 7px;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
