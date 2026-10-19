@@ -1,12 +1,15 @@
 (function () {
   "use strict";
 
+  const modelName = document.body.dataset.model;
   const WIDTH = 760;
-  const HEIGHT = 350;
-  const PLOT = { left: 44, top: 14, right: 14, bottom: 30 };
+  const HEIGHT = modelName === "linear" ? 370 : 350;
+  const PLOT =
+    modelName === "linear"
+      ? { left: 72, top: 14, right: 14, bottom: 52 }
+      : { left: 44, top: 14, right: 14, bottom: 30 };
   const plotWidth = WIDTH - PLOT.left - PLOT.right;
   const plotHeight = HEIGHT - PLOT.top - PLOT.bottom;
-  const modelName = document.body.dataset.model;
   const canvas = document.getElementById("chart");
   const context = canvas.getContext("2d");
   const plotWrap = canvas.parentElement;
@@ -21,7 +24,7 @@
   const hint = document.getElementById("hint");
   const range =
     modelName === "linear"
-      ? { xMin: -3.4, xMax: 3.4, yMin: -5, yMax: 5 }
+      ? { xMin: 15, xMax: 85, yMin: 0, yMax: 600 }
       : { xMin: -1.5, xMax: 2.5, yMin: -1.25, yMax: 1.6 };
   let points = [];
   let model = null;
@@ -131,12 +134,12 @@
 
   function makeRegressionData() {
     const count = Number(sampleCount.value);
-    const noise = value("noise", 0.85);
-    const random = seededRandom(2026 + count * 13 + Math.round(noise * 100));
+    const noise = value("noise", 60);
+    const random = seededRandom(2026 + count * 13 + Math.round(noise));
     points = [];
     for (let i = 0; i < count; i += 1) {
-      const x = -3 + random() * 6;
-      const y = 0.8 + 1.12 * x + normalRandom(random) * noise;
+      const x = 18 + random() * 62;
+      const y = 80 + 5.5 * (x - 18) + normalRandom(random) * noise;
       points.push({ x: x, y: y });
     }
   }
@@ -451,17 +454,31 @@
       context.fillText(
         xValue.toFixed(modelName === "linear" ? 0 : 1),
         x,
-        HEIGHT - 19,
+        modelName === "linear" ? HEIGHT - 31 : HEIGHT - 19,
       );
       context.textAlign = "right";
       context.textBaseline = "middle";
       context.fillText(
-        yValue.toFixed(modelName === "linear" ? 0 : 1),
+        modelName === "linear"
+          ? "€" + yValue.toFixed(0)
+          : yValue.toFixed(1),
         PLOT.left - 7,
         y,
       );
       context.textAlign = "center";
       context.textBaseline = "top";
+    }
+    if (modelName === "linear") {
+      context.fillStyle = "#64748b";
+      context.font = "11px Inter, ui-sans-serif, system-ui, sans-serif";
+      context.textAlign = "center";
+      context.textBaseline = "bottom";
+      context.fillText("Age (years)", PLOT.left + plotWidth / 2, HEIGHT - 3);
+      context.save();
+      context.translate(15, PLOT.top + plotHeight / 2);
+      context.rotate(-Math.PI / 2);
+      context.fillText("Monthly spend (€ / month)", 0, 0);
+      context.restore();
     }
   }
 
