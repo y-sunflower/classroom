@@ -929,21 +929,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#from-a-question-to-a-model" class="md-nav__link">
+  <a href="#question-to-a-model" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        From a question to a model
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#first-split-the-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        First, split the examples
+        Question to a model
       </span>
     </span>
   </a>
@@ -955,6 +944,17 @@
     <span class="md-ellipsis">
       <span class="md-typeset">
         Linear regression
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-test-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Train-test split
       </span>
     </span>
   </a>
@@ -1391,21 +1391,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#from-a-question-to-a-model" class="md-nav__link">
+  <a href="#question-to-a-model" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        From a question to a model
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#first-split-the-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        First, split the examples
+        Question to a model
       </span>
     </span>
   </a>
@@ -1417,6 +1406,17 @@
     <span class="md-ellipsis">
       <span class="md-typeset">
         Linear regression
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-test-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Train-test split
       </span>
     </span>
   </a>
@@ -1583,55 +1583,34 @@
 
   <h1>Prediction</h1>
 
-<h2 id="from-a-question-to-a-model">From a question to a model<a class="headerlink" href="#from-a-question-to-a-model" title="Permanent link">&para;</a></h2>
-<p>A machine learning model looks for patterns in examples. We give it <strong>features</strong> (the information it can use) and, for supervised learning, a <strong>target</strong> (the thing we want it to predict).</p>
-<h2 id="first-split-the-examples">First, split the examples<a class="headerlink" href="#first-split-the-examples" title="Permanent link">&para;</a></h2>
-<p>A model learns from its <strong>training data</strong>. Keep a separate <strong>test set</strong> aside until fitting is done; it gives a first check on examples the model has not seen.</p>
+<h2 id="question-to-a-model">Question to a model<a class="headerlink" href="#question-to-a-model" title="Permanent link">&para;</a></h2>
+<p>In marketing, many questions look like this:</p>
+<ul>
+<li>which customers are the most likely to churn?</li>
+<li>which products should we suggest to customers?</li>
+<li>who should we target for our ad campaign?</li>
+</ul>
+<p>In data / machine learning, those problems can be (partially?) solve using <strong>prediction techniques</strong>. A machine learning model looks for patterns in examples. We use:</p>
+<ul>
+<li><strong>Target</strong>: which is the thing we want it to predict: probability of churn, expected spend, etc</li>
+<li><strong>Features</strong>: anything that can help us predict our target: time since subscribed, age, buying behaviors, etc</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In all of the examples below, all visualization are in 2d (or 3d), because otherwise we wouldn't be able to represent them. This means that we only have 1 or 2 features, but keep in mind that in the real world we often use much more features.</p>
+</div>
+<h2 id="linear-regression">Linear regression<a class="headerlink" href="#linear-regression" title="Permanent link">&para;</a></h2>
+<p>Linear regression is the most simple machine learning model. It uses a line to estimate a <strong>number</strong>.</p>
+<iframe title="Linear regression playground" src=".././playgrounds/linear-regression.html" width="100%" height="620" style="border: none"></iframe>
+
+<h2 id="train-test-split">Train-test split<a class="headerlink" href="#train-test-split" title="Permanent link">&para;</a></h2>
+<p>When we create a model, we need to find a way to <strong>evaluate</strong> it. Let's say we have a model that predicts the <mark>spending of a customer next month</mark>. We use that model every month to know how much money we expect to make.</p>
+<blockquote>
+<p>How can we know whether that value is accurate or not?</p>
+</blockquote>
 <iframe title="Train and test split animation" src=".././playgrounds/train-test-split.html" width="100%" height="620" style="border: none"></iframe>
 
 <p>The blue examples are used to fit the line. Orange examples stay hidden from the fit until the final check. Mean absolute error (MAE) shows the average distance between a prediction and an example; lower is closer in this demo. If we keep tuning against the test set, it stops being a fair check.</p>
-<table>
-<thead>
-<tr>
-<th>Goal</th>
-<th>Example question</th>
-<th>A useful starting point</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Predict a number</td>
-<td>How much might this order cost?</td>
-<td>Linear regression</td>
-</tr>
-<tr>
-<td>Predict a category or probability</td>
-<td>Is this visit likely to end in a purchase?</td>
-<td>Logistic regression</td>
-</tr>
-<tr>
-<td>Learn a short set of rules</td>
-<td>Which visitors are likely to buy?</td>
-<td>Decision tree</td>
-</tr>
-<tr>
-<td>Combine many rule sets</td>
-<td>Can several trees make a steadier prediction?</td>
-<td>Random forest</td>
-</tr>
-<tr>
-<td>Use similar examples</td>
-<td>What might this customer like next?</td>
-<td>K-nearest neighbors</td>
-</tr>
-</tbody>
-</table>
-<p>The best choice depends on the decision, the available data, and how much explanation the team needs. Try the same sample-size control in each playground and see how the fitted pattern changes.</p>
-<p>After fitting a classification model, hover over a shaded square to inspect its probability for each class.</p>
-<h2 id="linear-regression">Linear regression<a class="headerlink" href="#linear-regression" title="Permanent link">&para;</a></h2>
-<p>Use a line to estimate a <strong>number</strong>. Try a small sample, add noise, and increase regularization to see the line become less sensitive to individual points.</p>
-<iframe title="Linear regression playground" src=".././playgrounds/linear-regression.html" width="100%" height="620" style="border: none"></iframe>
-
 <h2 id="logistic-regression">Logistic regression<a class="headerlink" href="#logistic-regression" title="Permanent link">&para;</a></h2>
 <p>Estimate the probability of one of two outcomes, such as a purchase or no purchase. The threshold controls when a probability becomes a positive prediction.</p>
 <iframe title="Logistic regression playground" src=".././playgrounds/logistic-regression.html" width="100%" height="620" style="border: none"></iframe>

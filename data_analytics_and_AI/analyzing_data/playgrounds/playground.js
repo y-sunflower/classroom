@@ -79,10 +79,12 @@
 
     const wrapBounds = plotWrap.getBoundingClientRect();
     let left = event.clientX - wrapBounds.left + 10;
-    let top = event.clientY - wrapBounds.top - probabilityTooltip.offsetHeight - 10;
+    let top =
+      event.clientY - wrapBounds.top - probabilityTooltip.offsetHeight - 10;
     if (top < 5) top = event.clientY - wrapBounds.top + 12;
     if (left + probabilityTooltip.offsetWidth > wrapBounds.width - 5) {
-      left = event.clientX - wrapBounds.left - probabilityTooltip.offsetWidth - 10;
+      left =
+        event.clientX - wrapBounds.left - probabilityTooltip.offsetWidth - 10;
     }
     left = Math.max(
       5,
@@ -207,7 +209,7 @@
       covariance += (point.x - meanX) * (point.y - meanY);
       variance += (point.x - meanX) * (point.x - meanX);
     });
-    const penalty = value("regularization", 0);
+    const penalty = 0;
     const slope = covariance / (variance + penalty * points.length * 0.08);
     const intercept = meanY - slope * meanX;
     return { slope: slope, intercept: intercept };
@@ -220,7 +222,7 @@
   }
 
   function fitLogistic() {
-    const regularization = value("strength", 5);
+    const regularization = 5;
     const lambda = 0.015 / regularization;
     let weights = [0, 0, 0];
     const rate = 0.09;
