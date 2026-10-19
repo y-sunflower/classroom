@@ -42,10 +42,6 @@
         </button>
       </section>
       <div class="chart-heading">
-        <div>
-          <strong id="split-status" aria-live="polite">Ready to split</strong
-          ><span id="split-detail">Each dot is one example</span>
-        </div>
         <div class="legend" aria-label="Chart legend">
           <span class="legend-item"><span class="swatch"></span>training</span>
           <span class="legend-item"><span class="swatch warm"></span>test</span>
@@ -58,7 +54,7 @@
         <canvas
           id="split-chart"
           role="img"
-          aria-label="Examples divided into training and test sets, with a fitted line and test errors"
+          aria-label="Customer age in years and monthly spending in euros per month, divided into training and test sets, with a fitted line and test errors"
           aria-describedby="split-hint"
         ></canvas>
       </div>
@@ -70,38 +66,35 @@
           >Test examples <output id="test-count">—</output></span
         >
         <span class="stat"
-          >Training MAE <output id="training-error">—</output></span
+          >Training MAE (€ / month)
+          <output id="training-error">—</output></span
         >
-        <span class="stat">Test MAE <output id="test-error">—</output></span>
+        <span class="stat"
+          >Test MAE (€ / month) <output id="test-error">—</output></span
+        >
       </div>
-      <p class="note" id="split-hint" aria-live="polite">
-        Orange examples stay out of the fit. Their prediction errors appear at
-        the end.
-      </p>
     </main>
     <script>
       (function () {
         "use strict";
 
         const WIDTH = 760;
-        const HEIGHT = 350;
-        const LEFT = 44;
+        const HEIGHT = 370;
+        const LEFT = 72;
         const TOP = 14;
         const RIGHT = 14;
-        const BOTTOM = 30;
+        const BOTTOM = 52;
         const PLOT_WIDTH = WIDTH - LEFT - RIGHT;
         const PLOT_HEIGHT = HEIGHT - TOP - BOTTOM;
-        const X_MIN = -3.5;
-        const X_MAX = 3.5;
-        const Y_MIN = -4.5;
-        const Y_MAX = 5.5;
+        const X_MIN = 15;
+        const X_MAX = 85;
+        const Y_MIN = 0;
+        const Y_MAX = 600;
         const canvas = document.getElementById("split-chart");
         const context = canvas.getContext("2d");
         const sampleInput = document.getElementById("sample-size");
         const shareInput = document.getElementById("test-share");
         const runButton = document.getElementById("run-split");
-        const status = document.getElementById("split-status");
-        const detail = document.getElementById("split-detail");
         const reducedMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)",
         ).matches;
@@ -139,8 +132,8 @@
           );
           data = [];
           for (let index = 0; index < count; index += 1) {
-            const x = -3.2 + random() * 6.4;
-            const y = 0.65 + 1.08 * x + normalRandom(random) * 0.85;
+            const x = 18 + random() * 62;
+            const y = 80 + 5.5 * (x - 18) + normalRandom(random) * 60;
             data.push({ x: x, y: y });
           }
         }
@@ -164,10 +157,6 @@
           document.getElementById("test-count").textContent = "—";
           document.getElementById("training-error").textContent = "—";
           document.getElementById("test-error").textContent = "—";
-          status.textContent = "Ready to split";
-          detail.textContent = "Each dot is one example";
-          document.getElementById("split-hint").textContent =
-            "Orange examples stay out of the fit. Their prediction errors appear at the end.";
           runButton.innerHTML =
             'Split and evaluate <span class="arrow" aria-hidden="true">↗</span>';
           draw();
@@ -201,16 +190,26 @@
             context.fillText(
               (X_MIN + ((X_MAX - X_MIN) * tick) / 4).toFixed(0),
               x,
-              HEIGHT - 19,
+              HEIGHT - 31,
             );
             context.textAlign = "right";
             context.textBaseline = "middle";
             context.fillText(
-              (Y_MAX - ((Y_MAX - Y_MIN) * tick) / 4).toFixed(0),
+              "€" + (Y_MAX - ((Y_MAX - Y_MIN) * tick) / 4).toFixed(0),
               LEFT - 7,
               y,
             );
           }
+          context.fillStyle = "#64748b";
+          context.font = "11px Inter, ui-sans-serif, system-ui, sans-serif";
+          context.textAlign = "center";
+          context.textBaseline = "bottom";
+          context.fillText("Age (years)", LEFT + PLOT_WIDTH / 2, HEIGHT - 3);
+          context.save();
+          context.translate(15, TOP + PLOT_HEIGHT / 2);
+          context.rotate(-Math.PI / 2);
+          context.fillText("Monthly spend (€ / month)", 0, 0);
+          context.restore();
         }
 
         function prediction(x) {
@@ -399,21 +398,11 @@
           runButton.disabled = true;
           sampleInput.disabled = true;
           shareInput.disabled = true;
-          status.textContent = "Shuffling examples…";
-          detail.textContent = "Setting a portion aside for the final check";
-          document.getElementById("split-hint").textContent =
-            "The model will only fit the blue training examples.";
           runNumber += 1;
           window.setTimeout(
             function () {
               makeSplit();
               phase = "split";
-              status.textContent = "Split complete";
-              detail.textContent =
-                training.length +
-                " for training · " +
-                testing.length +
-                " held back";
               animate(
                 380,
                 function (progress) {
@@ -421,17 +410,12 @@
                 },
                 function () {
                   line = fitTrainingLine();
-                  status.textContent = "Fitting on training examples";
-                  detail.textContent = "The blue examples shape the line";
                   animate(
                     520,
                     function (progress) {
                       lineProgress = progress;
                     },
                     function () {
-                      status.textContent = "Checking unseen examples";
-                      detail.textContent =
-                        "Orange lines show each test prediction error";
                       animate(
                         420,
                         function (progress) {
@@ -443,11 +427,6 @@
                           ).textContent = meanAbsoluteError(training);
                           document.getElementById("test-error").textContent =
                             meanAbsoluteError(testing);
-                          status.textContent = "Evaluation complete";
-                          detail.textContent =
-                            "A new set of examples gives a fairer performance check";
-                          document.getElementById("split-hint").textContent =
-                            "Training MAE is fit on examples the model saw; test MAE is measured on examples it did not see.";
                           runButton.disabled = false;
                           sampleInput.disabled = false;
                           shareInput.disabled = false;

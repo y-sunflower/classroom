@@ -223,6 +223,10 @@ canvas {
   height: 350px;
 }
 
+#split-chart {
+  height: 370px;
+}
+
 body[data-model="linear"] canvas {
   height: 370px;
 }
@@ -286,6 +290,10 @@ body[data-model="linear"] canvas {
 
   canvas {
     height: 290px;
+  }
+
+  #split-chart {
+    height: 310px;
   }
 
   body[data-model="linear"] canvas {
