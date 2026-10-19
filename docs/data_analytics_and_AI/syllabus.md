@@ -35,7 +35,7 @@ icon: lucide/book-open-check
 - Data mining techniques according to the company’s goal and type of data: prediction and classification algorithms, linear regression, logistic regression, decision trees, random forests, K-nearest neighbors
 - Practical exercises with Indigo data: predicting website purchases and recommending products
 
-[Go to materials of this session](analyzing_data/other.md){ .md-button .md-button--primary }
+[Go to materials of this session](analyzing_data/prediction.md){ .md-button .md-button--primary }
 
 ## Session 4 - Text mining
 

@@ -6,6 +6,14 @@ icon: lucide/brain-circuit
 
 A machine learning model looks for patterns in examples. We give it **features** (the information it can use) and, for supervised learning, a **target** (the thing we want it to predict).
 
+## First, split the examples
+
+A model learns from its **training data**. Keep a separate **test set** aside until fitting is done; it gives a first check on examples the model has not seen.
+
+<iframe title="Train and test split animation" src="./playgrounds/train-test-split.html" width="100%" height="620" style="border: none"></iframe>
+
+The blue examples are used to fit the line. Orange examples stay hidden from the fit until the final check. Mean absolute error (MAE) shows the average distance between a prediction and an example; lower is closer in this demo. If we keep tuning against the test set, it stops being a fair check.
+
 | Goal | Example question | A useful starting point |
 | --- | --- | --- |
 | Predict a number | How much might this order cost? | Linear regression |

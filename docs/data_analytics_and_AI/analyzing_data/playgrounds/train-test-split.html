@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Train and test split</title>
+    <link rel="stylesheet" href="./playground.css">
+  </head>
+  <body>
+    <main class="playground">
+      <header class="heading">
+        <div class="eyebrow">before fitting · model evaluation</div>
+        <h1>Keep some examples unseen</h1>
+        <p class="intro">Fit on one part of the data. Check the model on examples held back until the end.</p>
+      </header>
+      <section class="controls" aria-label="Split controls">
+        <label class="control" for="sample-size">
+          <span class="control-label">Sample size <output id="sample-size-value">80</output></span>
+          <input id="sample-size" type="range" min="40" max="140" step="20" value="80">
+        </label>
+        <label class="control" for="test-share">
+          <span class="control-label">Set aside for testing <output id="test-share-value">25%</output></span>
+          <input id="test-share" type="range" min="15" max="40" step="5" value="25" data-suffix="%">
+        </label>
+        <button class="fit-button" id="run-split" type="button">Split and evaluate <span class="arrow" aria-hidden="true">↗</span></button>
+      </section>
+      <div class="chart-heading">
+        <div><strong id="split-status" aria-live="polite">Ready to split</strong><span id="split-detail">Each dot is one example</span></div>
+        <div class="legend" aria-label="Chart legend">
+          <span class="legend-item"><span class="swatch"></span>training</span>
+          <span class="legend-item"><span class="swatch warm"></span>test</span>
+          <span class="legend-item"><span class="line-swatch"></span>fitted line</span>
+        </div>
+      </div>
+      <div class="plot-wrap">
+        <canvas id="split-chart" role="img" aria-label="Examples divided into training and test sets, with a fitted line and test errors" aria-describedby="split-hint"></canvas>
+      </div>
+      <div class="stats" aria-live="polite">
+        <span class="stat">Training examples <output id="training-count">—</output></span>
+        <span class="stat">Test examples <output id="test-count">—</output></span>
+        <span class="stat">Training MAE <output id="training-error">—</output></span>
+        <span class="stat">Test MAE <output id="test-error">—</output></span>
+      </div>
+      <p class="note" id="split-hint" aria-live="polite">Orange examples stay out of the fit. Their prediction errors appear at the end.</p>
+    </main>
+    <script>
+      (function () {
+        "use strict";
+
+        const WIDTH = 760;
+        const HEIGHT = 350;
+        const LEFT = 44;
+        const TOP = 14;
+        const RIGHT = 14;
+        const BOTTOM = 30;
+        const PLOT_WIDTH = WIDTH - LEFT - RIGHT;
+        const PLOT_HEIGHT = HEIGHT - TOP - BOTTOM;
+        const X_MIN = -3.5;
+        const X_MAX = 3.5;
+        const Y_MIN = -4.5;
+        const Y_MAX = 5.5;
+        const canvas = document.getElementById("split-chart");
+        const context = canvas.getContext("2d");
+        const sampleInput = document.getElementById("sample-size");
+        const shareInput = document.getElementById("test-share");
+        const runButton = document.getElementById("run-split");
+        const status = document.getElementById("split-status");
+        const detail = document.getElementById("split-detail");
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let data = [];
+        let training = [];
+        let testing = [];
+        let line = null;
+        let phase = "ready";
+        let splitOpacity = 0;
+        let lineProgress = 0;
+        let errorOpacity = 0;
+        let runNumber = 0;
+        let resizeObserver = null;
+
+        function seededRandom(seed) {
+          let state = seed >>> 0;
+          return function () {
+            state = (1664525 * state + 1013904223) >>> 0;
+            return state / 4294967296;
+          };
+        }
+
+        function normalRandom(random) {
+          const first = Math.max(random(), 0.000001);
+          const second = Math.max(random(), 0.000001);
+          return Math.sqrt(-2 * Math.log(first)) * Math.cos(2 * Math.PI * second);
+        }
+
+        function createData() {
+          const count = Number(sampleInput.value);
+          const random = seededRandom(503 + count * 37 + Number(shareInput.value) * 11 + runNumber);
+          data = [];
+          for (let index = 0; index < count; index += 1) {
+            const x = -3.2 + random() * 6.4;
+            const y = 0.65 + 1.08 * x + normalRandom(random) * 0.85;
+            data.push({ x: x, y: y });
+          }
+        }
+
+        function updateLabels() {
+          document.getElementById("sample-size-value").textContent = sampleInput.value;
+          document.getElementById("test-share-value").textContent = shareInput.value + "%";
+        }
+
+        function resetActivity() {
+          phase = "ready";
+          training = [];
+          testing = [];
+          line = null;
+          splitOpacity = 0;
+          lineProgress = 0;
+          errorOpacity = 0;
+          document.getElementById("training-count").textContent = "—";
+          document.getElementById("test-count").textContent = "—";
+          document.getElementById("training-error").textContent = "—";
+          document.getElementById("test-error").textContent = "—";
+          status.textContent = "Ready to split";
+          detail.textContent = "Each dot is one example";
+          document.getElementById("split-hint").textContent =
+            "Orange examples stay out of the fit. Their prediction errors appear at the end.";
+          runButton.innerHTML = 'Split and evaluate <span class="arrow" aria-hidden="true">↗</span>';
+          draw();
+        }
+
+        function coordinates(point) {
+          return {
+            x: LEFT + ((point.x - X_MIN) / (X_MAX - X_MIN)) * PLOT_WIDTH,
+            y: TOP + ((Y_MAX - point.y) / (Y_MAX - Y_MIN)) * PLOT_HEIGHT,
+          };
+        }
+
+        function drawGrid() {
+          context.fillStyle = "#fff";
+          context.fillRect(0, 0, WIDTH, HEIGHT);
+          context.strokeStyle = "#eef2f7";
+          context.lineWidth = 1;
+          context.fillStyle = "#7b8798";
+          context.font = "10px Inter, ui-sans-serif, system-ui, sans-serif";
+          for (let tick = 0; tick <= 4; tick += 1) {
+            const x = LEFT + PLOT_WIDTH * tick / 4;
+            const y = TOP + PLOT_HEIGHT * tick / 4;
+            context.beginPath();
+            context.moveTo(x, TOP);
+            context.lineTo(x, TOP + PLOT_HEIGHT);
+            context.moveTo(LEFT, y);
+            context.lineTo(LEFT + PLOT_WIDTH, y);
+            context.stroke();
+            context.textAlign = "center";
+            context.textBaseline = "top";
+            context.fillText((X_MIN + (X_MAX - X_MIN) * tick / 4).toFixed(0), x, HEIGHT - 19);
+            context.textAlign = "right";
+            context.textBaseline = "middle";
+            context.fillText((Y_MAX - (Y_MAX - Y_MIN) * tick / 4).toFixed(0), LEFT - 7, y);
+          }
+        }
+
+        function prediction(x) {
+          return line.intercept + line.slope * x;
+        }
+
+        function drawLine(progress) {
+          if (!line || progress <= 0) return;
+          const averageY = line.meanY;
+          const shownSlope = line.slope * progress;
+          const shownIntercept = averageY + (line.intercept - averageY) * progress;
+          context.beginPath();
+          context.moveTo(LEFT, TOP + ((Y_MAX - (shownIntercept + shownSlope * X_MIN)) / (Y_MAX - Y_MIN)) * PLOT_HEIGHT);
+          context.lineTo(LEFT + PLOT_WIDTH, TOP + ((Y_MAX - (shownIntercept + shownSlope * X_MAX)) / (Y_MAX - Y_MIN)) * PLOT_HEIGHT);
+          context.strokeStyle = "#315cce";
+          context.lineWidth = 3;
+          context.lineCap = "round";
+          context.stroke();
+        }
+
+        function draw() {
+          if (!canvas.width) return;
+          drawGrid();
+
+          data.forEach(function (point) {
+            const position = coordinates(point);
+            context.beginPath();
+            context.arc(position.x, position.y, 3.8, 0, Math.PI * 2);
+            context.fillStyle = "#b9c2d0";
+            context.fill();
+          });
+
+          if (line && errorOpacity > 0) {
+            context.save();
+            context.globalAlpha = errorOpacity;
+            context.strokeStyle = "#e8875a";
+            context.lineWidth = 1.25;
+            context.setLineDash([3, 3]);
+            testing.forEach(function (point) {
+              const actual = coordinates(point);
+              const expected = coordinates({ x: point.x, y: prediction(point.x) });
+              context.beginPath();
+              context.moveTo(actual.x, actual.y);
+              context.lineTo(expected.x, expected.y);
+              context.stroke();
+            });
+            context.restore();
+            context.setLineDash([]);
+          }
+
+          if (line) drawLine(lineProgress);
+
+          if (phase !== "ready") {
+            context.save();
+            context.globalAlpha = splitOpacity;
+            testing.forEach(function (point) {
+              const position = coordinates(point);
+              context.beginPath();
+              context.arc(position.x, position.y, 4.2, 0, Math.PI * 2);
+              context.fillStyle = "#e8875a";
+              context.fill();
+              context.strokeStyle = "#fff";
+              context.lineWidth = 1;
+              context.stroke();
+            });
+            training.forEach(function (point) {
+              const position = coordinates(point);
+              context.beginPath();
+              context.arc(position.x, position.y, 3.8, 0, Math.PI * 2);
+              context.fillStyle = "#315cce";
+              context.fill();
+              context.strokeStyle = "#fff";
+              context.lineWidth = 1;
+              context.stroke();
+            });
+            context.restore();
+          }
+        }
+
+        function resizeCanvas() {
+          const ratio = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+          const bounds = canvas.getBoundingClientRect();
+          canvas.width = Math.round(bounds.width * ratio);
+          canvas.height = Math.round(bounds.height * ratio);
+          context.setTransform(canvas.width / WIDTH, 0, 0, canvas.height / HEIGHT, 0, 0);
+          draw();
+        }
+
+        function makeSplit() {
+          const random = seededRandom(874 + runNumber * 97);
+          const shuffled = data.slice();
+          for (let index = shuffled.length - 1; index > 0; index -= 1) {
+            const target = Math.floor(random() * (index + 1));
+            const current = shuffled[index];
+            shuffled[index] = shuffled[target];
+            shuffled[target] = current;
+          }
+          const testCount = Math.max(1, Math.round(shuffled.length * Number(shareInput.value) / 100));
+          testing = shuffled.slice(0, testCount);
+          training = shuffled.slice(testCount);
+          document.getElementById("training-count").textContent = String(training.length);
+          document.getElementById("test-count").textContent = String(testing.length);
+        }
+
+        function fitTrainingLine() {
+          let meanX = 0;
+          let meanY = 0;
+          training.forEach(function (point) {
+            meanX += point.x;
+            meanY += point.y;
+          });
+          meanX /= training.length;
+          meanY /= training.length;
+          let covariance = 0;
+          let variance = 0;
+          training.forEach(function (point) {
+            covariance += (point.x - meanX) * (point.y - meanY);
+            variance += (point.x - meanX) * (point.x - meanX);
+          });
+          const slope = variance === 0 ? 0 : covariance / variance;
+          return { slope: slope, intercept: meanY - slope * meanX, meanY: meanY };
+        }
+
+        function meanAbsoluteError(rows) {
+          const total = rows.reduce(function (sum, point) {
+            return sum + Math.abs(point.y - prediction(point.x));
+          }, 0);
+          return (total / rows.length).toFixed(2);
+        }
+
+        function animate(duration, setProgress, done) {
+          if (reducedMotion) {
+            setProgress(1);
+            draw();
+            done();
+            return;
+          }
+          let start = 0;
+          function frame(timestamp) {
+            if (!start) start = timestamp;
+            const progress = Math.min(1, (timestamp - start) / duration);
+            setProgress(progress);
+            draw();
+            if (progress < 1) window.requestAnimationFrame(frame);
+            else done();
+          }
+          window.requestAnimationFrame(frame);
+        }
+
+        function run() {
+          if (runButton.disabled) return;
+          runButton.disabled = true;
+          sampleInput.disabled = true;
+          shareInput.disabled = true;
+          status.textContent = "Shuffling examples…";
+          detail.textContent = "Setting a portion aside for the final check";
+          document.getElementById("split-hint").textContent =
+            "The model will only fit the blue training examples.";
+          runNumber += 1;
+          window.setTimeout(function () {
+            makeSplit();
+            phase = "split";
+            status.textContent = "Split complete";
+            detail.textContent = training.length + " for training · " + testing.length + " held back";
+            animate(380, function (progress) {
+              splitOpacity = progress;
+            }, function () {
+              line = fitTrainingLine();
+              status.textContent = "Fitting on training examples";
+              detail.textContent = "The blue examples shape the line";
+              animate(520, function (progress) {
+                lineProgress = progress;
+              }, function () {
+                status.textContent = "Checking unseen examples";
+                detail.textContent = "Orange lines show each test prediction error";
+                animate(420, function (progress) {
+                  errorOpacity = progress;
+                }, function () {
+                  document.getElementById("training-error").textContent =
+                    meanAbsoluteError(training);
+                  document.getElementById("test-error").textContent =
+                    meanAbsoluteError(testing);
+                  status.textContent = "Evaluation complete";
+                  detail.textContent = "A new set of examples gives a fairer performance check";
+                  document.getElementById("split-hint").textContent =
+                    "Training MAE is fit on examples the model saw; test MAE is measured on examples it did not see.";
+                  runButton.disabled = false;
+                  sampleInput.disabled = false;
+                  shareInput.disabled = false;
+                  runButton.innerHTML = 'Run again <span class="arrow" aria-hidden="true">↗</span>';
+                });
+              });
+            });
+          }, reducedMotion ? 0 : 180);
+        }
+
+        [sampleInput, shareInput].forEach(function (input) {
+          input.addEventListener("input", function () {
+            updateLabels();
+            runButton.disabled = false;
+            createData();
+            resetActivity();
+          });
+        });
+        runButton.addEventListener("click", run);
+        updateLabels();
+        createData();
+        if (window.ResizeObserver) {
+          resizeObserver = new ResizeObserver(resizeCanvas);
+          resizeObserver.observe(canvas);
+        } else {
+          window.addEventListener("resize", resizeCanvas);
+        }
+        resizeCanvas();
+      })();
+    </script>
+  </body>
+</html>
