@@ -1025,12 +1025,12 @@
         
   
   
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-flask-conical" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2M6.453 15h11.094M8.5 2h7"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M6 18a4 4 0 0 1-1.967-.516M12 13h4M12 18h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
   
   <span class="md-ellipsis">
     
   
-  Machine learning exercise
+  Exercise
 
     
   </span>
@@ -1650,13 +1650,17 @@
 <p><iframe title="Decision tree playground" src=".././playgrounds/decision-tree.html" width="100%" height="620" style="border: none"></iframe></p>
 </div>
 <div class="tabbed-block">
-<p>A decision tree sorts customers by asking a series of feature-based questions. Each answer leads to another question or to a final prediction. A shallow tree is easier to explain; a very deep tree can memorize quirks in past customers.</p>
+<p>At each decision point, or <strong>node</strong> <span class="twemoji" title="A point where the tree asks a question and splits the examples."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span>, the tree tries possible cutoffs on its features, such as fewer or more product visits. It chooses a cutoff that leaves the resulting groups with less mixing between purchasers and non-purchasers, then repeats the process inside each group.</p>
+<p>A group where the tree stops asking questions is a <strong>leaf</strong> <span class="twemoji" title="The final group at the end of a branch, where the tree makes a prediction."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span>. It predicts the purchase likelihood from the share of training customers in that group who purchased.</p>
+<p>The <strong>maximum depth</strong> <span class="twemoji" title="The most questions allowed between the top of the tree and a prediction."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> sets how many questions can appear along a path from the top of the tree to a leaf. The <strong>minimum examples per group</strong> <span class="twemoji" title="The smallest number of training examples allowed on either side of a split."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> sets how many training customers each side of a split must contain. In this playground, the defaults are depth 4 and 6 examples per group. A group stops splitting when it reaches the depth limit, contains only one outcome, or cannot be divided while keeping the minimum examples on both sides. Increasing the depth allows more detailed rules; increasing the minimum group size favors broader rules.</p>
 <pre class="mermaid"><code>graph TD
   start{Visited the product page?}
   start --&gt;|Yes| email{Opened a recent email?}
   start --&gt;|No| unlikely[Less likely to purchase]
   email --&gt;|Yes| likely[More likely to purchase]
-  email --&gt;|No| unsure[Less likely to purchase]</code></pre>
+  email --&gt;|No| unsure[Less likely to purchase]
+  classDef leaf fill:#e4f3e8,stroke:#3a7d44,color:#1f3d23,stroke-width:2px
+  class unlikely,likely,unsure leaf</code></pre>
 </div>
 </div>
 </div>
@@ -1691,13 +1695,14 @@
 <p><iframe title="K-nearest neighbors playground" src=".././playgrounds/k-nearest-neighbors.html" width="100%" height="620" style="border: none"></iframe></p>
 </div>
 <div class="tabbed-block">
-<p>For a new customer, the model finds the most similar customers in its examples and looks at what they did. If most of the nearest customers purchased, it predicts a purchase. The number of neighbors controls how many examples influence the vote.</p>
+<p><strong>K</strong> <span class="twemoji" title="The number of nearest examples used to make one prediction."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> is the number of nearby examples used to make a prediction. When you click the chart, the model measures the straight-line distance from that point to the plotted examples and selects the K closest. It estimates the purchase likelihood from the share of those neighbors who purchased. For example, with K = 7, if 5 of the neighbors purchased, the estimate is 5 out of 7, or about 71%.</p>
+<p>A small K makes the prediction depend on a very local group, so one unusual example can change it. A larger K includes a wider neighborhood and tends to make predictions smoother, though examples farther away can influence the result. The playground lets you compare odd values from 1 to 31; odd values avoid a tied vote between two outcomes.</p>
 <pre class="mermaid"><code>graph LR
-  new[New customer] --&gt; find[Find the most similar customers]
+  new[New customer] --&gt; find[Find K closest examples]
   past[Past customers and their purchases] --&gt; find
-  find --&gt; neighbors[For example: 3 purchased, 2 did not]
-  neighbors --&gt; vote[Purchase is the majority]
-  vote --&gt; prediction[Predict a purchase]</code></pre>
+  find --&gt; neighbors[Example: K = 7; 5 purchased, 2 did not]
+  neighbors --&gt; vote[Purchase likelihood: 5 out of 7]
+  vote --&gt; prediction[About 71%]</code></pre>
 </div>
 </div>
 </div>
@@ -1758,13 +1763,13 @@
         
         
           
-          <a href="../exercise/" class="md-footer__link md-footer__link--next" aria-label="Next: Machine learning exercise">
+          <a href="../exercise/" class="md-footer__link md-footer__link--next" aria-label="Next: Exercise">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Machine learning exercise
+                Exercise
               </div>
             </div>
             <div class="md-footer__button md-icon">
