@@ -1,5 +1,5 @@
 ---
-icon: lucide/flask-conical
+icon: lucide/brain-circuit
 ---
 
 ## Turn Indigo data into two use cases
@@ -8,10 +8,10 @@ Work in pairs. Choose **two decisions** Indigo could improve with the course dat
 
 Two good starting points are available in the current data:
 
-| Use case | Dataset and target | Possible action |
-| --- | --- | --- |
-| Estimate which website visits may lead to a purchase | `website_analytics.csv`; predict `purchased` | Offer checkout help before a visitor completes a purchase |
-| Recommend another product to a returning customer | `sales.csv`; use past customer-product purchases | Suggest a product that similar customers bought |
+| Use case                                             | Dataset and target                               | Possible action                                           |
+| ---------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------- |
+| Estimate which website visits may lead to a purchase | `website_analytics.csv`; predict `purchased`     | Offer checkout help before a visitor completes a purchase |
+| Recommend another product to a returning customer    | `sales.csv`; use past customer-product purchases | Suggest a product that similar customers bought           |
 
 The website file has about 11,000 visits and about 1,000 purchases, enough for a classroom classification exercise. The sales file has nearly 1,000 customers and 30 products, enough for a small recommendation prototype.
 

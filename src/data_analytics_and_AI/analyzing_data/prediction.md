@@ -80,7 +80,11 @@ A tree asks a sequence of simple questions about the features. Greater depth can
 
 === "How it works"
 
-    A decision tree sorts customers by asking a series of feature-based questions. Each answer leads to another question or to a final prediction. A shallow tree is easier to explain; a very deep tree can memorize quirks in past customers.
+    At each decision point, or **node** :material-information-outline:{ title="A point where the tree asks a question and splits the examples." }, the tree tries possible cutoffs on its features, such as fewer or more product visits. It chooses a cutoff that leaves the resulting groups with less mixing between purchasers and non-purchasers, then repeats the process inside each group.
+
+    A group where the tree stops asking questions is a **leaf** :material-information-outline:{ title="The final group at the end of a branch, where the tree makes a prediction." }. It predicts the purchase likelihood from the share of training customers in that group who purchased.
+
+    The **maximum depth** :material-information-outline:{ title="The most questions allowed between the top of the tree and a prediction." } sets how many questions can appear along a path from the top of the tree to a leaf. The **minimum examples per group** :material-information-outline:{ title="The smallest number of training examples allowed on either side of a split." } sets how many training customers each side of a split must contain. In this playground, the defaults are depth 4 and 6 examples per group. A group stops splitting when it reaches the depth limit, contains only one outcome, or cannot be divided while keeping the minimum examples on both sides. Increasing the depth allows more detailed rules; increasing the minimum group size favors broader rules.
 
     ``` mermaid
     graph TD
@@ -89,6 +93,8 @@ A tree asks a sequence of simple questions about the features. Greater depth can
       start -->|No| unlikely[Less likely to purchase]
       email -->|Yes| likely[More likely to purchase]
       email -->|No| unsure[Less likely to purchase]
+      classDef leaf fill:#e4f3e8,stroke:#3a7d44,color:#1f3d23,stroke-width:2px
+      class unlikely,likely,unsure leaf
     ```
 
 ## Random forests
@@ -127,13 +133,15 @@ K-nearest neighbors looks at the most similar examples nearby. Change the number
 
 === "How it works"
 
-    For a new customer, the model finds the most similar customers in its examples and looks at what they did. If most of the nearest customers purchased, it predicts a purchase. The number of neighbors controls how many examples influence the vote.
+    **K** :material-information-outline:{ title="The number of nearest examples used to make one prediction." } is the number of nearby examples used to make a prediction. When you click the chart, the model measures the straight-line distance from that point to the plotted examples and selects the K closest. It estimates the purchase likelihood from the share of those neighbors who purchased. For example, with K = 7, if 5 of the neighbors purchased, the estimate is 5 out of 7, or about 71%.
+
+    A small K makes the prediction depend on a very local group, so one unusual example can change it. A larger K includes a wider neighborhood and tends to make predictions smoother, though examples farther away can influence the result. The playground lets you compare odd values from 1 to 31; odd values avoid a tied vote between two outcomes.
 
     ``` mermaid
     graph LR
-      new[New customer] --> find[Find the most similar customers]
+      new[New customer] --> find[Find K closest examples]
       past[Past customers and their purchases] --> find
-      find --> neighbors[For example: 3 purchased, 2 did not]
-      neighbors --> vote[Purchase is the majority]
-      vote --> prediction[Predict a purchase]
+      find --> neighbors[Example: K = 7; 5 purchased, 2 did not]
+      neighbors --> vote[Purchase likelihood: 5 out of 7]
+      vote --> prediction[About 71%]
     ```

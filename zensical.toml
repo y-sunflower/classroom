@@ -23,7 +23,7 @@ nav = [
     ] },
     { "Analyzing data" = [
       { "Prediction" = "data_analytics_and_AI/analyzing_data/prediction.md" },
-      { "Machine learning exercise" = "data_analytics_and_AI/analyzing_data/exercise.md" },
+      { "Exercise" = "data_analytics_and_AI/analyzing_data/exercise.md" },
     ] },
     { "Text mining" = [
       { "Other" = "data_analytics_and_AI/text_mining/other.md" },
@@ -102,7 +102,7 @@ attr_list = {}
 def_list = {}
 footnotes = {}
 md_in_html = {}
-toc.permalink = true
+pymdownx.snippets = {}
 pymdownx.arithmatex.generic = true
 pymdownx.betterem = {}
 pymdownx.caret = {}
@@ -125,3 +125,4 @@ pymdownx.tabbed.alternate_style = true
 pymdownx.tabbed.combine_header_slug = true
 pymdownx.tasklist.custom_checkbox = true
 pymdownx.tilde = {}
+toc.permalink = true
