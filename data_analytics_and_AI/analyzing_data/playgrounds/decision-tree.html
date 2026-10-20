@@ -6,22 +6,9 @@
     <title>Decision tree playground</title>
     <link rel="stylesheet" href="./playground.css" />
   </head>
-  <body data-model="tree">
+  <body data-model="tree" data-sample-count="360">
     <main class="playground">
       <section class="controls" aria-label="Model controls">
-        <label class="control" for="sample-count">
-          <span class="control-label"
-            >Sample size <output id="sample-output">180</output></span
-          >
-          <input
-            id="sample-count"
-            type="range"
-            min="60"
-            max="360"
-            step="30"
-            value="180"
-          />
-        </label>
         <label class="control" for="depth">
           <span class="control-label"
             >Maximum depth <output id="depth-value">4</output></span

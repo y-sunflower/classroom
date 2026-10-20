@@ -6,22 +6,9 @@
     <title>Random forest playground</title>
     <link rel="stylesheet" href="./playground.css" />
   </head>
-  <body data-model="forest">
+  <body data-model="forest" data-sample-count="360">
     <main class="playground">
       <section class="controls" aria-label="Model controls">
-        <label class="control" for="sample-count">
-          <span class="control-label"
-            >Sample size <output id="sample-output">180</output></span
-          >
-          <input
-            id="sample-count"
-            type="range"
-            min="60"
-            max="360"
-            step="30"
-            value="180"
-          />
-        </label>
         <label class="control" for="trees">
           <span class="control-label"
             >Number of trees <output id="trees-value">13</output></span

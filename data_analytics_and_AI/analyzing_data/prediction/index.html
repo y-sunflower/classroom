@@ -1590,7 +1590,7 @@
 <li>which products should we suggest to customers?</li>
 <li>who should we target for our ad campaign?</li>
 </ul>
-<p>In data / machine learning, those problems can be (partially?) solve using <strong>prediction techniques</strong>. A machine learning model looks for patterns in examples. We use:</p>
+<p>In data / machine learning, those problems can be (partially?) solve using <strong>prediction techniques</strong>, especially with machine learning models. Those models look for patterns in examples, and for this we need:</p>
 <ul>
 <li><strong>Target</strong>: which is the thing we want it to predict: probability of churn, expected spend, etc</li>
 <li><strong>Features</strong>: anything that can help us predict our target: time since subscribed, age, buying behaviors, etc</li>
@@ -1601,8 +1601,20 @@
 </div>
 <h2 id="linear-regression">Linear regression<a class="headerlink" href="#linear-regression" title="Permanent link">&para;</a></h2>
 <p>Linear regression is the most simple machine learning model. It uses a line to estimate a <strong>number</strong>.</p>
-<iframe title="Linear regression playground" src=".././playgrounds/linear-regression.html" width="100%" height="620" style="border: none"></iframe>
-
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Playground</label><label for="__tabbed_1_2">How it works</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><iframe title="Linear regression playground" src=".././playgrounds/linear-regression.html" width="100%" height="620" style="border: none"></iframe></p>
+</div>
+<div class="tabbed-block">
+<p>Each dot represents a customer's age and monthly spending. The model finds a straight line that stays close to the examples, then uses that line to estimate spending for a new customer.</p>
+<pre class="mermaid"><code>graph LR
+  examples[Past customers] --&gt; line[Find the trend in a straight line]
+  age[New customer's age] --&gt; line
+  line --&gt; estimate[Estimated monthly spending]</code></pre>
+</div>
+</div>
+</div>
 <h2 id="train-test-split">Train-test split<a class="headerlink" href="#train-test-split" title="Permanent link">&para;</a></h2>
 <p>When we create a model, we need to find a way to <strong>evaluate</strong> it. Let's say we have a model that predicts the <mark>spending of a customer next month</mark>. We use that model every month to know how much money we expect to make.</p>
 <blockquote>
@@ -1611,26 +1623,83 @@
 <p>For this, we often <strong>split our dataset into 2 sets</strong>: a train set and the test set.</p>
 <iframe title="Train and test split animation" src=".././playgrounds/train-test-split.html" width="100%" height="620" style="border: none"></iframe>
 
-<p>The blue examples are used to fit the line. Orange examples stay hidden from the fit until the final check. Mean absolute error (MAE) shows the average distance between a prediction and an example; lower is closer in this demo. If we keep tuning against the test set, it stops being a fair check.</p>
 <h2 id="logistic-regression">Logistic regression<a class="headerlink" href="#logistic-regression" title="Permanent link">&para;</a></h2>
 <p>Estimate the probability of one of two outcomes, such as a purchase or no purchase. The threshold controls when a probability becomes a positive prediction.</p>
-<iframe title="Logistic regression playground" src=".././playgrounds/logistic-regression.html" width="100%" height="620" style="border: none"></iframe>
-
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Playground</label><label for="__tabbed_2_2">How it works</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><iframe title="Logistic regression playground" src=".././playgrounds/logistic-regression.html" width="100%" height="620" style="border: none"></iframe></p>
+</div>
+<div class="tabbed-block">
+<p>The model learns which customer traits tend to go with a purchase, then estimates a purchase probability for each new customer. A threshold turns that probability into a yes-or-no prediction. A lower threshold reaches more people, while a higher one focuses on the most likely buyers.</p>
+<pre class="mermaid"><code>graph LR
+  history[Past customer behavior and purchases] --&gt; model[Learn purchase patterns]
+  customer[New customer's behavior] --&gt; model
+  model --&gt; probability[Estimated purchase probability]
+  probability --&gt; threshold{Above the campaign threshold?}
+  threshold --&gt;|Yes| target[Include in campaign]
+  threshold --&gt;|No| skip[Do not include]</code></pre>
+</div>
+</div>
+</div>
 <h2 id="decision-trees">Decision trees<a class="headerlink" href="#decision-trees" title="Permanent link">&para;</a></h2>
 <p>A tree asks a sequence of simple questions about the features. Greater depth can capture more detail, but can also fit noise in the examples.</p>
-<iframe title="Decision tree playground" src=".././playgrounds/decision-tree.html" width="100%" height="620" style="border: none"></iframe>
-
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Playground</label><label for="__tabbed_3_2">How it works</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><iframe title="Decision tree playground" src=".././playgrounds/decision-tree.html" width="100%" height="620" style="border: none"></iframe></p>
+</div>
+<div class="tabbed-block">
+<p>A decision tree sorts customers by asking a series of feature-based questions. Each answer leads to another question or to a final prediction. A shallow tree is easier to explain; a very deep tree can memorize quirks in past customers.</p>
+<pre class="mermaid"><code>graph TD
+  start{Visited the product page?}
+  start --&gt;|Yes| email{Opened a recent email?}
+  start --&gt;|No| unlikely[Less likely to purchase]
+  email --&gt;|Yes| likely[More likely to purchase]
+  email --&gt;|No| unsure[Less likely to purchase]</code></pre>
+</div>
+</div>
+</div>
 <h2 id="random-forests">Random forests<a class="headerlink" href="#random-forests" title="Permanent link">&para;</a></h2>
 <p>A forest combines predictions from many decision trees trained on slightly different samples. Compare a small forest with a larger one and change how deep each tree can grow.</p>
-<iframe title="Random forest playground" src=".././playgrounds/random-forest.html" width="100%" height="620" style="border: none"></iframe>
-
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Playground</label><label for="__tabbed_4_2">How it works</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><iframe title="Random forest playground" src=".././playgrounds/random-forest.html" width="100%" height="620" style="border: none"></iframe></p>
+</div>
+<div class="tabbed-block">
+<p>A random forest builds many decision trees, each using a slightly different sample of customers. The trees each make a prediction, and the forest combines their votes. This makes the result less dependent on the quirks of any one tree.</p>
+<pre class="mermaid"><code>graph LR
+  customers[Past customers] --&gt; sample1[Sample of customers]
+  customers --&gt; sample2[Another sample]
+  customers --&gt; sample3[Another sample]
+  sample1 --&gt; tree1[Tree 1 vote]
+  sample2 --&gt; tree2[Tree 2 vote]
+  sample3 --&gt; tree3[Tree 3 vote]
+  tree1 --&gt; combine[Combine the votes]
+  tree2 --&gt; combine
+  tree3 --&gt; combine
+  combine --&gt; prediction[Forest prediction]</code></pre>
+</div>
+</div>
+</div>
 <h2 id="k-nearest-neighbors">K-nearest neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Permanent link">&para;</a></h2>
 <p>K-nearest neighbors looks at the most similar examples nearby. Change the number of neighbors and click the chart to ask the model about a new point.</p>
-<iframe title="K-nearest neighbors playground" src=".././playgrounds/k-nearest-neighbors.html" width="100%" height="620" style="border: none"></iframe>
-
-<div class="admonition note">
-<p class="admonition-title">A model is a tool for a decision</p>
-<p>A pattern in the data does not explain why something happened. Before acting on a prediction, check what information was available, who may be missing from the data, and what the cost of a wrong prediction would be.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Playground</label><label for="__tabbed_5_2">How it works</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><iframe title="K-nearest neighbors playground" src=".././playgrounds/k-nearest-neighbors.html" width="100%" height="620" style="border: none"></iframe></p>
+</div>
+<div class="tabbed-block">
+<p>For a new customer, the model finds the most similar customers in its examples and looks at what they did. If most of the nearest customers purchased, it predicts a purchase. The number of neighbors controls how many examples influence the vote.</p>
+<pre class="mermaid"><code>graph LR
+  new[New customer] --&gt; find[Find the most similar customers]
+  past[Past customers and their purchases] --&gt; find
+  find --&gt; neighbors[For example: 3 purchased, 2 did not]
+  neighbors --&gt; vote[Purchase is the majority]
+  vote --&gt; prediction[Predict a purchase]</code></pre>
+</div>
+</div>
 </div>
 
 

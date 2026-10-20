@@ -16,8 +16,7 @@
   const controls = Array.from(document.querySelectorAll(".control input"));
   const fitButton = document.getElementById("fit-button");
   const detail = document.getElementById("chart-detail");
-  const sampleCount = document.getElementById("sample-count");
-  const sampleOutput = document.getElementById("sample-output");
+  const sampleCount = Number(document.body.dataset.sampleCount);
   const scoreStat = document.getElementById("score-stat");
   const scoreOutput = document.getElementById("score-output");
   const range =
@@ -130,12 +129,10 @@
       output.value = input.value + suffix;
       output.textContent = input.value + suffix;
     });
-    sampleOutput.value = sampleCount.value;
-    sampleOutput.textContent = sampleCount.value;
   }
 
   function makeRegressionData() {
-    const count = Number(sampleCount.value);
+    const count = sampleCount;
     const noise = value("noise", 60);
     const random = seededRandom(2026 + count * 13 + Math.round(noise));
     points = [];
@@ -147,7 +144,7 @@
   }
 
   function makeMoonData() {
-    const count = Number(sampleCount.value);
+    const count = sampleCount;
     const random = seededRandom(749 + count * 17);
     const half = Math.ceil(count / 2);
     points = [];
@@ -675,12 +672,8 @@
 
   function onControlChange(event) {
     setOutputs();
-    if (
-      event.target === sampleCount ||
-      (modelName === "linear" && event.target.id === "noise")
-    ) {
-      if (modelName === "linear") makeRegressionData();
-      else makeMoonData();
+    if (modelName === "linear" && event.target.id === "noise") {
+      makeRegressionData();
     }
     invalidateModel();
   }

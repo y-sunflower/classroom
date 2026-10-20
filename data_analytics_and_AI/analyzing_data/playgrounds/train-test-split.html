@@ -9,19 +9,6 @@
   <body>
     <main class="playground">
       <section class="controls" aria-label="Split controls">
-        <label class="control" for="sample-size">
-          <span class="control-label"
-            >Sample size <output id="sample-size-value">300</output></span
-          >
-          <input
-            id="sample-size"
-            type="range"
-            min="100"
-            max="500"
-            step="20"
-            value="300"
-          />
-        </label>
         <label class="control" for="test-share">
           <span class="control-label"
             >Set aside for testing
@@ -92,7 +79,7 @@
         const Y_MAX = 600;
         const canvas = document.getElementById("split-chart");
         const context = canvas.getContext("2d");
-        const sampleInput = document.getElementById("sample-size");
+        const sampleCount = 500;
         const shareInput = document.getElementById("test-share");
         const runButton = document.getElementById("run-split");
         const reducedMotion = window.matchMedia(
@@ -126,7 +113,7 @@
         }
 
         function createData() {
-          const count = Number(sampleInput.value);
+          const count = sampleCount;
           const random = seededRandom(
             503 + count * 37 + Number(shareInput.value) * 11 + runNumber,
           );
@@ -139,8 +126,6 @@
         }
 
         function updateLabels() {
-          document.getElementById("sample-size-value").textContent =
-            sampleInput.value;
           document.getElementById("test-share-value").textContent =
             shareInput.value + "%";
         }
@@ -396,7 +381,6 @@
         function run() {
           if (runButton.disabled) return;
           runButton.disabled = true;
-          sampleInput.disabled = true;
           shareInput.disabled = true;
           runNumber += 1;
           window.setTimeout(
@@ -428,7 +412,6 @@
                           document.getElementById("test-error").textContent =
                             meanAbsoluteError(testing);
                           runButton.disabled = false;
-                          sampleInput.disabled = false;
                           shareInput.disabled = false;
                           runButton.innerHTML =
                             'Run again <span class="arrow" aria-hidden="true">↗</span>';
@@ -443,13 +426,11 @@
           );
         }
 
-        [sampleInput, shareInput].forEach(function (input) {
-          input.addEventListener("input", function () {
-            updateLabels();
-            runButton.disabled = false;
-            createData();
-            resetActivity();
-          });
+        shareInput.addEventListener("input", function () {
+          updateLabels();
+          runButton.disabled = false;
+          createData();
+          resetActivity();
         });
         runButton.addEventListener("click", run);
         updateLabels();
