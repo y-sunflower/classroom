@@ -7,7 +7,7 @@ My teaching materials. Everything here is released under the MIT license.
 Clone the repo and then run:
 
 ```console
-$ uvx --with markdown-exec --with polars zensical serve
+$ uv sync && uv run zensical serve
 
 Serving /Users/user/classroom/site on http://localhost:8000
 Build started
