@@ -12,4 +12,5 @@ dependencies = [
     "scikit-learn>=1.9.1",
     "streamlit>=1.66.0",
     "watchdog>=6.0.0",
+    "zensical>=0.0.71",
 ]
