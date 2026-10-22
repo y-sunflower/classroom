@@ -4,10 +4,16 @@
         <loc>https://www.example.com/</loc>
       </url>
       <url>
-        <loc>https://www.example.com/data_analytics_and_AI/analyzing_data/exercise/</loc>
+        <loc>https://www.example.com/data_analytics_and_AI/analyzing_data/prediction/</loc>
       </url>
       <url>
-        <loc>https://www.example.com/data_analytics_and_AI/analyzing_data/prediction/</loc>
+        <loc>https://www.example.com/data_analytics_and_AI/analyzing_data/prepare_data/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/data_analytics_and_AI/analyzing_data/train_and_test/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/data_analytics_and_AI/analyzing_data/web_app/</loc>
       </url>
       <url>
         <loc>https://www.example.com/data_analytics_and_AI/definition_of_data_and_ai/definitions/</loc>

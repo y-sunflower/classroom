@@ -12,14 +12,14 @@
         <meta name="author" content="Joseph Barbier">
       
       
-        <link rel="canonical" href="https://www.example.com/data_analytics_and_AI/analyzing_data/exercise/">
+        <link rel="canonical" href="https://www.example.com/data_analytics_and_AI/analyzing_data/prepare_data/">
       
       
       
         <link rel="prev" href="../prediction/">
       
       
-        <link rel="next" href="../../text_mining/other/">
+        <link rel="next" href="../train_and_test/">
       
       
         
@@ -30,7 +30,7 @@
     
     
       
-        <title>Exercise - Documentation</title>
+        <title>Prepare data - Documentation</title>
       
     
     
@@ -121,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exercise
+              Prepare data
             
           </span>
         </div>
@@ -814,6 +814,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -915,7 +919,7 @@
   <span class="md-ellipsis">
     
   
-  Exercise
+  Prepare data
 
     
   </span>
@@ -934,7 +938,7 @@
   <span class="md-ellipsis">
     
   
-  Exercise
+  Prepare data
 
     
   </span>
@@ -958,10 +962,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#turn-indigo-data-into-two-use-cases" class="md-nav__link">
+  <a href="#churn-data" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Turn Indigo data into two use cases
+        Churn data
       </span>
     </span>
   </a>
@@ -969,35 +973,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-scikit-learn" class="md-nav__link">
+  <a href="#prepare-the-data" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Install scikit-learn
+        Prepare the data
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prepare the data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-the-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Read the data
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#start-with-purchase-prediction" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#calculate-churn-rate" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Start with purchase prediction
+        Calculate churn rate
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#build-a-product-recommender" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#separate-features-and-target" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Build a product recommender
+        Separate features and target
       </span>
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1005,6 +1026,64 @@
   
 </nav>
       
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../train_and_test/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M6 18a4 4 0 0 1-1.967-.516M12 13h4M12 18h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Train & test
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web_app/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M6 18a4 4 0 0 1-1.967-.516M12 13h4M12 18h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Web app
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1358,10 +1437,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#turn-indigo-data-into-two-use-cases" class="md-nav__link">
+  <a href="#churn-data" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Turn Indigo data into two use cases
+        Churn data
       </span>
     </span>
   </a>
@@ -1369,35 +1448,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-scikit-learn" class="md-nav__link">
+  <a href="#prepare-the-data" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Install scikit-learn
+        Prepare the data
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prepare the data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-the-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Read the data
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#start-with-purchase-prediction" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#calculate-churn-rate" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Start with purchase prediction
+        Calculate churn rate
       </span>
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#build-a-product-recommender" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#separate-features-and-target" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Build a product recommender
+        Separate features and target
       </span>
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1487,6 +1583,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1515,93 +1615,75 @@
                   
 
 
-  <h1>Exercise</h1>
+  <h1>Prepare data</h1>
 
-<h2 id="turn-indigo-data-into-two-use-cases">Turn Indigo data into two use cases<a class="headerlink" href="#turn-indigo-data-into-two-use-cases" title="Permanent link">&para;</a></h2>
-<p>Work in pairs. Choose <strong>two decisions</strong> Indigo could improve with the course datasets. For each one, identify the goal, the data that would be available at prediction time, and an action the team could take.</p>
-<p>Two good starting points are available in the current data:</p>
-<table>
-<thead>
-<tr>
-<th>Use case</th>
-<th>Dataset and target</th>
-<th>Possible action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Estimate which website visits may lead to a purchase</td>
-<td><code>website_analytics.csv</code>; predict <code>purchased</code></td>
-<td>Offer checkout help before a visitor completes a purchase</td>
-</tr>
-<tr>
-<td>Recommend another product to a returning customer</td>
-<td><code>sales.csv</code>; use past customer-product purchases</td>
-<td>Suggest a product that similar customers bought</td>
-</tr>
-</tbody>
-</table>
-<p>The website file has about 11,000 visits and about 1,000 purchases, enough for a classroom classification exercise. The sales file has nearly 1,000 customers and 30 products, enough for a small recommendation prototype.</p>
-<div class="admonition warning">
-<p class="admonition-title">Keep the prediction honest</p>
-<p>Do not give a model information that would only be known after the outcome. For website purchase prediction, leave out <code>transaction_id</code>. This starter uses stock availability and cart activity, both known before checkout completes. Traffic source and promotion are possible extensions; use visit duration only if it is measured at the moment the team plans to act. A purchase record is a clue about interest, not proof of preference.</p>
+<h2 id="churn-data">Churn data<a class="headerlink" href="#churn-data" title="Permanent link">&para;</a></h2>
+<p>Here we'll use a new CSV file about <strong>food delivery subscription</strong>:</p>
+<p><csv-table src="../../data/food_subscription.csv" caption="Food subscriptions" page-size="6"></csv-table></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you haven't already, install the required packages. See the <a href="../../definition_of_data_and_ai/setup/">setup guide</a>.</p>
 </div>
-<h2 id="install-scikit-learn">Install scikit-learn<a class="headerlink" href="#install-scikit-learn" title="Permanent link">&para;</a></h2>
-<p>Open the terminal in your <code>indigo-data</code> project and add the package:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>add<span class="w"> </span>scikit-learn
+<h2 id="prepare-the-data">Prepare the data<a class="headerlink" href="#prepare-the-data" title="Permanent link">&para;</a></h2>
+<h3 id="read-the-data">Read the data<a class="headerlink" href="#read-the-data" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"src/data_analytics_and_AI/data/food_subscription.csv"</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </span></code></pre></div>
-<p>If you do not have the course CSV files in your project yet, download them from the <a href="../../definition_of_data_and_ai/indigo/">Indigo data page</a> and place them in a <code>data</code> folder.</p>
-<h2 id="start-with-purchase-prediction">Start with purchase prediction<a class="headerlink" href="#start-with-purchase-prediction" title="Permanent link">&para;</a></h2>
-<p>This small baseline uses logistic regression to predict whether a website visit led to a purchase. It compares the model with a simple baseline that always predicts “no purchase”.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.dummy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyClassifier</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_pipeline</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">visits</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/website_analytics.csv"</span><span class="p">)</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">features</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">visits</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"product_available"</span><span class="p">,</span> <span class="s2">"added_to_cart"</span><span class="p">)</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"product_available"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int8</span><span class="p">),</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"added_to_cart"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int8</span><span class="p">),</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="p">)</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="p">)</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">target</span> <span class="o">=</span> <span class="n">visits</span><span class="o">.</span><span class="n">get_column</span><span class="p">(</span><span class="s2">"purchased"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int8</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">target</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">)</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">baseline</span> <span class="o">=</span> <span class="n">DummyClassifier</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">"most_frequent"</span><span class="p">)</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">baseline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Always no purchase"</span><span class="p">)</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">baseline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="n">StandardScaler</span><span class="p">(),</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">class_weight</span><span class="o">=</span><span class="s2">"balanced"</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="p">)</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Logistic regression"</span><span class="p">)</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (15_000, 9)
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌────────────┬────────────┬────────────┬───────────┬───┬───────────┬───────────┬───────────┬───────┐
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ subscripti ┆ tenure_mon ┆ monthly_pr ┆ food_pref ┆ … ┆ satisfact ┆ boxes_ski ┆ discount_ ┆ churn │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│ on_level   ┆ ths        ┆ ice_eur    ┆ erence    ┆   ┆ ion_score ┆ pped_6m   ┆ used      ┆ ---   │
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ ---        ┆ ---        ┆ ---        ┆ ---       ┆   ┆ ---       ┆ ---       ┆ ---       ┆ i64   │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│ str        ┆ i64        ┆ i64        ┆ str       ┆   ┆ i64       ┆ i64       ┆ i64       ┆       │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>╞════════════╪════════════╪════════════╪═══════════╪═══╪═══════════╪═══════════╪═══════════╪═══════╡
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ Deluxe     ┆ 9          ┆ 50         ┆ Mixed     ┆ … ┆ 7         ┆ 0         ┆ 0         ┆ 0     │
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│ Basic      ┆ 11         ┆ 30         ┆ Mixed     ┆ … ┆ 6         ┆ 1         ┆ 0         ┆ 1     │
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│ Premium    ┆ 21         ┆ 100        ┆ Mixed     ┆ … ┆ 10        ┆ 0         ┆ 0         ┆ 0     │
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│ Deluxe     ┆ 3          ┆ 50         ┆ Vegan     ┆ … ┆ 10        ┆ 0         ┆ 0         ┆ 1     │
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│ Basic      ┆ 15         ┆ 30         ┆ Vegetaria ┆ … ┆ 3         ┆ 2         ┆ 0         ┆ 0     │
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│            ┆            ┆            ┆ n         ┆   ┆           ┆           ┆           ┆       │
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ …          ┆ …          ┆ …          ┆ …         ┆ … ┆ …         ┆ …         ┆ …         ┆ …     │
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│ Premium    ┆ 8          ┆ 100        ┆ Vegan     ┆ … ┆ 7         ┆ 2         ┆ 1         ┆ 1     │
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│ Deluxe     ┆ 46         ┆ 50         ┆ Vegetaria ┆ … ┆ 10        ┆ 1         ┆ 0         ┆ 0     │
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│            ┆            ┆            ┆ n         ┆   ┆           ┆           ┆           ┆       │
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│ Basic      ┆ 2          ┆ 30         ┆ Vegetaria ┆ … ┆ 9         ┆ 0         ┆ 0         ┆ 0     │
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│            ┆            ┆            ┆ n         ┆   ┆           ┆           ┆           ┆       │
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>│ Basic      ┆ 6          ┆ 30         ┆ High      ┆ … ┆ 10        ┆ 3         ┆ 0         ┆ 0     │
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>│            ┆            ┆            ┆ Protein   ┆   ┆           ┆           ┆           ┆       │
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>│ Premium    ┆ 7          ┆ 100        ┆ Mixed     ┆ … ┆ 8         ┆ 0         ┆ 0         ┆ 0     │
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>└────────────┴────────────┴────────────┴───────────┴───┴───────────┴───────────┴───────────┴───────┘
 </span></code></pre></div>
-<p><code>purchased</code> is unevenly distributed, so accuracy alone can hide missed purchases. Compare <strong>precision</strong> (how often a purchase prediction is right) and <strong>recall</strong> (how many actual purchases the model finds). Decide which matters more for the action Indigo would take.</p>
-<h2 id="build-a-product-recommender">Build a product recommender<a class="headerlink" href="#build-a-product-recommender" title="Permanent link">&para;</a></h2>
-<p>Use <code>sales.csv</code> to make a customer-by-product table: each row is a customer, each column is a product, and a cell records whether that customer bought it. Then use <code>sklearn.neighbors.NearestNeighbors</code> with cosine distance to find customers with similar purchase histories.</p>
-<p>Your recommendation must omit products the customer already bought. Test it by holding out each customer's most recent new product, making recommendations from earlier purchases, and checking how often the held-out product appears near the top. Compare against recommending the most popular products to everyone.</p>
-<details class="question">
-<summary>What should the team deliver?</summary>
-<p>For each use case, show the business question, target or recommendation, input columns, one model, one baseline, and one evaluation result. End with one sentence describing the action Indigo could take and one limitation of the data.</p>
-</details>
-<div class="admonition note">
-<p class="admonition-title">About the product data</p>
-<p>This dataset is simulated and has no product impressions or customer demographics. It can support a classroom recommendation prototype for the existing 30 products. It cannot show whether a real customer saw an item, explain why they liked it, or reliably recommend Indigo's new refillable shampoo before that product has purchase history.</p>
-</div>
+<h3 id="calculate-churn-rate">Calculate churn rate<a class="headerlink" href="#calculate-churn-rate" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn rate: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Churn rate: 27.82%
+</span></code></pre></div>
+<h3 id="separate-features-and-target">Separate features and target<a class="headerlink" href="#separate-features-and-target" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>target</strong> (aka <code>y</code>) = whether the customer churned or not</li>
+<li><strong>features</strong> (aka <code>X</code>) = everything that can help us predict the target (time since subscribed, the kind of subcription, etc)</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># The "churn" columns contain the info we want</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"churn"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Target (y): </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Column names of features are everything, except "churn"</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">feature_columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"churn"</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">feature_columns</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Features (X): </span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Target (y): [0 1 0 ... 0 0 0]
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Features (X): [['Deluxe' 9 50 ... 7 0 0]
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> ['Basic' 11 30 ... 6 1 0]
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> ['Premium' 21 100 ... 10 0 0]
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a> ...
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a> ['Basic' 2 30 ... 9 0 0]
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a> ['Basic' 6 30 ... 10 3 0]
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a> ['Premium' 7 100 ... 8 0 0]]
+</span></code></pre></div>
 
 
 
@@ -1659,13 +1741,13 @@
         
         
           
-          <a href="../../text_mining/other/" class="md-footer__link md-footer__link--next" aria-label="Next: Other">
+          <a href="../train_and_test/" class="md-footer__link md-footer__link--next" aria-label="Next: Train &amp; test">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Other
+                Train & test
               </div>
             </div>
             <div class="md-footer__button md-icon">

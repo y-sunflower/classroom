@@ -26,8 +26,8 @@ csv-table {
   border-radius: 5px;
   color: var(--csv-text);
   font: inherit;
-  font-size: 0.875rem;
-  height: 2.25rem;
+  font-size: 0.75rem;
+  height: 2rem;
   margin-bottom: 0.75em;
   max-width: 22rem;
   padding: 0 0.75rem;
@@ -105,7 +105,7 @@ csv-table {
   background: var(--csv-surface);
   border-bottom: 1px solid var(--csv-border);
   color: var(--csv-text);
-  min-height: 2.75rem;
+  min-height: 2rem;
   transition: background-color 100ms ease;
 }
 
@@ -120,7 +120,7 @@ csv-table {
 }
 
 .csv-table .tabulator-row .tabulator-cell {
-  padding: 0.2rem 0.4rem;
+  padding: 0.3rem 0.3rem;
 }
 
 .csv-table .tabulator-footer {
@@ -169,10 +169,9 @@ csv-table {
   color: var(--csv-surface);
   cursor: pointer;
   font: inherit;
-  font-size: 0.8125rem;
+  font-size: 0.7125rem;
   font-weight: 500;
-  min-height: 2.125rem;
-  padding: 0.375rem 0.75rem;
+  padding: 0.2rem 0.5rem;
 }
 
 .csv-table .tabulator-footer button.csv-table__download:hover {

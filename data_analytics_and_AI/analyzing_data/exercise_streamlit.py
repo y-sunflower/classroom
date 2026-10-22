@@ -5,9 +5,8 @@ import numpy as np
 import polars as pl
 import streamlit as st
 
-
-MODEL_PATH = Path(__file__).with_name("best_churn_model.joblib")
-CUSTOMERS_PATH = Path(__file__).parents[1] / "data" / "food_subscription_churn.csv"
+MODEL_PATH = Path(__file__).with_name("exercise_model.joblib")
+CUSTOMERS_PATH = Path(__file__).parents[1] / "data" / "food_subscription.csv"
 PLAN_PRICES = {"Basic": 30, "Deluxe": 50, "Premium": 100}
 FEATURE_COLUMNS = [
     "subscription_level",
@@ -89,9 +88,7 @@ with manual_entry:
 
         with right:
             satisfaction_score = st.slider("Satisfaction score", 1, 10, 7)
-            boxes_skipped_6m = st.slider(
-                "Boxes skipped in the last 6 months", 0, 6, 0
-            )
+            boxes_skipped_6m = st.slider("Boxes skipped in the last 6 months", 0, 6, 0)
             discount_used = st.selectbox("Used a discount?", ["No", "Yes"])
 
         submitted = st.form_submit_button("Predict churn", type="primary")
