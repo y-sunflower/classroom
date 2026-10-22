@@ -22,7 +22,7 @@ jobs:
           enable-cache: true
 
       # Build website with inline dependencies
-      - run: uv sync && uv run zensical serve
+      - run: uv sync && uv run zensical build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
