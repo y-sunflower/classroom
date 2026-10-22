@@ -145,3 +145,12 @@ K-nearest neighbors looks at the most similar examples nearby. Change the number
       neighbors --> vote[Purchase likelihood: 5 out of 7]
       vote --> prediction[About 71%]
     ```
+
+## Goal
+
+We want to make it easy to know **what are the chances of a customer to churn**. For this, we need to:
+
+- find the relevant data and clean it
+- train and evaluate multiple machine learning models
+- make it easy to use the best model *in production*
+- measure if it's financially viable to contact customers

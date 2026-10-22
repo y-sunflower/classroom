@@ -68,13 +68,13 @@ Positron may download Python through `uv` if Python is not already installed. Th
 
 ### Step 4: install one package and verify it can be used
 
-We will install `polars`, a common package for working with tables.
+We will install `polars` (among others), a common package for working with tables.
 
 1. Make sure the Positron terminal is open in the `indigo-data` project.
 2. Go to **Terminal**:
 
 ```sh
-uv add polars
+uv add polars matplotlib scikit-learn streamlit joblib
 ```
 
 The command adds the package to the project and updates the project's environment. It should also record the dependency in `pyproject.toml`.
@@ -84,11 +84,17 @@ The command adds the package to the project and updates the project's environmen
 
 ```python
 import sys
-import polars as pl
+from importlib.metadata import version
 
-print(sys.executable)
-print(sys.version)
-print(pl.__version__)
+print(f"Python executable: {sys.executable}")
+print(f"Python version: {sys.version}")
+
+packages = ["polars", "matplotlib", "scikit-learn", "streamlit", "joblib"]
+for package in packages:
+    try:
+        print(f"✓ {package}: {version(package)}")
+    except Exception as e:
+        print(f"✗ {package}: {e}")
 ```
 
 You have succeeded when the cell prints a Python path, a Python version, and a polars version without errors.

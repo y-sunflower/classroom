@@ -23,7 +23,9 @@ nav = [
     ] },
     { "Analyzing data" = [
       { "Prediction" = "data_analytics_and_AI/analyzing_data/prediction.md" },
-      { "Exercise" = "data_analytics_and_AI/analyzing_data/exercise.md" },
+      { "Prepare data" = "data_analytics_and_AI/analyzing_data/prepare_data.md" },
+      { "Train & test" = "data_analytics_and_AI/analyzing_data/train_and_test.md" },
+      { "Web app" = "data_analytics_and_AI/analyzing_data/web_app.md" },
     ] },
     { "Text mining" = [
       { "Other" = "data_analytics_and_AI/text_mining/other.md" },

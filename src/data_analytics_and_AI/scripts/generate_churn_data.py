@@ -3,7 +3,7 @@ import polars as pl
 
 SEED = 42
 N_CUSTOMERS = 15000
-OUTPUT_FILE = "src/data_analytics_and_AI/data/food_subscription_churn.csv"
+OUTPUT_FILE = "src/data_analytics_and_AI/data/food_subscription.csv"
 
 rng = np.random.default_rng(SEED)
 
@@ -62,7 +62,7 @@ discount_used = rng.binomial(1, discount_probability)
 sigmoid = lambda x: 1 / (1 + np.exp(-x))
 
 logit = (
-    -1.90
+    -1.20
     + 0.36 * (subscription_level == "Basic")
     - 0.18 * (subscription_level == "Deluxe")
     + 0.20 * (subscription_level == "Premium")
