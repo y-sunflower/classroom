@@ -726,27 +726,7 @@ to configure it on all your pages if they are more Maths-heavy than these
 simple starter pages.</p>
 </div>
 <script id="MathJax-script" src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [["\\(", "\\)"]],
-      displayMath: [["\\[", "\\]"]],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      ignoreHtmlClass: ".*|",
-      processHtmlClass: "arithmatex"
-    }
-  };
-
-  document$.subscribe(() => {
-    MathJax.startup.output.clearCache()
-    MathJax.typesetClear()
-    MathJax.texReset()
-    MathJax.typesetPromise()
-  })
-</script>
+<script src="../javascripts/mathjax.js"></script>
 
 <h2 id="task-lists">Task Lists<a class="headerlink" href="#task-lists" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -842,6 +822,8 @@ simple starter pages.</p>
       <script src="../assets/javascripts/bundle.a2388154.min.js"></script>
       
         <script src="https://unpkg.com/tabulator-tables@6.5.3/dist/js/tabulator.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
         <script src="../javascripts/csv-table.js"></script>
       

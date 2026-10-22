@@ -23,29 +23,20 @@ feature_columns = [column for column in df.columns if column != "churn"]
 
 X = df.select(feature_columns).to_numpy()
 y = df["churn"].to_numpy()
-customer_indices = np.arange(df.height)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 categorical_features = ["subscription_level", "food_preference"]
-numeric_features = [
-    "tenure_months",
-    "monthly_price_eur",
-    "delivery_issues_6m",
-    "satisfaction_score",
-    "boxes_skipped_6m",
-    "discount_used",
+categorical_columns = [
+    i for i, col in enumerate(feature_columns) if col in categorical_features
 ]
-categorical_columns = [feature_columns.index(column) for column in categorical_features]
-numeric_columns = [feature_columns.index(column) for column in numeric_features]
+numeric_columns = [
+    i for i, col in enumerate(feature_columns) if col not in categorical_features
+]
 
 preprocessor = ColumnTransformer(
     [
-        (
-            "categorical",
-            OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-            categorical_columns,
-        ),
+        ("categorical", OneHotEncoder(), categorical_columns),
         ("numeric", StandardScaler(), numeric_columns),
     ]
 )
@@ -91,7 +82,7 @@ print(evaluation_display.select("model", "roc_auc"))
 best_model_name = evaluation_df["model"][0]
 best_model = trained_models[best_model_name]
 
-joblib.dump(best_model, "exercise_model.joblib")
+# joblib.dump(best_model, "exercise_model.joblib")
 
 print(f"\nBest model: {best_model_name}")
 print(f"ROC-AUC: {evaluation_df['roc_auc'][0]:.1%}")
@@ -102,7 +93,6 @@ threshold_results = []
 
 for threshold in thresholds:
     y_pred = (y_proba >= threshold).astype(int)
-
     threshold_results.append(
         {
             "threshold": threshold,
