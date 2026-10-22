@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>One-hot encoding column animation</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #172033;
+        background: transparent;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 280px;
+        margin: 0;
+        background: transparent;
+      }
+
+      main {
+        width: min(100%, 820px);
+        margin: 0 auto;
+        padding: 12px 8px;
+      }
+
+      table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0 5px;
+      }
+
+      col.category-col {
+        width: 100%;
+        transition: width 300ms ease;
+      }
+
+      col.output-col {
+        display: none;
+        width: 0;
+        transition: width 300ms ease;
+      }
+
+      col.output-col.visible {
+        display: table-column;
+      }
+
+      table[data-columns="1"] col.category-col { width: 52%; }
+      table[data-columns="1"] col.basic-col { width: 48%; }
+      table[data-columns="2"] col.category-col { width: 38%; }
+      table[data-columns="2"] col.basic-col,
+      table[data-columns="2"] col.plus-col { width: 31%; }
+      table[data-columns="3"] col.category-col { width: 31%; }
+      table[data-columns="3"] col.output-col { width: 23%; }
+
+      th {
+        padding: 0 6px 5px;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      th:not(:first-child) {
+        color: #315cce;
+        text-align: center;
+      }
+
+      td {
+        height: 43px;
+        padding: 0 6px;
+        border-bottom: 1px solid #edf1f6;
+        color: #24324a;
+        font-size: 18px;
+        font-weight: 650;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease;
+      }
+
+      tbody tr:nth-child(odd) td:first-child {
+        background: #fbfcfe;
+      }
+
+      .output-header {
+        animation: column-in 220ms ease both;
+      }
+
+      .output-cell {
+        border-bottom-color: #dce5fa;
+        color: transparent;
+        background: #f4f7ff;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 19px;
+        text-align: center;
+        animation: column-in 220ms ease both;
+      }
+
+      .output-cell.filled {
+        color: #315cce;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @keyframes column-in {
+        from {
+          opacity: 0;
+          transform: translateX(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @media (max-width: 460px) {
+        main {
+          padding: 9px 2px;
+        }
+
+        th {
+          padding-right: 3px;
+          padding-left: 3px;
+          font-size: 9px;
+        }
+
+        td {
+          height: 40px;
+          padding: 0 4px;
+          font-size: 16px;
+        }
+
+        .output-cell {
+          font-size: 17px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <table id="data-table" data-columns="0" aria-label="Subscription category and one-hot encoded columns">
+        <colgroup>
+          <col class="category-col" />
+          <col id="basic-col" class="output-col basic-col" />
+          <col id="plus-col" class="output-col plus-col" />
+          <col id="family-col" class="output-col family-col" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Subscription</th>
+            <th class="output-header" data-column="basic" scope="col" hidden>Basic</th>
+            <th class="output-header" data-column="plus" scope="col" hidden>Plus</th>
+            <th class="output-header" data-column="family" scope="col" hidden>Family</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic</td>
+            <td class="output-cell" data-column="basic" hidden></td>
+            <td class="output-cell" data-column="plus" hidden></td>
+            <td class="output-cell" data-column="family" hidden></td>
+          </tr>
+          <tr>
+            <td>Plus</td>
+            <td class="output-cell" data-column="basic" hidden></td>
+            <td class="output-cell" data-column="plus" hidden></td>
+            <td class="output-cell" data-column="family" hidden></td>
+          </tr>
+          <tr>
+            <td>Family</td>
+            <td class="output-cell" data-column="basic" hidden></td>
+            <td class="output-cell" data-column="plus" hidden></td>
+            <td class="output-cell" data-column="family" hidden></td>
+          </tr>
+          <tr>
+            <td>Plus</td>
+            <td class="output-cell" data-column="basic" hidden></td>
+            <td class="output-cell" data-column="plus" hidden></td>
+            <td class="output-cell" data-column="family" hidden></td>
+          </tr>
+          <tr>
+            <td>Basic</td>
+            <td class="output-cell" data-column="basic" hidden></td>
+            <td class="output-cell" data-column="plus" hidden></td>
+            <td class="output-cell" data-column="family" hidden></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <script>
+      (function () {
+        const table = document.getElementById("data-table");
+        const columns = ["basic", "plus", "family"].map((name) => ({
+          name,
+          col: document.getElementById(name + "-col"),
+          cells: Array.from(document.querySelectorAll('[data-column="' + name + '"]')),
+        }));
+        const pause = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+        const inputRows = Array.from(table.tBodies[0].rows);
+
+        columns.forEach((column) => {
+          const values = column.cells.filter((cell) => cell.classList.contains("output-cell"));
+          values.forEach((cell, index) => {
+            const category = inputRows[index].cells[0].textContent.trim().toLowerCase();
+            cell.textContent = category === column.name ? "1" : "0";
+          });
+        });
+
+        function showCompleteTable() {
+          table.dataset.columns = "3";
+          columns.forEach((column) => {
+            column.col.classList.add("visible");
+            column.cells.forEach((cell) => {
+              cell.hidden = false;
+              if (cell.classList.contains("output-cell")) cell.classList.add("filled");
+            });
+          });
+        }
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          showCompleteTable();
+          return;
+        }
+
+        async function animate() {
+          while (true) {
+            table.dataset.columns = "0";
+            columns.forEach((column) => {
+              column.col.classList.remove("visible");
+              column.cells.forEach((cell) => {
+                cell.hidden = true;
+                cell.classList.remove("filled");
+              });
+            });
+            await pause(650);
+
+            for (let index = 0; index < columns.length; index += 1) {
+              const column = columns[index];
+              table.dataset.columns = String(index + 1);
+              column.col.classList.add("visible");
+              column.cells.forEach((cell) => {
+                cell.hidden = false;
+                if (cell.classList.contains("output-cell")) cell.classList.remove("filled");
+              });
+              await pause(260);
+
+              const values = column.cells.filter((cell) => cell.classList.contains("output-cell"));
+              for (const cell of values) {
+                cell.classList.add("filled");
+                await pause(190);
+              }
+              await pause(350);
+            }
+
+            await pause(950);
+          }
+        }
+
+        animate();
+      })();
+    </script>
+  </body>
+</html>

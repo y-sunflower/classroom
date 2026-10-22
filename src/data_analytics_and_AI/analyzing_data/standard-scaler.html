@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>StandardScaler column animation</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #172033;
+        background: transparent;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 280px;
+        margin: 0;
+        background: transparent;
+      }
+
+      main {
+        width: min(100%, 820px);
+        margin: 0 auto;
+        padding: 12px 8px;
+      }
+
+      table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0 5px;
+        transition: width 300ms ease;
+      }
+
+      col.source-col {
+        width: 100%;
+        transition: width 300ms ease;
+      }
+
+      col.output-col {
+        display: none;
+        width: 0;
+        transition: width 300ms ease;
+      }
+
+      col.output-col.visible {
+        display: table-column;
+      }
+
+      table[data-output="1"] col.source-col {
+        width: 54%;
+      }
+
+      table[data-output="1"] col.output-col {
+        width: 46%;
+      }
+
+      th {
+        padding: 0 12px 5px;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      th:last-child {
+        color: #315cce;
+      }
+
+      td {
+        height: 43px;
+        padding: 0 12px;
+        border-bottom: 1px solid #edf1f6;
+        color: #24324a;
+        font-size: 20px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 650;
+        transition:
+          background 200ms ease,
+          color 200ms ease,
+          border-color 200ms ease;
+      }
+
+      tbody tr:nth-child(odd) td:first-child {
+        background: #fbfcfe;
+      }
+
+      .output-cell {
+        border-bottom-color: #dce5fa;
+        color: transparent;
+        background: #f4f7ff;
+        text-align: right;
+      }
+
+      .output-cell.filled {
+        color: #244eb7;
+      }
+
+      .stats {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 37px;
+        margin-top: 9px;
+        opacity: 0;
+        transform: translateY(4px);
+        transition:
+          opacity 220ms ease,
+          transform 220ms ease;
+      }
+
+      .stats.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stat {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border: 1px solid #e2e8f0;
+        border-radius: 7px;
+        color: #64748b;
+        background: #fff;
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .stat strong {
+        color: #172033;
+        font-size: 12px;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (max-width: 460px) {
+        main {
+          padding: 9px 2px;
+        }
+
+        th {
+          padding-right: 7px;
+          padding-left: 7px;
+          font-size: 9px;
+        }
+
+        td {
+          height: 40px;
+          padding: 0 8px;
+          font-size: 18px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <table id="data-table" data-output="0" aria-label="Monthly spend and standardized values">
+        <colgroup>
+          <col class="source-col" />
+          <col id="output-col" class="output-col" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Monthly spend (€)</th>
+            <th id="output-heading" scope="col" hidden>Standardized</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>120</td><td class="output-cell" hidden></td></tr>
+          <tr><td>140</td><td class="output-cell" hidden></td></tr>
+          <tr><td>160</td><td class="output-cell" hidden></td></tr>
+          <tr><td>180</td><td class="output-cell" hidden></td></tr>
+          <tr><td>200</td><td class="output-cell" hidden></td></tr>
+        </tbody>
+      </table>
+
+      <div id="stats" class="stats" hidden>
+        <span class="stat">mean μ <strong data-stat="mean"></strong></span>
+        <span class="stat">std dev σ <strong data-stat="std"></strong></span>
+      </div>
+    </main>
+    <script>
+      (function () {
+        const table = document.getElementById("data-table");
+        const outputColumn = document.getElementById("output-col");
+        const outputHeading = document.getElementById("output-heading");
+        const outputCells = Array.from(document.querySelectorAll(".output-cell"));
+        const stats = document.getElementById("stats");
+        const pause = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+        const sourceValues = Array.from(table.tBodies[0].rows, (row) =>
+          Number(row.cells[0].textContent),
+        );
+        const mean = sourceValues.reduce((sum, value) => sum + value, 0) / sourceValues.length;
+        const standardDeviation = Math.sqrt(
+          sourceValues.reduce((sum, value) => sum + (value - mean) ** 2, 0) / sourceValues.length,
+        );
+
+        stats.querySelector('[data-stat="mean"]').textContent = mean.toFixed(0);
+        stats.querySelector('[data-stat="std"]').textContent = standardDeviation.toFixed(2);
+        outputCells.forEach((cell, index) => {
+          const score = (sourceValues[index] - mean) / standardDeviation;
+          cell.textContent = score < 0
+            ? "−" + Math.abs(score).toFixed(2)
+            : score > 0
+              ? "+" + score.toFixed(2)
+              : "0.00";
+        });
+
+        function showCompleteTable() {
+          table.dataset.output = "1";
+          outputColumn.classList.add("visible");
+          outputHeading.hidden = false;
+          outputCells.forEach((cell) => {
+            cell.hidden = false;
+            cell.classList.add("filled");
+          });
+          stats.hidden = false;
+          stats.classList.add("visible");
+        }
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          showCompleteTable();
+          return;
+        }
+
+        async function animate() {
+          while (true) {
+            stats.hidden = false;
+            requestAnimationFrame(() => stats.classList.add("visible"));
+            await pause(700);
+
+            table.dataset.output = "1";
+            outputColumn.classList.add("visible");
+            outputHeading.hidden = false;
+            outputCells.forEach((cell) => {
+              cell.hidden = false;
+              cell.classList.remove("filled");
+            });
+            await pause(350);
+
+            for (const cell of outputCells) {
+              cell.classList.add("filled");
+              await pause(260);
+            }
+
+            await pause(1300);
+            stats.classList.remove("visible");
+            await pause(220);
+            stats.hidden = true;
+            table.dataset.output = "0";
+            outputColumn.classList.remove("visible");
+            outputHeading.hidden = true;
+            outputCells.forEach((cell) => {
+              cell.hidden = true;
+              cell.classList.remove("filled");
+            });
+            await pause(450);
+          }
+        }
+
+        animate();
+      })();
+    </script>
+  </body>
+</html>
