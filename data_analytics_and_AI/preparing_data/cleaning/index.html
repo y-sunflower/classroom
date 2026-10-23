@@ -1809,10 +1809,21 @@
 <p><span class="answer"><strong>Answer: at random.</strong> The missingness can be explained by the observed age variable.</span></p>
 </details>
 <h2 id="outliers">Outliers<a class="headerlink" href="#outliers" title="Permanent link">&para;</a></h2>
-<p>In France, before income tax (after social security contributions)</p>
+<div class="admonition question">
+<p class="admonition-title">Are they expected?</p>
+<p>In France, before income tax (after social security contributions):</p>
 <ul>
 <li>Average salary is ~2700€/month</li>
 <li>Median salary is ~2200€/month</li>
+</ul>
+<p>This is because revenu isn't uniformely distributed in the population.</p>
+</div>
+<p>How should we deal with them?</p>
+<ul>
+<li><strong>Detect</strong>: use distributions, box plots, IQR or anomaly detection</li>
+<li><strong>Investigate</strong>: data error, legitimate extreme value, or different population?</li>
+<li><strong>Choose a treatment</strong>: remove, cap, transform, use robust methods, or keep</li>
+<li><strong>Validate</strong>: compare model performance with and without treatment</li>
 </ul>
 <h3 id="exercise_1">Exercise<a class="headerlink" href="#exercise_1" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you'll investigate six outlier cases and figure out what should be done in each one.</p>
