@@ -68,13 +68,10 @@ For each scenario, decide whether the data is **completely at random**, **at ran
 
 ## Outliers
 
-Let's look at graduates' annual income ten years after graduation.
+In France, before income tax (after social security contributions)
 
-<iframe src="./outlier.html" width="100%" height="500" style="border: none"></iframe>
-
-!!! question "What should the school publish?"
-
-    The mean includes everyone but can be pulled up by one $500,000 income. The median may better represent a typical graduate. If you exclude a valid outcome, **say so clearly**.
+- Average salary is ~2700€/month
+- Median salary is ~2200€/month
 
 ### Exercise
 
