@@ -2,7 +2,6 @@
 icon: lucide/brain-circuit
 ---
 
-
 ## Data
 
 ```py exec="on" source="above" session="train-models"
@@ -88,7 +87,6 @@ model.fit(X_train, y_train)
 
     But is it good though?
 
-
 ## Evaluation metrics
 
 === "Accuracy"
@@ -173,12 +171,6 @@ print(f"AUC: {auc:.1f}%\n")
 
 ## Compare models
 
-Logistic regression is a useful baseline, but other models may find different patterns in the data. We can compare it with a decision tree, a random forest, and K-nearest neighbors.
-
-!!! important "Keep the comparison fair"
-
-    Use the same train-test split and preprocessing for every model. This way, differences in the scores come from the models rather than different data or preparation.
-
 ```py exec="on" source="above" result="text" session="train-models"
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -218,7 +210,7 @@ for name, classifier in models.items():
 
 for scores in sorted(model_scores, key=lambda scores: scores["auc"], reverse=True):
     print(
-        f"{scores['model']:<22} "
+        f"{scores['model']:<21} "
         f"accuracy {scores['accuracy']:.1%} | "
         f"precision {scores['precision']:.1%} | "
         f"recall {scores['recall']:.1%} | "
@@ -227,4 +219,14 @@ for scores in sorted(model_scores, key=lambda scores: scores["auc"], reverse=Tru
     )
 ```
 
-For a retention campaign, compare recall and AUC closely: recall reflects how many customers likely to churn we identify, while AUC compares how well the models separate churners from other customers across thresholds. A higher accuracy alone does not necessarily make a model the best fit for this goal.
+## Save the best model
+
+!!! note "joblib"
+
+    `joblib` is a Python library that (among others) that let use **save** a model to disk in order to **reuse it later**.
+
+```py exec="on" source="above" session="train-models"
+import joblib
+
+joblib.dump(model, "src/data_analytics_and_AI/analyzing_data/exercise_model.joblib")
+```

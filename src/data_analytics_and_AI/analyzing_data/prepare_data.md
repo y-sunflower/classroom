@@ -32,16 +32,18 @@ print(f"Churn rate: {df['churn'].mean():.2%}\n")
 ### Separate features and target
 
 - **target** (aka `y`) = whether the customer churned or not
-- **features** (aka `X`) = everything that can help us predict the target (time since subscribed, the kind of subcription, etc)
 
 ```py exec="on" source="above" result="text" session="food-analysis"
 # The "churn" columns contain the info we want
 y = df["churn"].to_numpy()
 print(f"Target (y): {y}\n")
+```
 
+- **features** (aka `X`) = everything that can help us predict the target (time since subscribed, the kind of subcription, etc)
+
+```py exec="on" source="above" result="text" session="food-analysis"
 # Column names of features are everything, except "churn"
 feature_columns = df.drop("churn").columns
 X = df.select(feature_columns).to_numpy()
 print(f"Features (X): {X}\n")
 ```
-

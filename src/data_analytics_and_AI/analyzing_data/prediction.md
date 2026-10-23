@@ -80,11 +80,11 @@ A tree asks a sequence of simple questions about the features. Greater depth can
 
 === "How it works"
 
-    At each decision point, or **node** :material-information-outline:{ title="A point where the tree asks a question and splits the examples." }, the tree tries possible cutoffs on its features, such as fewer or more product visits. It chooses a cutoff that leaves the resulting groups with less mixing between purchasers and non-purchasers, then repeats the process inside each group.
+    At each decision point, or **node** :material-information-outline:{ title="A point where the tree asks a question and splits the examples." }, the tree tries possible cutoffs on its features (such as fewer or more product visits). It chooses a cutoff that leaves the resulting groups with less mixing between purchasers and non-purchasers, and then repeats the process inside each group.
 
-    A group where the tree stops asking questions is a **leaf** :material-information-outline:{ title="The final group at the end of a branch, where the tree makes a prediction." }. It predicts the purchase likelihood from the share of training customers in that group who purchased.
+    A group where the tree stops asking questions is a **leaf** :material-information-outline:{ title="The final group at the end of a branch, where the tree makes a prediction." }. It predicts the purchase probability from the share of training customers in that group who purchased.
 
-    The **maximum depth** :material-information-outline:{ title="The most questions allowed between the top of the tree and a prediction." } sets how many questions can appear along a path from the top of the tree to a leaf. The **minimum examples per group** :material-information-outline:{ title="The smallest number of training examples allowed on either side of a split." } sets how many training customers each side of a split must contain. In this playground, the defaults are depth 4 and 6 examples per group. A group stops splitting when it reaches the depth limit, contains only one outcome, or cannot be divided while keeping the minimum examples on both sides. Increasing the depth allows more detailed rules; increasing the minimum group size favors broader rules.
+    The **maximum depth** :material-information-outline:{ title="The most questions allowed between the top of the tree and a prediction." } sets how many questions can appear along a path from the top of the tree to a leaf. The **minimum examples per group** :material-information-outline:{ title="The smallest number of training examples allowed on either side of a split." } sets how many training customers each side of a split must contain. A group stops splitting when it reaches the depth limit, contains only one outcome, or cannot be divided while keeping the minimum examples on both sides.
 
     ``` mermaid
     graph TD
@@ -152,5 +152,5 @@ We want to make it easy to know **what are the chances of a customer to churn**.
 
 - find the relevant data and clean it
 - train and evaluate multiple machine learning models
-- make it easy to use the best model *in production*
+- make it easy to use the best model _in production_
 - measure if it's financially viable to contact customers

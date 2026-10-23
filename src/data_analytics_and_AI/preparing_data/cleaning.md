@@ -68,10 +68,21 @@ For each scenario, decide whether the data is **completely at random**, **at ran
 
 ## Outliers
 
-In France, before income tax (after social security contributions)
+!!! question "Are they expected?"
 
-- Average salary is ~2700€/month
-- Median salary is ~2200€/month
+    In France, before income tax (after social security contributions):
+
+    - Average salary is ~2700€/month
+    - Median salary is ~2200€/month
+
+    This is because revenu isn't uniformely distributed in the population.
+
+How should we deal with them?
+
+- **Detect**: use distributions, box plots, IQR or anomaly detection
+- **Investigate**: data error, legitimate extreme value, or different population?
+- **Choose a treatment**: remove, cap, transform, use robust methods, or keep
+- **Validate**: compare model performance with and without treatment
 
 ### Exercise
 
