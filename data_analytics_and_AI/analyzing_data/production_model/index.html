@@ -1193,6 +1193,56 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#load-the-model_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Load the model
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load the model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ask-for-customer-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ask for customer details
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-the-inputs-to-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pass the inputs to the model
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-the-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Show the prediction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1638,6 +1688,56 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#load-the-model_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Load the model
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load the model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ask-for-customer-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ask for customer details
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-the-inputs-to-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pass the inputs to the model
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-the-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Show the prediction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1787,7 +1887,7 @@
 <li>define the inputs we want</li>
 <li>make a prediction</li>
 </ul>
-<h3 id="load-the-model">Load the model<a class="headerlink" href="#load-the-model" title="Permanent link">&para;</a></h3>
+<h4 id="load-the-model">Load the model<a class="headerlink" href="#load-the-model" title="Permanent link">&para;</a></h4>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -1819,7 +1919,7 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn probability: </span><span class="si">{</span><span class="n">probability</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Churn probability: 14.9%</p>
+<p>Churn probability: 15.2%</p>
 <div class="admonition question">
 <p class="admonition-title">Question</p>
 <p>What is the churn probability of someone who is a <strong>vegetarian</strong> with a <strong>premium</strong> subscription, been subscribed since <strong>2 months</strong>, <strong>no issue delivery</strong> in the last 6 months, <strong>satisfaction of 1</strong> and <strong>without discount</strong>?</p>
@@ -1850,6 +1950,76 @@
 </span></code></pre></div>
 <p>Change the code in <code>app.py</code> so that instead of asking for the name, it asks for the age. Use <code>st.number_input()</code> instead of <code>st.text_input()</code>. The code should display a different message depending on whether user is more than 20 yo or not.</p>
 <h3 id="integrate-our-model">Integrate our model<a class="headerlink" href="#integrate-our-model" title="Permanent link">&para;</a></h3>
+<p>Let's replace the toy app with one that asks for a customer's details and uses our saved model. Continue editing the <code>app.py</code> from the previous section. Add each part below in order.</p>
+<h3 id="load-the-model_1">Load the model<a class="headerlink" href="#load-the-model_1" title="Permanent link">&para;</a></h3>
+<p>First, import the libraries we need. <code>Path</code> lets us find the saved model in the same folder as <code>app.py</code>.</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+</span></code></pre></div>
+<p>Load the model once and let Streamlit keep it ready while the app reruns after a user changes an input:</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">#@st.cache_resource</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_model</span><span class="p">():</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s2">"exercise_model.joblib"</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">return</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">()</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">plan_prices</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Basic"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">"Deluxe"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">"Premium"</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="ask-for-customer-details">Ask for customer details<a class="headerlink" href="#ask-for-customer-details" title="Permanent link">&para;</a></h4>
+<p>Add a title and input widgets for the features. The monthly price comes from the selected plan, so users don't have to enter it separately.</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Customer churn prediction"</span><span class="p">)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Enter a customer's details to estimate their likelihood of churning."</span><span class="p">)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">subscription_level</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">"Subscription plan"</span><span class="p">,</span> <span class="n">plan_prices</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">tenure_months</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Months subscribed"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">food_preference</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="s2">"Food preference"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"Mixed"</span><span class="p">,</span> <span class="s2">"Vegetarian"</span><span class="p">,</span> <span class="s2">"Vegan"</span><span class="p">,</span> <span class="s2">"High Protein"</span><span class="p">]</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">delivery_issues_6m</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Delivery issues in the last 6 months"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">satisfaction_score</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Satisfaction score"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">boxes_skipped_6m</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Boxes skipped in the last 6 months"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">discount_choice</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">"Used a discount?"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"No"</span><span class="p">,</span> <span class="s2">"Yes"</span><span class="p">])</span>
+</span></code></pre></div>
+<h4 id="pass-the-inputs-to-the-model">Pass the inputs to the model<a class="headerlink" href="#pass-the-inputs-to-the-model" title="Permanent link">&para;</a></h4>
+<p>The model expects the features in the same order used during training. Add a button and arrange the selected values in that order. <code>dtype=object</code> allows the array to contain both text and numbers.</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">"Predict churn"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"primary"</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">discount_used</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">discount_choice</span> <span class="o">==</span> <span class="s2">"Yes"</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="p">[[</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>            <span class="n">subscription_level</span><span class="p">,</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            <span class="n">tenure_months</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="n">plan_prices</span><span class="p">[</span><span class="n">subscription_level</span><span class="p">],</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="n">food_preference</span><span class="p">,</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="n">delivery_issues_6m</span><span class="p">,</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="n">satisfaction_score</span><span class="p">,</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="n">boxes_skipped_6m</span><span class="p">,</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="n">discount_used</span><span class="p">,</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="p">]],</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="p">)</span>
+</span></code></pre></div>
+<h4 id="show-the-prediction">Show the prediction<a class="headerlink" href="#show-the-prediction" title="Permanent link">&para;</a></h4>
+<p>The model returns a probability for each class. Find the column for class <code>1</code> (churn) and display that probability, along with the model's yes-or-no prediction:</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>    <span class="n">churn_class_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">churn_probability</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="n">churn_class_index</span><span class="p">]</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">st</span><span class="o">.</span><span class="n">metric</span><span class="p">(</span><span class="s2">"Churn probability"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">churn_probability</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"This customer is predicted to churn."</span><span class="p">)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">"This customer is predicted to stay."</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Launch the app:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>uv<span class="w"> </span>run<span class="w"> </span>streamlit<span class="w"> </span>run<span class="w"> </span>app.py
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Once it works, try a few different customer profiles!</p>
+</div>
 
 
 

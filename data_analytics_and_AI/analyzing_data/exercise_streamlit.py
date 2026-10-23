@@ -110,7 +110,7 @@ if customer_to_predict:
 
     st.subheader("Prediction")
     if predicted_churn:
-        st.warning("This customer is predicted to churn.")
+        st.error("This customer is predicted to churn.")
     else:
         st.success("This customer is predicted to stay.")
     st.metric("Churn probability", f"{churn_probability:.1%}")

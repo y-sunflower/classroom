@@ -1937,8 +1937,8 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">y_proba</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">y_proba</span><span class="p">)</span>
 </span></code></pre></div>
-<p>[0 0 0 ... 0 0 0] </p>
-<p>[0.0975957  0.41764282 0.24517954 ... 0.18440839 0.15577149 0.13006206]</p>
+<p>[0 0 0 ... 0 1 0] </p>
+<p>[0.36489092 0.23687051 0.08913679 ... 0.23402104 0.57077083 0.38237388]</p>
 <h3 id="evaluate-our-predictions-against-the-test-set">Evaluate our predictions against the test set<a class="headerlink" href="#evaluate-our-predictions-against-the-test-set" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
@@ -1955,11 +1955,11 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Accuracy: 74.1%</p>
-<p>Precision: 58.8%</p>
-<p>Recall: 22.9%</p>
-<p>F1: 32.9%</p>
-<p>AUC: 71.0%</p>
+<p>Accuracy: 74.2%</p>
+<p>Precision: 61.3%</p>
+<p>Recall: 21.2%</p>
+<p>F1: 31.5%</p>
+<p>AUC: 70.9%</p>
 <details class="question" open="open">
 <summary>Assuming <strong>retention campaigns</strong> are cheap, which metrics are we the most interested in?</summary>
 <p><span class="answer">We can use the recall and the auc metrics here, while others have medium to low value.</span></p>
@@ -2011,10 +2011,10 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="sa">f</span><span class="s2">"AUC </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">'auc'</span><span class="p">]</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression   accuracy 74.1% | precision 58.8% | recall 22.9% | F1 32.9% | AUC 71.0%
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Random forest         accuracy 73.5% | precision 55.3% | recall 24.2% | F1 33.7% | AUC 69.5%
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Decision tree         accuracy 73.3% | precision 54.3% | recall 24.4% | F1 33.7% | AUC 69.0%
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors   accuracy 69.7% | precision 43.9% | recall 32.6% | F1 37.4% | AUC 64.0%
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression   accuracy 74.2% | precision 61.3% | recall 21.2% | F1 31.5% | AUC 70.9%
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Decision tree         accuracy 73.0% | precision 56.6% | recall 15.5% | F1 24.4% | AUC 68.5%
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Random forest         accuracy 73.0% | precision 54.0% | recall 22.6% | F1 31.9% | AUC 68.5%
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors   accuracy 69.5% | precision 43.2% | recall 28.8% | F1 34.6% | AUC 62.0%
 </span></code></pre></div>
 <h2 id="save-the-best-model">Save the best model<a class="headerlink" href="#save-the-best-model" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
