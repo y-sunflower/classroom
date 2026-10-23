@@ -10,7 +10,7 @@ Here we'll use a new CSV file about **food delivery subscription**:
 
 !!! info
 
-    If you haven't already, install the required packages. See the [setup guide](../definition_of_data_and_ai/setup.md).
+    If you haven't already, install the required packages. See the [setup guide](../setup.md).
 
 ## Prepare the data
 

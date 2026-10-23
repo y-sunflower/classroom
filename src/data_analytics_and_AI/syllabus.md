@@ -19,7 +19,7 @@ icon: lucide/book-open-check
 - Richness of data and where to collect them: internal data, external data, open data, panel and tracking data
 - From data to action: machine learning, natural language processing, computer vision
 
-[Go to materials of this session](definition_of_data_and_ai/setup.md){ .md-button .md-button--primary }
+[Go to materials of this session](definition_of_data_and_ai/definitions.md){ .md-button .md-button--primary }
 
 ## Session 2 - Preparing data
 

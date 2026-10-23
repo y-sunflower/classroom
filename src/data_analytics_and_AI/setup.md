@@ -1,5 +1,5 @@
 ---
-icon: lucide/database
+icon: lucide/folder-code
 ---
 
 ### What each tool does
@@ -15,6 +15,10 @@ icon: lucide/database
 1. Open the official [Positron download page](https://positron.posit.co/download).
 2. Download the installer for your operating system.
 3. Install and open Positron.
+4. (Optionnal but recommended) Go to the extensions pane and install the following:
+    - Error Lens
+    - Ruff
+    - ty
 
 ### Step 2: check or install `uv`
 

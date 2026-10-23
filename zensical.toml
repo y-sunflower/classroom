@@ -8,9 +8,11 @@ docs_dir = "src"
 nav = [
   { "All courses" = "index.md" },
   { "Data Analytics & AI" = [
-    { "Syllabus" = "data_analytics_and_AI/syllabus.md" },
+    { "About" = [
+      { "Syllabus" = "data_analytics_and_AI/syllabus.md" },
+      { "Set up Positron and uv" = "data_analytics_and_AI/setup.md" },
+    ] },
     { "Definitions of data and AI" = [
-      { "Set up Positron and uv" = "data_analytics_and_AI/definition_of_data_and_ai/setup.md" },
       { "Definitions" = "data_analytics_and_AI/definition_of_data_and_ai/definitions.md" },
       { "Generative AI" = "data_analytics_and_AI/definition_of_data_and_ai/generative_ai.md" },
       { "Indigo" = "data_analytics_and_AI/definition_of_data_and_ai/indigo.md" },

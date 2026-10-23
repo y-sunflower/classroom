@@ -78,7 +78,6 @@ flowchart TB
     B -->|"Better algorithms + more data"| C
     C -->|"Large datasets + GPUs"| D
     D -->|"Foundation models"| E
-
 ```
 
 </center>
@@ -105,11 +104,11 @@ Data work is collaborative. Job titles vary between organisations, and one perso
 | **Data scientist**                | Uses statistics, machine learning, and programming to model patterns or make predictions |
 | **Data Protection Officer (DPO)** | Advises on privacy, data protection obligations, rights, and governance                  |
 
-In practice, many of those job titles are mixed together and companies often don't make true differences between them. Also,
+In practice, many of those job titles are mixed together and companies often don't make true differences between them.
 
 
 ## Going further:
 
 - [Video, FR] [How does ChatGPT run on a single database server](https://www.youtube.com/watch?v=Awu5RoPmy-0)
 - [Blog, EN] [Big data doesn't exist](https://techcrunch.com/2015/09/10/big-data-doesnt-exist/)
-```
+

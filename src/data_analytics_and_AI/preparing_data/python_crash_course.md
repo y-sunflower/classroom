@@ -6,7 +6,7 @@ In the next lesson, we'll use **Python**, one of the world's most famous program
 
 !!! warning
 
-      - Make sure you've installed Positron and uv ([see the guide if not](../definition_of_data_and_ai/setup.md)).
+      - Make sure you've installed Positron and uv ([see the guide if not](../setup.md)).
       - **The goal isn't to make you a programming expert**! Instead, I want you to grasp the core concepts of manipulating data with code, learn to do basic operations, and then learn how to use AI to do them for you.
 
 ## Get ready
@@ -381,3 +381,114 @@ The same building blocks work together in a program. Here, a loop visits each sa
 === "Hint"
 
       Each sale is a dictionary with keys `product` and `total`. Change `> 10` to `>= 20` to include sales that equal 20.
+
+## Going further
+
+!!! info
+
+      Those are exercises to make practices the concepts seen before. Using AI wouldn't make sense here, but **feel free to use it** to give you hints and explanations of things you don't understand.
+
+=== "Calculate a shopping cart"
+
+      You have a list of product prices. Write a program that:
+
+      1. Prints each price.
+      2. Calculates the total price of all products.
+      3. Prints the total using an f-string.
+      4. Calculates the average price of a product.
+
+      Starter code:
+
+      ```py
+      prices = [12.50, 8.00, 15.75, 4.25]
+      
+      # TODO: calculate the total using a loop
+      
+      # TODO: calculate the average price
+      
+      # TODO: display the total and average
+      ```
+
+      Expected result:
+
+      ```
+      Total: 40.5 euros
+      Average price: 10.125 euros
+      ```
+
+=== "Find expensive products"
+
+      You have a small collection of products. Write a program that:
+
+      1. Displays the name and price of each product.
+      2. Displays only products costing more than 10 euros.
+      3. Counts how many products cost more than 10 euros.
+      4. Prints that count.
+
+      Starter code:
+
+      ```py
+      products = [
+            {"name": "Notebook", "price": 5.50},
+            {"name": "Backpack", "price": 35.00},
+            {"name": "Pen", "price": 2.00},
+            {"name": "Calculator", "price": 18.50},
+            {"name": "Folder", "price": 4.00},
+      ]
+
+      # TODO: display all products
+
+      # TODO: find products costing more than 10 euros
+
+      # TODO: display the number of expensive products
+      ```
+
+      Expected result for expensive products:
+
+      ```
+      Backpack: 35.0 euros
+      Calculator: 18.5 euros
+      Number of expensive products: 2
+      ```
+
+=== "Analyze sales data"
+
+      You have a small sales dataset. Your goal is to write a program that produces a simple sales report.
+
+      1. Create a function `calculate_total(quantity, unit_price)` that returns the total amount of a sale.
+      2. Use a loop to calculate the total for each sale.
+      3. Calculate the total revenue across all sales.
+      4. Display only sales worth at least 20 euros.
+      5. Print the total revenue at the end.
+
+      Starter code:
+
+      ```py
+      sales = [
+            {"product": "Notebook", "quantity": 3, "unit_price": 5.00},
+            {"product": "Pen", "quantity": 10, "unit_price": 2.00},
+            {"product": "Backpack", "quantity": 2, "unit_price": 35.00},
+            {"product": "Folder", "quantity": 4, "unit_price": 3.50},
+      ]
+
+      def calculate_total(quantity, unit_price):
+            pass
+
+      # TODO: loop through the sales
+
+      # TODO: calculate the total for each sale
+
+      # TODO: display sales worth at least 20 euros
+
+      # TODO: calculate and display total revenue
+      ```
+
+      Expected result:
+
+      ```
+      Pen: 20.0 euros
+      Backpack: 70.0 euros
+      Total revenue: 119.0 euros
+      ```
+
+      These exercises build toward the next lesson: working with tabular data using Polars. Students will have already practiced selecting records, calculating values, filtering by conditions, and aggregating results using plain Python.
