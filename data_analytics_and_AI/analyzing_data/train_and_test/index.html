@@ -243,6 +243,24 @@
     
     
     
+      
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+      
+        
+      
+    
+    
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../../syllabus/" class="md-tabs__link">
           
@@ -251,6 +269,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -394,6 +415,68 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  About
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_1">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  About
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../syllabus/" class="md-nav__link">
         
@@ -423,10 +506,46 @@
   
   
   
-    
-    
-      
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
         
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-folder-code" viewBox="0 0 24 24"><path d="M10 10.5 8 13l2 2.5M14 10.5l2 2.5-2 2.5"/><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Set up Positron and uv
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
       
         
       
@@ -482,35 +601,6 @@
 
             </label>
             <ul class="md-nav__list" data-md-scrollfix>
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../definition_of_data_and_ai/setup/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
-  
-  <span class="md-ellipsis">
-    
-  
-  Set up Positron and uv
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
               
                 
                   
@@ -1615,6 +1705,20 @@
     
     
     
+      
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
       <li class="md-path__item">
         <a href="../../syllabus/" class="md-path__link">
           
@@ -1625,6 +1729,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -1808,8 +1915,8 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">y_proba</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">y_proba</span><span class="p">)</span>
 </span></code></pre></div>
-<p>[0 1 1 ... 0 0 0] </p>
-<p>[0.15808971 0.69361345 0.53885571 ... 0.07649413 0.25623365 0.24588124]</p>
+<p>[1 0 0 ... 0 0 0] </p>
+<p>[0.60032928 0.44139502 0.08880995 ... 0.24455509 0.40419861 0.37312219]</p>
 <h3 id="evaluate-our-predictions-against-the-test-set">Evaluate our predictions against the test set<a class="headerlink" href="#evaluate-our-predictions-against-the-test-set" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
@@ -1826,11 +1933,11 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Accuracy: 74.4%</p>
-<p>Precision: 58.3%</p>
-<p>Recall: 22.5%</p>
-<p>F1: 32.5%</p>
-<p>AUC: 70.9%</p>
+<p>Accuracy: 74.5%</p>
+<p>Precision: 60.8%</p>
+<p>Recall: 20.8%</p>
+<p>F1: 30.9%</p>
+<p>AUC: 72.2%</p>
 <details class="question" open="open">
 <summary>Assuming <strong>retention campaigns</strong> are cheap, which metrics are we the most interested in?</summary>
 <p><span class="answer">We can use the recall and the auc metrics here, while others have medium to low value.</span></p>
@@ -1887,10 +1994,10 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="sa">f</span><span class="s2">"AUC </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">'auc'</span><span class="p">]</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression    accuracy 74.4% | precision 58.3% | recall 22.5% | F1 32.5% | AUC 70.9%
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Random forest          accuracy 73.4% | precision 53.7% | recall 21.3% | F1 30.5% | AUC 69.0%
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Decision tree          accuracy 73.7% | precision 57.1% | recall 15.6% | F1 24.5% | AUC 68.3%
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors    accuracy 70.2% | precision 43.1% | recall 27.8% | F1 33.8% | AUC 61.6%
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression    accuracy 74.5% | precision 60.8% | recall 20.8% | F1 30.9% | AUC 72.2%
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Random forest          accuracy 73.5% | precision 54.4% | recall 21.6% | F1 31.0% | AUC 70.8%
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Decision tree          accuracy 73.8% | precision 58.4% | recall 16.8% | F1 26.1% | AUC 70.7%
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors    accuracy 71.4% | precision 47.1% | recall 31.1% | F1 37.5% | AUC 64.4%
 </span></code></pre></div>
 <p>For a retention campaign, compare recall and AUC closely: recall reflects how many customers likely to churn we identify, while AUC compares how well the models separate churners from other customers across thresholds. A higher accuracy alone does not necessarily make a model the best fit for this goal.</p>
 
