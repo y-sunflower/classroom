@@ -1915,8 +1915,8 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">y_proba</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">y_proba</span><span class="p">)</span>
 </span></code></pre></div>
-<p>[1 0 0 ... 0 0 0] </p>
-<p>[0.60032928 0.44139502 0.08880995 ... 0.24455509 0.40419861 0.37312219]</p>
+<p>[0 0 1 ... 0 0 0] </p>
+<p>[0.2664819  0.35356831 0.56378781 ... 0.311095   0.07450116 0.31087158]</p>
 <h3 id="evaluate-our-predictions-against-the-test-set">Evaluate our predictions against the test set<a class="headerlink" href="#evaluate-our-predictions-against-the-test-set" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
@@ -1933,11 +1933,11 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Accuracy: 74.5%</p>
-<p>Precision: 60.8%</p>
-<p>Recall: 20.8%</p>
-<p>F1: 30.9%</p>
-<p>AUC: 72.2%</p>
+<p>Accuracy: 73.7%</p>
+<p>Precision: 59.8%</p>
+<p>Recall: 22.5%</p>
+<p>F1: 32.7%</p>
+<p>AUC: 70.5%</p>
 <details class="question" open="open">
 <summary>Assuming <strong>retention campaigns</strong> are cheap, which metrics are we the most interested in?</summary>
 <p><span class="answer">We can use the recall and the auc metrics here, while others have medium to low value.</span></p>
@@ -1994,10 +1994,10 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="sa">f</span><span class="s2">"AUC </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">'auc'</span><span class="p">]</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression    accuracy 74.5% | precision 60.8% | recall 20.8% | F1 30.9% | AUC 72.2%
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Random forest          accuracy 73.5% | precision 54.4% | recall 21.6% | F1 31.0% | AUC 70.8%
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Decision tree          accuracy 73.8% | precision 58.4% | recall 16.8% | F1 26.1% | AUC 70.7%
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors    accuracy 71.4% | precision 47.1% | recall 31.1% | F1 37.5% | AUC 64.4%
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression    accuracy 73.7% | precision 59.8% | recall 22.5% | F1 32.7% | AUC 70.5%
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Random forest          accuracy 72.8% | precision 54.9% | recall 22.8% | F1 32.2% | AUC 68.0%
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Decision tree          accuracy 73.1% | precision 59.8% | recall 15.2% | F1 24.3% | AUC 67.6%
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors    accuracy 69.9% | precision 45.1% | recall 28.9% | F1 35.2% | AUC 62.5%
 </span></code></pre></div>
 <p>For a retention campaign, compare recall and AUC closely: recall reflects how many customers likely to churn we identify, while AUC compares how well the models separate churners from other customers across thresholds. A higher accuracy alone does not necessarily make a model the best fit for this goal.</p>
 
