@@ -19,6 +19,10 @@ import numpy as np
 model = joblib.load("src/data_analytics_and_AI/analyzing_data/exercise_model.joblib")
 ```
 
+!!! tip
+
+    Remember to change the path above to the right one!
+
 ### Inputs
 
 ```py exec="on" source="above" session="use-model"
