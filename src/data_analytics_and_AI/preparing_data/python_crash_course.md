@@ -401,11 +401,11 @@ The same building blocks work together in a program. Here, a loop visits each sa
 
       ```py
       prices = [12.50, 8.00, 15.75, 4.25]
-      
+
       # TODO: calculate the total using a loop
-      
+
       # TODO: calculate the average price
-      
+
       # TODO: display the total and average
       ```
 
@@ -491,4 +491,4 @@ The same building blocks work together in a program. Here, a loop visits each sa
       Total revenue: 119.0 euros
       ```
 
-      These exercises build toward the next lesson: working with tabular data using Polars. Students will have already practiced selecting records, calculating values, filtering by conditions, and aggregating results using plain Python.
+

@@ -2,6 +2,13 @@
 icon: lucide/book-open-check
 ---
 
+## Contact
+
+```sh
+joseph.barbier@kedgebs.com
+joseph@ysunflower.com # urgent only
+```
+
 ## Requirements for this course
 
 - [uv](https://docs.astral.sh/uv/getting-started/installation/): Python project manager
@@ -9,7 +16,7 @@ icon: lucide/book-open-check
 
 !!! tip
 
-      Installation instructions are available in the first session materials.
+      Installation instructions are available [here](./setup.md).
 
 ## Session 1 - Definitions of data and AI
 
