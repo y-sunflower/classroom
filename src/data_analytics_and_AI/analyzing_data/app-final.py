@@ -12,12 +12,13 @@ def load_model():
 
 
 model = load_model()
-plan_prices = {"Basic": 30, "Deluxe": 50, "Premium": 100}
 
 st.title("Customer churn prediction")
 st.write("Enter a customer's details to estimate their likelihood of churning.")
 
-subscription_level = st.selectbox("Subscription plan", plan_prices)
+subscription_level = st.selectbox(
+    "Subscription plan", ["Basic", "Deluxe", "Premium"]
+)
 tenure_months = st.slider("Months subscribed", 1, 60, 9)
 food_preference = st.selectbox(
     "Food preference", ["Mixed", "Vegetarian", "Vegan", "High Protein"]
@@ -34,7 +35,6 @@ if st.button("Predict churn", type="primary"):
             [
                 subscription_level,
                 tenure_months,
-                plan_prices[subscription_level],
                 food_preference,
                 delivery_issues_6m,
                 satisfaction_score,

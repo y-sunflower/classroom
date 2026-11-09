@@ -1,7 +1,16 @@
-h2:not(.doc.doc-heading),
+h1 {
+  color: #4a4e69;
+}
+
+h2:not(.doc.doc-heading) {
+  margin-top: 3em !important;
+  color: darkblue;
+}
+
 h3,
 h4 {
-  margin-top: 3em !important;
+  margin-top: 1.2em !important;
+  color: brown;
 }
 
 .md-footer-meta {

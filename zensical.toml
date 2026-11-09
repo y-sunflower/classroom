@@ -1,9 +1,8 @@
 [project]
-site_url = "https://www.example.com/"
-site_name = "Documentation"
+site_url = "https://y-sunflower.github.io/classroom/"
+site_name = "Website: y-sunflower.github.io/classroom/"
 site_description = "Teaching materials of Joseph Barbier"
 site_author = "Joseph Barbier"
-copyright = "Copyright &copy; 2026 Joseph Barbier--Darnal"
 docs_dir = "src"
 nav = [
   { "All courses" = "index.md" },

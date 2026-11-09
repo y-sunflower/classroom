@@ -28,7 +28,6 @@ model = joblib.load("src/data_analytics_and_AI/analyzing_data/exercise_model.job
 ```py exec="on" source="above" session="use-model"
 subscription_level = "Deluxe"
 tenure_months = 9
-monthly_price_eur = 50
 food_preference = "Mixed"
 delivery_issues_6m = 0
 satisfaction_score = 7
@@ -38,7 +37,6 @@ discount_used = 0
 X = np.array([[
       subscription_level,
       tenure_months,
-      monthly_price_eur,
       food_preference,
       delivery_issues_6m,
       satisfaction_score,
@@ -120,18 +118,17 @@ def load_model():
 
 
 model = load_model()
-plan_prices = {"Basic": 30, "Deluxe": 50, "Premium": 100}
 ```
 
 #### Ask for customer details
 
-Add a title and input widgets for the features. The monthly price comes from the selected plan, so users don't have to enter it separately.
+Add a title and input widgets for the features.
 
 ```py
 st.title("Customer churn prediction")
 st.write("Enter a customer's details to estimate their likelihood of churning.")
 
-subscription_level = st.selectbox("Subscription plan", plan_prices)
+subscription_level = st.selectbox("Subscription plan", ["Basic", "Deluxe", "Premium"])
 tenure_months = st.slider("Months subscribed", 1, 60, 9)
 food_preference = st.selectbox(
     "Food preference", ["Mixed", "Vegetarian", "Vegan", "High Protein"]
@@ -153,7 +150,6 @@ if st.button("Predict churn", type="primary"):
         [[
             subscription_level,
             tenure_months,
-            plan_prices[subscription_level],
             food_preference,
             delivery_issues_6m,
             satisfaction_score,

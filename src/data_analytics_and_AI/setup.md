@@ -16,9 +16,9 @@ icon: lucide/folder-code
 2. Download the installer for your operating system.
 3. Install and open Positron.
 4. (Optionnal but recommended) Go to the extensions pane and install the following:
-    - Error Lens
-    - Ruff
-    - ty
+   - Error Lens
+   - Ruff
+   - ty
 
 ### Step 2: check or install `uv`
 
@@ -78,10 +78,23 @@ We will install `polars` (among others), a common package for working with table
 2. Go to **Terminal**:
 
 ```sh
-uv add polars matplotlib scikit-learn streamlit joblib
+uv add polars
 ```
 
-The command adds the package to the project and updates the project's environment. It should also record the dependency in `pyproject.toml`.
+It should print something like this:
+
+```sh
+Using CPython 3.15.1
+Creating virtual environment at: .venv
+Resolved 3 packages in 132ms
+      Built project @ file:///Users/josephbarbier/l/project
+Installed 3 packages in 14ms
+ + project==0.1.0 (from file:///Users/josephbarbier/l/project)
+ + polars==2.1.0
+ + polars-runtime-32==2.1.0
+```
+
+The command adds the package to the project and updates the project's environment.
 
 3. Go to **Console**.
 4. Copy the following code block, paste it, and press Enter:

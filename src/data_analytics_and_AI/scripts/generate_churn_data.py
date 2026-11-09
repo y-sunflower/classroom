@@ -11,10 +11,6 @@ subscription_level = rng.choice(
     ["Basic", "Deluxe", "Premium"], size=N_CUSTOMERS, p=[0.50, 0.35, 0.15]
 )
 
-price_map = {"Basic": 30, "Deluxe": 50, "Premium": 100}
-
-monthly_price = np.array([price_map[level] for level in subscription_level])
-
 food_preference = rng.choice(
     ["Mixed", "Vegetarian", "Vegan", "High Protein"],
     size=N_CUSTOMERS,
@@ -87,7 +83,6 @@ df = pl.DataFrame(
     {
         "subscription_level": subscription_level,
         "tenure_months": tenure_months,
-        "monthly_price_eur": monthly_price,
         "food_preference": food_preference,
         "delivery_issues_6m": delivery_issues,
         "satisfaction_score": satisfaction,

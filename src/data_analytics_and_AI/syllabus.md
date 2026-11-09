@@ -4,9 +4,16 @@ icon: lucide/book-open-check
 
 ## Contact
 
+- default:
+
 ```sh
 joseph.barbier@kedgebs.com
-joseph@ysunflower.com # urgent only
+```
+
+- urgent only:
+
+```sh
+joseph@ysunflower.com
 ```
 
 ## Requirements for this course

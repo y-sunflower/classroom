@@ -38,6 +38,12 @@ Linear regression is the most simple machine learning model. It uses a line to e
       line --> estimate[Estimated monthly spending]
     ```
 
+> R2 (R squared): proportion of the variation in the **target** that is predictable from the **features**. Higher is better.
+
+!!! question
+
+    In order to have the best model possible, is it better to have or less noise in the data?
+
 ## Train-test split
 
 When we create a model, we need to find a way to **evaluate** it. Let's say we have a model that predicts the ==spending of a customer next month==. We use that model every month to know how much money we expect to make.

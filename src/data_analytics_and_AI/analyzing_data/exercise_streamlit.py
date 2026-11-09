@@ -7,11 +7,9 @@ import streamlit as st
 
 MODEL_PATH = Path(__file__).with_name("exercise_model.joblib")
 CUSTOMERS_PATH = Path(__file__).parents[1] / "data" / "food_subscription.csv"
-PLAN_PRICES = {"Basic": 30, "Deluxe": 50, "Premium": 100}
 FEATURE_COLUMNS = [
     "subscription_level",
     "tenure_months",
-    "monthly_price_eur",
     "food_preference",
     "delivery_issues_6m",
     "satisfaction_score",
@@ -77,7 +75,9 @@ with manual_entry:
         left, right = st.columns(2)
 
         with left:
-            subscription_level = st.selectbox("Subscription plan", PLAN_PRICES)
+            subscription_level = st.selectbox(
+                "Subscription plan", ["Basic", "Deluxe", "Premium"]
+            )
             tenure_months = st.slider("Months subscribed", 1, 60, 9)
             food_preference = st.selectbox(
                 "Food preference", ["Mixed", "Vegetarian", "Vegan", "High Protein"]
@@ -97,7 +97,6 @@ with manual_entry:
         customer_to_predict = {
             "subscription_level": subscription_level,
             "tenure_months": tenure_months,
-            "monthly_price_eur": PLAN_PRICES[subscription_level],
             "food_preference": food_preference,
             "delivery_issues_6m": delivery_issues_6m,
             "satisfaction_score": satisfaction_score,
