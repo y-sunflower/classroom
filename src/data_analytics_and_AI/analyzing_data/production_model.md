@@ -184,3 +184,19 @@ uv run streamlit run app.py
 !!! tip
 
       Once it works, try a few different customer profiles!
+
+### Exercise
+
+Add three risk levels to the app using the predicted churn probability: high for 70% or more, medium for 40% to less than 70%, and low for less than 40%. Try at least three customer profiles and check that the displayed risk level changes when the probability crosses a threshold.
+
+```py
+if churn_probability >= 0.70:
+    # TODO: display the high-risk message
+    ...
+elif churn_probability >= 0.40:
+    # TODO: display the medium-risk message
+    ...
+else:
+    # TODO: display the low-risk message
+    ...
+```

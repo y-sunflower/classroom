@@ -44,6 +44,10 @@ Linear regression is the most simple machine learning model. It uses a line to e
 
     In order to have the best model possible, is it better to have or less noise in the data?
 
+### Exercise
+
+Use the linear regression playground to add noise to the examples. Compare the fitted line and R² before and after adding noise. In which version would you trust the spending predictions more, and why?
+
 ## Train-test split
 
 When we create a model, we need to find a way to **evaluate** it. Let's say we have a model that predicts the ==spending of a customer next month==. We use that model every month to know how much money we expect to make.
@@ -76,6 +80,10 @@ Estimate the probability of one of two outcomes, such as a purchase or no purcha
       threshold -->|No| skip[Do not include]
     ```
 
+### Exercise
+
+Use the logistic regression playground to compare thresholds of 0.3, 0.5, and 0.7. For each threshold, note how many customers are selected and how many of them actually purchased. Which threshold would you choose if contacting a customer is expensive? Explain your choice.
+
 ## Decision trees
 
 A tree asks a sequence of simple questions about the features. Greater depth can capture more detail, but can also fit noise in the examples.
@@ -103,6 +111,10 @@ A tree asks a sequence of simple questions about the features. Greater depth can
       class unlikely,likely,unsure leaf
     ```
 
+### Exercise
+
+In the decision tree playground, find a shallow tree and a deeper tree that make different predictions for at least one point. Describe the question at the split that changes the prediction. Which tree seems more likely to have learned a pattern that would generalize to new customers? Explain why.
+
 ## Random forests
 
 A forest combines predictions from many decision trees trained on slightly different samples. Compare a small forest with a larger one and change how deep each tree can grow.
@@ -129,6 +141,10 @@ A forest combines predictions from many decision trees trained on slightly diffe
       combine --> prediction[Forest prediction]
     ```
 
+### Exercise
+
+In the random forest playground, compare a forest with a small number of shallow trees to one with more, deeper trees. Record how the predictions change. Which setting would you test on new data before choosing, and why?
+
 ## K-nearest neighbors
 
 K-nearest neighbors looks at the most similar examples nearby. Change the number of neighbors and click the chart to ask the model about a new point.
@@ -151,6 +167,10 @@ K-nearest neighbors looks at the most similar examples nearby. Change the number
       neighbors --> vote[Purchase likelihood: 5 out of 7]
       vote --> prediction[About 71%]
     ```
+
+### Exercise
+
+Use the K-nearest neighbors playground to predict the same point with K = 1, K = 7, and K = 15. Record the predicted purchase likelihood each time. Which result changes the most when you move the point slightly, and what does that tell you about the choice of K?
 
 ## Goal
 

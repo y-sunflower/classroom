@@ -47,3 +47,17 @@ feature_columns = df.drop("churn").columns
 X = df.select(feature_columns).to_numpy()
 print(f"Features (X): {X}\n")
 ```
+
+### Exercise
+
+Calculate the churn rate for each subscription level. Sort the result from the highest churn rate to the lowest, then write one sentence describing what you observe. Does this comparison show that the subscription level causes churn?
+
+```py
+churn_by_plan = (
+    df.group_by("subscription_level")
+    .agg(churn_rate=pl.col("churn").mean())
+    # TODO: sort by churn_rate from highest to lowest
+)
+
+print(churn_by_plan)
+```

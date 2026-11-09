@@ -169,6 +169,24 @@ print(f"AUC: {auc:.1f}%\n")
 
     <span class="answer">We can use the recall and the auc metrics here, while others have medium to low value.</span>
 
+### Exercise
+
+The default prediction uses a probability threshold of 0.5. Try thresholds of 0.3 and 0.7 using the predicted probabilities. For each threshold, calculate precision and recall, then explain which threshold better fits a retention team that can contact only a small number of customers.
+
+```py
+from sklearn.metrics import precision_score, recall_score
+
+for threshold in [0.3, 0.5, 0.7]:
+    # TODO: turn y_proba into yes/no predictions using this threshold
+    y_threshold = ...
+
+    print(
+        threshold,
+        precision_score(y_test, y_threshold, zero_division=0),
+        recall_score(y_test, y_threshold, zero_division=0),
+    )
+```
+
 ## Compare models
 
 ```py exec="on" source="above" result="text" session="train-models"
@@ -218,6 +236,10 @@ for scores in sorted(model_scores, key=lambda scores: scores["auc"], reverse=Tru
         f"AUC {scores['auc']:.1%}"
     )
 ```
+
+### Exercise
+
+Change the decision tree's `max_depth` to 2 and then to 10. Compare its test-set recall and AUC with the original tree. Which setting would you recommend, and what might happen if the tree is too deep?
 
 ## Save the best model
 
