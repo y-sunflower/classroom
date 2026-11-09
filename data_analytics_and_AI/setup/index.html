@@ -12,7 +12,7 @@
         <meta name="author" content="Joseph Barbier">
       
       
-        <link rel="canonical" href="https://www.example.com/data_analytics_and_AI/setup/">
+        <link rel="canonical" href="https://y-sunflower.github.io/classroom/data_analytics_and_AI/setup/">
       
       
       
@@ -30,7 +30,7 @@
     
     
       
-        <title>Set up Positron and uv - Documentation</title>
+        <title>Set up Positron and uv - Website: y-sunflower.github.io/classroom/</title>
       
     
     
@@ -101,7 +101,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-header__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
@@ -115,7 +115,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Documentation
+            Website: y-sunflower.github.io/classroom/
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -298,13 +298,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-nav__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
 
     </a>
-    Documentation
+    Website: y-sunflower.github.io/classroom/
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -1736,12 +1736,10 @@
 <li>Open the official <a href="https://positron.posit.co/download">Positron download page</a>.</li>
 <li>Download the installer for your operating system.</li>
 <li>Install and open Positron.</li>
-<li>(Optionnal but recommended) Go to the extensions pane and install the following:<ul>
+<li>(Optionnal but recommended) Go to the extensions pane and install the following:</li>
 <li>Error Lens</li>
 <li>Ruff</li>
 <li>ty</li>
-</ul>
-</li>
 </ol>
 <h3 id="step-2-check-or-install-uv">Step 2: check or install <code>uv</code><a class="headerlink" href="#step-2-check-or-install-uv" title="Permanent link">&para;</a></h3>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Mac/Linux</label><label for="__tabbed_1_2">Windows PowerShell</label></div>
@@ -1790,25 +1788,35 @@
 <li>Make sure the Positron terminal is open in the <code>indigo-data</code> project.</li>
 <li>Go to <strong>Terminal</strong>:</li>
 </ol>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>add<span class="w"> </span>polars<span class="w"> </span>matplotlib<span class="w"> </span>scikit-learn<span class="w"> </span>streamlit<span class="w"> </span>joblib
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>add<span class="w"> </span>polars
 </span></code></pre></div>
-<p>The command adds the package to the project and updates the project's environment. It should also record the dependency in <code>pyproject.toml</code>.</p>
+<p>It should print something like this:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Using<span class="w"> </span>CPython<span class="w"> </span><span class="m">3</span>.15.1
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Creating<span class="w"> </span>virtual<span class="w"> </span>environment<span class="w"> </span>at:<span class="w"> </span>.venv
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Resolved<span class="w"> </span><span class="m">3</span><span class="w"> </span>packages<span class="w"> </span><span class="k">in</span><span class="w"> </span>132ms
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span>Built<span class="w"> </span>project<span class="w"> </span>@<span class="w"> </span>file:///Users/josephbarbier/l/project
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Installed<span class="w"> </span><span class="m">3</span><span class="w"> </span>packages<span class="w"> </span><span class="k">in</span><span class="w"> </span>14ms
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w"> </span>+<span class="w"> </span><span class="nv">project</span><span class="o">==</span><span class="m">0</span>.1.0<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>file:///Users/josephbarbier/l/project<span class="o">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w"> </span>+<span class="w"> </span><span class="nv">polars</span><span class="o">==</span><span class="m">2</span>.1.0
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w"> </span>+<span class="w"> </span>polars-runtime-32<span class="o">==</span><span class="m">2</span>.1.0
+</span></code></pre></div>
+<p>The command adds the package to the project and updates the project's environment.</p>
 <ol>
 <li>Go to <strong>Console</strong>.</li>
 <li>Copy the following code block, paste it, and press Enter:</li>
 </ol>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python executable: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python version: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"polars"</span><span class="p">,</span> <span class="s2">"matplotlib"</span><span class="p">,</span> <span class="s2">"scikit-learn"</span><span class="p">,</span> <span class="s2">"streamlit"</span><span class="p">,</span> <span class="s2">"joblib"</span><span class="p">]</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python executable: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python version: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"polars"</span><span class="p">,</span> <span class="s2">"matplotlib"</span><span class="p">,</span> <span class="s2">"scikit-learn"</span><span class="p">,</span> <span class="s2">"streamlit"</span><span class="p">,</span> <span class="s2">"joblib"</span><span class="p">]</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>You have succeeded when the cell prints a Python path, a Python version, and a polars version without errors.</p>
 <details class="info">
@@ -1897,10 +1905,6 @@
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      Copyright &copy; 2026 Joseph Barbier--Darnal
-    </div>
   
   
 </div>

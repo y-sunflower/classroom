@@ -12,7 +12,7 @@
         <meta name="author" content="Joseph Barbier">
       
       
-        <link rel="canonical" href="https://www.example.com/data_analytics_and_AI/analyzing_data/prepare_data/">
+        <link rel="canonical" href="https://y-sunflower.github.io/classroom/data_analytics_and_AI/analyzing_data/prepare_data/">
       
       
       
@@ -30,7 +30,7 @@
     
     
       
-        <title>Prepare data - Documentation</title>
+        <title>Prepare data - Website: y-sunflower.github.io/classroom/</title>
       
     
     
@@ -101,7 +101,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="../../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-header__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
@@ -115,7 +115,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Documentation
+            Website: y-sunflower.github.io/classroom/
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -298,13 +298,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="../../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-nav__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
 
     </a>
-    Documentation
+    Website: y-sunflower.github.io/classroom/
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -1738,29 +1738,26 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"src/data_analytics_and_AI/data/food_subscription.csv"</span><span class="p">)</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (15_000, 9)
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌────────────┬────────────┬────────────┬───────────┬───┬───────────┬───────────┬───────────┬───────┐
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ subscripti ┆ tenure_mon ┆ monthly_pr ┆ food_pref ┆ … ┆ satisfact ┆ boxes_ski ┆ discount_ ┆ churn │
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│ on_level   ┆ ths        ┆ ice_eur    ┆ erence    ┆   ┆ ion_score ┆ pped_6m   ┆ used      ┆ ---   │
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ ---        ┆ ---        ┆ ---        ┆ ---       ┆   ┆ ---       ┆ ---       ┆ ---       ┆ i64   │
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│ str        ┆ i64        ┆ i64        ┆ str       ┆   ┆ i64       ┆ i64       ┆ i64       ┆       │
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>╞════════════╪════════════╪════════════╪═══════════╪═══╪═══════════╪═══════════╪═══════════╪═══════╡
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ Deluxe     ┆ 9          ┆ 50         ┆ Mixed     ┆ … ┆ 7         ┆ 0         ┆ 0         ┆ 0     │
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│ Basic      ┆ 11         ┆ 30         ┆ Mixed     ┆ … ┆ 6         ┆ 1         ┆ 0         ┆ 1     │
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│ Premium    ┆ 21         ┆ 100        ┆ Mixed     ┆ … ┆ 10        ┆ 0         ┆ 0         ┆ 0     │
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│ Deluxe     ┆ 3          ┆ 50         ┆ Vegan     ┆ … ┆ 10        ┆ 0         ┆ 0         ┆ 1     │
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│ Basic      ┆ 15         ┆ 30         ┆ Vegetaria ┆ … ┆ 3         ┆ 2         ┆ 0         ┆ 0     │
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│            ┆            ┆            ┆ n         ┆   ┆           ┆           ┆           ┆       │
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ …          ┆ …          ┆ …          ┆ …         ┆ … ┆ …         ┆ …         ┆ …         ┆ …     │
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│ Premium    ┆ 8          ┆ 100        ┆ Vegan     ┆ … ┆ 7         ┆ 2         ┆ 1         ┆ 1     │
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│ Deluxe     ┆ 46         ┆ 50         ┆ Vegetaria ┆ … ┆ 10        ┆ 1         ┆ 0         ┆ 0     │
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│            ┆            ┆            ┆ n         ┆   ┆           ┆           ┆           ┆       │
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│ Basic      ┆ 2          ┆ 30         ┆ Vegetaria ┆ … ┆ 9         ┆ 0         ┆ 0         ┆ 0     │
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│            ┆            ┆            ┆ n         ┆   ┆           ┆           ┆           ┆       │
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>│ Basic      ┆ 6          ┆ 30         ┆ High      ┆ … ┆ 10        ┆ 3         ┆ 0         ┆ 0     │
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>│            ┆            ┆            ┆ Protein   ┆   ┆           ┆           ┆           ┆       │
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>│ Premium    ┆ 7          ┆ 100        ┆ Mixed     ┆ … ┆ 8         ┆ 0         ┆ 0         ┆ 0     │
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>└────────────┴────────────┴────────────┴───────────┴───┴───────────┴───────────┴───────────┴───────┘
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (15_000, 8)
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌────────────┬────────────┬────────────┬────────────┬────────────┬────────────┬────────────┬───────┐
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ subscripti ┆ tenure_mon ┆ food_prefe ┆ delivery_i ┆ satisfacti ┆ boxes_skip ┆ discount_u ┆ churn │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│ on_level   ┆ ths        ┆ rence      ┆ ssues_6m   ┆ on_score   ┆ ped_6m     ┆ sed        ┆ ---   │
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ ---        ┆ ---        ┆ ---        ┆ ---        ┆ ---        ┆ ---        ┆ ---        ┆ i64   │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│ str        ┆ i64        ┆ str        ┆ i64        ┆ i64        ┆ i64        ┆ i64        ┆       │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>╞════════════╪════════════╪════════════╪════════════╪════════════╪════════════╪════════════╪═══════╡
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ Deluxe     ┆ 9          ┆ Mixed      ┆ 0          ┆ 7          ┆ 0          ┆ 0          ┆ 0     │
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│ Basic      ┆ 11         ┆ Mixed      ┆ 1          ┆ 6          ┆ 1          ┆ 0          ┆ 1     │
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│ Premium    ┆ 21         ┆ Mixed      ┆ 0          ┆ 10         ┆ 0          ┆ 0          ┆ 0     │
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│ Deluxe     ┆ 3          ┆ Vegan      ┆ 1          ┆ 10         ┆ 0          ┆ 0          ┆ 1     │
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│ Basic      ┆ 15         ┆ Vegetarian ┆ 1          ┆ 3          ┆ 2          ┆ 0          ┆ 0     │
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│ …          ┆ …          ┆ …          ┆ …          ┆ …          ┆ …          ┆ …          ┆ …     │
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ Premium    ┆ 8          ┆ Vegan      ┆ 2          ┆ 7          ┆ 2          ┆ 1          ┆ 1     │
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│ Deluxe     ┆ 46         ┆ Vegetarian ┆ 0          ┆ 10         ┆ 1          ┆ 0          ┆ 0     │
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│ Basic      ┆ 2          ┆ Vegetarian ┆ 0          ┆ 9          ┆ 0          ┆ 0          ┆ 0     │
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│ Basic      ┆ 6          ┆ High       ┆ 1          ┆ 10         ┆ 3          ┆ 0          ┆ 0     │
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│            ┆            ┆ Protein    ┆            ┆            ┆            ┆            ┆       │
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│ Premium    ┆ 7          ┆ Mixed      ┆ 0          ┆ 8          ┆ 0          ┆ 0          ┆ 0     │
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>└────────────┴────────────┴────────────┴────────────┴────────────┴────────────┴────────────┴───────┘
 </span></code></pre></div>
 <h3 id="calculate-churn-rate">Calculate churn rate<a class="headerlink" href="#calculate-churn-rate" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn rate: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
@@ -1785,13 +1782,13 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">feature_columns</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Features (X): </span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Features (X): [['Deluxe' 9 50 ... 7 0 0]
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> ['Basic' 11 30 ... 6 1 0]
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> ['Premium' 21 100 ... 10 0 0]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Features (X): [['Deluxe' 9 'Mixed' ... 7 0 0]
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> ['Basic' 11 'Mixed' ... 6 1 0]
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> ['Premium' 21 'Mixed' ... 10 0 0]
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> ...
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> ['Basic' 2 30 ... 9 0 0]
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a> ['Basic' 6 30 ... 10 3 0]
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a> ['Premium' 7 100 ... 8 0 0]]
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> ['Basic' 2 'Vegetarian' ... 9 0 0]
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a> ['Basic' 6 'High Protein' ... 10 3 0]
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a> ['Premium' 7 'Mixed' ... 8 0 0]]
 </span></code></pre></div>
 
 
@@ -1871,10 +1868,6 @@
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      Copyright &copy; 2026 Joseph Barbier--Darnal
-    </div>
   
   
 </div>
