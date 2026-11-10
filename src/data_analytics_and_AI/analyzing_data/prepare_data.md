@@ -2,6 +2,15 @@
 icon: lucide/brain-circuit
 ---
 
+## Goal
+
+We want to make it easy to know **what are the chances of a customer to churn**. For this, we need to:
+
+- find the relevant data and clean it
+- train and evaluate multiple machine learning models
+- make it easy to use the best model _in production_
+- measure if it's financially viable to contact customers
+
 ## Churn data
 
 Here we'll use a new CSV file about **food delivery subscription**:
@@ -55,9 +64,13 @@ Calculate the churn rate for each subscription level. Sort the result from the h
 ```py
 churn_by_plan = (
     df.group_by("subscription_level")
-    .agg(churn_rate=pl.col("churn").mean())
+    # TODO: compute the mean of "churn"
     # TODO: sort by churn_rate from highest to lowest
 )
 
 print(churn_by_plan)
 ```
+
+!!! tip
+
+    Look at the [polars crash course](../preparing_data/polars_crash_course.md#group-by)!

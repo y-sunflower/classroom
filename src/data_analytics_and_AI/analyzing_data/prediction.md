@@ -38,15 +38,15 @@ Linear regression is the most simple machine learning model. It uses a line to e
       line --> estimate[Estimated monthly spending]
     ```
 
-> R2 (R squared): proportion of the variation in the **target** that is predictable from the **features**. Higher is better.
-
-!!! question
-
-    In order to have the best model possible, is it better to have or less noise in the data?
+> R² (R squared): proportion of the variation in the **target** that is predictable from the **features**. Higher is better.
 
 ### Exercise
 
 Use the linear regression playground to add noise to the examples. Compare the fitted line and R² before and after adding noise. In which version would you trust the spending predictions more, and why?
+
+??? question "Answer"
+
+    <span class="answer"><strong>Answer: trust the predictions with less noise more.</strong> With less noise, the points stay closer to the fitted line and R² is usually higher. Adding noise spreads the points around the trend and usually lowers R², even if the fitted line keeps a similar slope. Individual spending predictions become less precise.</span>
 
 ## Train-test split
 
@@ -60,7 +60,7 @@ For this, we often **split our dataset into 2 sets**: a train set and the test s
 
 ## Logistic regression
 
-Estimate the probability of one of two outcomes, such as a purchase or no purchase. The threshold controls when a probability becomes a positive prediction.
+Estimate the probability of one of two outcomes, such as a <span class="blue">purchase</span> or <span class="orange">no purchase</span>. The threshold controls when a probability becomes a positive prediction.
 
 === "Playground"
 
@@ -83,6 +83,10 @@ Estimate the probability of one of two outcomes, such as a purchase or no purcha
 ### Exercise
 
 Use the logistic regression playground to compare thresholds of 0.3, 0.5, and 0.7. For each threshold, note how many customers are selected and how many of them actually purchased. Which threshold would you choose if contacting a customer is expensive? Explain your choice.
+
+??? question "Answer"
+
+    <span class="answer"><strong>Answer: a threshold of 0.7 is a reasonable starting point when contact is expensive.</strong> Raising the threshold selects fewer customers, keeping only those with higher predicted purchase probabilities. The aim is to spend less on contacting people who will not purchase, although we also miss some buyers.</span>
 
 ## Decision trees
 
@@ -111,10 +115,6 @@ A tree asks a sequence of simple questions about the features. Greater depth can
       class unlikely,likely,unsure leaf
     ```
 
-### Exercise
-
-In the decision tree playground, find a shallow tree and a deeper tree that make different predictions for at least one point. Describe the question at the split that changes the prediction. Which tree seems more likely to have learned a pattern that would generalize to new customers? Explain why.
-
 ## Random forests
 
 A forest combines predictions from many decision trees trained on slightly different samples. Compare a small forest with a larger one and change how deep each tree can grow.
@@ -140,10 +140,6 @@ A forest combines predictions from many decision trees trained on slightly diffe
       tree3 --> combine
       combine --> prediction[Forest prediction]
     ```
-
-### Exercise
-
-In the random forest playground, compare a forest with a small number of shallow trees to one with more, deeper trees. Record how the predictions change. Which setting would you test on new data before choosing, and why?
 
 ## K-nearest neighbors
 
@@ -172,11 +168,48 @@ K-nearest neighbors looks at the most similar examples nearby. Change the number
 
 Use the K-nearest neighbors playground to predict the same point with K = 1, K = 7, and K = 15. Record the predicted purchase likelihood each time. Which result changes the most when you move the point slightly, and what does that tell you about the choice of K?
 
-## Goal
+??? question "Answer"
 
-We want to make it easy to know **what are the chances of a customer to churn**. For this, we need to:
+    <span class="answer"><strong>Answer: K = 1 is usually the most sensitive to a small move.</strong> Its purchase likelihood is either 0% or 100%, depending on the single closest example, so moving across a boundary can flip the prediction completely. With K = 7 or K = 15, the likelihood is the share of purchasers among those neighbors; replacing one neighbor has a smaller effect. Your exact values depend on the point you choose. Larger K usually makes predictions smoother, but can blur useful local patterns, so compare values on new data before choosing.</span>
 
-- find the relevant data and clean it
-- train and evaluate multiple machine learning models
-- make it easy to use the best model _in production_
-- measure if it's financially viable to contact customers
+## Underfitting and overfitting
+
+A model should learn patterns that also work for **new examples**. This ability is called ==generalization==. Fitting the training data very closely does not guarantee good predictions for new customers.
+
+<iframe title="Visual comparison of underfitting, a good fit, and overfitting" src="./fitting-comparison.html" width="100%" height="470" style="border: none"></iframe>
+
+=== "Underfitting"
+
+    **The model misses the pattern.** A straight line cannot capture every curved relationship. A tree that can ask only one question may miss useful combinations of customer behaviors.
+
+    - **Typical signal:** errors are high on both training and unseen data, compared with a useful baseline or the task's requirements.
+    - **Why it happens:** the model is too restricted, useful features are missing, or training has stopped too early.
+    - **What to try:** add useful features, allow more model complexity, or train longer if learning has not finished. More rows alone may not fix a model that cannot represent the pattern.
+
+=== "Good fit (normal)"
+
+    **The model captures the pattern without chasing every dot.** Some variation is noise: random differences that the available features cannot explain. A useful model can leave training errors and still make good predictions.
+
+    - **Typical signal:** errors are low enough for the task on both training and unseen data, with a reasonably small gap.
+    - **What matters:** the model improves on a relevant baseline and works on examples that represent future use.
+    - **Keep in mind:** similar training and unseen errors are not enough by themselves. Both could be equally bad!
+
+=== "Overfitting"
+
+    **The model learns details that do not generalize.** It follows chance fluctuations or unusual training examples as though they were reliable patterns. A very deep tree or K-nearest neighbors with K = 1 can do this.
+
+    - **Typical signal:** very low training error, but substantially higher error on unseen data. This difference is the **generalization gap**.
+    - **What to try:** simplify the model, limit tree depth, increase K, or add regularization (a penalty that discourages overly complex fits). More representative training examples can also help.
+    - **Keep in mind:** complexity alone does not prove overfitting. Check how the model performs on unseen examples.
+
+!!! tip "Compare fairly, then keep a final test"
+
+    Compare the **same metric** on training and unseen data. For errors such as **MAE** (mean absolute error), lower is better; for scores such as accuracy or R², higher is better. There is no universal gap that proves overfitting: consider the baseline, sample size, noise, and task.
+
+    Use a **validation set** to compare model settings. Keep a separate **test set** for the final evaluation, after choosing the model. Repeatedly adjusting a model based on its test score can make that score too optimistic. These comparisons assume no data leakage and that the evaluation examples represent the people or situations where the model will be used.
+
+## Exercises
+
+For each of the five cases below, decide whether the evidence suggests **underfitting**, **overfitting**, or a **good fit (normal)**. Identify the clue that supports your answer before selecting it. All data are illustrative; validation examples were kept out of training.
+
+<iframe title="Five exercises to diagnose underfitting, overfitting, and a good fit" src="./fit-diagnosis.html" width="100%" height="850" style="border: none"></iframe>

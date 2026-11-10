@@ -15,9 +15,7 @@ X = df.select(feature_columns).to_numpy()
 
 ## Simple model
 
-We'll use a very famous library called `scikit-learn`. It's the world reference when it comes to machine learning.
-
-<iframe src="https://clickhouse-analytics.metabaseapp.com/public/dashboard/daa27bf9-c01e-43fe-9260-c69b679cfe83?project_name=scikit-learn#&theme=night" frameborder="0" width="100%" height="480"></iframe>
+We'll use a very famous library called [`scikit-learn`](https://scikit-learn.org/stable/). It's the world reference when it comes to machine learning.
 
 ### Let's create our first machine learning model
 
@@ -44,6 +42,15 @@ from sklearn.metrics import (
 ```py exec="on" source="above" session="train-models"
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 ```
+
+!!! question
+
+    If we have a dataset with 100 rows and 10 columns (9 features and 1 target) and we use `test_size=0.25`, what are the dimensions (number of rows and columns) of:
+    
+    - `X_train`
+    - `X_test`
+    - `y_train`
+    - `y_test`
 
 - Create a `ColumnTransformer`
 

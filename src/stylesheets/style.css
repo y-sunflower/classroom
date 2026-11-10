@@ -13,6 +13,29 @@ h4 {
   color: brown;
 }
 
+[data-md-color-scheme="slate"] h1 {
+  color: #c4c7e7;
+}
+
+[data-md-color-scheme="slate"] h2:not(.doc.doc-heading) {
+  color: #a5b4fc;
+}
+
+[data-md-color-scheme="slate"] h3,
+[data-md-color-scheme="slate"] h4 {
+  color: #f0a8a0;
+}
+
+.blue {
+  color: #315cce;
+  font-weight: 600;
+}
+
+.orange {
+  color: #e8875a;
+  font-weight: 600;
+}
+
 .md-footer-meta {
   display: none;
 }
