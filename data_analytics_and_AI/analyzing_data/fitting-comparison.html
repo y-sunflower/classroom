@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How well does the model fit?</title>
+    <style>
+      :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #172033; }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      main { max-width: 960px; margin: auto; padding: 4px; }
+      .key { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 8px 0 14px; font-size: 12px; color: #475569; }
+      .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      article { padding: 14px; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; }
+      h2 { margin: 0; font-size: 17px; }
+      p { font-size: 13px; line-height: 1.5; margin: 8px 0; }
+      svg { display: block; width: 100%; height: auto; }
+      .errors { padding-top: 8px; border-top: 1px solid #e2e8f0; color: #475569; }
+      .caption { color: #64748b; font-size: 12px; }
+      @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } article { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; align-items: center; } h2 { grid-column: 1 / -1; } svg { grid-row: span 2; } .errors { margin-top: 0; } }
+      @media (max-width: 360px) { article { display: block; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="key" aria-label="Chart key">
+        <span>● Grey circles: training examples</span>
+        <span style="color: #b45309">◇ Orange diamonds: unseen examples</span>
+        <span style="color: #315cce">━ Blue line: model prediction</span>
+      </div>
+      <div class="cards">
+        <article>
+          <h2>Underfitting</h2>
+          <svg id="under" viewBox="0 0 280 230" role="img" aria-label="A flat prediction misses a curved pattern in both training and unseen examples."></svg>
+          <p>Too simple to capture the curve.</p>
+          <p class="errors">Training error: <strong>high</strong><br />Unseen error: <strong>high</strong></p>
+        </article>
+        <article>
+          <h2>Good fit (normal)</h2>
+          <svg id="good" viewBox="0 0 280 230" role="img" aria-label="A smooth curve follows the overall pattern and stays close to both training and unseen examples."></svg>
+          <p>Follows the pattern; leaves some noise.</p>
+          <p class="errors">Training error: <strong>low</strong><br />Unseen error: <strong>low</strong></p>
+        </article>
+        <article>
+          <h2>Overfitting</h2>
+          <svg id="over" viewBox="0 0 280 230" role="img" aria-label="A wiggly prediction passes through every training example but misses many unseen examples between them."></svg>
+          <p>Chases individual training examples.</p>
+          <p class="errors">Training error: <strong>very low</strong><br />Unseen error: <strong>high</strong></p>
+        </article>
+      </div>
+      <p class="caption">Illustrative data, with the same examples and axes in every panel. Errors describe these examples, not a universal numerical threshold. Real fits must be evaluated on representative unseen data.</p>
+    </main>
+    <script>
+      const pattern = x => 0.2 + 0.57 * Math.sin(Math.PI * x);
+      const trainX = [0.05, 0.18, 0.31, 0.44, 0.57, 0.7, 0.83, 0.96];
+      const noise = [0.04, -0.07, 0.06, -0.05, 0.08, -0.06, 0.05, -0.03];
+      const train = trainX.map((x, i) => [x, pattern(x) + noise[i]]);
+      const unseen = [0.11, 0.24, 0.37, 0.5, 0.63, 0.76, 0.89].map((x, i) => [x, pattern(x) + (i % 2 ? 0.02 : -0.02)]);
+      const px = x => 33 + 230 * x;
+      const py = y => 190 - 165 * y;
+      function overfit(x) {
+        let i = 0;
+        while (i < train.length - 2 && x > train[i + 1][0]) i++;
+        const t = Math.max(0, Math.min(1, (x - train[i][0]) / (train[i + 1][0] - train[i][0])));
+        return train[i][1] * (1 - t) + train[i + 1][1] * t + 0.24 * Math.sin(Math.PI * t);
+      }
+      for (const [id, predict] of [["under", () => 0.55], ["good", pattern], ["over", overfit]]) {
+        const line = Array.from({length: 241}, (_, i) => {
+          const x = 0.05 + 0.91 * i / 240;
+          return `${i ? "L" : "M"}${px(x).toFixed(2)},${py(predict(x)).toFixed(2)}`;
+        }).join(" ");
+        document.getElementById(id).innerHTML = `
+          <path d="M33 20V190H267" fill="none" stroke="#cbd5e1" />
+          <text x="33" y="13" fill="#64748b" font-size="11">Target</text>
+          <text x="145" y="216" text-anchor="middle" fill="#64748b" font-size="11">Feature →</text>
+          <path d="${line}" fill="none" stroke="#315cce" stroke-width="2.5" />
+          ${train.map(([x, y]) => `<circle cx="${px(x)}" cy="${py(y)}" r="3.8" fill="#64748b" stroke="white" stroke-width="1" />`).join("")}
+          ${unseen.map(([x, y]) => `<path d="M${px(x)} ${py(y)-4.5}l4.5 4.5-4.5 4.5-4.5-4.5Z" fill="white" stroke="#b45309" stroke-width="1.6" />`).join("")}`;
+      }
+      if (window.frameElement && "ResizeObserver" in window) {
+        new ResizeObserver(() => { window.frameElement.style.height = document.documentElement.scrollHeight + "px"; }).observe(document.body);
+      }
+    </script>
+  </body>
+</html>
