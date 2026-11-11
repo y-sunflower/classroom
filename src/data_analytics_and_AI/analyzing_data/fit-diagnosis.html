@@ -5,103 +5,286 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Diagnose the fit</title>
     <style>
-      :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #172033; }
-      * { box-sizing: border-box; }
-      body { margin: 0; }
-      main { width: min(100%, 820px); margin: auto; padding: 4px; }
-      button { min-height: 40px; padding: 8px 13px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #334155; font: inherit; font-size: 13px; cursor: pointer; }
-      button:hover:not(:disabled) { background: #f1f5f9; border-color: #94a3b8; }
-      button:focus-visible { outline: 2px solid #315cce; outline-offset: 3px; }
-      button:disabled { opacity: 0.5; cursor: default; }
-      button[aria-pressed="true"] { color: #244eb7; border-color: #315cce; background: #eff6ff; }
-      .topbar, nav { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
-      .topbar { margin-bottom: 10px; font-size: 12px; color: #64748b; }
-      .card { padding: 20px; border: 1px solid #e2e8f0; border-radius: 14px; background: #fff; }
-      progress { display: block; width: 100%; height: 7px; margin: 0 0 18px; accent-color: #315cce; }
-      h1 { margin: 0 0 10px; font-size: 21px; line-height: 1.3; }
-      p { font-size: 14px; line-height: 1.6; }
-      .context { color: #475569; }
-      .evidence { margin: 16px 0; }
-      .evidence svg { width: 100%; max-height: 310px; display: block; }
-      .legend, .note { font-size: 12px; color: #64748b; }
-      .table-wrap { overflow-x: auto; }
-      table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
-      caption { text-align: left; padding-bottom: 10px; color: #475569; font-size: 13px; }
-      th, td { padding: 13px 10px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-      thead { background: #f8fafc; }
-      .choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-      .feedback { padding: 12px 14px; margin: 16px 0; border-left: 3px solid #315cce; border-radius: 4px; background: #eff6ff; }
-      .feedback p { margin: 4px 0; }
-      .feedback.revisit { background: #fff7ed; border-color: #b45309; }
-      nav { margin-top: 18px; }
-      .primary { background: #315cce; color: white; border-color: #315cce; }
-      .primary:hover:not(:disabled) { background: #244eb7; }
-      #completion { margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0; }
-      #completion h2 { font-size: 18px; margin: 0; }
-      #completion ul { padding-left: 20px; font-size: 13px; line-height: 1.7; }
-      [hidden] { display: none !important; }
-      @media (max-width: 520px) { .card { padding: 14px; } .choices { grid-template-columns: 1fr; } th, td { padding: 10px 6px; font-size: 12px; } }
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        color: #172033;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        width: min(100%, 820px);
+        margin: auto;
+        padding: 4px;
+      }
+      button {
+        min-height: 40px;
+        padding: 8px 13px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: #fff;
+        color: #334155;
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      button:hover:not(:disabled) {
+        background: #f1f5f9;
+        border-color: #94a3b8;
+      }
+      button:focus-visible {
+        outline: 2px solid #315cce;
+        outline-offset: 3px;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      button[aria-pressed="true"] {
+        color: #244eb7;
+        border-color: #315cce;
+        background: #eff6ff;
+      }
+      .topbar,
+      nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+      .topbar {
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: #64748b;
+      }
+      .card {
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        background: #fff;
+      }
+      progress {
+        display: block;
+        width: 100%;
+        height: 7px;
+        margin: 0 0 18px;
+        accent-color: #315cce;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 21px;
+        line-height: 1.3;
+      }
+      p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .context {
+        color: #475569;
+      }
+      .evidence {
+        margin: 16px 0;
+      }
+      .evidence svg {
+        width: 100%;
+        max-height: 310px;
+        display: block;
+      }
+      .legend,
+      .note {
+        font-size: 12px;
+        color: #64748b;
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        font-variant-numeric: tabular-nums;
+      }
+      caption {
+        text-align: left;
+        padding-bottom: 10px;
+        color: #475569;
+        font-size: 13px;
+      }
+      th,
+      td {
+        padding: 13px 10px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      thead {
+        background: #f8fafc;
+      }
+      .choices {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .feedback {
+        padding: 12px 14px;
+        margin: 16px 0;
+        border-left: 3px solid #315cce;
+        border-radius: 4px;
+        background: #eff6ff;
+      }
+      .feedback p {
+        margin: 4px 0;
+      }
+      .feedback.revisit {
+        background: #fff7ed;
+        border-color: #b45309;
+      }
+      nav {
+        margin-top: 18px;
+      }
+      .primary {
+        background: #315cce;
+        color: white;
+        border-color: #315cce;
+      }
+      .primary:hover:not(:disabled) {
+        background: #244eb7;
+      }
+      #completion {
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid #e2e8f0;
+      }
+      #completion h2 {
+        font-size: 18px;
+        margin: 0;
+      }
+      #completion ul {
+        padding-left: 20px;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 520px) {
+        .card {
+          padding: 14px;
+        }
+        .choices {
+          grid-template-columns: 1fr;
+        }
+        th,
+        td {
+          padding: 10px 6px;
+          font-size: 12px;
+        }
+      }
     </style>
   </head>
   <body>
     <main>
-      <div class="topbar"><span id="progress-label"></span><button id="reset" type="button">Start over</button></div>
+      <div class="topbar">
+        <span id="progress-label"></span
+        ><button id="reset" type="button">Start over</button>
+      </div>
       <section class="card" aria-labelledby="case-title">
-        <progress id="progress" max="5" value="0" aria-label="Cases answered"></progress>
+        <progress
+          id="progress"
+          max="5"
+          value="0"
+          aria-label="Cases answered"
+        ></progress>
         <h1 id="case-title" tabindex="-1"></h1>
         <p id="context" class="context"></p>
         <div id="evidence" class="evidence"></div>
         <p><strong>Which diagnosis best fits this evidence?</strong></p>
         <div class="choices" role="group" aria-label="Choose a diagnosis">
-          <button type="button" data-answer="under" aria-pressed="false">Underfitting</button>
-          <button type="button" data-answer="over" aria-pressed="false">Overfitting</button>
-          <button type="button" data-answer="good" aria-pressed="false">Good fit (normal)</button>
+          <button type="button" data-answer="under" aria-pressed="false">
+            Underfitting
+          </button>
+          <button type="button" data-answer="over" aria-pressed="false">
+            Overfitting
+          </button>
+          <button type="button" data-answer="good" aria-pressed="false">
+            Good fit (normal)
+          </button>
         </div>
-        <div id="feedback" class="feedback" aria-live="polite" aria-atomic="true" hidden></div>
-        <nav aria-label="Exercise navigation"><button id="previous" type="button">Previous case</button><button id="next" class="primary" type="button" disabled>Next case</button></nav>
+        <div
+          id="feedback"
+          class="feedback"
+          aria-live="polite"
+          aria-atomic="true"
+          hidden
+        ></div>
+        <nav aria-label="Exercise navigation">
+          <button id="previous" type="button">Previous case</button
+          ><button id="next" class="primary" type="button" disabled>
+            Next case
+          </button>
+        </nav>
         <section id="completion" aria-live="polite" hidden></section>
       </section>
-      <p class="note">Illustrative cases. Validation data are independent, representative, and excluded from training. No data leakage is present.</p>
-      <noscript>This activity needs JavaScript to display the cases and feedback.</noscript>
+
+      <noscript
+        >This activity needs JavaScript to display the cases and
+        feedback.</noscript
+      >
     </main>
     <script>
-      const labels = {under: "Underfitting", over: "Overfitting", good: "Good fit (normal)"};
+      const labels = {
+        under: "Underfitting",
+        over: "Overfitting",
+        good: "Good fit (normal)",
+      };
       const cases = [
         {
-          title: "A discount model",
-          context: "A retailer predicts weekly revenue from the discount offered. The blue line is its fitted linear model. Look at the pattern across the training and validation examples.",
-          kind: "under-chart", answer: "under",
-          explanation: "The straight line misses the rise and fall in revenue. Both training circles and validation diamonds sit above it in the middle and below it at the ends. The errors have a systematic pattern: the model has not learned the curved relationship.",
-          action: "Try a model or a feature that can represent a curve, then compare validation error."
+          title: "Linear regression",
+          context: "",
+          kind: "under-chart",
+          answer: "under",
+          explanation:
+            "The straight line misses the rise and fall in revenue. Both training circles and validation diamonds sit above it in the middle and below it at the ends. The errors have a systematic pattern: the model has not learned the curved relationship.",
         },
         {
-          title: "A churn tree's report card",
-          context: "A churn dataset has equal numbers of customers who stay and leave. A tree trains on 5,000 customers and is evaluated on 2,000 separate validation customers. Accuracy is the percentage of correct predictions; higher is better.",
-          kind: "metrics", answer: "over",
-          explanation: "The deep tree is almost perfect on training customers but falls to 68.2% on validation customers, a gap of 31.6 percentage points. The shallower tree does better on validation data despite its lower training score. This is strong evidence that the deep tree has learned training-specific details.",
-          action: "Prefer the shallower tree based on these validation results; reserve the test set for the final evaluation."
+          title: "Deep tree VS shallow tree",
+          context:
+            "A churn dataset has equal numbers of customers who stay and leave. A tree trains on 5,000 customers and is evaluated on 2,000 separate validation customers.",
+          kind: "metrics",
+          answer: "over",
+          explanation:
+            "The deep tree is almost perfect on training customers but falls to 68.2% on validation customers, a gap of 31.6 percentage points. The shallower tree does better on validation data despite its lower training score. This is strong evidence that the deep tree has learned training-specific details.",
         },
         {
-          title: "Predicting sales from advertising",
-          context: "A model estimates weekly sales from advertising spend. Extra advertising has diminishing returns. Validation MAE is 3 sales, compared with 18 sales for a model that always predicts the training average. The team needs an MAE below 5 sales.",
-          kind: "good-chart", answer: "good",
-          explanation: "The smooth curve captures the leveling-off pattern and stays close to both training and validation examples. Its validation error beats the baseline and meets the team's requirement. Missing a few dots is expected when there is noise; passing through every training dot is unnecessary.",
-          action: "Keep this as a promising model and evaluate it once on the reserved test set after model selection."
+          title: "Predicting sales",
+          context:
+            "A model estimates weekly sales from advertising spend. Extra advertising has diminishing returns. Validation MAE is 3 sales, compared with 18 sales for a model that always predicts the training average. The team needs an MAE below 5 sales.",
+          kind: "good-chart",
+          answer: "good",
+          explanation:
+            "The smooth curve captures the leveling-off pattern and stays close to both training and validation examples. Its validation error beats the baseline and meets the team's requirement. Missing a few dots is expected when there is noise because passing through every training dot is unnecessary.",
         },
         {
           title: "More customers, little improvement",
-          context: "The same fully trained model is fitted on larger training samples, always evaluated on a fixed validation set. It predicts monthly spending. MAE is the average absolute prediction error in euros; lower is better. An average-only baseline has validation MAE €43. A richer model using the same features reaches €12.",
-          kind: "learning", answer: "under",
-          explanation: "Training and validation errors level off together around €40, barely better than the €43 baseline and far worse than the richer model's €12. A small gap does not mean a good fit: both errors are high. The plateau and richer-model comparison point to an overly restricted model.",
-          action: "Increase the model's ability to capture patterns and check validation error, rather than only collecting more rows."
+          context:
+            "The same fully trained model is fitted on larger training samples, always evaluated on a fixed validation set. It predicts monthly spending. An average-only baseline has validation MAE €43. Another existing model using the same features reaches €12.",
+          kind: "learning",
+          answer: "under",
+          explanation:
+            "Training and validation errors level off together around €40, barely better than the €43 baseline and far worse than the existing model's €12. A small gap does not mean a good fit since both errors are high.",
         },
         {
-          title: "A model that changes its mind",
-          context: "A K-nearest neighbors model uses K = 1 to predict monthly customer spending. Two versions use the same features and settings, but one random 10% of training customers is replaced with other customers from the same population. Each row below describes the same unseen customer scored by both versions.",
-          kind: "stability", answer: "over",
-          explanation: "Predictions for the same customers swing sharply when a small part of the training data changes. Both versions have zero training MAE but validation MAE above €30. This combination suggests sensitivity to individual examples, or high variance, rather than a reliable pattern. K = 1 can reproduce each training target exactly when scored against its own training set.",
-          action: "Try larger K values and compare validation MAE. Instability alone is not proof, but the training–validation gap reinforces the diagnosis here."
-        }
+          title: "Model stability",
+          context:
+            "A K-nearest neighbors model uses K = 1 to predict monthly customer spending. Two versions use the same features and settings, but one random 10% of training customers is replaced with other customers from the same population.",
+          kind: "stability",
+          answer: "over",
+          explanation:
+            "Predictions for the same customers swing sharply when a small part of the training data changes. Both versions have zero training MAE but validation MAE above €30. This combination suggests sensitivity to individual examples, or high variance, rather than a reliable pattern. K = 1 can reproduce each training target exactly when scored against its own training set.",
+        },
       ];
       const title = document.getElementById("case-title");
       const feedback = document.getElementById("feedback");
@@ -112,7 +295,15 @@
       let answers = Array(cases.length).fill(null);
 
       function table(caption, headings, rows) {
-        return `<div class="table-wrap"><table><caption>${caption}</caption><thead><tr>${headings.map(h => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr><th scope="row">${row[0]}</th>${row.slice(1).map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+        return `<div class="table-wrap"><table><caption>${caption}</caption><thead><tr>${headings.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${rows
+          .map(
+            (row) =>
+              `<tr><th scope="row">${row[0]}</th>${row
+                .slice(1)
+                .map((cell) => `<td>${cell}</td>`)
+                .join("")}</tr>`,
+          )
+          .join("")}</tbody></table></div>`;
       }
       function svgChart(description, xLabel, yLabel, contents) {
         return `<svg viewBox="0 0 640 310" role="img" aria-label="${description}">
@@ -122,77 +313,152 @@
           ${contents}</svg>`;
       }
       function regressionChart(good) {
-        const px = x => 58 + 548 * x;
-        const py = y => 256 - 210 * y;
-        const pattern = good ? x => 0.13 + 0.74 * (1 - Math.exp(-3.8 * x)) : x => 0.22 + 0.59 * Math.sin(Math.PI * x);
+        const px = (x) => 58 + 548 * x;
+        const py = (y) => 256 - 210 * y;
+        const pattern = good
+          ? (x) => 0.13 + 0.74 * (1 - Math.exp(-3.8 * x))
+          : (x) => 0.22 + 0.59 * Math.sin(Math.PI * x);
         const trainX = [0.05, 0.17, 0.29, 0.41, 0.53, 0.65, 0.77, 0.91];
         const validationX = [0.1, 0.23, 0.36, 0.49, 0.62, 0.75, 0.86, 0.97];
         let contents = "";
         for (const y of [0, 0.5, 1]) {
-          contents += `<path d="M58 ${py(y)}H606" stroke="#f1f5f9" /><text x="49" y="${py(y)+4}" text-anchor="end" fill="#64748b" font-size="12">${good ? y*100 : y*20}</text>`;
+          contents += `<path d="M58 ${py(y)}H606" stroke="#f1f5f9" /><text x="49" y="${py(y) + 4}" text-anchor="end" fill="#64748b" font-size="12">${good ? y * 100 : y * 20}</text>`;
         }
-        for (const x of [0, 0.25, 0.5, 0.75, 1]) contents += `<text x="${px(x)}" y="276" text-anchor="middle" fill="#64748b" font-size="12">${x*(good ? 1000 : 40)}</text>`;
-        const path = Array.from({length: 101}, (_, i) => `${i ? "L" : "M"}${px(i/100)},${py(good ? pattern(i/100) : 0.55)}`).join(" ");
+        for (const x of [0, 0.25, 0.5, 0.75, 1])
+          contents += `<text x="${px(x)}" y="276" text-anchor="middle" fill="#64748b" font-size="12">${x * (good ? 1000 : 40)}</text>`;
+        const path = Array.from(
+          { length: 101 },
+          (_, i) =>
+            `${i ? "L" : "M"}${px(i / 100)},${py(good ? pattern(i / 100) : 0.55)}`,
+        ).join(" ");
         contents += `<path d="${path}" fill="none" stroke="#315cce" stroke-width="3" />`;
-        trainX.forEach((x, i) => { contents += `<circle cx="${px(x)}" cy="${py(pattern(x) + (i % 2 ? -0.04 : 0.04))}" r="5" fill="#64748b" stroke="white" />`; });
-        validationX.forEach((x, i) => { const y = py(pattern(x) + (i % 2 ? 0.025 : -0.025)); contents += `<path d="M${px(x)} ${y-5}l5 5-5 5-5-5Z" fill="white" stroke="#b45309" stroke-width="2" />`; });
-        return `<p class="legend">● Grey circles: training · ◇ Orange diamonds: validation · Blue line: prediction</p>` + svgChart(
-          good ? "Sales rise and then level off. A smooth prediction stays close to training and validation points." : "Revenue rises and then falls as discounts increase. A flat fitted line misses this pattern for both training and validation points.",
-          good ? "Advertising spend (€/week)" : "Discount (%)", good ? "Sales per week" : "Weekly revenue (€ thousands)", contents);
+        trainX.forEach((x, i) => {
+          contents += `<circle cx="${px(x)}" cy="${py(pattern(x) + (i % 2 ? -0.04 : 0.04))}" r="5" fill="#64748b" stroke="white" />`;
+        });
+        validationX.forEach((x, i) => {
+          const y = py(pattern(x) + (i % 2 ? 0.025 : -0.025));
+          contents += `<path d="M${px(x)} ${y - 5}l5 5-5 5-5-5Z" fill="white" stroke="#b45309" stroke-width="2" />`;
+        });
+        return (
+          `<p class="legend">● Grey circles: training · ◇ Orange diamonds: validation · Blue line: prediction</p>` +
+          svgChart(
+            good
+              ? "Sales rise and then level off. A smooth prediction stays close to training and validation points."
+              : "Revenue rises and then falls as discounts increase. A flat fitted line misses this pattern for both training and validation points.",
+            good ? "Advertising spend (€/week)" : "Discount (%)",
+            good ? "Sales per week" : "Weekly revenue (€ thousands)",
+            contents,
+          )
+        );
       }
       function learningChart() {
         const counts = [200, 500, 1000, 2000, 5000];
         const train = [35, 37, 38, 39, 39];
         const validation = [48, 45, 42, 41, 40];
-        const px = n => 58 + (n - 200) / 4800 * 548;
-        const py = n => 256 - n / 60 * 210;
+        const px = (n) => 58 + ((n - 200) / 4800) * 548;
+        const py = (n) => 256 - (n / 60) * 210;
         let content = "";
-        for (const y of [0, 20, 40, 60]) content += `<path d="M58 ${py(y)}H606" stroke="#f1f5f9" /><text x="49" y="${py(y)+4}" text-anchor="end" font-size="12" fill="#64748b">${y}</text>`;
-        for (const n of [200, 1000, 2000, 5000]) content += `<text x="${px(n)}" y="276" text-anchor="middle" font-size="12" fill="#64748b">${n.toLocaleString("en")}</text>`;
-        for (const [values, color, dash] of [[train, "#315cce", ""], [validation, "#b45309", "7 5"]]) {
+        for (const y of [0, 20, 40, 60])
+          content += `<path d="M58 ${py(y)}H606" stroke="#f1f5f9" /><text x="49" y="${py(y) + 4}" text-anchor="end" font-size="12" fill="#64748b">${y}</text>`;
+        for (const n of [200, 1000, 2000, 5000])
+          content += `<text x="${px(n)}" y="276" text-anchor="middle" font-size="12" fill="#64748b">${n.toLocaleString("en")}</text>`;
+        for (const [values, color, dash] of [
+          [train, "#315cce", ""],
+          [validation, "#b45309", "7 5"],
+        ]) {
           content += `<path d="${values.map((y, i) => `${i ? "L" : "M"}${px(counts[i])},${py(y)}`).join(" ")}" fill="none" stroke="${color}" stroke-width="3" stroke-dasharray="${dash}" />`;
         }
-        content += `<text x="600" y="${py(40)-10}" text-anchor="end" fill="#b45309" font-size="12">Validation: €40</text><text x="600" y="${py(39)+20}" text-anchor="end" fill="#315cce" font-size="12">Training: €39</text>`;
-        return svgChart("As training size grows from 200 to 5,000, training MAE rises from €35 to €39 and validation MAE falls from €48 to €40. Both plateau at high error.", "Number of training customers", "MAE (€) · lower is better", content) + '<p class="note">Solid blue: training error. Dashed orange: validation error. Both curves use the same vertical scale, starting at zero.</p>';
+        content += `<text x="600" y="${py(40) - 10}" text-anchor="end" fill="#b45309" font-size="12">Validation: €40</text><text x="600" y="${py(39) + 20}" text-anchor="end" fill="#315cce" font-size="12">Training: €39</text>`;
+        return svgChart(
+          "As training size grows from 200 to 5,000, training MAE rises from €35 to €39 and validation MAE falls from €48 to €40. Both plateau at high error.",
+          "Number of training customers",
+          "MAE (€) · lower is better",
+          content,
+        );
       }
       function evidence(item) {
         if (item.kind === "under-chart") return regressionChart(false);
         if (item.kind === "good-chart") return regressionChart(true);
         if (item.kind === "learning") return learningChart();
-        if (item.kind === "metrics") return table("Diagnose the deep tree. All models use the same split.", ["Model", "Training accuracy", "Validation accuracy"], [["Majority baseline", "50.0%", "50.0%"], ["Deep tree", "99.8%", "68.2%"], ["Shallower tree", "83.6%", "82.9%"]]);
-        return table("Predictions for the same three unseen customers", ["Customer", "Original training set", "10% replaced"], [["Alex", "€42", "€110"], ["Sam", "€135", "€64"], ["Robin", "€58", "€126"]]) + table("Evaluation of each version (MAE; lower is better)", ["Dataset", "Original training set", "10% replaced"], [["Training MAE", "€0", "€0"], ["Validation MAE", "€32", "€35"]]);
+        if (item.kind === "metrics")
+          return table(
+            "Diagnose the deep tree.",
+            ["Model", "Training accuracy", "Validation accuracy"],
+            [
+              ["Majority baseline", "50.0%", "50.0%"],
+              ["Deep tree", "99.8%", "68.2%"],
+              ["Shallower tree", "83.6%", "82.9%"],
+            ],
+          );
+        return (
+          table(
+            "Predictions for the same three unseen customers",
+            ["Customer", "Original training set", "10% replaced"],
+            [
+              ["Alex", "€42", "€110"],
+              ["Sam", "€135", "€64"],
+              ["Robin", "€58", "€126"],
+            ],
+          ) +
+          table(
+            "Evaluation of each version (MAE; lower is better)",
+            ["Dataset", "Original training set", "10% replaced"],
+            [
+              ["Training MAE", "€0", "€0"],
+              ["Validation MAE", "€32", "€35"],
+            ],
+          )
+        );
       }
       function render() {
         const item = cases[active];
         const answer = answers[active];
         const answered = answers.filter(Boolean).length;
-        document.getElementById("progress-label").textContent = `Case ${active + 1} of ${cases.length} · ${answered} answered`;
+        document.getElementById("progress-label").textContent =
+          `Case ${active + 1} of ${cases.length} · ${answered} answered`;
         document.getElementById("progress").value = answered;
         title.textContent = item.title;
         document.getElementById("context").textContent = item.context;
         document.getElementById("evidence").innerHTML = evidence(item);
-        choices.forEach(button => {
-          button.setAttribute("aria-pressed", String(button.dataset.answer === answer));
+        choices.forEach((button) => {
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.answer === answer),
+          );
           button.disabled = answer !== null;
         });
         feedback.hidden = !answer;
-        feedback.classList.toggle("revisit", Boolean(answer && answer !== item.answer));
-        feedback.innerHTML = answer ? `<strong>${answer === item.answer ? "Correct" : "Revisit this one"}: ${labels[item.answer]}.</strong><p>${item.explanation}</p><p><strong>What to try:</strong> ${item.action}</p>` : "";
+        feedback.classList.toggle(
+          "revisit",
+          Boolean(answer && answer !== item.answer),
+        );
+        feedback.innerHTML = answer
+          ? `<strong>${answer === item.answer ? "Correct" : "Incorrect"}: ${labels[item.answer]}.</strong><p>${item.explanation}</p>`
+          : "";
         document.getElementById("previous").disabled = active === 0;
         next.disabled = !answer || finished;
-        next.textContent = active === cases.length - 1 ? (finished ? "Review complete" : "Finish review") : "Next case";
+        next.textContent =
+          active === cases.length - 1
+            ? finished
+              ? "Review complete"
+              : "Finish review"
+            : "Next case";
         const completion = document.getElementById("completion");
         completion.hidden = !finished;
         if (finished) {
-          const correct = cases.filter((item, i) => answers[i] === item.answer).length;
+          const correct = cases.filter(
+            (item, i) => answers[i] === item.answer,
+          ).length;
           completion.innerHTML = `<h2>Review complete · ${correct} / ${cases.length} correct</h2><p>Your first answer to each case counts. Use Previous case to revisit the explanations, or Start over to try again.</p><ul>${cases.map((item, i) => `<li>${item.title}: <strong>${labels[item.answer]}</strong> — ${answers[i] === item.answer ? "correct" : "you chose " + labels[answers[i]]}</li>`).join("")}</ul>`;
         }
       }
-      choices.forEach(button => button.addEventListener("click", () => {
-        if (answers[active]) return;
-        answers[active] = button.dataset.answer;
-        render();
-      }));
+      choices.forEach((button) =>
+        button.addEventListener("click", () => {
+          if (answers[active]) return;
+          answers[active] = button.dataset.answer;
+          render();
+        }),
+      );
       document.getElementById("previous").addEventListener("click", () => {
         if (active === 0) return;
         active--;
@@ -205,7 +471,10 @@
         if (active < cases.length - 1) active++;
         else finished = true;
         render();
-        if (finished) document.getElementById("completion").scrollIntoView({block: "nearest"});
+        if (finished)
+          document
+            .getElementById("completion")
+            .scrollIntoView({ block: "nearest" });
         else title.focus();
       });
       document.getElementById("reset").addEventListener("click", () => {
@@ -217,7 +486,10 @@
       });
       render();
       if (window.frameElement && "ResizeObserver" in window) {
-        new ResizeObserver(() => { window.frameElement.style.height = document.documentElement.scrollHeight + "px"; }).observe(document.body);
+        new ResizeObserver(() => {
+          window.frameElement.style.height =
+            document.documentElement.scrollHeight + "px";
+        }).observe(document.body);
       }
     </script>
   </body>

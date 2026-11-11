@@ -202,14 +202,8 @@ A model should learn patterns that also work for **new examples**. This ability 
     - **What to try:** simplify the model, limit tree depth, increase K, or add regularization (a penalty that discourages overly complex fits). More representative training examples can also help.
     - **Keep in mind:** complexity alone does not prove overfitting. Check how the model performs on unseen examples.
 
-!!! tip "Compare fairly, then keep a final test"
-
-    Compare the **same metric** on training and unseen data. For errors such as **MAE** (mean absolute error), lower is better; for scores such as accuracy or R², higher is better. There is no universal gap that proves overfitting: consider the baseline, sample size, noise, and task.
-
-    Use a **validation set** to compare model settings. Keep a separate **test set** for the final evaluation, after choosing the model. Repeatedly adjusting a model based on its test score can make that score too optimistic. These comparisons assume no data leakage and that the evaluation examples represent the people or situations where the model will be used.
-
 ## Exercises
 
-For each of the five cases below, decide whether the evidence suggests **underfitting**, **overfitting**, or a **good fit (normal)**. Identify the clue that supports your answer before selecting it. All data are illustrative; validation examples were kept out of training.
+For each of the five cases below, decide whether the evidence suggests **underfitting**, **overfitting**, or a **good fit (normal)**. Identify the clue that supports your answer before selecting it.
 
 <iframe title="Five exercises to diagnose underfitting, overfitting, and a good fit" src="./fit-diagnosis.html" width="100%" height="850" style="border: none"></iframe>
