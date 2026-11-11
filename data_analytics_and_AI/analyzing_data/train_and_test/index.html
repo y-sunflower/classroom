@@ -104,7 +104,7 @@
     <a href="../../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-header__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
@@ -301,7 +301,7 @@
     <a href="../../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-nav__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
 
     </a>
     Website: y-sunflower.github.io/classroom/
@@ -2063,8 +2063,8 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">y_proba</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">y_proba</span><span class="p">)</span>
 </span></code></pre></div>
-<p>[0 1 0 ... 1 0 0] </p>
-<p>[0.34469012 0.65497222 0.09443097 ... 0.52949522 0.29383901 0.33006472]</p>
+<p>[0 0 0 ... 0 0 0] </p>
+<p>[0.45049758 0.39045587 0.17709971 ... 0.29588297 0.24470976 0.10954025]</p>
 <h3 id="evaluate-our-predictions-against-the-test-set">Evaluate our predictions against the test set<a class="headerlink" href="#evaluate-our-predictions-against-the-test-set" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
@@ -2081,11 +2081,11 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Accuracy: 74.9%</p>
-<p>Precision: 57.5%</p>
-<p>Recall: 22.2%</p>
-<p>F1: 32.0%</p>
-<p>AUC: 72.9%</p>
+<p>Accuracy: 73.6%</p>
+<p>Precision: 59.5%</p>
+<p>Recall: 18.5%</p>
+<p>F1: 28.2%</p>
+<p>AUC: 71.2%</p>
 <details class="question" open="open">
 <summary>Assuming <strong>retention campaigns</strong> are cheap, which metrics are we the most interested in?</summary>
 <p><span class="answer">We can use the recall and the auc metrics here, while others have medium to low value.</span></p>
@@ -2151,10 +2151,10 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 </span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="sa">f</span><span class="s2">"AUC </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">'auc'</span><span class="p">]</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression   accuracy 74.9% | precision 57.5% | recall 22.2% | F1 32.0% | AUC 72.9%
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Random forest         accuracy 74.8% | precision 56.6% | recall 24.6% | F1 34.3% | AUC 71.3%
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Decision tree         accuracy 74.3% | precision 59.5% | recall 11.6% | F1 19.4% | AUC 70.0%
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors   accuracy 72.2% | precision 46.9% | recall 30.2% | F1 36.7% | AUC 65.4%
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Logistic regression   accuracy 73.6% | precision 59.5% | recall 18.5% | F1 28.2% | AUC 71.2%
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Random forest         accuracy 73.8% | precision 59.0% | recall 21.5% | F1 31.5% | AUC 69.5%
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Decision tree         accuracy 72.8% | precision 55.2% | recall 16.5% | F1 25.4% | AUC 69.5%
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>K-nearest neighbors   accuracy 70.8% | precision 46.6% | recall 26.8% | F1 34.0% | AUC 62.8%
 </span></code></pre></div>
 <h3 id="exercise_1">Exercise<a class="headerlink" href="#exercise_1" title="Permanent link">&para;</a></h3>
 <p>Change the decision tree's <code>max_depth</code> to 2 and then to 10. Compare its test-set recall and AUC with the original tree. Which setting would you recommend, and what might happen if the tree is too deep?</p>
