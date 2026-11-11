@@ -153,14 +153,9 @@
       .primary:hover:not(:disabled) {
         background: #244eb7;
       }
-      #completion {
-        margin-top: 20px;
-        padding-top: 16px;
-        border-top: 1px solid #e2e8f0;
-      }
-      #completion h2 {
-        font-size: 18px;
-        margin: 0;
+      #completion .score {
+        font-size: 24px;
+        font-weight: 700;
       }
       #completion ul {
         padding-left: 20px;
@@ -191,41 +186,43 @@
         <span id="progress-label"></span
         ><button id="reset" type="button">Start over</button>
       </div>
-      <section class="card" aria-labelledby="case-title">
+      <section class="card" aria-label="Fit diagnosis activity">
         <progress
           id="progress"
           max="5"
           value="0"
           aria-label="Cases answered"
         ></progress>
-        <h1 id="case-title" tabindex="-1"></h1>
-        <p id="context" class="context"></p>
-        <div id="evidence" class="evidence"></div>
-        <p><strong>Which diagnosis best fits this evidence?</strong></p>
-        <div class="choices" role="group" aria-label="Choose a diagnosis">
-          <button type="button" data-answer="under" aria-pressed="false">
-            Underfitting
-          </button>
-          <button type="button" data-answer="over" aria-pressed="false">
-            Overfitting
-          </button>
-          <button type="button" data-answer="good" aria-pressed="false">
-            Good fit (normal)
-          </button>
-        </div>
-        <div
-          id="feedback"
-          class="feedback"
-          aria-live="polite"
-          aria-atomic="true"
-          hidden
-        ></div>
-        <nav aria-label="Exercise navigation">
-          <button id="previous" type="button">Previous case</button
-          ><button id="next" class="primary" type="button" disabled>
-            Next case
-          </button>
-        </nav>
+        <section id="case" aria-labelledby="case-title">
+          <h1 id="case-title" tabindex="-1"></h1>
+          <p id="context" class="context"></p>
+          <div id="evidence" class="evidence"></div>
+          <p><strong>Which diagnosis best fits this evidence?</strong></p>
+          <div class="choices" role="group" aria-label="Choose a diagnosis">
+            <button type="button" data-answer="under" aria-pressed="false">
+              Underfitting
+            </button>
+            <button type="button" data-answer="over" aria-pressed="false">
+              Overfitting
+            </button>
+            <button type="button" data-answer="good" aria-pressed="false">
+              Good fit (normal)
+            </button>
+          </div>
+          <div
+            id="feedback"
+            class="feedback"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+          ></div>
+          <nav aria-label="Exercise navigation">
+            <button id="previous" type="button">Previous case</button
+            ><button id="next" class="primary" type="button" disabled>
+              Next case
+            </button>
+          </nav>
+        </section>
         <section id="completion" aria-live="polite" hidden></section>
       </section>
 
@@ -414,9 +411,11 @@
         const item = cases[active];
         const answer = answers[active];
         const answered = answers.filter(Boolean).length;
-        document.getElementById("progress-label").textContent =
-          `Case ${active + 1} of ${cases.length} · ${answered} answered`;
+        document.getElementById("progress-label").textContent = finished
+          ? `Review complete · ${answered} answered`
+          : `Case ${active + 1} of ${cases.length} · ${answered} answered`;
         document.getElementById("progress").value = answered;
+        document.getElementById("case").hidden = finished;
         title.textContent = item.title;
         document.getElementById("context").textContent = item.context;
         document.getElementById("evidence").innerHTML = evidence(item);
@@ -449,7 +448,7 @@
           const correct = cases.filter(
             (item, i) => answers[i] === item.answer,
           ).length;
-          completion.innerHTML = `<h2>Review complete · ${correct} / ${cases.length} correct</h2><p>Your first answer to each case counts. Use Previous case to revisit the explanations, or Start over to try again.</p><ul>${cases.map((item, i) => `<li>${item.title}: <strong>${labels[item.answer]}</strong> — ${answers[i] === item.answer ? "correct" : "you chose " + labels[answers[i]]}</li>`).join("")}</ul>`;
+          completion.innerHTML = `<h1 id="review-title" tabindex="-1">Review complete</h1><p class="score">Score: ${correct} / ${cases.length}</p><p>Your first answer to each case counts. Start over to try again.</p><ul>${cases.map((item, i) => `<li><span role="img" aria-label="${answers[i] === item.answer ? "Correct" : "Incorrect"}">${answers[i] === item.answer ? "✅" : "❌"}</span> ${item.title}: <strong>${labels[item.answer]}</strong>${answers[i] === item.answer ? "" : " — you chose " + labels[answers[i]]}</li>`).join("")}</ul>`;
         }
       }
       choices.forEach((button) =>
@@ -471,10 +470,7 @@
         if (active < cases.length - 1) active++;
         else finished = true;
         render();
-        if (finished)
-          document
-            .getElementById("completion")
-            .scrollIntoView({ block: "nearest" });
+        if (finished) document.getElementById("review-title").focus();
         else title.focus();
       });
       document.getElementById("reset").addEventListener("click", () => {
