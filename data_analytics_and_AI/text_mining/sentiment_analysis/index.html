@@ -1,0 +1,2557 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Teaching materials of Joseph Barbier">
+      
+      
+        <meta name="author" content="Joseph Barbier">
+      
+      
+        <link rel="canonical" href="https://y-sunflower.github.io/classroom/data_analytics_and_AI/text_mining/sentiment_analysis/">
+      
+      
+      
+        <link rel="prev" href="../explore_reviews/">
+      
+      
+        <link rel="next" href="../llm_activity/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.71">
+    
+    
+      
+        <title>Sentiment analysis - Website: y-sunflower.github.io/classroom/</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../assets/stylesheets/modern/main.e442bf79.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/modern/palette.b60ce83d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetbrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Jetbrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.5.3/dist/css/tabulator.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-hidden="true"></label>
+    <div data-md-component="skip">
+      <a href="#__skip" class="md-skip">
+        Skip to content
+      </a>
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-header__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Website: y-sunflower.github.io/classroom/
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sentiment analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  All courses
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../syllabus/" class="md-tabs__link">
+          
+  
+  Data Analytics & AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Website: y-sunflower.github.io&#x2f;classroom&#x2f;" class="md-nav__button md-logo" aria-label="Website: y-sunflower.github.io/classroom/" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smile" viewBox="0 0 24 24"><path d="M15 10V9M16.472 15a6 6 0 0 1-8.943 0M9 10V9"/><circle cx="12" cy="12" r="10"/></svg>
+
+    </a>
+    Website: y-sunflower.github.io/classroom/
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  All courses
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Data Analytics & AI
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Data Analytics & AI
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  About
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_1">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  About
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open-check" viewBox="0 0 24 24"><path d="M12 5v16M16 12l2 2 4-4"/><path d="M22 6V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2h4.001A2 2 0 0 0 22 17v-1.344"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Syllabus
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-folder-code" viewBox="0 0 24 24"><path d="M10 10.5 8 13l2 2.5M14 10.5l2 2.5-2 2.5"/><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Set up Positron and uv
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Definitions of data and AI
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Definitions of data and AI
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../definition_of_data_and_ai/definitions/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Definitions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../definition_of_data_and_ai/generative_ai/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Generative AI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../definition_of_data_and_ai/indigo/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Indigo
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Preparing data
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Preparing data
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparing_data/storing_data/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brush-cleaning" viewBox="0 0 24 24"><path d="m16 22-1-4M19 14a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v1a1 1 0 0 0 1 1"/><path d="M19 14H5l-1.973 6.767A1 1 0 0 0 4 22h16a1 1 0 0 0 .973-1.233zM8 22l1-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Storing data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparing_data/python_crash_course/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brush-cleaning" viewBox="0 0 24 24"><path d="m16 22-1-4M19 14a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v1a1 1 0 0 0 1 1"/><path d="M19 14H5l-1.973 6.767A1 1 0 0 0 4 22h16a1 1 0 0 0 .973-1.233zM8 22l1-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Python crash course
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparing_data/polars_crash_course/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brush-cleaning" viewBox="0 0 24 24"><path d="m16 22-1-4M19 14a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v1a1 1 0 0 0 1 1"/><path d="M19 14H5l-1.973 6.767A1 1 0 0 0 4 22h16a1 1 0 0 0 .973-1.233zM8 22l1-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Polars crash course
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparing_data/cleaning/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brush-cleaning" viewBox="0 0 24 24"><path d="m16 22-1-4M19 14a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v1a1 1 0 0 0 1 1"/><path d="M19 14H5l-1.973 6.767A1 1 0 0 0 4 22h16a1 1 0 0 0 .973-1.233zM8 22l1-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Cleaning data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Analyzing data
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_4">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Analyzing data
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analyzing_data/prediction/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M6 18a4 4 0 0 1-1.967-.516M12 13h4M12 18h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Prediction
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analyzing_data/prepare_data/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M6 18a4 4 0 0 1-1.967-.516M12 13h4M12 18h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Prepare data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analyzing_data/train_and_test/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M6 18a4 4 0 0 1-1.967-.516M12 13h4M12 18h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Train & test
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analyzing_data/production_model/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M6 18a4 4 0 0 1-1.967-.516M12 13h4M12 18h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Production model
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Text mining
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_2_5">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Text mining
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explore_reviews/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-message-square-text" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Explore reviews
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-message-square-text" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Sentiment analysis
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-message-square-text" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Sentiment analysis
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#try-a-rule-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Try a rule first
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Try a rule first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-break-the-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: break the rule
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-what-the-model-should-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Define what the model should learn
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Define what the model should learn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avoid-testing-on-copies-of-training-reviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Avoid testing on copies of training reviews
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#turn-text-into-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Turn text into numbers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Turn text into numbers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-inspect-the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: inspect the numbers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#split-then-train" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Split, then train
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Split, then train">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluate-the-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Evaluate the classifier
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluate the classifier">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-read-the-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: read the mistakes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-wording-it-hasnt-seen-before" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Try wording it hasn't seen before
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Try wording it hasn&#x27;t seen before">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-challenge-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: challenge the model
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../llm_activity/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-message-square-text" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Text mining with an LLM
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Presenting data and ethical issues
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_6">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Presenting data and ethical issues
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../presenting_data_and_ethical_issues/other/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16M18 17V9M13 17V5M8 17v-3"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Other
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Group projects
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_7">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Group projects
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../group_projects/other/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.128a4 4 0 0 1 0 7.744M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Other
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#try-a-rule-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Try a rule first
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Try a rule first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-break-the-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: break the rule
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-what-the-model-should-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Define what the model should learn
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Define what the model should learn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avoid-testing-on-copies-of-training-reviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Avoid testing on copies of training reviews
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#turn-text-into-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Turn text into numbers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Turn text into numbers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-inspect-the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: inspect the numbers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#split-then-train" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Split, then train
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Split, then train">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluate-the-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Evaluate the classifier
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluate the classifier">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-read-the-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: read the mistakes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-wording-it-hasnt-seen-before" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Try wording it hasn't seen before
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Try wording it hasn&#x27;t seen before">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-challenge-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exercise: challenge the model
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    All courses
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../../syllabus/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Data Analytics & AI
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../explore_reviews/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Text mining
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                <a id="__skip" tabindex="-1"></a>
+                
+                  
+
+
+  <h1>Sentiment analysis</h1>
+
+<p>Now we want to know how customers feel. That's what <strong>sentiment analysis</strong> tries to do.</p>
+<p>The main thing that makes this thing complicated is that positive words != positive review.</p>
+<blockquote>
+<p><em>"Great, another broken bottle. Exactly what I needed."</em></p>
+</blockquote>
+<h2 id="try-a-rule-first">Try a rule first<a class="headerlink" href="#try-a-rule-first" title="Permanent link">&para;</a></h2>
+<p>We could write down a few positive and negative words, then count how many appear in a review.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">positive_words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"love"</span><span class="p">,</span> <span class="s2">"great"</span><span class="p">,</span> <span class="s2">"good"</span><span class="p">,</span> <span class="s2">"perfect"</span><span class="p">]</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">negative_words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"broken"</span><span class="p">,</span> <span class="s2">"bad"</span><span class="p">,</span> <span class="s2">"awful"</span><span class="p">,</span> <span class="s2">"expensive"</span><span class="p">]</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">sentiment_rule</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"!"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">positive_words</span><span class="p">:</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">negative_words</span><span class="p">:</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            <span class="n">score</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="k">return</span> <span class="s2">"positive"</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="k">return</span> <span class="s2">"negative"</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">return</span> <span class="s2">"unclear"</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"I love it!"</span><span class="p">,</span> <span class="s2">"Awful and expensive."</span><span class="p">,</span> <span class="s2">"Not good."</span><span class="p">]:</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">sentiment_rule</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>I love it! -&gt; positive
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Awful and expensive. -&gt; negative
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Not good. -&gt; positive
+</span></code></pre></div>
+<p>This uses lists, a function, a loop, and conditions from the <a href="../../preparing_data/python_crash_course/">Python crash course</a>. Here, <code>.lower()</code> lowercases a Python string, <code>.replace(...)</code> replaces some characters, and <code>.split()</code> splits it on whitespace. The punctuation handling is deliberately basic.</p>
+<h3 id="exercise-break-the-rule">Exercise: break the rule<a class="headerlink" href="#exercise-break-the-rule" title="Permanent link">&para;</a></h3>
+<p>Before running the function, predict its output for each sentence:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">test_reviews</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="s2">"Not good."</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="s2">"Not bad!"</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">"Great, another broken bottle."</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="s2">"Love the product, awful delivery."</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="s2">"Would buy again."</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">]</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># TODO: loop through test_reviews and print the rule's prediction</span>
+</span></code></pre></div>
+<p>Find at least two problems. Change the word lists or add a condition to fix one of them, then try to write a new sentence that breaks your fix.</p>
+<details class="question">
+<summary>What does a score of zero mean?</summary>
+<p>It could mean no recognised words, a balance of positive and negative words, or something else the rule missed. <strong>It doesn't prove that a review is neutral.</strong></p>
+</details>
+<h2 id="define-what-the-model-should-learn">Define what the model should learn<a class="headerlink" href="#define-what-the-model-should-learn" title="Permanent link">&para;</a></h2>
+<p>A classifier needs examples <strong>and labels</strong>. We already have star ratings, so we'll use them to create a target:</p>
+<table>
+<thead>
+<tr>
+<th>Rating</th>
+<th>Training label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 or 2 stars</td>
+<td><code>negative</code></td>
+</tr>
+<tr>
+<td>3 stars</td>
+<td>Left out of this exercise</td>
+</tr>
+<tr>
+<td>4 or 5 stars</td>
+<td><code>positive</code></td>
+</tr>
+</tbody>
+</table>
+<p>Three-star reviews can be mixed, neutral, or mildly positive or negative. We're leaving them out to keep our first model simple, <strong>not because they don't matter</strong>.</p>
+<h3 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
+<p>Create a new Python file. This block reads the data again, so you can also start this page in a separate script.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">reviews</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"src/data_analytics_and_AI/data/product_reviews.csv"</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">labeled_reviews</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">reviews</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"rating"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">sentiment</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"rating"</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"negative"</span><span class="p">))</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"positive"</span><span class="p">))</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"sentiment"</span><span class="p">)</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">)</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">labeled_reviews</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (2, 2)
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌───────────┬──────┐
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ sentiment ┆ len  │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│ ---       ┆ ---  │
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ str       ┆ u32  │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>╞═══════════╪══════╡
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ positive  ┆ 1316 │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ negative  ┆ 525  │
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>└───────────┴──────┘
+</span></code></pre></div>
+<p><code>pl.when(...).then(...).otherwise(...)</code> is a column (or <strong>vectorized</strong>) version of <code>if</code> / <code>else</code>. <code>pl.lit(...)</code> tells Polars we're supplying a value, here a text label.</p>
+<h3 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Calculate the share of positive reviews in <code>labeled_reviews</code>.</li>
+<li>What accuracy would we get by predicting <strong>positive for every review</strong>?</li>
+</ul>
+<h2 id="avoid-testing-on-copies-of-training-reviews">Avoid testing on copies of training reviews<a class="headerlink" href="#avoid-testing-on-copies-of-training-reviews" title="Permanent link">&para;</a></h2>
+<p>Our dataset repeats sentences. If <code>"LOVE IT!!!"</code> is in training and <code>"love it"</code> is in testing, the test isn't very challenging.</p>
+<p>We'll remove repeated versions of the same wording before splitting. This key ignores casing, punctuation, and extra whitespace; we'll still feed the <strong>original text</strong> to the model.</p>
+<p>You can run this preparation block as provided. The main idea is to avoid testing the model on copies of reviews it has already seen.</p>
+<p>```python exec="on" source="above" result="text" session="review-model"
+model_data = (
+    labeled_reviews.with_columns(
+        text_key=pl.col("review_text")
+        .str.to_lowercase()
+        .str.replace_all(r"[^a-z0-9\s]", "")
+        .str.replace_all(r"\s+", " ")
+        .str.strip_chars()
+    )
+    .unique(subset="text_key", maintain_order=True)
+)</p>
+<p>print(f"Before removing repeated wording: {labeled_reviews.height}")
+print(f"After: {model_data.height}")
+```</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This removes duplicates according to our key, but reviews with an added phrase or a typo can still be very similar. <strong>The test score will still be optimistic.</strong> Removing reviews also changes their proportions, so this smaller table is for our model experiment, not for reporting customer satisfaction.</p>
+</div>
+<h2 id="turn-text-into-numbers">Turn text into numbers<a class="headerlink" href="#turn-text-into-numbers" title="Permanent link">&para;</a></h2>
+<p>In the previous session, the model received numerical features. We need numbers here too.</p>
+<p>A simple approach is <strong>bag of words</strong>: create one column per word and count its occurrences in each review. For example:</p>
+<table>
+<thead>
+<tr>
+<th>Review</th>
+<th>good</th>
+<th>delivery</th>
+<th>bad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>good delivery</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>bad delivery</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>good good</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The model can learn which words tend to go with which label. The basic version loses word order: <code>"not good"</code> and <code>"good not"</code> have the same counts.</p>
+<h3 id="example_2">Example<a class="headerlink" href="#example_2" title="Permanent link">&para;</a></h3>
+<p>Scikit-learn's <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html"><code>CountVectorizer</code></a> does this transformation for us. By default, it lowercases text and extracts tokens of at least two characters.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">tiny_texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"good delivery"</span><span class="p">,</span> <span class="s2">"bad delivery"</span><span class="p">,</span> <span class="s2">"good good"</span><span class="p">]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">word_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tiny_texts</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">word_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>['bad' 'delivery' 'good']
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[[0 1 1]
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> [1 1 0]
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> [0 0 2]]
+</span></code></pre></div>
+<ul>
+<li><code>.fit_transform(...)</code> learns the vocabulary and creates the number table.</li>
+<li><code>.get_feature_names_out()</code> gives the column names, in the same order as the numbers.</li>
+<li><code>.toarray()</code> lets us print this tiny example as an ordinary array. For a large dataset, keep the efficient <strong>sparse</strong> representation, which avoids storing all those zeros.</li>
+</ul>
+<h3 id="exercise-inspect-the-numbers">Exercise: inspect the numbers<a class="headerlink" href="#exercise-inspect-the-numbers" title="Permanent link">&para;</a></h3>
+<p>Add <code>"not good delivery"</code> to <code>tiny_texts</code> and run the example again. Find the <code>"not"</code> column and explain the last row of the matrix.</p>
+<p>Then transform a new sentence <strong>without fitting again</strong>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">new_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">"excellent delivery"</span><span class="p">])</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">new_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</span></code></pre></div>
+<p>What happened to <code>"excellent"</code>? Why shouldn't we learn a new vocabulary every time we make a prediction?</p>
+<details class="tip">
+<summary>Hint</summary>
+<p><code>"excellent"</code> wasn't in the texts used for fitting. The vectorizer ignores unknown words. The model needs the same columns, in the same order, when training and predicting.</p>
+</details>
+<h2 id="split-then-train">Split, then train<a class="headerlink" href="#split-then-train" title="Permanent link">&para;</a></h2>
+<p>The workflow is the same as for churn. Only the features have changed: <strong><code>X</code> is a list of review texts</strong>, and <strong><code>y</code> is the list of sentiment labels</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Training reviews] --&gt; B[Learn word vocabulary]
+    B --&gt; C[Word counts]
+    C --&gt; D[Train logistic regression]
+    E[Test reviews] --&gt; F[Use the training vocabulary]
+    F --&gt; G[Predict with the trained model]
+    G --&gt; H[Compare with test labels]</code></pre>
+<h3 id="example_3">Example<a class="headerlink" href="#example_3" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="n">File</span> <span class="s2">"/home/runner/work/classroom/classroom/.venv/lib/python3.13/site-packages/markdown_exec/_internal/formatters/python.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">71</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_python</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">exec_python</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">code_block_id</span><span class="p">,</span> <span class="n">exec_globals</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="o">~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  <span class="n">File</span> <span class="s2">"/home/runner/work/classroom/classroom/.venv/lib/python3.13/site-packages/markdown_exec/_internal/formatters/_exec_python.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="ow">in</span> <span class="n">exec_python</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">exec</span><span class="p">(</span><span class="n">compiled</span><span class="p">,</span> <span class="n">exec_globals</span><span class="p">)</span>  <span class="c1"># noqa: S102</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">~~~~^^^^^^^^^^^^^^^^^^^^^^^^</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  <span class="n">File</span> <span class="s2">"&lt;code block: session review-model; n4&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">5</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">X</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="o">^^^^^^^^^^</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">'model_data'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</span></code></pre></div>
+<ul>
+<li><code>random_state=42</code> makes the split reproducible, so we can discuss the same results.</li>
+<li><code>stratify=y</code> keeps approximately the same positive/negative proportions in each set.</li>
+<li>The <code>Pipeline</code> learns the vocabulary <strong>only from training reviews</strong>, then uses that vocabulary for test reviews. This avoids letting test data influence the features we learn.</li>
+</ul>
+<p>We use the logistic regression from the previous session. No need for a new classification algorithm just because the input is text.</p>
+<div class="admonition warning">
+<p class="admonition-title">Keep the answer out of the features</p>
+<p>Our label comes from <code>rating</code>. Feeding <code>rating</code> into the model would give away the answer. Here, the <strong>only input is the review text</strong>: no rating, customer ID, or product ID.</p>
+</div>
+<h2 id="evaluate-the-classifier">Evaluate the classifier<a class="headerlink" href="#evaluate-the-classifier" title="Permanent link">&para;</a></h2>
+<p>Accuracy is useful, but the team wants to <strong>flag unhappy reviews</strong>. So we'll treat <code>"negative"</code> as the class we're trying to detect.</p>
+<h3 id="example_4">Example<a class="headerlink" href="#example_4" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="n">File</span> <span class="s2">"/home/runner/work/classroom/classroom/.venv/lib/python3.13/site-packages/markdown_exec/_internal/formatters/python.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">71</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_python</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">exec_python</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">code_block_id</span><span class="p">,</span> <span class="n">exec_globals</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="o">~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  <span class="n">File</span> <span class="s2">"/home/runner/work/classroom/classroom/.venv/lib/python3.13/site-packages/markdown_exec/_internal/formatters/_exec_python.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="ow">in</span> <span class="n">exec_python</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">exec</span><span class="p">(</span><span class="n">compiled</span><span class="p">,</span> <span class="n">exec_globals</span><span class="p">)</span>  <span class="c1"># noqa: S102</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">~~~~^^^^^^^^^^^^^^^^^^^^^^^^</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  <span class="n">File</span> <span class="s2">"&lt;code block: session review-model; n5&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">5</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">baseline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                 <span class="o">^^^^^^^</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">'X_train'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</span></code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Precision</label><label for="__tabbed_1_2">Recall</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Among the reviews we flagged as negative, how many have a negative label?</p>
+<p>Low precision means the team spends time reading positive reviews by mistake.</p>
+</div>
+<div class="tabbed-block">
+<p>Among reviews with a negative label, how many did we flag?</p>
+<p>Low recall means we miss unhappy reviews.</p>
+</div>
+</div>
+</div>
+<p><code>pos_label="negative"</code> tells scikit-learn which label to focus on. The name of the parameter doesn't mean we have to focus on happy customers!</p>
+<h3 id="exercise-read-the-mistakes">Exercise: read the mistakes<a class="headerlink" href="#exercise-read-the-mistakes" title="Permanent link">&para;</a></h3>
+<p>Create a table containing the test text, actual label, and prediction. This code is ready to use:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">test_results</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">"review_text"</span><span class="p">:</span> <span class="n">X_test</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">"actual"</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s2">"predicted"</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">})</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">mistakes</span> <span class="o">=</span> <span class="n">test_results</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"actual"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"predicted"</span><span class="p">))</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">mistakes</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_dicts</span><span class="p">():</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</span></code></pre></div>
+<ul>
+<li>Read up to five mistakes. Is each one an obvious failure, or could the label be debatable?</li>
+<li>If the model makes no mistakes, what about our dataset could explain that?</li>
+<li>The team can read only a few flagged reviews per day. Would you focus on precision or recall? What if reading reviews is cheap and missing complaints is costly?</li>
+</ul>
+<details class="tip">
+<summary>Same tradeoff as in the churn session</summary>
+<p>With very limited reading capacity, precision helps avoid wasting it. When missing complaints is the bigger concern, recall matters more. Neither choice makes the labels perfect.</p>
+</details>
+<h2 id="try-wording-it-hasnt-seen-before">Try wording it hasn't seen before<a class="headerlink" href="#try-wording-it-hasnt-seen-before" title="Permanent link">&para;</a></h2>
+<p>A great test score on template-based reviews is nice. Let's make the task a bit less comfortable.</p>
+<p>We've prepared <strong>24 fictional reviews</strong>, written separately from the generated dataset. Some are clearly positive or negative; others are mixed or don't give enough information. They aren't real customer data or a representative benchmark.</p>
+<p><a class="md-button" download="review_challenge.csv" href="../../data/review_challenge.csv">Download review_challenge.csv</a></p>
+<p>Put it next to <code>product_reviews.csv</code>. Keep using the trained model from above.</p>
+<h3 id="example_5">Example<a class="headerlink" href="#example_5" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="n">File</span> <span class="s2">"/home/runner/work/classroom/classroom/.venv/lib/python3.13/site-packages/markdown_exec/_internal/formatters/python.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">71</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_python</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">exec_python</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">code_block_id</span><span class="p">,</span> <span class="n">exec_globals</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="o">~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  <span class="n">File</span> <span class="s2">"/home/runner/work/classroom/classroom/.venv/lib/python3.13/site-packages/markdown_exec/_internal/formatters/_exec_python.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="ow">in</span> <span class="n">exec_python</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">exec</span><span class="p">(</span><span class="n">compiled</span><span class="p">,</span> <span class="n">exec_globals</span><span class="p">)</span>  <span class="c1"># noqa: S102</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">~~~~^^^^^^^^^^^^^^^^^^^^^^^^</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  <span class="n">File</span> <span class="s2">"&lt;code block: session review-model; n6&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">pl</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s2">"model_sentiment"</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">challenge</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()))</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                                 <span class="o">^^^^^</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">'model'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</span></code></pre></div>
+<p>Use <code>pl.read_csv("review_challenge.csv")</code> in your own script.</p>
+<h3 id="exercise-challenge-the-model">Exercise: challenge the model<a class="headerlink" href="#exercise-challenge-the-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Read the challenge reviews and write your own labels: <code>positive</code>, <code>negative</code>, or <code>mixed_or_unclear</code>. Do this before opening the suggested answers on the next page.</li>
+<li>Compare your labels with the classifier's predictions. Find a case where forcing a binary answer is a problem.</li>
+<li>Add two reviews of your own: one clearly negative without a word from our negative list, and one sarcastic review. Predict with <code>model.predict([your_text])</code>.</li>
+<li>Would you let this system automatically send a reply to a customer? Explain what you'd check first.</li>
+</ul>
+<details class="info">
+<summary>Going further: pairs of words</summary>
+<p>A pair of consecutive words is called a <strong>bigram</strong>. <code>CountVectorizer(ngram_range=(1, 2))</code> uses single words and pairs, so <code>"not good"</code> can become its own feature.</p>
+<p>If you finish early, create a second pipeline with that setting and compare predictions on your own examples. It can help with some phrases, but it doesn't solve sarcasm or guarantee better results.</p>
+<p>Treat this as exploration. If we keep changing the model based on the same test results, that test is no longer an independent final check. We'd need a separate validation set for choosing settings and an untouched test set for the final evaluation.</p>
+</details>
+<p><a class="md-button md-button--primary" href="../llm_activity/">Next: compare with an LLM</a></p>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../explore_reviews/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Explore reviews">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Explore reviews
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../llm_activity/" class="md-footer__link md-footer__link--next" aria-label="Next: Text mining with an LLM">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Text mining with an LLM
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.footnote.tooltips","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.tabs","navigation.sections","navigation.top","navigation.tracking","search.highlight","navigation.prune"],"redirect":null,"search":"../../../assets/javascripts/workers/search.c47bb847.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a2388154.min.js"></script>
+      
+        <script src="https://unpkg.com/tabulator-tables@6.5.3/dist/js/tabulator.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../javascripts/csv-table.js"></script>
+      
+    
+  </body>
+</html>

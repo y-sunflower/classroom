@@ -1221,6 +1221,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1277,7 +1281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../text_mining/other/" class="md-nav__link">
+      <a href="../../text_mining/explore_reviews/" class="md-nav__link">
         
   
   
@@ -1286,7 +1290,65 @@
   <span class="md-ellipsis">
     
   
-  Other
+  Explore reviews
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../text_mining/sentiment_analysis/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-message-square-text" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Sentiment analysis
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../text_mining/llm_activity/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-message-square-text" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Text mining with an LLM
 
     
   </span>
@@ -1812,13 +1874,16 @@
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>└────────────┴────────────┴────────────┴────────────┴────────────┴────────────┴────────────┴───────┘
 </span></code></pre></div>
 <h3 id="calculate-churn-rate">Calculate churn rate<a class="headerlink" href="#calculate-churn-rate" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn rate: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">churn_rate</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"churn"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">churn_rate</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"churn"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">height</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn rate: </span><span class="si">{</span><span class="n">churn_rate</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Churn rate: 27.82%
 </span></code></pre></div>
 <h3 id="separate-features-and-target">Separate features and target<a class="headerlink" href="#separate-features-and-target" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>target</strong> (aka <code>y</code>) = whether the customer churned or not</li>
+<li><strong>target</strong> (aka <code>y</code>) = whether the customer churned or not (1 = true, 0 = false)</li>
 </ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># The "churn" columns contain the info we want</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"churn"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
@@ -1827,7 +1892,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Target (y): [0 1 0 ... 0 0 0]
 </span></code></pre></div>
 <ul>
-<li><strong>features</strong> (aka <code>X</code>) = everything that can help us predict the target (time since subscribed, the kind of subcription, etc)</li>
+<li><strong>features</strong> (aka <code>X</code>) = everything that can help us predict the target (time since subscribed, the kind of subcription, number of issues reported, etc)</li>
 </ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Column names of features are everything, except "churn"</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">feature_columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"churn"</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
