@@ -2078,13 +2078,8 @@
 </div>
 </div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Compare fairly, then keep a final test</p>
-<p>Compare the <strong>same metric</strong> on training and unseen data. For errors such as <strong>MAE</strong> (mean absolute error), lower is better; for scores such as accuracy or R², higher is better. There is no universal gap that proves overfitting: consider the baseline, sample size, noise, and task.</p>
-<p>Use a <strong>validation set</strong> to compare model settings. Keep a separate <strong>test set</strong> for the final evaluation, after choosing the model. Repeatedly adjusting a model based on its test score can make that score too optimistic. These comparisons assume no data leakage and that the evaluation examples represent the people or situations where the model will be used.</p>
-</div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
-<p>For each of the five cases below, decide whether the evidence suggests <strong>underfitting</strong>, <strong>overfitting</strong>, or a <strong>good fit (normal)</strong>. Identify the clue that supports your answer before selecting it. All data are illustrative; validation examples were kept out of training.</p>
+<p>For each of the five cases below, decide whether the evidence suggests <strong>underfitting</strong>, <strong>overfitting</strong>, or a <strong>good fit (normal)</strong>. Identify the clue that supports your answer before selecting it.</p>
 <iframe title="Five exercises to diagnose underfitting, overfitting, and a good fit" src=".././fit-diagnosis.html" width="100%" height="850" style="border: none"></iframe>
 
 
