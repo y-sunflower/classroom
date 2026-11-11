@@ -4,13 +4,11 @@ icon: lucide/message-square-text
 
 Our classifier learned from labeled reviews. An LLM has already been trained on a lot of text, so we can try giving it instructions and examples instead of training our own model.
 
-For this activity, **use any chatbot you already have access to**. No API key, paid subscription, or new Python package needed.
+For this activity, **use any chatbot you already have access to** (chatgpt, claude, gemini, mistral, etc).
 
 !!! abstract "The comparison"
 
     We'll give the chatbot the same [24 challenge reviews](../data/review_challenge.csv) we gave our classifier. The goal is to find out where each approach helps, where it fails, and what a marketing team should check before using the output.
-
-    These reviews are fictional. For this activity, paste only those reviews, not real customer messages or account information.
 
 ## Decide what the labels mean
 
@@ -28,11 +26,13 @@ The classifier has only two possible answers. For the LLM activity, we'll allow 
 
     If two people disagree about a label, how should we decide whether the model is wrong?
 
-    <span class="answer">Start by checking the labeling instructions and the review together. Sometimes the instructions need improving. A human label is a judgment too; disagreement isn't automatically a model failure.</span>
+    <span class="answer">Start by checking the labeling instructions and the review together. Sometimes the instructions need improving. A human label is a judgment too and disagreement isn't necessary a model failure.</span>
 
 ## Start with a basic prompt
 
 ### Example
+
+In Positron, you can easily retrieve raw texts by right clicking on `review_challenge.csv` > `Open with` > `Text Editor`.
 
 Copy this into a new conversation, followed by reviews C01 to C06 from `review_challenge.csv`:
 
@@ -44,7 +44,7 @@ Reviews:
 [paste C01 to C06 here, keeping their IDs]
 ```
 
-### Exercise: inspect the response
+### Exercise
 
 - Compare the answers with the labels you wrote on the previous page.
 - Does the chatbot use the same labels each time? Does it explain how it handles mixed opinions?
@@ -100,7 +100,7 @@ Here, **topic** and **sentiment** are separate outputs. A review could be positi
 
 The exact quote helps us check the result. It isn't proof of the model's internal reasoning, and a real quote can still be used to support a questionable label.
 
-### Exercise: audit the output
+### Exercise
 
 Check the response before calculating a score:
 
@@ -108,14 +108,6 @@ Check the response before calculating a score:
 - Are the sentiment labels limited to the three allowed values?
 - Is each evidence quote actually in the corresponding review?
 - Does the quote support the label when you read the **whole review**?
-
-Pay particular attention to C09, C15, C17, and C20. Discuss one disagreement with a neighbour and refer to the label definitions.
-
-Compare C01 to C06 with the first prompt's answers. Did the more specific prompt improve the labels, the consistency of the format, or both? It might improve the format without changing any labels.
-
-!!! tip "Keep a record"
-
-    Save the prompt, the response, the chatbot/model name shown in the interface, and the date. If you change a prompt, keep the earlier version too. Otherwise, it's hard to know what you actually compared.
 
 ## Compare on the same reviews
 

@@ -89,10 +89,9 @@ labeled_reviews = (
         .then(pl.lit("negative"))
         .otherwise(pl.lit("positive"))
     )
-    .group_by("sentiment").len()
 )
 
-print(labeled_reviews)
+print(labeled_reviews.group_by("sentiment").len())
 ```
 
 `pl.when(...).then(...).otherwise(...)` is a column (or **vectorized**) version of `if` / `else`. `pl.lit(...)` tells Polars we're supplying a value, here a text label.
@@ -114,21 +113,25 @@ You can run this preparation block as provided. The main idea is to avoid testin
 model_data = (
     labeled_reviews.with_columns(
         text_key=pl.col("review_text")
-        .str.to_lowercase()
-        .str.replace_all(r"[^a-z0-9\s]", "")
-        .str.replace_all(r"\s+", " ")
-        .str.strip_chars()
+        .str.to_lowercase()                  # lower case
+        .str.replace_all(r"[^a-z0-9\s]", "") # remove punctations / special characters
+        .str.replace_all(r"\s+", " ")        # remove consecutive white spaces
+        .str.strip_chars()                   # remove useless white spaces
     )
-    .unique(subset="text_key", maintain_order=True)
+    .unique("text_key")
 )
 
 print(f"Before removing repeated wording: {labeled_reviews.height}")
 print(f"After: {model_data.height}")
 ```
 
-!!! warning
+| Original `review_text`  | Normalized `text_key` |
+| ----------------------- | --------------------- |
+| `"Great Product!!!"`    | `"great product"`     |
+| `"great product"`       | `"great product"`     |
+| `"  GREAT   PRODUCT  "` | `"great product"`     |
+| `"Bad product."`        | `"bad product"`       |
 
-    This removes duplicates according to our key, but reviews with an added phrase or a typo can still be very similar. **The test score will still be optimistic.** Removing reviews also changes their proportions, so this smaller table is for our model experiment, not for reporting customer satisfaction.
 
 ## Turn text into numbers
 
@@ -163,13 +166,13 @@ print(word_matrix.toarray())
 - `.get_feature_names_out()` gives the column names, in the same order as the numbers.
 - `.toarray()` lets us print this tiny example as an ordinary array. For a large dataset, keep the efficient **sparse** representation, which avoids storing all those zeros.
 
-### Exercise: inspect the numbers
+### Exercise
 
 Add `"not good delivery"` to `tiny_texts` and run the example again. Find the `"not"` column and explain the last row of the matrix.
 
 Then transform a new sentence **without fitting again**:
 
-```python
+```python exec="on" source="above" result="text" session="review-model"
 new_matrix = vectorizer.transform(["excellent delivery"])
 print(new_matrix.toarray())
 ```
@@ -188,7 +191,7 @@ The workflow is the same as for churn. Only the features have changed: **`X` is 
 flowchart LR
     A[Training reviews] --> B[Learn word vocabulary]
     B --> C[Word counts]
-    C --> D[Train logistic regression]
+    C --> D[Train model]
     E[Test reviews] --> F[Use the training vocabulary]
     F --> G[Predict with the trained model]
     G --> H[Compare with test labels]
@@ -204,13 +207,11 @@ from sklearn.linear_model import LogisticRegression
 X = model_data["review_text"].to_list()
 y = model_data["sentiment"].to_list()
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42, stratify=y
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
 model = Pipeline([
     ("words", CountVectorizer()),
-    ("classifier", LogisticRegression(max_iter=1000)),
+    ("classifier", LogisticRegression()),
 ])
 
 model.fit(X_train, y_train)
@@ -218,11 +219,7 @@ print(f"Training reviews: {len(X_train)}")
 print(f"Test reviews: {len(X_test)}")
 ```
 
-- `random_state=42` makes the split reproducible, so we can discuss the same results.
-- `stratify=y` keeps approximately the same positive/negative proportions in each set.
-- The `Pipeline` learns the vocabulary **only from training reviews**, then uses that vocabulary for test reviews. This avoids letting test data influence the features we learn.
-
-We use the logistic regression from the previous session. No need for a new classification algorithm just because the input is text.
+The `Pipeline` learns the vocabulary **only from training reviews**, then uses that vocabulary for test reviews. This avoids letting test data influence the features we learn.
 
 !!! warning "Keep the answer out of the features"
 
@@ -230,7 +227,7 @@ We use the logistic regression from the previous session. No need for a new clas
 
 ## Evaluate the classifier
 
-Accuracy is useful, but the team wants to **flag unhappy reviews**. So we'll treat `"negative"` as the class we're trying to detect.
+Accuracy is useful, but we want to **flag unhappy reviews**. So we'll treat `"negative"` as the class we're trying to detect.
 
 ### Example
 
@@ -252,23 +249,29 @@ print(f"Negative recall: {recall_score(y_test, y_pred, pos_label='negative', zer
 
 === "Precision"
 
-    Among the reviews we flagged as negative, how many have a negative label?
+    $$
+    \text{Precision} = \frac{TP}{TP + FP}
+    $$
 
-    Low precision means the team spends time reading positive reviews by mistake.
+    - Measures the proportion of positive predictions that are actually correct.
+    - Particularly relevant in **spam detection**, where incorrectly classifying legitimate emails as spam should be avoided.
 
 === "Recall"
 
-    Among reviews with a negative label, how many did we flag?
+    $$
+    \text{Recall} = \frac{TP}{TP + FN}
+    $$
 
-    Low recall means we miss unhappy reviews.
+    - Measures the proportion of actual positive cases that the model correctly identifies.
+    - Particularly relevant in **disease screening**, where missing a positive case can have serious consequences.
 
 `pos_label="negative"` tells scikit-learn which label to focus on. The name of the parameter doesn't mean we have to focus on happy customers!
 
-### Exercise: read the mistakes
+### Exercise
 
-Create a table containing the test text, actual label, and prediction. This code is ready to use:
+Create a table containing the test text, actual label, and prediction.
 
-```python
+```python exec="on" source="above" result="text" session="review-model"
 test_results = pl.DataFrame({
     "review_text": X_test,
     "actual": y_test,
@@ -288,31 +291,34 @@ for row in mistakes.head(5).to_dicts():
 
     With very limited reading capacity, precision helps avoid wasting it. When missing complaints is the bigger concern, recall matters more. Neither choice makes the labels perfect.
 
-## Try wording it hasn't seen before
+## New reviews
 
-A great test score on template-based reviews is nice. Let's make the task a bit less comfortable.
+Now we have a model that makes prediction for us. The easiest way to test it:
 
-We've prepared **24 fictional reviews**, written separately from the generated dataset. Some are clearly positive or negative; others are mixed or don't give enough information. They aren't real customer data or a representative benchmark.
+```python exec="on" source="above" result="text" session="review-model"
+print(model.predict(["this product is bad"]))
+print(model.predict(["I just love this product"]))
+print(model.predict(["this is too expensive"]))
+```
 
-[Download review_challenge.csv](../data/review_challenge.csv){ .md-button download="review_challenge.csv" }
+Let's use some new reviews our products got and see if customers are happy or not.
 
-Put it next to `product_reviews.csv`. Keep using the trained model from above.
+<csv-table src="../data/review_challenge.csv" caption="Customer reviews" page-size="6"></csv-table>
+
 
 ### Example
 
 ```python exec="on" source="above" result="text" session="review-model"
 challenge = pl.read_csv("src/data_analytics_and_AI/data/review_challenge.csv")
 challenge = challenge.with_columns(
-    pl.Series("model_sentiment", model.predict(challenge["review_text"].to_list()))
+    pl.Series("prediction", model.predict(challenge["review_text"].to_list()))
 )
 
-for row in challenge.head(4).to_dicts():
-    print(row)
+for row in challenge.head(6).to_dicts():
+    print("Prediction: ", row["prediction"], "\n", row["review_text"], "\n")
 ```
 
-Use `pl.read_csv("review_challenge.csv")` in your own script.
-
-### Exercise: challenge the model
+### Exercise
 
 - Read the challenge reviews and write your own labels: `positive`, `negative`, or `mixed_or_unclear`. Do this before opening the suggested answers on the next page.
 - Compare your labels with the classifier's predictions. Find a case where forcing a binary answer is a problem.
@@ -323,8 +329,5 @@ Use `pl.read_csv("review_challenge.csv")` in your own script.
 
     A pair of consecutive words is called a **bigram**. `CountVectorizer(ngram_range=(1, 2))` uses single words and pairs, so `"not good"` can become its own feature.
 
-    If you finish early, create a second pipeline with that setting and compare predictions on your own examples. It can help with some phrases, but it doesn't solve sarcasm or guarantee better results.
+    Create a second pipeline with that setting and compare predictions on your own examples.
 
-    Treat this as exploration. If we keep changing the model based on the same test results, that test is no longer an independent final check. We'd need a separate validation set for choosing settings and an untouched test set for the final evaluation.
-
-[Next: compare with an LLM](llm_activity.md){ .md-button .md-button--primary }

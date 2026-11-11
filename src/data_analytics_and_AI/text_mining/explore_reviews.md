@@ -25,8 +25,6 @@ We'll reuse a [product reviews dataset](../definition_of_data_and_ai/indigo.md#d
 
 <csv-table src="../data/product_reviews.csv" caption="Customer reviews" page-size="6"></csv-table>
 
-
-
 - Create a file called `text_mining.py`.
 - If needed, install the packages from the Positron terminal:
 

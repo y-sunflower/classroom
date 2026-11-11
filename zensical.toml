@@ -73,8 +73,6 @@ features = [
   "navigation.prune",
 ]
 
-[project.theme.icon]
-logo = "lucide/smile"
 
 [project.theme.font]
 text = "Inter"
