@@ -25,7 +25,7 @@ Here we'll use a new CSV file about **food delivery subscription**:
 
 ### Read the data
 
-```py exec="on" source="above" result="text" session="food-analysis"
+```python exec="on" source="above" result="text" session="food-analysis"
 import polars as pl
 
 df = pl.read_csv("src/data_analytics_and_AI/data/food_subscription.csv")
@@ -34,23 +34,26 @@ print(df)
 
 ### Calculate churn rate
 
-```py exec="on" source="above" result="text" session="food-analysis"
-print(f"Churn rate: {df['churn'].mean():.2%}\n")
+```python exec="on" source="above" result="text" session="food-analysis"
+churn_rate = df["churn"].mean()
+churn_rate = df["churn"].sum() / df.height
+
+print(f"Churn rate: {churn_rate:.2%}\n")
 ```
 
 ### Separate features and target
 
-- **target** (aka `y`) = whether the customer churned or not
+- **target** (aka `y`) = whether the customer churned or not (1 = true, 0 = false)
 
-```py exec="on" source="above" result="text" session="food-analysis"
+```python exec="on" source="above" result="text" session="food-analysis"
 # The "churn" columns contain the info we want
 y = df["churn"].to_numpy()
 print(f"Target (y): {y}\n")
 ```
 
-- **features** (aka `X`) = everything that can help us predict the target (time since subscribed, the kind of subcription, etc)
+- **features** (aka `X`) = everything that can help us predict the target (time since subscribed, the kind of subcription, number of issues reported, etc)
 
-```py exec="on" source="above" result="text" session="food-analysis"
+```python exec="on" source="above" result="text" session="food-analysis"
 # Column names of features are everything, except "churn"
 feature_columns = df.drop("churn").columns
 X = df.select(feature_columns).to_numpy()

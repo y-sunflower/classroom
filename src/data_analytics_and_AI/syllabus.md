@@ -56,7 +56,7 @@ joseph@ysunflower.com
 - Exploring text mining: sentiment analysis for marketing insights
 - Practical exercise in class
 
-[Go to materials of this session](text_mining/other.md){ .md-button .md-button--primary }
+[Go to materials of this session](text_mining/explore_reviews.md){ .md-button .md-button--primary }
 
 ## Session 5 - Presenting data & ethical issues
 

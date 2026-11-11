@@ -29,7 +29,9 @@ nav = [
       { "Production model" = "data_analytics_and_AI/analyzing_data/production_model.md" },
     ] },
     { "Text mining" = [
-      { "Other" = "data_analytics_and_AI/text_mining/other.md" },
+      { "Explore reviews" = "data_analytics_and_AI/text_mining/explore_reviews.md" },
+      { "Sentiment analysis" = "data_analytics_and_AI/text_mining/sentiment_analysis.md" },
+      { "Text mining with an LLM" = "data_analytics_and_AI/text_mining/llm_activity.md" },
     ] },
     { "Presenting data and ethical issues" = [
       { "Other" = "data_analytics_and_AI/presenting_data_and_ethical_issues/other.md" },

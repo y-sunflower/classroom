@@ -4,7 +4,7 @@ icon: lucide/brain-circuit
 
 ## Data
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 import polars as pl
 
 df = pl.read_csv("src/data_analytics_and_AI/data/food_subscription.csv")
@@ -21,7 +21,7 @@ We'll use a very famous library called [`scikit-learn`](https://scikit-learn.org
 
 - Import a whole bunch of things
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -39,7 +39,7 @@ from sklearn.metrics import (
 
 - Split train and test sets
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 ```
 
@@ -54,7 +54,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
 - Create a `ColumnTransformer`
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 categorical_features = ["subscription_level", "food_preference"]
 categorical_columns = [
     i for i, col in enumerate(feature_columns) if col in categorical_features
@@ -81,7 +81,7 @@ preprocessor = ColumnTransformer(
 
 - Train (logistic regression)
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 from sklearn.pipeline import Pipeline
 
 model = Pipeline([("preprocessor", preprocessor), ("classifier", LogisticRegression())])
@@ -145,7 +145,7 @@ model.fit(X_train, y_train)
 
 ### Let's make predictions
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 y_pred = model.predict(X_test)
 print(y_pred, "\n")
 
@@ -155,7 +155,7 @@ print(y_proba)
 
 ### Evaluate our predictions against the test set
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 accuracy = accuracy_score(y_test, y_pred) * 100
 print(f"Accuracy: {accuracy:.1f}%\n")
 
@@ -196,7 +196,7 @@ for threshold in [0.3, 0.5, 0.7]:
 
 ## Compare models
 
-```py exec="on" source="above" result="text" session="train-models"
+```python exec="on" source="above" result="text" session="train-models"
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -254,7 +254,7 @@ Change the decision tree's `max_depth` to 2 and then to 10. Compare its test-set
 
     `joblib` is a Python library that (among others) that let use **save** a model to disk in order to **reuse it later**.
 
-```py exec="on" source="above" session="train-models"
+```python exec="on" source="above" session="train-models"
 import joblib
 
 joblib.dump(model, "src/data_analytics_and_AI/analyzing_data/exercise_model.joblib")

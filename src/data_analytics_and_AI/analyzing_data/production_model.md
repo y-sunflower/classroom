@@ -12,7 +12,7 @@ Now that we have our model saved to disk, let's see how we can:
 
 #### Load the model
 
-```py exec="on" source="above" session="use-model"
+```python exec="on" source="above" session="use-model"
 import joblib
 import numpy as np
 
@@ -25,7 +25,7 @@ model = joblib.load("src/data_analytics_and_AI/analyzing_data/exercise_model.job
 
 ### Inputs
 
-```py exec="on" source="above" session="use-model"
+```python exec="on" source="above" session="use-model"
 subscription_level = "Deluxe"
 tenure_months = 9
 food_preference = "Mixed"
@@ -47,7 +47,7 @@ X = np.array([[
 
 ### Make prediction
 
-```py exec="on" source="above" session="use-model"
+```python exec="on" source="above" session="use-model"
 probability = model.predict_proba(X)[0, list(model.classes_).index(1)]
 
 print(f"Churn probability: {probability:.1%}")
