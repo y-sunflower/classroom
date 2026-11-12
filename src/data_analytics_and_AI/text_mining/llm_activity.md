@@ -151,7 +151,7 @@ print(comparison.select(
 - `.join(..., on="review_id")` matches rows by ID, like looking up a record in another table. `how="left"` keeps our challenge rows, and `validate="1:1"` checks that the matching IDs are unique.
 - Comparing two columns produces booleans. Their mean is the share that match, just like the mention shares on the first page.
 
-### Exercise: explain the comparison
+### Exercise
 
 - Report both systems' accuracy on the **same 16 clear reviews**, including the count correct out of 16.
 - Read the mistakes. Did either system miss sarcasm, negation, or a complaint hidden behind a positive word?
@@ -180,7 +180,7 @@ print(comparison.select(
 
 ## Recent progress
 
-### Decision models: TypeSafe and Jev
+### Decision models
 
 [TypeSafe AI](https://typesafe.ai/) introduced **Jev**, its first **System One model**, on **September 15, 2026**. This is a very recent, advanced development with the potential to be a major step forward for AI automation: models designed to make fast, structured decisions that software can act on directly.
 

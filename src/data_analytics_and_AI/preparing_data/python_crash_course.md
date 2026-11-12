@@ -357,12 +357,6 @@ for sale in sales:
 
       ```py
       prices = [12.50, 8.00, 15.75, 4.25]
-
-      # TODO: calculate the total using a loop
-
-      # TODO: calculate the average price
-
-      # TODO: display the total and average
       ```
 
       Expected result:
@@ -378,8 +372,7 @@ for sale in sales:
 
       1. Displays the name and price of each product.
       2. Displays only products costing more than 10 euros.
-      3. Counts how many products cost more than 10 euros.
-      4. Prints that count.
+      3. Counts how many products cost more than 10 euros and print it.
 
       Starter code:
 
@@ -391,12 +384,6 @@ for sale in sales:
             {"name": "Calculator", "price": 18.50},
             {"name": "Folder", "price": 4.00},
       ]
-
-      # TODO: display all products
-
-      # TODO: find products costing more than 10 euros
-
-      # TODO: display the number of expensive products
       ```
 
       Expected result for expensive products:
