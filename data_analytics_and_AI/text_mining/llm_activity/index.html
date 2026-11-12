@@ -1351,10 +1351,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exercise-explain-the-comparison" class="md-nav__link">
+  <a href="#exercise_2" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Exercise: explain the comparison
+        Exercise
       </span>
     </span>
   </a>
@@ -1390,10 +1390,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#decision-models-typesafe-and-jev" class="md-nav__link">
+  <a href="#decision-models" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Decision models: TypeSafe and Jev
+        Decision models
       </span>
     </span>
   </a>
@@ -1776,10 +1776,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exercise-explain-the-comparison" class="md-nav__link">
+  <a href="#exercise_2" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Exercise: explain the comparison
+        Exercise
       </span>
     </span>
   </a>
@@ -1815,10 +1815,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#decision-models-typesafe-and-jev" class="md-nav__link">
+  <a href="#decision-models" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Decision models: TypeSafe and Jev
+        Decision models
       </span>
     </span>
   </a>
@@ -2102,7 +2102,7 @@
 <li><code>.join(..., on="review_id")</code> matches rows by ID, like looking up a record in another table. <code>how="left"</code> keeps our challenge rows, and <code>validate="1:1"</code> checks that the matching IDs are unique.</li>
 <li>Comparing two columns produces booleans. Their mean is the share that match, just like the mention shares on the first page.</li>
 </ul>
-<h3 id="exercise-explain-the-comparison">Exercise: explain the comparison<a class="headerlink" href="#exercise-explain-the-comparison" title="Permanent link">&para;</a></h3>
+<h3 id="exercise_2">Exercise<a class="headerlink" href="#exercise_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Report both systems' accuracy on the <strong>same 16 clear reviews</strong>, including the count correct out of 16.</li>
 <li>Read the mistakes. Did either system miss sarcasm, negation, or a complaint hidden behind a positive word?</li>
@@ -2151,7 +2151,7 @@
 <p>Which model, which labels, which reviews, and which metric? Does it detect the complaints we care about? Were French, emojis, slang, and short comments represented in the evaluation? Who checks errors, and what happens when it gets a customer wrong?</p>
 </details>
 <h2 id="recent-progress">Recent progress<a class="headerlink" href="#recent-progress" title="Permanent link">&para;</a></h2>
-<h3 id="decision-models-typesafe-and-jev">Decision models: TypeSafe and Jev<a class="headerlink" href="#decision-models-typesafe-and-jev" title="Permanent link">&para;</a></h3>
+<h3 id="decision-models">Decision models<a class="headerlink" href="#decision-models" title="Permanent link">&para;</a></h3>
 <p><a href="https://typesafe.ai/">TypeSafe AI</a> introduced <strong>Jev</strong>, its first <strong>System One model</strong>, on <strong>September 15, 2026</strong>. This is a very recent, advanced development with the potential to be a major step forward for AI automation: models designed to make fast, structured decisions that software can act on directly.</p>
 <p>An LLM generates tokens, even when we ask it for CSV or JSON. Jev instead receives context and questions with predefined answer types, then returns <strong>typed values and probabilities</strong>. For our review exercise, that could mean choosing between <code>positive</code>, <code>negative</code>, and <code>mixed_or_unclear</code>, without generating a written response.</p>
 <table>
