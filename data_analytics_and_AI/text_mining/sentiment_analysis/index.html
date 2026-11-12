@@ -551,8 +551,6 @@
       
         
       
-        
-      
     
     
     
@@ -648,35 +646,6 @@
     
   
   Generative AI
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../definition_of_data_and_ai/indigo/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
-  
-  <span class="md-ellipsis">
-    
-  
-  Indigo
 
     
   </span>
@@ -1319,17 +1288,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#avoid-testing-on-copies-of-training-reviews" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Avoid testing on copies of training reviews
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#turn-text-into-numbers" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1840,17 +1798,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#avoid-testing-on-copies-of-training-reviews" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Avoid testing on copies of training reviews
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#turn-text-into-numbers" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -2131,7 +2078,7 @@
   <h1>Sentiment analysis</h1>
 
 <p>Now we want to know how customers feel. That's what <strong>sentiment analysis</strong> tries to do.</p>
-<p>The main thing that makes this thing complicated is that positive words != positive review.</p>
+<p>One difficulty is that a positive word doesn't necessarily mean a positive review.</p>
 <blockquote>
 <p><em>"Great, another broken bottle. Exactly what I needed."</em></p>
 </blockquote>
@@ -2207,10 +2154,10 @@
 </table>
 <p>Three-star reviews can be mixed, neutral, or mildly positive or negative. We're leaving them out to keep our first model simple, <strong>not because they don't matter</strong>.</p>
 <h3 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
-<p>Create a new Python file. This block reads the data again, so you can also start this page in a separate script.</p>
+<p>Create a new Python file called <code>sentiment_analysis.py</code> in the same project folder as <code>product_reviews.csv</code>. This block reads the data again, so it doesn't depend on running the previous page's script.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">reviews</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"src/data_analytics_and_AI/data/product_reviews.csv"</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">reviews</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"product_reviews.csv"</span><span class="p">)</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">labeled_reviews</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">reviews</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"rating"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span>
@@ -2221,7 +2168,7 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="p">)</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">)</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">labeled_reviews</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"sentiment"</span><span class="p">)</span><span class="o">.</span><span class="n">len</span><span class="p">())</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">labeled_reviews</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"sentiment"</span><span class="p">)</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"sentiment"</span><span class="p">))</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (2, 2)
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌───────────┬──────┐
@@ -2239,53 +2186,6 @@
 <li>Calculate the share of positive reviews in <code>labeled_reviews</code>.</li>
 <li>What accuracy would we get by predicting <strong>positive for every review</strong>?</li>
 </ul>
-<h2 id="avoid-testing-on-copies-of-training-reviews">Avoid testing on copies of training reviews<a class="headerlink" href="#avoid-testing-on-copies-of-training-reviews" title="Permanent link">&para;</a></h2>
-<p>Our dataset repeats sentences. If <code>"LOVE IT!!!"</code> is in training and <code>"love it"</code> is in testing, the test isn't very challenging.</p>
-<p>We'll remove repeated versions of the same wording before splitting. This key ignores casing, punctuation, and extra whitespace; we'll still feed the <strong>original text</strong> to the model.</p>
-<p>You can run this preparation block as provided. The main idea is to avoid testing the model on copies of reviews it has already seen.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">model_data</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">labeled_reviews</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="n">text_key</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"review_text"</span><span class="p">)</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">to_lowercase</span><span class="p">()</span>                  <span class="c1"># lower case</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace_all</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[^a-z0-9\s]"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="c1"># remove punctations / special characters</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace_all</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span>        <span class="c1"># remove consecutive white spaces</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip_chars</span><span class="p">()</span>                   <span class="c1"># remove useless white spaces</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="s2">"text_key"</span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Before removing repeated wording: </span><span class="si">{</span><span class="n">labeled_reviews</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"After: </span><span class="si">{</span><span class="n">model_data</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Before removing repeated wording: 1841
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>After: 353
-</span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th>Original <code>review_text</code></th>
-<th>Normalized <code>text_key</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>"Great Product!!!"</code></td>
-<td><code>"great product"</code></td>
-</tr>
-<tr>
-<td><code>"great product"</code></td>
-<td><code>"great product"</code></td>
-</tr>
-<tr>
-<td><code>"  GREAT   PRODUCT  "</code></td>
-<td><code>"great product"</code></td>
-</tr>
-<tr>
-<td><code>"Bad product."</code></td>
-<td><code>"bad product"</code></td>
-</tr>
-</tbody>
-</table>
 <h2 id="turn-text-into-numbers">Turn text into numbers<a class="headerlink" href="#turn-text-into-numbers" title="Permanent link">&para;</a></h2>
 <p>In the previous session, the model received numerical features. We need numbers here too.</p>
 <p>A simple approach is <strong>bag of words</strong>: create one column per word and count its occurrences in each review. For example:</p>
@@ -2342,12 +2242,24 @@
 <li><code>.toarray()</code> lets us print this tiny example as an ordinary array. For a large dataset, keep the efficient <strong>sparse</strong> representation, which avoids storing all those zeros.</li>
 </ul>
 <h3 id="exercise_1">Exercise<a class="headerlink" href="#exercise_1" title="Permanent link">&para;</a></h3>
-<p>Add <code>"not good delivery"</code> to <code>tiny_texts</code> and run the example again. Find the <code>"not"</code> column and explain the last row of the matrix.</p>
+<p>Add <code>"not good delivery"</code> to <code>tiny_texts</code>. Before running the updated example below, predict how the vocabulary and matrix will change. Then find the <code>"not"</code> column and explain the last row of the matrix.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">tiny_texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"good delivery"</span><span class="p">,</span> <span class="s2">"bad delivery"</span><span class="p">,</span> <span class="s2">"good good"</span><span class="p">,</span> <span class="s2">"not good delivery"</span><span class="p">]</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">word_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tiny_texts</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">word_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>['bad' 'delivery' 'good' 'not']
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[[0 1 1 0]
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> [1 1 0 0]
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> [0 0 2 0]
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> [0 1 1 1]]
+</span></code></pre></div>
 <p>Then transform a new sentence <strong>without fitting again</strong>:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">new_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">"excellent delivery"</span><span class="p">])</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">new_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[[0 1 0]]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[[0 1 0 0]]
 </span></code></pre></div>
 <p>What happened to <code>"excellent"</code>? Why shouldn't we learn a new vocabulary every time we make a prediction?</p>
 <details class="tip">
@@ -2368,23 +2280,38 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">X</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">y</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="s2">"sentiment"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="p">(</span><span class="s2">"words"</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">()),</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="p">(</span><span class="s2">"classifier"</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">()),</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">])</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Training reviews: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test reviews: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">model_data</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">labeled_reviews</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">text_key</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"review_text"</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">to_lowercase</span><span class="p">()</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace_all</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[^a-z0-9\s]"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace_all</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip_chars</span><span class="p">()</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="s2">"text_key"</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s2">"first"</span><span class="p">,</span> <span class="n">maintain_order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">X</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">y</span> <span class="o">=</span> <span class="n">model_data</span><span class="p">[</span><span class="s2">"sentiment"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="p">)</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="p">(</span><span class="s2">"words"</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">()),</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="p">(</span><span class="s2">"classifier"</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">()),</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">])</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Training reviews: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test reviews: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Training reviews: 264
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Test reviews: 89
 </span></code></pre></div>
+<p>The dataset repeats review wording. <code>text_key</code> ignores case, punctuation, and extra whitespace so we can remove those duplicates before splitting. The model still receives the original text. This makes the test more useful than testing on copies of training reviews, although similar sentences remain.</p>
+<p><code>random_state=42</code> makes the split repeatable, and <code>stratify=y</code> keeps approximately the same label proportions in training and testing. Removing duplicates also changes the positive share from about 71.5% to 61.5%, so the test baseline differs from the earlier exercise.</p>
 <p>The <code>Pipeline</code> learns the vocabulary <strong>only from training reviews</strong>, then uses that vocabulary for test reviews. This avoids letting test data influence the features we learn.</p>
 <div class="admonition warning">
 <p class="admonition-title">Keep the answer out of the features</p>
@@ -2407,10 +2334,10 @@
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Negative precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="n">pos_label</span><span class="o">=</span><span class="s1">'negative'</span><span class="p">,</span><span class="w"> </span><span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Negative recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="n">pos_label</span><span class="o">=</span><span class="s1">'negative'</span><span class="p">,</span><span class="w"> </span><span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Baseline accuracy: 56.2%
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Model accuracy: 94.4%
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Baseline accuracy: 61.8%
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Model accuracy: 98.9%
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Negative precision: 100.0%
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Negative recall: 87.2%
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Negative recall: 97.1%
 </span></code></pre></div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Precision</label><label for="__tabbed_1_2">Recall</label></div>
 <div class="tabbed-content">
@@ -2419,8 +2346,8 @@
 \text{Precision} = \frac{TP}{TP + FP}
 \]</div>
 <ul>
-<li>Measures the proportion of positive predictions that are actually correct.</li>
-<li>Particularly relevant in <strong>spam detection</strong>, where incorrectly classifying legitimate emails as spam should be avoided.</li>
+<li>Of the reviews flagged as <code>negative</code>, what proportion actually have a negative test label?</li>
+<li>High precision helps when the team can read only a few flagged reviews.</li>
 </ul>
 </div>
 <div class="tabbed-block">
@@ -2428,15 +2355,15 @@
 \text{Recall} = \frac{TP}{TP + FN}
 \]</div>
 <ul>
-<li>Measures the proportion of actual positive cases that the model correctly identifies.</li>
-<li>Particularly relevant in <strong>disease screening</strong>, where missing a positive case can have serious consequences.</li>
+<li>Of the reviews with a negative test label, what proportion did we flag as <code>negative</code>?</li>
+<li>High recall helps when missing a complaint is costly.</li>
 </ul>
 </div>
 </div>
 </div>
-<p><code>pos_label="negative"</code> tells scikit-learn which label to focus on. The name of the parameter doesn't mean we have to focus on happy customers!</p>
+<p><code>pos_label="negative"</code> tells scikit-learn which label to focus on. Here, TP counts correctly flagged negative reviews, FP counts positive reviews incorrectly flagged as negative, and FN counts negative reviews we missed. The name of the parameter doesn't mean we have to focus on happy customers!</p>
 <h3 id="exercise_2">Exercise<a class="headerlink" href="#exercise_2" title="Permanent link">&para;</a></h3>
-<p>Create a table containing the test text, actual label, and prediction.</p>
+<p>Create a table containing the test text, actual label, and prediction, then print up to five misclassified reviews.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">test_results</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="s2">"review_text"</span><span class="p">:</span> <span class="n">X_test</span><span class="p">,</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="s2">"actual"</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
@@ -2444,66 +2371,73 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">})</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">mistakes</span> <span class="o">=</span> <span class="n">test_results</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"actual"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"predicted"</span><span class="p">))</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">mistakes</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_dicts</span><span class="p">():</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">mistakes</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">mistakes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"review_text"</span><span class="p">])</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{'review_text': 'Arrived late and the packaging was a mess packaging was a bit much', 'actual': 'negative', 'predicted': 'positive'}
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>{'review_text': 'Arrived late and the packaging was a mess shipping was quick', 'actual': 'negative', 'predicted': 'positive'}
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>{'review_text': 'Arrived late and the packaging was a mess', 'actual': 'negative', 'predicted': 'positive'}
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>{'review_text': 'Quality control seems all over the place', 'actual': 'negative', 'predicted': 'positive'}
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>{'review_text': 'Quality control seems all over the place delivery took forever', 'actual': 'negative', 'predicted': 'positive'}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shape: (1, 3)
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌─────────────────────────────────┬──────────┬───────────┐
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ review_text                     ┆ actual   ┆ predicted │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│ ---                             ┆ ---      ┆ ---       │
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ str                             ┆ str      ┆ str       │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>╞═════════════════════════════════╪══════════╪═══════════╡
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ Quality control seems all over… ┆ negative ┆ positive  │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>└─────────────────────────────────┴──────────┴───────────┘
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Quality control seems all over the place delivery took forever
 </span></code></pre></div>
 <ul>
-<li>Read up to five mistakes. Is each one an obvious failure, or could the label be debatable?</li>
+<li>Is this mistakean obvious failure, or could the label be debatable?</li>
 <li>If the model makes no mistakes, what about our dataset could explain that?</li>
 <li>The team can read only a few flagged reviews per day. Would you focus on precision or recall? What if reading reviews is cheap and missing complaints is costly?</li>
 </ul>
 <details class="tip">
 <summary>Same tradeoff as in the churn session</summary>
-<p>With very limited reading capacity, precision helps avoid wasting it. When missing complaints is the bigger concern, recall matters more. Neither choice makes the labels perfect.</p>
+<p>With very limited reading capacity, precision helps avoid wasting it. When missing complaints is the bigger concern, recall matters more.</p>
 </details>
 <h2 id="new-reviews">New reviews<a class="headerlink" href="#new-reviews" title="Permanent link">&para;</a></h2>
-<p>Now we have a model that makes prediction for us. The easiest way to test it:</p>
+<p>Now we have a model that makes predictions for us. Let's try a few sentences, then check which words the trained model knows:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s2">"this product is bad"</span><span class="p">]))</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s2">"I just love this product"</span><span class="p">]))</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s2">"this is too expensive"</span><span class="p">]))</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>['positive']
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>['negative']
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>['positive']
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>['negative']
 </span></code></pre></div>
-<p>Let's use some new reviews our products got and see if customers are happy or not.</p>
-<p><csv-table src="../../data/review_challenge.csv" caption="Customer reviews" page-size="6"></csv-table></p>
+<p>Let's now use 24 fictional challenge reviews written for this activity. Click <strong>Download data</strong> in the table below and save <code>review_challenge.csv</code> in your Positron project folder.</p>
+<p><csv-table src="../../data/review_challenge.csv" caption="Customer reviews" page-size="6" download="review_challenge.csv"></csv-table></p>
 <h3 id="example_5">Example<a class="headerlink" href="#example_5" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">challenge</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"src/data_analytics_and_AI/data/review_challenge.csv"</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">challenge</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"review_challenge.csv"</span><span class="p">)</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">challenge</span> <span class="o">=</span> <span class="n">challenge</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">pl</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s2">"prediction"</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">challenge</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()))</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">challenge</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">)</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">challenge</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">to_dicts</span><span class="p">():</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction: "</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">"prediction"</span><span class="p">],</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">],</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"review_id"</span><span class="p">],</span> <span class="s2">"Prediction:"</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">"prediction"</span><span class="p">])</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"review_text"</span><span class="p">],</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Prediction:  positive 
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> The refill arrived intact, clicks straight into the dispenser, and saves me a trip to the shop. Already ordered the next one. 
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>C01 Prediction: negative
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>The refill arrived intact, clicks straight into the dispenser, and saves me a trip to the shop. Already ordered the next one. 
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Prediction:  positive 
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> No sticky residue on the shelf anymore. That's all I wanted, and this does it. 
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>C02 Prediction: positive
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>No sticky residue on the shelf anymore. That's all I wanted, and this does it. 
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Prediction:  positive 
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a> I expected a tiny sample for this price. The bottle lasted three months, so I'll stick with it. 
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>C03 Prediction: positive
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>I expected a tiny sample for this price. The bottle lasted three months, so I'll stick with it. 
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Prediction:  positive 
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a> My parcel disappeared and support replaced it the next day without making me chase anyone. Thank you. 
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>C04 Prediction: positive
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>My parcel disappeared and support replaced it the next day without making me chase anyone. Thank you. 
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Prediction:  positive 
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a> Finally a cap my mum can open without asking for help. We've switched both bathrooms to this. 
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>C05 Prediction: positive
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Finally a cap my mum can open without asking for help. We've switched both bathrooms to this. 
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>Prediction:  negative 
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a> Not bad at all. I was sceptical about refills but this has won me over. 
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>C06 Prediction: negative
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>Not bad at all. I was sceptical about refills but this has won me over. 
 </span></code></pre></div>
+<p>For the exercise, use <code>for row in challenge.to_dicts():</code> to print all 24.</p>
 <h3 id="exercise_3">Exercise<a class="headerlink" href="#exercise_3" title="Permanent link">&para;</a></h3>
+<p>In Positron, you can easily retrieve raw texts by right clicking on <code>review_challenge.csv</code> &gt; <code>Open with</code> &gt; <code>Text Editor</code>.</p>
 <ul>
-<li>Read the challenge reviews and write your own labels: <code>positive</code>, <code>negative</code>, or <code>mixed_or_unclear</code>. Do this before opening the suggested answers on the next page.</li>
+<li>Read the challenge reviews and write your own labels: <code>positive</code>, <code>negative</code>, or <code>mixed_or_unclear</code>.</li>
 <li>Compare your labels with the classifier's predictions. Find a case where forcing a binary answer is a problem.</li>
 <li>Add two reviews of your own: one clearly negative without a word from our negative list, and one sarcastic review. Predict with <code>model.predict([your_text])</code>.</li>
 <li>Would you let this system automatically send a reply to a customer? Explain what you'd check first.</li>

@@ -67,7 +67,7 @@ class CsvTable extends HTMLElement {
       });
       downloadButton.addEventListener("click", () => {
         const filename = caption.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "data";
-        table.download("csv", `${filename}.csv`, {}, "all");
+        table.download("csv", this.getAttribute("download") || `${filename}.csv`, {}, "all");
       });
       search.addEventListener("input", () => {
         const query = search.value.trim().toLocaleLowerCase();
