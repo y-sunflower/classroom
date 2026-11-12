@@ -42,6 +42,12 @@ Instead, the best investment you could make is to understand how `polars` works 
 sales = pl.read_csv("https://raw.githubusercontent.com/y-sunflower/classroom/refs/heads/main/src/data_analytics_and_AI/data/sales.csv")
 ```
 
+First cell:
+
+```sh
+!pip install polars
+```
+
 
 ## Read files
 
@@ -108,7 +114,7 @@ print(high_value_sales.select("transaction_id", "product_name", "net_total").hea
 
 ### Exercise
 
-Keep only sales where `sales_channel` is `"online"`. Store the result in `online_sales`, then print its first five rows.
+Keep only sales where `sales_channel` is `"website"`. Store the result in `online_sales`, then print its first five rows.
 
 ## Group by
 
