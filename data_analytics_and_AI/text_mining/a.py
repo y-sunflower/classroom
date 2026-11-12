@@ -1,10 +1,8 @@
 import polars as pl
 
-# Read the sales dataset
 sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
 
-# Select 3 columns
-overview = sales.select("product_name", "quantity", "net_total")
-
-# Print the first 5 rows
-print(overview.head())
+sales_with_line_total = sales.with_columns(
+    line_total=(pl.col("quantity") * pl.col("unit_price"))
+)
+print(sales_with_line_total.select("product_name", "line_total").head())
