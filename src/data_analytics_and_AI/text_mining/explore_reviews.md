@@ -6,7 +6,7 @@ We already know how to work with prices, clicks, and customer characteristics. B
 
 > *"Love the product. The packaging though... why does a tiny bottle need this much plastic?"* Customer A
 
-Looking at average rating doesn't necessary tell the whole story. The customer can like the product **and** have a problem with its packaging. Those are two different things we could act on.
+Looking at the average rating doesn't necessarily tell the whole story. The customer can like the product **and** have a problem with its packaging. Those are two different things we could act on.
 
 **Text mining** means extracting useful information from text: reviews, survey answers, support messages, social media posts, etc. Here we'll use customer reviews to figure out what people talk about, how they feel, and what a marketing team could do with that information.
 
@@ -19,12 +19,13 @@ Looking at average rating doesn't necessary tell the whole story. The customer c
     - Which findings could improve the product page or campaign message?
 
 
-## Get ready
+## Dataset
 
-We'll reuse a [product reviews dataset](../definition_of_data_and_ai/indigo.md#datasets). One row is one review of a purchased product. For this session, the most useful columns are `review_id`, `product_name`, `rating`, and `review_text`.
+We'll reuse a product reviews dataset. One row is one review of a purchased product. For this session, the most useful columns are `review_id`, `product_name`, `rating`, and `review_text`.
 
-<csv-table src="../data/product_reviews.csv" caption="Customer reviews" page-size="6"></csv-table>
+<csv-table src="../data/product_reviews.csv" caption="Customer reviews" page-size="6" download="product_reviews.csv"></csv-table>
 
+- Click **Download data** in the table above and save `product_reviews.csv` in your Positron project folder.
 - Create a file called `text_mining.py`.
 - If needed, install the packages from the Positron terminal:
 
@@ -32,36 +33,27 @@ We'll reuse a [product reviews dataset](../definition_of_data_and_ai/indigo.md#d
 uv add polars scikit-learn
 ```
 
-## Read a few reviews before calculating anything
+!!! tip "Run from your project folder"
+
+    The code below expects the CSV and your Python file in the same project folder. Run it with that folder open in Positron.
+
+## Read a few reviews
 
 You can calculate a lot of things without understanding the data, but that's usually a pretty bad idea.
 
 ### Example
 
-```python exec="on" source="above" result="text" session="explore-reviews"
+```python exec="on" source="above" result="text" session="explore-reviews" workdir="src/data_analytics_and_AI/data"
 import polars as pl
 
-reviews = pl.read_csv("src/data_analytics_and_AI/data/product_reviews.csv")
+reviews = pl.read_csv("product_reviews.csv")
 
 for review in reviews.sample(5).to_dicts():
     print(f"\n{review['rating']} stars: {review['review_text']}")
 ```
 
-Use `pl.read_csv("product_reviews.csv")` in your own file. `.to_dicts()` turns the rows into Python dictionaries, so we can print the full sentences without the table cutting them off.
+`.to_dicts()` turns the rows into Python dictionaries, so we can print the full sentences without the table cutting them off.
 
-### Exercise
-
-Read ten reviews. For each one, write down:
-
-- the **topic**: price, delivery, packaging, quality, design, something else?
-- the **sentiment**: positive, negative, mixed, or unclear?
-- one possible action, if there is enough information to suggest one.
-
-Compare two of your answers with a neighbour. Did you always agree? Find a review where the star rating doesn't describe every part of the text very well.
-
-!!! tip "A starting point"
-
-    Copy the loop above and replace `.sample(4)` with `.sample(10)`. You can also hide the rating while reading, then look at it afterwards.
 
 ## Prepare a text column
 
@@ -81,7 +73,7 @@ reviews = reviews.with_columns(
 print(reviews.select("review_text", "text_clean").head(3))
 ```
 
-### Exercise: check what cleaning changes
+### Exercise
 
 Create this small table and apply the same cleaning steps:
 
@@ -97,11 +89,10 @@ What information would disappear if we also deleted punctuation? What would happ
 
 !!! warning "Cleaning depends on the question"
 
-    Punctuation, emojis, capitals, and small words can carry meaning. `"good"` and `"not good"` aren't interchangeable! There isn't a universal recipe where deleting more things makes text better.
+    Punctuation, emojis, capitals, and small words can carry meaning. `"good"` and `"not good"` aren't interchangeable!
 
 ## Find reviews about a topic
 
-Before building any model, we can already find reviews mentioning packaging.
 
 ### Example
 
@@ -111,15 +102,17 @@ packaging_reviews = reviews.filter(
 )
 
 print(f"Reviews mentioning packaging: {packaging_reviews.height}\n")
-for text in packaging_reviews["review_text"].head(4):
+for text in packaging_reviews["review_text"].sample(5):
     print(f'"{text}"')
 ```
 
-It's a substring search, so searching for `"price"` also finds `"overpriced"`.
+!!! note
+        
+    It's a substring search, so searching for `"price"` also finds `"overpriced"`.
 
 ### Exercise
 
-Find reviews that mention either `"price"` **or** `"expensive"`. Use `|` to combine the two conditions (e.g., `pl.col("col_name").str.contains("pattern_we_want")`).
+Find reviews that mention either `"price"` **or** `"expensive"`. Create one `.str.contains(...)` condition for each word, then combine them with `|` (meaning **or**), as in `condition_a | condition_b`.
 
 - Count the matching reviews and calculate their share of all reviews.
 - Read five matches. Are they all complaints?
@@ -173,15 +166,15 @@ word_counts = (
 print(word_counts.head(10))
 ```
 
-### Exercise: make the ranking more useful
+### Exercise
 
-Common words such as `"the"` or `"it"` are called **stop words**: they don't bring any meaning and we can't do much about them. The common approach for this is to just drop them entirely. Here's a short list to get started:
+For a topic-frequency ranking, common words such as `"the"` or `"it"` often tell us little about what customers discuss. We can treat them as **stop words** and exclude them from this ranking. They still have meaning in sentences, and a useful stop-word list depends on the task. Here's a short list to get started:
 
 ```python
 stop_words = ["the", "a", "an", "it", "i", "and", "is", "this", "for", "to", "of", "in"]
 
 useful_words_counts = word_counts.filter(
-    # TODO: remove useless words using this syntax:
+    # TODO: exclude the chosen stop words using this syntax:
     # ~pl.col("col_name").is_in(list_of_stop_words)
 )
 ```
@@ -194,7 +187,7 @@ Compare the ranking before and after filtering. Choose two words worth investiga
 
     `"Love love love it"` adds three occurrences of `"love"`. If you want to count **reviews mentioning a word**, first use `words.unique(subset=["review_id", "word"])`, then group and count.
 
-Now, explore the remaining words and **try to find an additional 10 words** to add to the `stop_words` list, add them and re-run the code.
+Now explore the remaining words and choose **up to ten additional stop words** for this topic ranking. Read reviews containing each candidate and explain why removing it helps. Keep words that convey sentiment or contrast, such as `"not"` and `"but"`, and words that identify a topic, such as `"price"`. Add your choices to `stop_words` and rerun the filter; don't change the original review text.
 
 ## Turn mentions into a useful comparison
 
@@ -222,7 +215,7 @@ delivery_by_rating = (
 print(delivery_by_rating)
 ```
 
-### Exercise: investigate packaging
+### Exercise
 
 Adapt the example to packaging. Keep the number of reviews, number of matches, and share for each rating.
 

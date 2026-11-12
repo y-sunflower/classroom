@@ -54,7 +54,6 @@ print(sales.head())
 
 ### Exercise
 
-- (if you haven't already) Download the [datasets](../definition_of_data_and_ai/indigo.md) and put them inside the `indigo-data` folder.
 - Create a `read.py` file
 - In that file, write the code to read the `sales.csv` file and print the first 5 rows.
 

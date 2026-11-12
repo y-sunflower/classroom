@@ -4,7 +4,7 @@ icon: lucide/message-square-text
 
 Now we want to know how customers feel. That's what **sentiment analysis** tries to do.
 
-The main thing that makes this thing complicated is that positive words != positive review.
+One difficulty is that a positive word doesn't necessarily mean a positive review.
 
 > *"Great, another broken bottle. Exactly what I needed."*
 
@@ -75,12 +75,12 @@ Three-star reviews can be mixed, neutral, or mildly positive or negative. We're 
 
 ### Example
 
-Create a new Python file. This block reads the data again, so you can also start this page in a separate script.
+Create a new Python file called `sentiment_analysis.py` in the same project folder as `product_reviews.csv`. This block reads the data again, so it doesn't depend on running the previous page's script.
 
-```python exec="on" source="above" result="text" session="review-model"
+```python exec="on" source="above" result="text" session="review-model" workdir="src/data_analytics_and_AI/data"
 import polars as pl
 
-reviews = pl.read_csv("src/data_analytics_and_AI/data/product_reviews.csv")
+reviews = pl.read_csv("product_reviews.csv")
 
 labeled_reviews = (
     reviews.filter(pl.col("rating") != 3)
@@ -91,7 +91,7 @@ labeled_reviews = (
     )
 )
 
-print(labeled_reviews.group_by("sentiment").len())
+print(labeled_reviews.group_by("sentiment").len().sort("sentiment"))
 ```
 
 `pl.when(...).then(...).otherwise(...)` is a column (or **vectorized**) version of `if` / `else`. `pl.lit(...)` tells Polars we're supplying a value, here a text label.
@@ -100,38 +100,6 @@ print(labeled_reviews.group_by("sentiment").len())
 
 - Calculate the share of positive reviews in `labeled_reviews`.
 - What accuracy would we get by predicting **positive for every review**?
-
-## Avoid testing on copies of training reviews
-
-Our dataset repeats sentences. If `"LOVE IT!!!"` is in training and `"love it"` is in testing, the test isn't very challenging.
-
-We'll remove repeated versions of the same wording before splitting. This key ignores casing, punctuation, and extra whitespace; we'll still feed the **original text** to the model.
-
-You can run this preparation block as provided. The main idea is to avoid testing the model on copies of reviews it has already seen.
-
-```python exec="on" source="above" result="text" session="review-model"
-model_data = (
-    labeled_reviews.with_columns(
-        text_key=pl.col("review_text")
-        .str.to_lowercase()                  # lower case
-        .str.replace_all(r"[^a-z0-9\s]", "") # remove punctations / special characters
-        .str.replace_all(r"\s+", " ")        # remove consecutive white spaces
-        .str.strip_chars()                   # remove useless white spaces
-    )
-    .unique("text_key")
-)
-
-print(f"Before removing repeated wording: {labeled_reviews.height}")
-print(f"After: {model_data.height}")
-```
-
-| Original `review_text`  | Normalized `text_key` |
-| ----------------------- | --------------------- |
-| `"Great Product!!!"`    | `"great product"`     |
-| `"great product"`       | `"great product"`     |
-| `"  GREAT   PRODUCT  "` | `"great product"`     |
-| `"Bad product."`        | `"bad product"`       |
-
 
 ## Turn text into numbers
 
@@ -168,7 +136,15 @@ print(word_matrix.toarray())
 
 ### Exercise
 
-Add `"not good delivery"` to `tiny_texts` and run the example again. Find the `"not"` column and explain the last row of the matrix.
+Add `"not good delivery"` to `tiny_texts`. Before running the updated example below, predict how the vocabulary and matrix will change. Then find the `"not"` column and explain the last row of the matrix.
+
+```python exec="on" source="above" result="text" session="review-model"
+tiny_texts = ["good delivery", "bad delivery", "good good", "not good delivery"]
+word_matrix = vectorizer.fit_transform(tiny_texts)
+
+print(vectorizer.get_feature_names_out())
+print(word_matrix.toarray())
+```
 
 Then transform a new sentence **without fitting again**:
 
@@ -204,10 +180,23 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 
+model_data = (
+    labeled_reviews.with_columns(
+        text_key=pl.col("review_text")
+        .str.to_lowercase()
+        .str.replace_all(r"[^a-z0-9\s]", "")
+        .str.replace_all(r"\s+", " ")
+        .str.strip_chars()
+    )
+    .unique("text_key", keep="first", maintain_order=True)
+)
+
 X = model_data["review_text"].to_list()
 y = model_data["sentiment"].to_list()
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
 
 model = Pipeline([
     ("words", CountVectorizer()),
@@ -218,6 +207,10 @@ model.fit(X_train, y_train)
 print(f"Training reviews: {len(X_train)}")
 print(f"Test reviews: {len(X_test)}")
 ```
+
+The dataset repeats review wording. `text_key` ignores case, punctuation, and extra whitespace so we can remove those duplicates before splitting. The model still receives the original text. This makes the test more useful than testing on copies of training reviews, although similar sentences remain.
+
+`random_state=42` makes the split repeatable, and `stratify=y` keeps approximately the same label proportions in training and testing. Removing duplicates also changes the positive share from about 71.5% to 61.5%, so the test baseline differs from the earlier exercise.
 
 The `Pipeline` learns the vocabulary **only from training reviews**, then uses that vocabulary for test reviews. This avoids letting test data influence the features we learn.
 
@@ -253,8 +246,8 @@ print(f"Negative recall: {recall_score(y_test, y_pred, pos_label='negative', zer
     \text{Precision} = \frac{TP}{TP + FP}
     $$
 
-    - Measures the proportion of positive predictions that are actually correct.
-    - Particularly relevant in **spam detection**, where incorrectly classifying legitimate emails as spam should be avoided.
+    - Of the reviews flagged as `negative`, what proportion actually have a negative test label?
+    - High precision helps when the team can read only a few flagged reviews.
 
 === "Recall"
 
@@ -262,14 +255,14 @@ print(f"Negative recall: {recall_score(y_test, y_pred, pos_label='negative', zer
     \text{Recall} = \frac{TP}{TP + FN}
     $$
 
-    - Measures the proportion of actual positive cases that the model correctly identifies.
-    - Particularly relevant in **disease screening**, where missing a positive case can have serious consequences.
+    - Of the reviews with a negative test label, what proportion did we flag as `negative`?
+    - High recall helps when missing a complaint is costly.
 
-`pos_label="negative"` tells scikit-learn which label to focus on. The name of the parameter doesn't mean we have to focus on happy customers!
+`pos_label="negative"` tells scikit-learn which label to focus on. Here, TP counts correctly flagged negative reviews, FP counts positive reviews incorrectly flagged as negative, and FN counts negative reviews we missed. The name of the parameter doesn't mean we have to focus on happy customers!
 
 ### Exercise
 
-Create a table containing the test text, actual label, and prediction.
+Create a table containing the test text, actual label, and prediction, then print up to five misclassified reviews.
 
 ```python exec="on" source="above" result="text" session="review-model"
 test_results = pl.DataFrame({
@@ -279,21 +272,21 @@ test_results = pl.DataFrame({
 })
 
 mistakes = test_results.filter(pl.col("actual") != pl.col("predicted"))
-for row in mistakes.head(5).to_dicts():
-    print(row)
+print(mistakes)
+print(mistakes[0, "review_text"])
 ```
 
-- Read up to five mistakes. Is each one an obvious failure, or could the label be debatable?
+- Is this mistakean obvious failure, or could the label be debatable?
 - If the model makes no mistakes, what about our dataset could explain that?
 - The team can read only a few flagged reviews per day. Would you focus on precision or recall? What if reading reviews is cheap and missing complaints is costly?
 
 ??? tip "Same tradeoff as in the churn session"
 
-    With very limited reading capacity, precision helps avoid wasting it. When missing complaints is the bigger concern, recall matters more. Neither choice makes the labels perfect.
+    With very limited reading capacity, precision helps avoid wasting it. When missing complaints is the bigger concern, recall matters more.
 
 ## New reviews
 
-Now we have a model that makes prediction for us. The easiest way to test it:
+Now we have a model that makes predictions for us. Let's try a few sentences, then check which words the trained model knows:
 
 ```python exec="on" source="above" result="text" session="review-model"
 print(model.predict(["this product is bad"]))
@@ -301,26 +294,31 @@ print(model.predict(["I just love this product"]))
 print(model.predict(["this is too expensive"]))
 ```
 
-Let's use some new reviews our products got and see if customers are happy or not.
+Let's now use 24 fictional challenge reviews written for this activity. Click **Download data** in the table below and save `review_challenge.csv` in your Positron project folder.
 
-<csv-table src="../data/review_challenge.csv" caption="Customer reviews" page-size="6"></csv-table>
+<csv-table src="../data/review_challenge.csv" caption="Customer reviews" page-size="6" download="review_challenge.csv"></csv-table>
 
 
 ### Example
 
-```python exec="on" source="above" result="text" session="review-model"
-challenge = pl.read_csv("src/data_analytics_and_AI/data/review_challenge.csv")
+```python exec="on" source="above" result="text" session="review-model" workdir="src/data_analytics_and_AI/data"
+challenge = pl.read_csv("review_challenge.csv")
 challenge = challenge.with_columns(
-    pl.Series("prediction", model.predict(challenge["review_text"].to_list()))
+    prediction = model.predict(challenge["review_text"].to_list())
 )
 
 for row in challenge.head(6).to_dicts():
-    print("Prediction: ", row["prediction"], "\n", row["review_text"], "\n")
+    print(row["review_id"], "Prediction:", row["prediction"])
+    print(row["review_text"], "\n")
 ```
+
+For the exercise, use `for row in challenge.to_dicts():` to print all 24.
 
 ### Exercise
 
-- Read the challenge reviews and write your own labels: `positive`, `negative`, or `mixed_or_unclear`. Do this before opening the suggested answers on the next page.
+In Positron, you can easily retrieve raw texts by right clicking on `review_challenge.csv` > `Open with` > `Text Editor`.
+
+- Read the challenge reviews and write your own labels: `positive`, `negative`, or `mixed_or_unclear`.
 - Compare your labels with the classifier's predictions. Find a case where forcing a binary answer is a problem.
 - Add two reviews of your own: one clearly negative without a word from our negative list, and one sarcastic review. Predict with `model.predict([your_text])`.
 - Would you let this system automatically send a reply to a customer? Explain what you'd check first.

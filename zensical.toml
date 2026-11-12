@@ -14,7 +14,6 @@ nav = [
     { "Definitions of data and AI" = [
       { "Definitions" = "data_analytics_and_AI/definition_of_data_and_ai/definitions.md" },
       { "Generative AI" = "data_analytics_and_AI/definition_of_data_and_ai/generative_ai.md" },
-      { "Indigo" = "data_analytics_and_AI/definition_of_data_and_ai/indigo.md" },
     ] },
     { "Preparing data" = [
       { "Storing data" = "data_analytics_and_AI/preparing_data/storing_data.md" },

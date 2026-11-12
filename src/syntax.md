@@ -82,6 +82,8 @@ Use the `<csv-table>` element to load a CSV file as an interactive table. [Tabul
 
 Set `src` to a path relative to the Markdown file. `caption` and `page-size` are optional; the default page size is 10.
 
+Set `download="sales.csv"` to choose the filename used by the **Download data** button. Otherwise, the filename is based on the caption.
+
 ## Diagrams
 
 > Go to [documentation](https://zensical.org/docs/authoring/diagrams/)

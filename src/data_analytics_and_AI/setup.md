@@ -2,7 +2,7 @@
 icon: lucide/folder-code
 ---
 
-### What each tool does
+## What each tool does
 
 | Tool     | Explanation                                                                                   |
 | -------- | --------------------------------------------------------------------------------------------- |
@@ -10,7 +10,7 @@ icon: lucide/folder-code
 | Positron | The application where you open projects, notebooks, data, and results                         |
 | `uv`     | A tool that installs Python versions and packages and keeps a project's environment organised |
 
-### Step 1: install Positron
+## Step 1: install Positron
 
 1. Open the official [Positron download page](https://positron.posit.co/download).
 2. Download the installer for your operating system.
@@ -20,7 +20,7 @@ icon: lucide/folder-code
    - Ruff
    - ty
 
-### Step 2: check or install `uv`
+## Step 2: check or install `uv`
 
 === "Mac/Linux"
 
@@ -55,7 +55,7 @@ The [official `uv` installation page](https://docs.astral.sh/uv/getting-started/
 
     You do not need administrator rights for every installation method. If your network blocks the installer, continue with a neighbour and tell the instructor.
 
-### Step 3: create a project environment
+## Step 3: create a project environment
 
 The Positron menus may look slightly different across versions, but the workflow is the same.
 
@@ -70,7 +70,7 @@ The Positron menus may look slightly different across versions, but the workflow
 
 Positron may download Python through `uv` if Python is not already installed. This is expected. A new `.venv` folder should appear in the project, along with a `pyproject.toml` file.
 
-### Step 4: install one package and verify it can be used
+## Step 4: install one package and verify it can be used
 
 We will install `polars` (among others), a common package for working with tables.
 
