@@ -198,8 +198,10 @@ An LLM generates tokens, even when we ask it for CSV or JSON. Jev instead receiv
 
 **Type-safe doesn't mean correct**: a model can return an allowed label and still misunderstand sarcasm or choose the wrong category. We still need to evaluate its decisions on our own data.
 
-#### Demo: Jev playing Doom
+- Demo: Jev playing Doom
 
 https://typesafe.ai/blog/introducing-system-one-models-and-jev
 
-Source: [TypeSafe's introduction and original demos](https://typesafe.ai/blog/introducing-system-one-models-and-jev)
+- Demo: OpenAI
+
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/FB6oCmrIj-Y?si=4MsX_K0FyzLfydCm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
