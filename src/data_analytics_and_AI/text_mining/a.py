@@ -1,15 +1,12 @@
-products = [
-    {"name": "Notebook", "price": 5.50},
-    {"name": "Backpack", "price": 35.00},
-    {"name": "Pen", "price": 2.00},
-    {"name": "Calculator", "price": 18.50},
-    {"name": "Folder", "price": 4.00},
+sales = [
+    {"product": "Notebook", "quantity": 3, "unit_price": 5.00},
+    {"product": "Pen", "quantity": 10, "unit_price": 2.00},
+    {"product": "Backpack", "quantity": 2, "unit_price": 35.00},
+    {"product": "Folder", "quantity": 4, "unit_price": 3.50},
 ]
 
-count = 0
-for x in products:
-    if x["price"] > 10:
-        count = count + 1
-
-
-print(count)
+for x in sales:
+    if x["unit_price"] * x["quantity"] > 20:
+        print(f"{x['product']}: {x['unit_price']}euros")
+        print(f"{x['product']}: {x['unit_price']}euros")
+x

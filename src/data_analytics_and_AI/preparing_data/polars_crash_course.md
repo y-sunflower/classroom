@@ -36,6 +36,13 @@ Instead, the best investment you could make is to understand how `polars` works 
 
       Put the `sales.csv` file in the same folder as the project you created earlier.
 
+### Google colab
+
+```py
+sales = pl.read_csv("https://raw.githubusercontent.com/y-sunflower/classroom/refs/heads/main/src/data_analytics_and_AI/data/sales.csv")
+```
+
+
 ## Read files
 
 Reading a file is like opening an Excel spreadsheet.
