@@ -150,7 +150,7 @@ import polars as pl
 
 sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
 sales_with_discount = sales.with_columns(
-      (pl.col("list_unit_price") - pl.col("unit_price")).alias("discount_per_unit")
+      discount_per_unit=(pl.col("list_unit_price") - pl.col("unit_price"))
 )
 print(sales_with_discount.select("product_name", "discount_per_unit").head())
 ```
@@ -179,4 +179,4 @@ print(online_revenue)
 
 ### Exercise
 
-Chain operations to keep online sales, select the `product_name` and `quantity` columns, then group by product and calculate total units sold. Name the result `units_sold` and print the final table.
+Chain operations to keep online sales, select the `product_name` and `quantity` columns, then group by product and calculate total units sold. Name the result `units_sold` and print the final table. Sort it in the ascending order.
