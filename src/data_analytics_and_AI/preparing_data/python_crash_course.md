@@ -398,11 +398,8 @@ for sale in sales:
 
       You have a small sales dataset. Your goal is to write a program that produces a simple sales report.
 
-      1. Create a function `calculate_total(quantity, unit_price)` that returns the total amount of a sale.
-      2. Use a loop to calculate the total for each sale.
-      3. Calculate the total revenue across all sales.
+      1. Calculate the total revenue across all sales and print it.
       4. Display only sales worth at least 20 euros.
-      5. Print the total revenue at the end.
 
       Starter code:
 
@@ -413,17 +410,6 @@ for sale in sales:
             {"product": "Backpack", "quantity": 2, "unit_price": 35.00},
             {"product": "Folder", "quantity": 4, "unit_price": 3.50},
       ]
-
-      def calculate_total(quantity, unit_price):
-            pass
-
-      # TODO: loop through the sales
-
-      # TODO: calculate the total for each sale
-
-      # TODO: display sales worth at least 20 euros
-
-      # TODO: calculate and display total revenue
       ```
 
       Expected result:
