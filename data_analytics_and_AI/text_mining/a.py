@@ -1,15 +1,15 @@
-prices = [12.50, 8.00, 15.75, 4.25]
+products = [
+    {"name": "Notebook", "price": 5.50},
+    {"name": "Backpack", "price": 35.00},
+    {"name": "Pen", "price": 2.00},
+    {"name": "Calculator", "price": 18.50},
+    {"name": "Folder", "price": 4.00},
+]
 
-total = 0
+count = 0
+for x in products:
+    if x["price"] > 10:
+        count = count + 1
 
-for x in prices:
-    print(x)
-    total = total + x
 
-print(total)
-print(len(prices))
-print(total / len(prices))
-
-# TODO: calculate the average price
-
-# TODO: display the total and average
+print(count)
