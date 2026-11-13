@@ -2,7 +2,13 @@ import polars as pl
 
 sales = pl.read_csv("src/data_analytics_and_AI/data/sales.csv")
 
-sales_with_line_total = sales.with_columns(
-    line_total=(pl.col("quantity") * pl.col("unit_price"))
+units_sold = (
+    sales.filter(pl.col("sales_channel") == "website")
+    .select("product_name", "quantity")
+    .group_by("product_name")
+    .agg(unit_sold=pl.col("quantity").sum())
+    .sort("unit_sold")
+    .head()
 )
-print(sales_with_line_total.select("product_name", "line_total").head())
+
+print(units_sold)
