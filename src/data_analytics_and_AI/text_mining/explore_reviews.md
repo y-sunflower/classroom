@@ -33,10 +33,6 @@ We'll reuse a product reviews dataset. One row is one review of a purchased prod
 uv add polars scikit-learn
 ```
 
-!!! tip "Run from your project folder"
-
-    The code below expects the CSV and your Python file in the same project folder. Run it with that folder open in Positron.
-
 ## Read a few reviews
 
 You can calculate a lot of things without understanding the data, but that's usually a pretty bad idea.
